@@ -1,0 +1,20 @@
+# Build result
+result/
+result
+result_bin/
+
+# Nextcloud
+.sync*.db*
+.nextcloudsync.log
+
+# Output
+nix.log
+
+# Custom configuration of vscode
+.vscode/
+
+# Direnv cache
+.direnv/
+
+# For developer notes
+notes
