@@ -8,28 +8,14 @@ let
 		mkDefault
 		mkForce;
 in {
-	system.stateVersion = "23.05";
-
-	# FIXME(Krey): Figure out if we need this: x86/cpu: SGX disabled by BIOS.
-
-	security.allowSimultaneousMultithreading = mkForce false; # Vulnerable af
-	security.virtualisation.flushL1DataCache = null; # Apparently not needed on this system?
-	security.lockKernelModules = false; # Do not allow unloading of kernel modules
-	security.protectKernelImage = true; # Do not allow to replace the current kernel image
-	# security.allowUserNamespaces = true; # TBD
+	system.stateVersion = "23.11";
 
 	# FIXME(Krey): Can reportedly be used to enter the passphrase
 	# boot.initrd.network.ssh.enable = true;
 	# boot.initrd.network.enable = true;
 
 	# BootLoader
-	## NOTE(Krey): Has a weird BIOS, lanzaboote has issues with deployment
-	boot.loader.systemd-boot.enable = mkForce true; # Lanzeboote uses it's own module and requires this disabled
-	boot.loader.systemd-boot.editor = false;
-	boot.lanzaboote = {
-		enable = false; # For Secure-Boot
-		pkiBundle = "/etc/secureboot";
-	};
+	boot.loader.systemd-boot.enable = true;
 	boot.loader.efi.canTouchEfiVariables = true;
 
 	# FIXME(Krey): It doesn't do the blacklisting for some reason..
@@ -69,11 +55,11 @@ in {
 		];
 		boot.initrd.kernelModules = [ ];
 
-		boot.initrd.includeDefaultModules = false;
+		boot.initrd.includeDefaultModules = true; # Has to be set to true to be able to input decrypting password
 
-		boot.initrd.systemd.enable = true; # To Get Logs
+		boot.initrd.systemd.enable = true;
 
-	# services.acpid.enable = true; # Maybe fix ACPI errors?
+	services.acpid.enable = true; # Maybe fix ACPI errors?
 
 	# Nvidia - GTX 1050M
 	hardware.opengl = {
@@ -83,33 +69,33 @@ in {
 	};
 
 	## Nvidia, Fuck you! .. and your proprietary piece of shit code ##
-		# Configure nVidia including Optimus
-		services.xserver.videoDrivers = ["nvidia"];
+		# # Configure nVidia including Optimus
+		# services.xserver.videoDrivers = ["nvidia"];
 
-		hardware.nvidia = {
-			## Enable modesetting - Needed for Wayland compositors
-			modesetting.enable = true;
+		# hardware.nvidia = {
+		# 	## Enable modesetting - Needed for Wayland compositors
+		# 	modesetting.enable = true;
 
-			open = false; # Do not use open-source drivers, because it complains that GPU System Processor ("GSP") is not supported in the open nvidia.ko
+		# 	open = false; # Do not use open-source drivers, because it complains that GPU System Processor ("GSP") is not supported in the open nvidia.ko
 
-			nvidiaSettings = false; # Disable nVidia settings menu, because no GUI
+		# 	nvidiaSettings = false; # Disable nVidia settings menu, because no GUI
 
-			powerManagement = {
-				enable = true;
-				# finegrained = true;
-			};
+		# 	powerManagement = {
+		# 		enable = true;
+		# 		# finegrained = true;
+		# 	};
 
-			## Optionally you may need to select the appropriate driver version for your specific GPU
-			package = config.boot.kernelPackages.nvidiaPackages.stable;
+		# 	## Optionally you may need to select the appropriate driver version for your specific GPU
+		# 	package = config.boot.kernelPackages.nvidiaPackages.stable;
 
-			prime = {
-				# sync.enable = true; # Server configuration
-				offload.enable = true;
-				offload.enableOffloadCmd = true;
-				intelBusId = "PCI:00:02:0"; # 00:02.0
-				nvidiaBusId = "PCI:01:00:0"; # 01:00.0
-			};
-		};
+		# 	prime = {
+		# 		# sync.enable = true; # Server configuration
+		# 		offload.enable = true;
+		# 		offload.enableOffloadCmd = true;
+		# 		intelBusId = "PCI:00:02:0"; # 00:02.0
+		# 		nvidiaBusId = "PCI:01:00:0"; # 01:00.0
+		# 	};
+		# };
 
 	## Sound ##
 		## Is not used and only takes out power -> Disable
@@ -197,5 +183,5 @@ in {
 	hardware.enableRedistributableFirmware = true; # Necessary Evil :(
 	hardware.cpu.intel.updateMicrocode = mkDefault config.hardware.enableRedistributableFirmware;
 
-	services.fwupd.enable = true;
+	services.fwupd.enable = false; # hotfix
 }

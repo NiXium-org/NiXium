@@ -1,8 +1,10 @@
-{ self, inputs, ... }:
+{ self, lib, inputs, ... }:
 
 # Flake management of MRACEK system
 
-{
+let
+	inherit (lib) mkForce;
+in {
 	# FIXME-QA(Krey): I want to get rid of the `system = "x86_64-linux";` and `pkgs` declaration so that it takes it from the config e.g. `nixpkgs.platform`, but dunno how
 	flake.nixosConfigurations."mracek" = inputs.nixpkgs.lib.nixosSystem {
 		system = "x86_64-linux";
@@ -10,8 +12,7 @@
 		pkgs = import inputs.nixpkgs {
 			system = "x86_64-linux";
 			config.allowUnfree = true;
-			# FIXME(Krey): Do Nouveau
-			config.nvidia.acceptLicense = true; # Fuck You Nvidia, I am forced into this
+			config.nvidia.acceptLicense = mkForce false; # Nvidia, Fuck You!
 		};
 
 		modules = [
@@ -19,9 +20,9 @@
 
 			# Principles
 			self.inputs.ragenix.nixosModules.default
-			# self.disko-nixpkgs.nixosModules.disko
 			self.inputs.lanzaboote.nixosModules.lanzaboote
 			self.inputs.impermanence.nixosModules.impermanence
+			# self.disko-nixpkgs.nixosModules.disko
 
 			# Users
 			#self.nixosModules.users-kreyren
@@ -35,6 +36,8 @@
 			./configuration.nix
 			./hardware-configuration.nix
 			./impermenance.nix
+			./security.nix
+			./lanzaboote.nix
 			# ./disko.nix # FIXME(Krey): I don't know how to implement that yet
 		];
 

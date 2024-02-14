@@ -6,11 +6,11 @@ let
 	inherit (lib) mkIf;
 in {
 	boot.initrd.luks.devices = {
-		"luks-3f91458d-a1a5-4351-a422-1470844800f2" = {
-			device = "/dev/disk/by-uuid/3f91458d-a1a5-4351-a422-1470844800f2"; # Nix-store
+		"luks-f9700689-2ba8-499c-8cc0-45acbc56eee4" = {
+			device = "/dev/disk/by-uuid/f9700689-2ba8-499c-8cc0-45acbc56eee4"; # Nix-store?
 		};
-		"luks-a3a28fb8-883c-404a-a312-cc20bf9e9890" = {
-			device = "/dev/disk/by-uuid/a3a28fb8-883c-404a-a312-cc20bf9e9890"; # SWAP
+		"luks-748d184c-5cf1-43fa-b8c3-782978848d7a" = {
+			device = "/dev/disk/by-uuid/748d184c-5cf1-43fa-b8c3-782978848d7a"; # SWAP?
 		};
 	};
 
@@ -26,14 +26,14 @@ in {
 			options = [ "size=3G" "mode=755" ];
 		};
 
-		"/home/raptor" = {
-			device = "none";
-			fsType = "tmpfs";
-			options = [ "size=4G" "mode=777" ];
-		};
+		# "/home/raptor" = {
+		# 	device = "none";
+		# 	fsType = "tmpfs";
+		# 	options = [ "size=4G" "mode=777" ];
+		# };
 
 		"/nix" = {
-			device = "/dev/disk/by-label/NIX";
+			device = "/dev/disk/by-label/NIX_STORE";
 			fsType = "btrfs";
 		};
 

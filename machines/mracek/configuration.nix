@@ -22,6 +22,7 @@ in {
 
 		# Vikunja
 		## FIXME-PRIVACY(Krey): Force Vikunja to use the tor proxy for clearnet requests https://unix.stackexchange.com/questions/501623/forward-all-traffic-to-a-socks5-proxy-port/501713#501713
+		## FIXME-QA(Krey): Current vikunja doesn't know how to resolve HTTP/S requests so it has a hard dependency on nginx and alike.. Was told that this will be addressed in next release
 		services.vikunja.enable = true;
 			# services.tor.relay.onionServices."hiddenVikunja".map = mkIf config.services.vikunja.enable [ config.services.vikunja.port ]; # Set up Onionized Vikunja
 			services.tor.relay.onionServices."hiddenVikunja".map = mkIf config.services.vikunja.enable [ 80 ]; # Set up Onionized Vikunja
@@ -30,7 +31,6 @@ in {
 		networking.firewall.enable = mkForce true; # Enforce FireWall
 		# networking.firewall.allowedTCPPorts = [ ... ];
 		# networking.firewall.allowedUDPPorts = [ ... ];
-
 
 	## Configuration ##
 		services.logind.lidSwitchExternalPower = "lock"; # Lock the system on closing the lid when on external power instead of suspend/hibernation

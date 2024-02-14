@@ -177,6 +177,9 @@ in {
 		# ];
 		boot.initrd.kernelModules = [];
 
+		# FIXME-UPSTREAM(Krey): This is not enough to get working display in initrd
+		# boot.initrd.includeDefaultModules = true;
+
 	# Filesystem Management
 		boot.initrd.luks.devices."rootfs".device = "/dev/disk/by-uuid/d76dcad7-e22c-4442-910e-cf147911bd57";
 
