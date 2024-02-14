@@ -12,7 +12,7 @@
 		"terminal.integrated.fontFamily": "'Fira Code'",
 
 		"editor.renderWhitespace": "all",
-		"terminal.integrated.scrollback": 5000,
+		"terminal.integrated.scrollback": 20000,
 		"nix.enableLanguageServer": true,
 		"nix.serverPath": "nil",
 		"nix.serverSettings": {

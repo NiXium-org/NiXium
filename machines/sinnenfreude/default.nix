@@ -16,6 +16,7 @@
 
 		modules = [
 			self.nixosModules.default
+			self.nixosModules.users-kreyren
 
 			self.inputs.ragenix.nixosModules.default
 			# self.disko-nixpkgs.nixosModules.disko

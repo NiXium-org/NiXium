@@ -49,6 +49,11 @@
 
 		# For T-Head Kernel and stuff
 		nixos-licheepi4a.url = "github:ryan4yin/nixos-licheepi4a";
+
+		nixos-generators = {
+			url = "github:nix-community/nixos-generators";
+			inputs.nixpkgs.follows = "nixpkgs";
+		};
 	};
 
 	outputs = inputs @ { self, ... }:
@@ -112,6 +117,7 @@
 						inputs.ragenix.packages.${system}.default # To manage secrets
 						inputs.nixpkgs.legacyPackages.${system}.sbctl # To set up secureboot
 						inputs.nixpkgs.legacyPackages.${system}.fira-code # For liquratures in code editors
+						inputs.nixpkgs.legacyPackages.${system}.nixUnstable # Test
 					];
 					inputsFrom = [ config.mission-control.devShell ];
 					# Environmental Variables

@@ -5,7 +5,7 @@
 	boot.initrd.luks.devices."luks-4c0cf623-043a-4dbd-a85b-6f9af34a136a".device = "/dev/disk/by-uuid/4c0cf623-043a-4dbd-a85b-6f9af34a136a"; # SWAP
 
 	boot.tmp.useTmpfs = true; # Mounts a /tmp filesystem on tmpfs (https://matrix.to/#/!KqkRjyTEzAGRiZFBYT:nixos.org/$DR9utkk4dHQ7iIWMfuVhKSymx5_9HRteEewVONBry2c?via=nixos.org)
-	boot.tmp.tmpfsSize = "100%"; # How much of the RAM's total size do we want to use?
+	boot.tmp.tmpfsSize = "50G"; # How much of the RAM's total size do we want to use?
 	boot.tmp.cleanOnBoot = false; # False is default, unsure what it does in impermenance context
 
 	# Filesystem Management

@@ -14,8 +14,8 @@
 
 		modules = [
 			self.nixosModules.default
-			self.nixosModules.users # Include users
-
+      #self.nixosModules.users # Include useRs
+      self.nixosModules.users-kreyren
 			self.inputs.ragenix.nixosModules.default
 			# self.disko-nixpkgs.nixosModules.disko
 			self.inputs.lanzaboote.nixosModules.lanzaboote

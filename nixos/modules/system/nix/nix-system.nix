@@ -1,6 +1,6 @@
 { ... }:
 
-# Management of Nix
+# Gloobal Management of Nix for all systems
 
 let
 	inherit (builtins) toFile;
@@ -11,7 +11,6 @@ in {
 		# FIXME(Krey): No fucking idea how to implement this, wasted 8h on it
 		# registry.nixpkgs.flake = flake.inputs.nixpkgs; # Make `nix shell` etc use pinned nixpkgs
 		settings = {
-			max-jobs = "auto";
 			experimental-features = "nix-command flakes";
 			auto-optimise-store = true;
 			#system-features = [ "recursive-nix" ];

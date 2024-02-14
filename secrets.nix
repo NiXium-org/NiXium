@@ -7,10 +7,10 @@ let
 
 	pelagus-host = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINhxI+25BwlCuEezW6Vc4mJ+EP/KO597PI2YfEU9t+vf";
 	sinnenfreude-host = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM7nLConnVyxn/ZTQXIReXo6x3CbAMky6YVmZ7iMIP5Q";
-	tsvetan-host = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOdXo/F5GFtiiy7ItHr7+aCpM9BE18N0ecfZleS2qhrO";
-	asus-host = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN/iuA5q4bZnG1WW8i+gyWoPYvmtxXRoDyKSzleJyfVn";
+	tsvetan-host = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMLmkZZVwNTCZbnQvevM6u0COYPjB/zHsLv+IS6tyLRT";
+	mracek-host = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN/iuA5q4bZnG1WW8i+gyWoPYvmtxXRoDyKSzleJyfVn";
 in {
 	"./nixos/users/kreyren/kreyren-user-password.age".publicKeys = [
-		kreyren pelagus-host sinnenfreude-host tsvetan-host asus-host
+		kreyren pelagus-host sinnenfreude-host tsvetan-host mracek-host
 	];
 }
