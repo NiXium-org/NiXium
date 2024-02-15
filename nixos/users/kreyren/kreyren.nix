@@ -1,5 +1,7 @@
 { config, lib, ... }:
 
+# Module that is going to set up the KREYREN user
+
 let
 	inherit (lib) mkIf mkForce;
 	username = "raptor";
@@ -18,18 +20,4 @@ in {
 	};
 
 	age.secrets.kreyren-user-password.file = ./kreyren-user-password.age;
-
-	# Allow root access
-	users.users.root.openssh.authorizedKeys.keys = mkForce config.users.users."${username}".openssh.authorizedKeys.keys;
-
-	# Impermenance
-	## FIXME(Krey): Figure out how we want to handle this
-	# environment.persistance.users."${username}" = {
-	# 	directories = {
-	# 		...
-	# 	};
-	# 	files = [
-	# 		...
-	# 	];
-	# };
 }

@@ -16,17 +16,18 @@
 
 		modules = [
 			self.nixosModules.default
-			self.nixosModules.users-kreyren
 
 			self.inputs.ragenix.nixosModules.default
 			# self.disko-nixpkgs.nixosModules.disko
 			self.inputs.lanzaboote.nixosModules.lanzaboote
 			self.inputs.impermanence.nixosModules.impermanence
+
+			self.nixosModules.users-kreyren # Add KREYREN user
+			self.homeConfigurations."kreyren@sinnenfreude" # Automatically deploy KREYREN's home
 			# self.inputs.home-manager-nixpkgs.nixosModules.home-manager
 			# {
 			# 	home-manager.users.raptor = import ../../nixos/users/kreyren/home/machines/sinnenfreude/home-configuration.nix;
 			# }
-			# self.homeManagerModules.kreyren.default
 
 			./configuration.nix
 			./hardware-configuration.nix

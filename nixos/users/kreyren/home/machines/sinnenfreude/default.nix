@@ -2,7 +2,7 @@
 
 {
 	# Standalone declaration
-	flake.homeManagerConfigurations."raptor@sinnenfreude" = inputs.home-manager-nixpkgs.lib.homeManagerConfiguration {
+	flake.homeManagerConfigurations."kreyren@sinnenfreude" = inputs.home-manager-nixpkgs.lib.homeManagerConfiguration {
 		pkgs = import inputs.nixpkgs {
 			system = "x86_64-linux";
 			nixpkgs.config.allowUnfree = true;
@@ -10,7 +10,7 @@
 		modules = [
 			{ home.stateVersion = "23.11"; }
 
-			self.homeManagerModules.kreyren.default
+			self.nixosModules.homeManagerConfiguration.kreyren.default
 
 			./home-configuration.nix
 		];
@@ -23,16 +23,24 @@
 		};
 	};
 
-	# # NixOS module (https://github.com/nix-community/home-manager/blob/fcbc70a7ee064f2b65dc1fac1717ca2a9813bbe6/nixos/common.nix#L45)
-	# flake.nixosModules.homeManagerConfiguration."raptor@sinnenfreude" = inputs.home-manager-nixpkgs.nixosModule.home-manager {
-	# 	modules = {
+	# NixOS module (https://github.com/nix-community/home-manager/blob/fcbc70a7ee064f2b65dc1fac1717ca2a9813bbe6/nixos/common.nix#L45)
+	flake.homeConfigurations."kreyren@sinnenfreude" = inputs.home-manager-nixpkgs.nixosModule.home-manager {
+		modules = [
+			#self.homeManagerModules.kreyren.default # Include default home modules
 
-	# 	};
-	# 	extraSpecialArgs = {
-	# 		unstable = import inputs.nixpkgs-unstable {
-	# 			system = "x86_64-linux";
-	# 			nixpkgs.config.allowUnfree = true;
-	# 		};
-	# 	};
-	# };
+			{
+				home.packages = [
+					inputs.nixpkgs.legacyPackages.x86_64-linux.htop
+				];
+			}
+
+			#./home-configuration.nix # Add SINNENFREUDE specific configuration
+		];
+		extraSpecialArgs = {
+			unstable = import inputs.nixpkgs-unstable {
+				system = "x86_64-linux";
+				nixpkgs.config.allowUnfree = true;
+			};
+		};
+	};
 }
