@@ -1,0 +1,54 @@
+{ config, lib, pkgs, ... }:
+
+# The Nix Confituration of TUPAC system
+
+let
+	inherit (lib)
+		mkIf
+		mkForce;
+in {
+	networking.hostName = "tupac"; # Set Hostname
+
+	# Plymouth
+		boot.plymouth.enable = true;
+
+	# Enable the X11 windowing system.
+		services.xserver.enable = true;
+
+		# Set layout
+		services.xserver = {
+			layout = "us";
+			xkbVariant = "";
+		};
+
+	# Enable GNOME
+		services.xserver.displayManager.gdm.enable = true;
+		services.xserver.desktopManager.gnome.enable = true;
+
+	# Networking
+		networking.networkmanager.enable = true; # Enable Networking via network-manager
+
+	# Printing
+		services.printing.enable = true; # enable CUPS the deamon for printing
+
+	# Non-Free
+		hardware.enableRedistributableFirmware = true; # Neccesary Evil :(
+
+	# KDE-connect
+		programs.kdeconnect.enable = true;
+		programs.kdeconnect.package = mkIf config.services.xserver.desktopManager.gnome.enable pkgs.gnomeExtensions.gsconnect; # Uses KDE thing by default which doesn't work on GNOME where we need gsconnect
+
+	# Steam
+		programs.steam = {
+			enable = true;
+			remotePlay.openFirewall = false; # Open ports in the firewall for Steam Remote Play
+		dedicatedServer.openFirewall = false; # Open ports in the firewall for Source Dedicated Server
+		};
+
+	# SSH
+		services.openssh.enable = true;
+		services.tor.relay.onionServices."hiddenSSH".map = [ 22 ]; # Hidden SSH
+
+	# Firewall
+		networking.firewall.enable = mkForce true; # Enforce FireWall
+}

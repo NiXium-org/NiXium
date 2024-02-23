@@ -4,5 +4,6 @@
 		./pelagus
 		./sinnenfreude
 		./tsvetan
+		./tupac
 	];
 }

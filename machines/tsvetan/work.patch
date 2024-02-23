@@ -1,0 +1,54 @@
+From 64b9bb446fae4b83f482b2cb43812454e420d4f3 Mon Sep 17 00:00:00 2001
+From: itycodes <ity@itycodes.org>
+Date: Thu, 22 Feb 2024 00:04:10 +0100
+Subject: [PATCH] Temporary debug patch (--amend later) for HDMI
+
+---
+ .../boot/dts/allwinner/sun50i-a64-teres-i.dts | 24 +++++++++++++++++++
+ 1 file changed, 24 insertions(+)
+
+diff --git a/arch/arm64/boot/dts/allwinner/sun50i-a64-teres-i.dts b/arch/arm64/boot/dts/allwinner/sun50i-a64-teres-i.dts
+index 1128030e4c25..42b5be01b87d 100644
+--- a/arch/arm64/boot/dts/allwinner/sun50i-a64-teres-i.dts
++++ b/arch/arm64/boot/dts/allwinner/sun50i-a64-teres-i.dts
+@@ -20,6 +20,18 @@ aliases {
+ 		serial0 = &uart0;
+ 	};
+ 
++	hdmi-connector {
++		compatible = "hdmi-connector";
++		type = "c";
++
++		port {
++			hdmi_con_in: endpoint {
++				remote-endpoint = <&hdmi_out_con>;
++			};
++		};
++	};
++
++
+ 	backlight: backlight {
+ 		compatible = "pwm-backlight";
+ 		pwms = <&pwm 0 50000 0>;
+@@ -343,6 +355,18 @@ &simplefb_hdmi {
+ 	vcc-hdmi-supply = <&reg_dldo1>;
+ };
+ 
++&hdmi {
++	hvcc-supply = <&reg_dldo1>;
++	status = "okay";
++};
++
++&hdmi_out {
++	hdmi_out_con: endpoint {
++		remote-endpoint = <&hdmi_con_in>;
++	};
++};
++
++
+ &sound {
+ 	simple-audio-card,aux-devs = <&codec_analog>, <&speaker_amp>;
+ 	simple-audio-card,widgets = "Headphone", "Headphone Jack",
+-- 
+2.43.2
+

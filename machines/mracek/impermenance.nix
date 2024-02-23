@@ -57,6 +57,7 @@ in {
 			"/var/lib/systemd/coredump" # Dunno
 			"/etc/NetworkManager/system-connections" # WiFi configs
 			(mkIf config.boot.lanzaboote.enable "/etc/secureboot")
+			(mkIf config.services.monero.enable config.services.monero.dataDir)
 			{ directory = "/var/lib/colord"; user = "colord"; group = "colord"; mode = "u=rwx,g=rx,o="; }
 		];
 		files = [

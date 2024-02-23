@@ -14,3 +14,8 @@ To Be Considered
 * [ ] Nextcloud
 * [ ] Lokinet
 * [ ] Conduit, Blocked by https://github.com/element-hq/synapse/issues/7088
+
+## ToDo
+
+* [ ] Upgrade storage for monero node (~114GB)
+* [ ] RAID-1 for data sanity

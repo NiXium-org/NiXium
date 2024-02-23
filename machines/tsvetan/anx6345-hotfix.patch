@@ -1,0 +1,13 @@
+diff --git a/drivers/clk/sunxi-ng/ccu-sun50i-a64.c b/drivers/clk/sunxi-ng/ccu-sun50i-a64.c
+ index ea701bc51ade..fc906712a0ad 100644
+ --- a/drivers/clk/sunxi-ng/ccu-sun50i-a64.c
+ +++ b/drivers/clk/sunxi-ng/ccu-sun50i-a64.c
+ @@ -200,7 +200,7 @@ static struct ccu_nkm pll_mipi_clk = {
+  		.reg		= 0x040,
+  		.hw.init	= CLK_HW_INIT("pll-mipi", "pll-video0",
+  					      &ccu_nkm_ops,
+ -					      CLK_SET_RATE_UNGATE | CLK_SET_RATE_PARENT),
+ +					      CLK_SET_RATE_UNGATE),
+  		.features	= CCU_FEATURE_CLOSEST_RATE,
+  	},
+  };

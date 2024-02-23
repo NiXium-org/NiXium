@@ -1,6 +1,10 @@
+{ config, lib, ... }:
+
 # This is an experimental declaration of an impermenance setup on SINNENFREUDE to better understand it's practical challenges and figure out management
 
-{
+let
+	inherit (lib) mkIf;
+in {
 	boot.initrd.luks.devices."luks-c61bb824-f4b5-409c-b083-b5e11e2d9cc5".device = "/dev/disk/by-uuid/c61bb824-f4b5-409c-b083-b5e11e2d9cc5"; # Nix-Store
 	boot.initrd.luks.devices."luks-4c0cf623-043a-4dbd-a85b-6f9af34a136a".device = "/dev/disk/by-uuid/4c0cf623-043a-4dbd-a85b-6f9af34a136a"; # SWAP
 
@@ -53,6 +57,7 @@
 			"/var/lib/nixos" # Nix stuff
 			"/var/lib/systemd/coredump" # Dunno
 			"/etc/NetworkManager/system-connections" # WiFi configs
+			(mkIf config.programs.ccache.enable { directory = config.programs.ccache.cacheDir; user = "root"; group = "nixbld"; mode = "u=,g=rwx,o="; }) # CCache
 			{ directory = "/var/lib/colord"; user = "colord"; group = "colord"; mode = "u=rwx,g=rx,o="; }
 		];
 		files = [

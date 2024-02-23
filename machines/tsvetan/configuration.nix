@@ -63,7 +63,11 @@ in {
 	# ];
 
 	# CCache
-	programs.ccache.enable = false;
+	programs.ccache.enable = true;
+	programs.ccache.packageNames = [
+		# CCache Linux for tsvetan
+			"linuxPackages_testing"
+	];
 
 	environment.systemPackages = [
 		unstable.prusa-slicer

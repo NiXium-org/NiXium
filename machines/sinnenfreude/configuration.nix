@@ -88,18 +88,30 @@ in {
 		"riscv64-linux"
 	];
 
-	# programs.ccache.enable = true;
-	# programs.ccache.packageNames = [
-	# 	"linux" # CCache Linux
-	# ];
+	# CCache
+		programs.ccache.enable = true;
+		programs.ccache.packageNames = [
+			# CCache Linux for tsvetan
+				#"linux"
+				#"linuxPackages"
+				# "linuxKernel.kernels.linux"
+
+				# "linux_latest"
+				#"linuxPackages_latest"
+				# "linuxKernel.kernels.linux_latest"
+
+				"linux_testing"
+				"linuxPackages_testing"
+				#"linuxKernel.kernels.linux_testing"
+		];
 
 	# Temporary
-	users.users.margarette = {
-		description = "Margarette";
-		isNormalUser = true;
-		hashedPassword = "$y$j9T$gbllw53aL5CNVa4vhSbNt/$yGTQLLrByawvBPjpoKA7e3rZRrt.S6zxaQOiaWKSfY1";
-	};
-	environment.systemPackages = [
-		pkgs.firefox
-	];
+	# users.users.margarette = {
+	# 	description = "Margarette";
+	# 	isNormalUser = true;
+	# 	hashedPassword = "$y$j9T$gbllw53aL5CNVa4vhSbNt/$yGTQLLrByawvBPjpoKA7e3rZRrt.S6zxaQOiaWKSfY1";
+	# };
+	# environment.systemPackages = [
+	# 	pkgs.firefox
+	# ];
 }
