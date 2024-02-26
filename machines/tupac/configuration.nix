@@ -45,7 +45,12 @@ in {
 		dedicatedServer.openFirewall = false; # Open ports in the firewall for Source Dedicated Server
 		};
 
-	services.tor.enable = true;
+	# Tor
+		services.tor = {
+			enable = true; # Use Tor
+			client.enable = true; # Provides Port 9050 with gateway to Tor
+			relay.enable = true; # Work as a relay to obstruct network sniffing
+		};
 
 	# SSH
 		services.openssh.enable = true;
