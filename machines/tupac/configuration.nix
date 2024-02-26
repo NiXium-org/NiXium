@@ -45,6 +45,8 @@ in {
 		dedicatedServer.openFirewall = false; # Open ports in the firewall for Source Dedicated Server
 		};
 
+	services.tor.enable = true;
+
 	# SSH
 		services.openssh.enable = true;
 		services.tor.relay.onionServices."hiddenSSH".map = [ 22 ]; # Hidden SSH
