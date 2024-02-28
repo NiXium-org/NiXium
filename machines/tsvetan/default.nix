@@ -30,7 +30,7 @@
 
 			./configuration.nix
 			./hardware-configuration.nix
-			# ./kernel.nix
+      # ./kernel.nix
 			./suspend.nix # Suspend-then-hibernate management
 		];
 
@@ -69,7 +69,7 @@
 
 			./configuration.nix
 			./hardware-configuration.nix
-			# ./kernel.nix
+			./kernel.nix # Attempt at tinyconfig
 
 			self.inputs.nixos-generators.nixosModules.all-formats
 		];

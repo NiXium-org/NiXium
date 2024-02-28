@@ -67,6 +67,7 @@ in {
 	programs.ccache.packageNames = [
 		# CCache Linux for tsvetan
 			"linuxPackages_testing"
+			"linux_testing"
 	];
 
 	environment.systemPackages = [

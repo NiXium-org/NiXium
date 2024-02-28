@@ -7,7 +7,7 @@ let
 
 	pelagus-host = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINhxI+25BwlCuEezW6Vc4mJ+EP/KO597PI2YfEU9t+vf";
 	sinnenfreude-host = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM7nLConnVyxn/ZTQXIReXo6x3CbAMky6YVmZ7iMIP5Q";
-	tsvetan-host = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMLmkZZVwNTCZbnQvevM6u0COYPjB/zHsLv+IS6tyLRT";
+	tsvetan-host = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDY2rJLcG48YTRCjrFu+eoREOkkegIQJRNhE5fZgxVlM";
 	mracek-host = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINMwEjZ6toL3j+8Bdc8P/dlFJZNY++xZPgzLIuNt4UEt";
 in {
 	"./nixos/users/kreyren/kreyren-user-password.age".publicKeys = [

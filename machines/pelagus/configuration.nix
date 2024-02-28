@@ -86,4 +86,12 @@ in {
 		"aarch64-linux"
 		"riscv64-linux"
 	];
+
+	# CCache
+	programs.ccache.enable = true;
+	programs.ccache.packageNames = [
+		# CCache Linux for tsvetan
+			"linuxPackages_testing"
+			"linux_testing"
+	];
 }

@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, crossPkgs, ... }:
 
 # Custom kernel management for OLIMEX Teres-I
 
@@ -9,24 +9,34 @@
 let
 	inherit (lib) mkIf mkForce;
 in {
+	# NOTE(Krey): Whats this?
 	system.requiredKernelConfig = mkForce [];
 
 	boot.kernelPackages = pkgs.linuxPackagesFor
 		(let
-			baseKernel = pkgs.linux_latest;
-		in #
+			baseKernel = crossPkgs.linux_testing;
+		in
 			pkgs.linuxManualConfig {
 				inherit (baseKernel) src modDirVersion;
 				version = "${baseKernel.version}-teres_i";
-				configfile = ./kernel.config;
+				kernelPatches = [
+					{
+						name = "work-patch";
+						patch = ./work.patch;
+					}
+					{
+						name = "anx6345-hotfix";
+						patch = ./anx6345-hotfix.patch;
+					}
+				];
+				configfile = ./tinykernel.config;
 				allowImportFromDerivation = true;
+				# extraMakeFlags = [ "yes2modconfig" "dtbs" ]; # Rebuild dtbs and convert on modules
 			}
 		);
 
-	# FIXME-QA(Krey): Add `make yes2mod` to convert everything we can in modules
-
-	# FIXME-UPSTREAM(Krey): To avoid failure due to missing root module 'ahci' which is not present on aarch64 (workarounding a nix bug), or is it needed?
 	nixpkgs.overlays = [
+		# FIXME-UPSTREAM(Krey): To avoid failure due to missing root module 'ahci' which is not present on aarch64 (workarounding a nix bug), or is it needed?
 		(final: super: {
 			makeModulesClosure = x:
 				super.makeModulesClosure (x // { allowMissing = true; });

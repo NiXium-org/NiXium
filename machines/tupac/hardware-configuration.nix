@@ -36,49 +36,49 @@ in {
 			#media-session.enable = true;
 		};
 
-	# # Nvidia (https://nixos.wiki/wiki/Nvidia)
-	# 	hardware.opengl = {
-	# 		enable = true; # Enable 3D-accelaration
-	# 		driSupport = true;
-	# 		driSupport32Bit = true;
-	# 	};
+	# Nvidia (https://nixos.wiki/wiki/Nvidia)
+		hardware.opengl = {
+			enable = true; # Enable 3D-accelaration
+	 		driSupport = true;
+	 		driSupport32Bit = true;
+	 	};
 
-	# 	# Load nvidia driver for Xorg and Wayland
-	# 	services.xserver.videoDrivers = [ "nvidia" ];
+	 	# Load nvidia driver for Xorg and Wayland
+	 	services.xserver.videoDrivers = [ "nvidia" ];
 
-	# 	hardware.nvidia = {
-	# 		modesetting.enable = true; # Required
+	 	hardware.nvidia = {
+	 		modesetting.enable = true; # Required
 
-	# 		# Nvidia power management. Experimental, and can cause sleep/suspend to fail.
-	# 		powerManagement.enable = false;
+	 		# Nvidia power management. Experimental, and can cause sleep/suspend to fail.
+	 		powerManagement.enable = false;
 
-	# 		# Fine-grained power management. Turns off GPU when not in use. Experimental and only works on modern Nvidia GPUs (Turing or newer).
-	# 		powerManagement.finegrained = true; # This is RTX4060
+	 		# Fine-grained power management. Turns off GPU when not in use. Experimental and only works on modern Nvidia GPUs (Turing or newer).
+	 		powerManagement.finegrained = true; # This is RTX4060
 
-	# 		# Use the NVidia open source kernel module (not to be confused with the
-	# 		# independent third-party "nouveau" open source driver).
-	# 		# Support is limited to the Turing and later architectures. Full list of
-	# 		# supported GPUs is at:
-	# 		# https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus
-	# 		# Only available from driver 515.43.04+
-	# 		# Currently alpha-quality/buggy, so false is currently the recommended setting.
-	# 		open = mkForce false; # Appears to have issues on the open atm
+      # Use the NVidia open source kernel module (not to be confused with the
+	 		# independent third-party "nouveau" open source driver).
+	 		# Support is limited to the Turing and later architectures. Full list of
+	 		# supported GPUs is at:
+	 		# https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus
+	 		# Only available from driver 515.43.04+
+	 		# Currently alpha-quality/buggy, so false is currently the recommended setting.
+	 		open = mkForce false; # Appears to have issues on the open atm
 
-	# 		# Enable the Nvidia settings menu, accessible via `nvidia-settings`.
-	# 		nvidiaSettings = true;
+	 		# Enable the Nvidia settings menu, accessible via `nvidia-settings`.
+	 		nvidiaSettings = true;
 
-	# 		# Offloading on dGPU
-	# 		prime = {
-	# 			offload = {
-	# 				enable = true; # Use offloading
-	# 				enableOffloadCmd = true; # provide 'nvidia-offload' command
-	# 			};
-	# 			intelBusId = "PCI:00:02:0"; # Intel GPU bus
-	# 			nvidiaBusId = "PCI:01:0:0"; # Nvidia GPU bus
-	# 		};
+	 		# Offloading on dGPU
+	 		prime = {
+	 			offload = {
+	 				enable = true; # Use offloading
+	 				enableOffloadCmd = true; # provide 'nvidia-offload' command
+	 			};
+	 			intelBusId = "PCI:1:0:0"; # Intel GPU bus
+	 			nvidiaBusId = "PCI:0:2:0"; # Nvidia GPU bus
+	 		};
 
-	# 		package = config.boot.kernelPackages.nvidiaPackages.production; # Specify the Nvidia Driver package
-	# 	};
+	 		package = config.boot.kernelPackages.nvidiaPackages.production; # Specify the Nvidia Driver package
+	 	};
 
 	# FWUPD
 		services.fwupd.enable = true; # Service used to manage the onboard firmware

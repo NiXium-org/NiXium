@@ -36,6 +36,14 @@ in {
 			#services.vaultwarden.enable = false; # Testing..
 			#services.tor.relay.onionServices."hiddenWarden".map = mkIf config.services.vaultwarden.enable [ config.services.vaultwarden.config.ROCKET_PORT ]; # Deploy an onion service for the vault warden
 
+		# Jitsi meet
+			services.jitsi-meet.enable = false; # FIXME(Krey): Add tor compatibility?
+			services.jitsi-meet.hostName = "localhost";
+
+		# Mumble
+			services.murmur.enable = true;
+				services.tor.relay.onionServices."hiddenMurmur".map = mkIf config.services.murmur.enable [ 64738 ]; # Set up Onionized Murmur
+
 		# Firewall
 		networking.firewall.enable = mkForce true; # Enforce FireWall
 		# networking.firewall.allowedTCPPorts = [ ... ];
@@ -45,7 +53,7 @@ in {
 		services.logind.lidSwitchExternalPower = "lock"; # Lock the system on closing the lid when on external power instead of suspend/hibernation
 
 		# Proxy
-		networking.proxy.default = "socks5://127.0.0.1:9050/";
+		networking.proxy.default = "socks5://127.0.0.1:9050";
 		networking.proxy.noProxy = "127.0.0.1,localhost";
 
 	## Virtualization ##

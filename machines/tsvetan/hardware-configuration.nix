@@ -27,22 +27,22 @@ in {
 		# boot.kernelPackages = crossPkgs.linuxPackages;
 		boot.kernelPackages = crossPkgs.linuxPackages_testing;
 		boot.kernelPatches = [
-			# {
+      # {
 			# 	name = "teres_i-config";
 			# 	patch = ./thing.patch;
-			# 	# extraConfig = ''
+		 	# 	# extraConfig = ''
 			# 	# 	CMA_SIZE_MBYTES 128
 			# 	# 	THERMAL n
 			# 	# '';
 			# }
 			{
-				name = "work-patch";
-				patch = ./work.patch;
-			}
-			{
-				name = "anx6345-hotfix";
-				patch = ./anx6345-hotfix.patch;
-			}
+			  name = "work-patch";
+		 		patch = ./work.patch;
+		 	}
+		 	{
+		 		name = "anx6345-hotfix";
+		 		patch = ./anx6345-hotfix.patch;
+		 	}
 		];
 
 		# Use defaults
@@ -58,135 +58,26 @@ in {
 
 	# InitRD
 		boot.initrd.systemd.enable = true;
+		boot.initrd.availableKernelModules = [
+			"ushhid" # for USB
 
-		# boot.initrd.availableKernelModules = [
-		# 	"usbhid"
-		# 	"snd_seq_dummy"
-		# 	"snd_hrtimer"
-		# 	"snd_seq"
-		# 	"qrtr"
-		# 	"snd_seq_device"
-		# 	"crct10dif_ce"
-		# 	"polyval_ce"
-		# 	"polyval_generic"
-		# 	"sm4"
-		# 	"axp20x_battery"
-		# 	"axp20x_ac_power"
-		# 	"axp20x_adc"
-		# 	"axp20x_pek"
-		# 	"pinctrl_axp209"
-		# 	"analogix_anx6345"
-		# 	"analogix_dp"
-		# 	"r8723bs"
-		# 	"snd_soc_simple_card"
-		# 	"drm_display_helper"
-		# 	"snd_soc_simple_card_utils"
-		# 	"lima"
-		# 	"sun8i_rotate"
-		# 	"gpu_sched"
-		# 	"sun8i_di"
-		# 	"sun50i_codec_analog"
-		# 	"cfg80211"
-		# 	"drm_shmem_helper"
-		# 	"sun8i_adda_pr_regmap"
-		# 	"uvcvideo"
-		# 	"v4l2_mem2mem"
-		# 	"sun8i_a33_mbus"
-		# 	"sunxi_wdt"
-		# 	"videobuf2_dma_contig"
-		# 	"sun8i_codec"
-		# 	"sun4i_i2s"
-		# 	# "uvc" # Not found?
-		# 	"videobuf2_vmalloc"
-		# 	"pwm_sun4i"
-		# 	"videobuf2_memops"
-		# 	"rfkill"
-		# 	"videobuf2_v4l2"
-		# 	"libarc4"
-		# 	"videodev"
-		# 	"onboard_usb_hub"
-		# 	"sun8i_ce"
-		# 	"videobuf2_common"
-		# 	"mc"
-		# 	"sun4i_drm"
-		# 	"sun8i_mixer"
-		# 	"sun4i_tcon"
-		# 	"sun8i_tcon_top"
-		# 	"drm_dma_helper"
-		# 	"sun6i_dma"
-		# 	"drm_kms_helper"
-		# 	"snd_soc_simple_amplifier"
-		# 	"pwm_bl"
-		# 	"nls_iso8859_1"
-		# 	"nls_cp437"
-		# 	"mousedev"
-		# 	"xt_conntrack"
-		# 	"uio_pdrv_genirq"
-		# 	"nf_conntrack"
-		# 	"nf_defrag_ipv6"
-		# 	"uio"
-		# 	"nf_defrag_ipv4"
-		# 	"ip6t_rpfilter"
-		# 	"ipt_rpfilter"
-		# 	"xt_pkttype"
-		# 	"xt_LOG"
-		# 	"nf_log_syslog"
-		# 	"xt_tcpudp"
-		# 	"nft_compat"
-		# 	"nf_tables"
-		# 	"sch_fq_codel"
-		# 	"tap"
-		# 	"macvlan"
-		# 	"bridge"
-		# 	"stp"
-		# 	"llc"
-		# 	"drm"
-		# 	"fuse"
-		# 	"backlight"
-		# 	"nfnetlink"
-		# 	"dmi_sysfs"
-		# 	"ip_tables"
-		# 	"x_tables"
-		# 	"dm_crypt"
-		# 	"encrypted_keys"
-		# 	"trusted"
-		# 	"caam_jr"
-		# 	"libdes"
-		# 	"authenc"
-		# 	"caamhash_desc"
-		# 	"caamalg_desc"
-		# 	"caam"
-		# 	"error"
-		# 	"crypto_engine"
-		# 	"asn1_encoder"
-		# 	"dm_mod"
-		# 	"dax"
-		# 	"btrfs"
-		# 	"blake2b_generic"
-		# 	"libcrc32c"
-		# 	"xor"
-		# 	"xor_neon"
-		# 	"raid6_pq"
-		# ];
-		boot.initrd.availableKernelModules = [ "usbhid" ];
-		# boot.initrd.availableKernelModules = [
-		# 	"usbhid"
-		# 	"lima"
-		# 	"analogix_anx6345"
-		# 	"drm"
-		# 	"analogix_dp"
-		# 	"sun4i_drm"
-		# 	"sun4i_tcon"
-		# 	"gpu_sched"
-		# 	"sun8i_mixer"
-		# 	"drm_kms_helper"
-		# 	"drm_dma_helper"
-		# 	"drm_shmem_helper"
-		# 	"drm_display_helper"
-		# ];
+			# For display
+			"sun4i-drm"
+			"sun4i-tcon"
+			"sun8i-mixer"
+			"sun8i_tcon_top"
+			"gpu-sched"
+			"drm"
+			"drm_shmem_helper"
+			"drm_kms_helper"
+			"drm_dma_helper"
+			"drm_display_helper"
+			"analogix_anx6345"
+			"analogix_dp"
+		];
 		boot.initrd.kernelModules = [];
 
-		# FIXME-UPSTREAM(Krey): This is not enough to get working display in initrd
+		# FIXME-UPSTREAM(Krey): This is not enough to get working display in initrd, discuss including the modules above by default
 		# boot.initrd.includeDefaultModules = true;
 
 	# Filesystem Management
