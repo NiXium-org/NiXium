@@ -201,8 +201,11 @@ Collection of NixOS configurations that you might find useful as a reference for
 * https://github.com/gvolpe/nix-config
 * https://github.com/cole-h/nixos-config (flakes + agenix)
 * https://github.com/moni-dz/nix-config (flakes + flake-parts + agenix + home-manager + darwin)
+* https://github.com/vkleen/machines
 
 Relevant GitHub Topic: https://github.com/topics/nixos-configuration
+
+https://github.com/search?q=flake.homeManagerModules&type=code
 
 GitHub repositories which use flake-parts: https://github.com/search?q=flake-parts+path%3Aflake.nix&type=code&p=3
 

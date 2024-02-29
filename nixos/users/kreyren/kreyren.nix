@@ -10,7 +10,7 @@ in {
 	users.users."${username}" = {
 		description = "Raptor"; # FIXME(Krey): Figure out how to handle this
 		isNormalUser = true;
-		#hashedPasswordFile = mkForce config.age.secrets.kreyren-user-password.path;
+		hashedPasswordFile = mkForce config.age.secrets.kreyren-user-password.path;
 		extraGroups = [
 			"wheel"
 			(mkIf config.virtualisation.docker.enable "docker")

@@ -21,6 +21,7 @@
 		flake-root.url = "github:srid/flake-root";
 		ragenix.url = "github:yaxitech/ragenix";
 		lanzaboote.url = "github:nix-community/lanzaboote/v0.3.0"; # MAINTAIN(Krey): has to be kept up to date
+		arkenfox.url = "github:dwarfmaster/arkenfox-nixos";
 
 		disko-nixpkgs = {
 			url = "github:nix-community/disko";
