@@ -1,10 +1,10 @@
 {
 	imports = [
-		./editors
-		./prompts
-		./shells
-		./terminal-emulators
-		./tools
-		./web-browsers
+		# ./editors
+		# ./prompts
+		# ./shells
+		# ./terminal-emulators
+		# ./tools
+		# ./web-browsers
 	];
 }

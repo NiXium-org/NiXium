@@ -1,4 +1,4 @@
-{ self, inputs, homeImports, ... }:
+{ self, inputs, ... }:
 
 # Flake management of SINNENFREUDE system
 
@@ -27,31 +27,13 @@
 
 			# Users
 			self.nixosModules.users-kreyren # Add KREYREN user
+			self.homeManagerModules.kreyren
 			{
-				home-manager.users.raptor.home.stateVersion = "23.11";
-				home-manager.users.raptor.imports = [
-					#self.homeManagerModules.kreyren.default
-					#self.homeManagerConfigurations."kreyren@sinnenfreude"
-
-					../../nixos/users/kreyren/home/home.nix
-					../../nixos/users/kreyren/home/machines/sinnenfreude/home-configuration.nix
-					../../nixos/users/kreyren/home/modules/editors/vim/vim.nix
-					../../nixos/users/kreyren/home/modules/editors/vscode/vscode.nix
-					../../nixos/users/kreyren/home/modules/editors/vscode/vscode.nix
-					../../nixos/users/kreyren/home/modules/prompts/starship/starship.nix
-					../../nixos/users/kreyren/home/modules/shells/bash/bash.nix
-					../../nixos/users/kreyren/home/modules/shells/nushell/nushell.nix
-					../../nixos/users/kreyren/home/modules/shells/nushell/nushell.nix
-					../../nixos/users/kreyren/home/modules/system/dconf/dconf.nix
-					../../nixos/users/kreyren/home/modules/system/gtk/gtk.nix
-					../../nixos/users/kreyren/home/modules/terminal-emulators/alacritty/alacritty.nix
-					../../nixos/users/kreyren/home/modules/terminal-emulators/alacritty/alacritty.nix
-					../../nixos/users/kreyren/home/modules/tools/direnv/direnv.nix
-					../../nixos/users/kreyren/home/modules/tools/git/git.nix
-					../../nixos/users/kreyren/home/modules/tools/gpg-agent/gpg-agent.nix
-					#../../nixos/users/kreyren/home/modules/web-browsers/firefox/firefox.nix
-					../../nixos/users/kreyren/home/modules/web-browsers/librewolf/librewolf.nix
-				];
+				home-manager.users.kreyren.home.stateVersion = "23.11";
+				# home-manager.users.raptor.imports = [
+				# 	self.homeManagerModules.kreyren.default
+				# 	#self.homeManagerModules."kreyren@sinnenfreude"
+				# ];
 			}
 
 			./configuration.nix

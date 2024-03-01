@@ -24,7 +24,7 @@
 			self.inputs.ragenix.nixosModules.default
 			self.inputs.impermanence.nixosModules.impermanence
 
-			self.inputs.nixos-generators.nixosModules.all-formats
+			#self.inputs.nixos-generators.nixosModules.all-formats
 
 			self.nixosModules.users-kreyren
 
@@ -51,43 +51,43 @@
 		};
 	};
 
-	flake.nixosConfigurations."tsvetan-sdcard" = inputs.nixpkgs.lib.nixosSystem {
-		system = "aarch64-linux";
+	# flake.nixosConfigurations."tsvetan-sdcard" = inputs.nixpkgs.lib.nixosSystem {
+	# 	system = "aarch64-linux";
 
-		# Basically you just want something like `(import inputs.nixpkgs { buildPlatform = "x86_64-linux"; hostPlatform = "aarch64-linux"; }).buildLinux`
-		pkgs = import inputs.nixpkgs {
-			system = "aarch64-linux";
-			config.allowUnfree = true;
-		};
+	# 	# Basically you just want something like `(import inputs.nixpkgs { buildPlatform = "x86_64-linux"; hostPlatform = "aarch64-linux"; }).buildLinux`
+	# 	pkgs = import inputs.nixpkgs {
+	# 		system = "aarch64-linux";
+	# 		config.allowUnfree = true;
+	# 	};
 
-		modules = [
-			self.nixosModules.default
-			self.inputs.ragenix.nixosModules.default
-			self.inputs.impermanence.nixosModules.impermanence
+	# 	modules = [
+	# 		self.nixosModules.default
+	# 		self.inputs.ragenix.nixosModules.default
+	# 		self.inputs.impermanence.nixosModules.impermanence
 
-			self.nixosModules.users-kreyren
+	# 		self.nixosModules.users-kreyren
 
-			./configuration.nix
-			./hardware-configuration.nix
-			./kernel.nix # Attempt at tinyconfig
+	# 		./configuration.nix
+	# 		./hardware-configuration.nix
+	# 		./kernel.nix # Attempt at tinyconfig
 
-			self.inputs.nixos-generators.nixosModules.all-formats
-		];
+	# 		self.inputs.nixos-generators.nixosModules.all-formats
+	# 	];
 
-		# FIXME-QA(Krey): This needs better management
-		specialArgs = {
-			unstable = import inputs.nixpkgs-unstable {
-				system = "aarch64-linux";
-				config.allowUnfree = true;
-			};
-			# For cross-compilation of e.g. linux kernel as we don't have powerful enough aarch64-linux machine for it
-			crossPkgs = import inputs.nixpkgs {
-				# buildPlatform = "x86_64-linux";
-				# hostPlatform = "aarch64-linux";
-				system = "x86_64-linux";
-				crossSystem = "aarch64-linux";
-				config.allowUnfree = true;
-			};
-		};
-	};
+	# 	# FIXME-QA(Krey): This needs better management
+	# 	specialArgs = {
+	# 		unstable = import inputs.nixpkgs-unstable {
+	# 			system = "aarch64-linux";
+	# 			config.allowUnfree = true;
+	# 		};
+	# 		# For cross-compilation of e.g. linux kernel as we don't have powerful enough aarch64-linux machine for it
+	# 		crossPkgs = import inputs.nixpkgs {
+	# 			# buildPlatform = "x86_64-linux";
+	# 			# hostPlatform = "aarch64-linux";
+	# 			system = "x86_64-linux";
+	# 			crossSystem = "aarch64-linux";
+	# 			config.allowUnfree = true;
+	# 		};
+	# 	};
+	# };
 }

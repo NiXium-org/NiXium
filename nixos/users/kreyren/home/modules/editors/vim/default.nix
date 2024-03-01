@@ -1,3 +1,3 @@
 {
-	flake.homeManagerModules.kreyren-editors-vim = ./vim.nix;
+	flake.homeManagerModules.editors-vim-kreyren = ./vim.nix;
 }

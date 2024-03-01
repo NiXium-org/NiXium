@@ -1,3 +1,3 @@
 {
-	flake.homeManagerModules.kreyren-editors-vscode = ./vscode.nix;
+	flake.homeManagerModules.editors-vscode-kreyren = ./vscode.nix;
 }

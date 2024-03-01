@@ -32,16 +32,17 @@
 #### SponsorBlock Settings
 ##### Enable SponsorBlock: TRUE
 
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 # Common Home-Manager configuration across all systems
 
 {
-	home.username = "raptor";
-	home.homeDirectory = ("/home/" + config.home.username);
+	home-manager.users.kreyren.home.username = "kreyren";
+	# home.homeDirectory = ("/home/" + config.home.username);
+	home-manager.users.kreyren.home.homeDirectory = "/home/kreyren";
 
 	# Global Packages Installed On ALL Systems
-	home.packages = [
+	home-manager.users.kreyren.home.packages = [
 		pkgs.keepassxc
 		pkgs.xorg.xkill
 		pkgs.htop
