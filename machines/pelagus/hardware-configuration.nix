@@ -129,4 +129,9 @@ in {
 	nixpkgs.hostPlatform = "x86_64-linux";
 	hardware.enableRedistributableFirmware = true; # Necessary Evil :(
 	hardware.cpu.amd.updateMicrocode = mkDefault config.hardware.enableRedistributableFirmware;
+
+	# Auto-Upgrade
+	system.autoUpgrade.enable = true;
+	system.autoUpgrade.flake = "github:kreyren/nixos-config#pelagus";
+	system.autoUpgrade.dates = "*:0/10"; # 10 min
 }
