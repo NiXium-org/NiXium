@@ -1,3 +1,3 @@
 {
-	flake.homeManagerModules.kreyren.web-browsers.firefox = ./firefox.nix;
+	flake.homeManagerModules.web-browsers-firefox-kreyren = ./firefox.nix;
 }

@@ -127,15 +127,18 @@ in {
 
 		# Background
 		"org/gnome/desktop/background" = {
-			picture-uri="${pkgs.gnome.gnome-backgrounds}/share/backgrounds/gnome/blobs-l.svg";
-			picture-uri-dark="${pkgs.gnome.gnome-backgrounds}/share/backgrounds/gnome/blobs-d.svg";
+			#picture-uri="${pkgs.gnome.gnome-backgrounds}/share/backgrounds/gnome/blobs-l.svg";
+			picture-uri ="./wallpaper.jpeg";
+			#picture-uri-dark="${pkgs.gnome.gnome-backgrounds}/share/backgrounds/gnome/blobs-d.svg";
+			picture-uri-dark ="./wallpaper.jpeg";
 		};
 		"org/gnome/desktop/screensaver" = {
-			picture-uri = "${pkgs.gnome.gnome-backgrounds}/share/backgrounds/gnome/blobs-l.svg";
+			picture-uri ="./wallpaper.jpeg";
+			#picture-uri = "${pkgs.gnome.gnome-backgrounds}/share/backgrounds/gnome/blobs-l.svg";
 		};
 
 		"org/gnome/desktop/input-sources" = {
-			show-all-sources = true;
+			shob-all-sources = true;
 			sources = [
 				(mkTuple [ "xkb" "eu" ])
 				(mkTuple [ "xkb" "cz" ])
@@ -164,25 +167,6 @@ in {
 
 		"org/gnome/shell/extensions/user-theme" = {
 			name = "Custom-Accent-Colors";
-		};
-
-		# Extensions
-		"org/gnome/shell" = {
-			disable-user-extensions = false;
-
-			# The extension names can be found through `$ gnome-extensions list`
-			enabled-extensions = [
-				"Vitals@CoreCoding.com"
-				"drive-menu@gnome-shell-extensions.gcampax.github.com"
-				# FIXME(Krey): Err not compatible with current GNOME version
-				# "audio-output-switcher@anduchs"
-				"blur-my-shell@aunetx"
-				"user-theme@gnome-shell-extensions.gcampax.github.com"
-				"gsconnect@andyholmes.github.io"
-				"custom-accent-colors@demiskp"
-			];
-
-			disabled-extensions = [];
 		};
 	};
 }

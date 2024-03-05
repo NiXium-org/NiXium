@@ -3,36 +3,38 @@
 let
 	inherit (config.flake) homeManagerModules;
 in {
-	flake.homeManagerModules.kreyren.imports = [
-		./home.nix
+	flake.homeManagerModules.kreyren.imports = [{
+		home-manager.users.kreyren.imports = [
+			./home.nix
 
-		# ../../nixos/users/kreyren/home/machines/sinnenfreude/home-configuration.nix
-		# ../../nixos/users/kreyren/home/modules/editors/vim/vim.nix
-		# ../../nixos/users/kreyren/home/modules/editors/vscode/vscode.nix
-		# ../../nixos/users/kreyren/home/modules/editors/vscode/vscode.nix
-		# ../../nixos/users/kreyren/home/modules/prompts/starship/starship.nix
-		# ../../nixos/users/kreyren/home/modules/shells/bash/bash.nix
-		# ../../nixos/users/kreyren/home/modules/shells/nushell/nushell.nix
-		# ../../nixos/users/kreyren/home/modules/shells/nushell/nushell.nix
-		# ../../nixos/users/kreyren/home/modules/system/dconf/dconf.nix
-		# ../../nixos/users/kreyren/home/modules/system/gtk/gtk.nix
-		# ../../nixos/users/kreyren/home/modules/terminal-emulators/alacritty/alacritty.nix
-		# ../../nixos/users/kreyren/home/modules/terminal-emulators/alacritty/alacritty.nix
-		# ../../nixos/users/kreyren/home/modules/tools/direnv/direnv.nix
-		# ../../nixos/users/kreyren/home/modules/tools/git/git.nix
-		# ../../nixos/users/kreyren/home/modules/tools/gpg-agent/gpg-agent.nix
-		# #../../nixos/users/kreyren/home/modules/web-browsers/firefox/firefox.nix
-		# ../../nixos/users/kreyren/home/modules/web-browsers/librewolf/librewolf.nix
+			# FIXME-QA(Krey): Expected to be just `homeManagerModules.editors-kreyren` same for all others..
+			homeManagerModules.editors-vim-kreyren
+			homeManagerModules.editors-vscode-kreyren
 
-		# homeManagerModules.editors-kreyren
-		#../../../../nixos/users/kreyren/home/modules/editors/vim/vim.nix
-		# homeManagerModules.kreyren.prompts.default
-		# homeManagerModules.kreyren.shells.default
-		# homeManagerModules.kreyren.system.default
-		# homeManagerModules.kreyren.terminal-emulators.alacritty
-		# homeManagerModules.kreyren.tools.default
-		# homeManagerModules.kreyren.web-browsers.default
-	];
+			#homeManagerModules.prompts-kreyren
+			homeManagerModules.prompts-starship-kreyren
+
+			# homeManagerModules.kreyren.shells.default
+			homeManagerModules.shells-bash-kreyren
+			homeManagerModules.shells-nushell-kreyren
+
+			# homeManagerModules.kreyren.system.default
+			homeManagerModules.system-dconf-kreyren
+			homeManagerModules.system-gtk-kreyren
+
+			# homeManagerModules.kreyren.terminal-emulators.default
+			homeManagerModules.terminal-emulators-alacritty-kreyren
+
+			# homeManagerModules.kreyren.tools.default
+			homeManagerModules.tools-direnv-kreyren
+			homeManagerModules.tools-git-kreyren
+			homeManagerModules.tools-gpg-agent-kreyren
+
+			# homeManagerModules.kreyren.web-browsers.default
+			# homeManagerModules.web-browsers-firefox-kreyren # Broken
+			homeManagerModules.web-browsers-librewolf-kreyren
+		];
+	}];
 
 	imports = [
 		./machines

@@ -19,22 +19,15 @@
 
 			# Principles
 			self.inputs.ragenix.nixosModules.default
-			self.inputs.home-manager-nixpkgs.nixosModules.home-manager
+			self.inputs.home-manager.nixosModules.home-manager
 			# self.disko-nixpkgs.nixosModules.disko
 			self.inputs.lanzaboote.nixosModules.lanzaboote
 			self.inputs.impermanence.nixosModules.impermanence
 			self.inputs.arkenfox.hmModules.default
 
 			# Users
-			self.nixosModules.users-kreyren # Add KREYREN user
-			self.homeManagerModules.kreyren
-			{
-				home-manager.users.kreyren.home.stateVersion = "23.11";
-				# home-manager.users.raptor.imports = [
-				# 	self.homeManagerModules.kreyren.default
-				# 	#self.homeManagerModules."kreyren@sinnenfreude"
-				# ];
-			}
+			self.nixosModules.users-kreyren
+			self.homeManagerModules."kreyren@sinnenfreude"
 
 			./configuration.nix
 			./hardware-configuration.nix

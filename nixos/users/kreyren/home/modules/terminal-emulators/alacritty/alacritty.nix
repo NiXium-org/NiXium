@@ -8,7 +8,7 @@ in {
 	programs.alacritty = {
 		settings = {
 			shell = {
-				program = mkDefault "${pkgs.bash}/bin/bash";
+				program = mkDefault "${pkgs.bashInteractive}/bin/bash";
 			};
 
 			key_binding = [

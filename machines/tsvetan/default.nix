@@ -21,16 +21,21 @@
 
 		modules = [
 			self.nixosModules.default
+
+			# Principles
 			self.inputs.ragenix.nixosModules.default
 			self.inputs.impermanence.nixosModules.impermanence
+			self.inputs.home-manager.nixosModules.home-manager
+			#self.inputs.nixos-generators.nixosModules.all-formats # Figure out later
 
-			#self.inputs.nixos-generators.nixosModules.all-formats
+			# Users
+			self.nixosModules.users-kreyren # Add KREYREN user
+			self.homeManagerModules."kreyren@tsvetan"
 
-			self.nixosModules.users-kreyren
-
+			# Files
 			./configuration.nix
 			./hardware-configuration.nix
-      # ./kernel.nix
+			# ./kernel.nix # Doesn't work as expected
 			./suspend.nix # Suspend-then-hibernate management
 		];
 

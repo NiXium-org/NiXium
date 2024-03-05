@@ -23,27 +23,27 @@ in {
 		# https://discourse.nixos.org/t/the-correct-way-to-override-the-latest-kernel-config/533/5
 		# Set according to https://nixos.wiki/wiki/Linux_kernel#Custom_configuration to test hypothesis in https://github.com/NixOS/nixpkgs/issues/260222#issuecomment-1869774655
 		# boot.kernelPackages = pkgs.linuxPackages;
-		# boot.kernelPackages = pkgs.linuxPackages_hardened;
+		boot.kernelPackages = pkgs.linuxPackages_hardened;
 		# boot.kernelPackages = crossPkgs.linuxPackages;
-		boot.kernelPackages = crossPkgs.linuxPackages_testing;
-		boot.kernelPatches = [
-      # {
+    # boot.kernelPackages = crossPkgs.linuxPackages_testing;
+    # boot.kernelPatches = [
+			# {
 			# 	name = "teres_i-config";
 			# 	patch = ./thing.patch;
-		 	# 	# extraConfig = ''
+			# 	# extraConfig = ''
 			# 	# 	CMA_SIZE_MBYTES 128
 			# 	# 	THERMAL n
 			# 	# '';
 			# }
-			{
-			  name = "work-patch";
-		 		patch = ./work.patch;
-		 	}
-		 	{
-		 		name = "anx6345-hotfix";
-		 		patch = ./anx6345-hotfix.patch;
-		 	}
-		];
+      # {
+      # 	name = "work-patch";
+      # 	patch = ./work.patch;
+      # }
+      # {
+      # 	name = "anx6345-hotfix";
+      # 	patch = ./anx6345-hotfix.patch;
+      # }
+    # ];
 
 		# Use defaults
 		boot.kernelParams = [
@@ -59,7 +59,7 @@ in {
 	# InitRD
 		boot.initrd.systemd.enable = true;
 		boot.initrd.availableKernelModules = [
-			"ushhid" # for USB
+			"usbhid" # for USB
 
 			# For display
 			"sun4i-drm"
@@ -100,7 +100,7 @@ in {
 		hardware.steam-hardware.enable = false;
 
 	# Sound
-		# sound.enable = true; # Only meant for ALSA-based systems? (https://nixos.wiki/wiki/PipeWire)
+		sound.enable = true; # Only meant for ALSA-based systems? (https://nixos.wiki/wiki/PipeWire)
 		hardware.pulseaudio = {
 			enable = mkIf config.services.pipewire.enable false; # PipeWire expects this set to false
 			package = pkgs.pulseaudioFull;

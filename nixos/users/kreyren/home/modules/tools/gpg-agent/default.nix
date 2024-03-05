@@ -1,3 +1,3 @@
 {
-	flake.homeManagerModules.kreyren.tools.gpg-agent = ./gpg-agent.nix;
+	flake.homeManagerModules.tools-gpg-agent-kreyren = ./gpg-agent.nix;
 }

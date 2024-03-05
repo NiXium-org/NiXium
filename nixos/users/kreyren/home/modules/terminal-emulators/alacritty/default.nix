@@ -1,3 +1,3 @@
 {
-	flake.homeManagerModules.kreyren.terminal-emulators.alacritty = ./alacritty.nix;
+	flake.homeManagerModules.terminal-emulators-alacritty-kreyren = ./alacritty.nix;
 }

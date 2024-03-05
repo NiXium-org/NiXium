@@ -1,10 +1,13 @@
 {
 	imports = [
-		# ./editors
-		# ./prompts
-		# ./shells
-		# ./terminal-emulators
-		# ./tools
-		# ./web-browsers
+		./editors
+		./prompts
+		./shells
+		./system
+		./terminal-emulators
+		./tools
+		./web-browsers
+
+		./homeManagerModules.nix
 	];
 }

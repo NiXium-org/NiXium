@@ -14,13 +14,18 @@
 
 		modules = [
 			self.nixosModules.default
-      #self.nixosModules.users # Include useRs
-      self.nixosModules.users-kreyren
+
+			# Principles
 			self.inputs.ragenix.nixosModules.default
-			# self.disko-nixpkgs.nixosModules.disko
+			self.inputs.home-manager.nixosModules.home-manager
 			self.inputs.lanzaboote.nixosModules.lanzaboote
 			self.inputs.impermanence.nixosModules.impermanence
 
+			# Users
+			self.nixosModules.users-kreyren
+			self.homeManagerModules."kreyren@pelagus"
+
+			# Files
 			./configuration.nix
 			./hardware-configuration.nix
 		];

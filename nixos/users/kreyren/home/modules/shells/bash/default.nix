@@ -1,3 +1,3 @@
 {
-	flake.homeManagerModules.kreyren.shells.bash = ./bash.nix;
+	flake.homeManagerModules.shells-bash-kreyren = ./bash.nix;
 }

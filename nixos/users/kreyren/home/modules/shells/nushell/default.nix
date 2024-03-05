@@ -1,3 +1,3 @@
 {
-	flake.homeManagerModules.kreyren.shells.nushell = ./nushell.nix;
+	flake.homeManagerModules.shells-nushell-kreyren = ./nushell.nix;
 }

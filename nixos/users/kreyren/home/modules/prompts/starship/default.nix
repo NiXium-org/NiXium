@@ -1,3 +1,3 @@
 {
-	flake.homeManagerModules.kreyren.prompts.starship = ./starship.nix;
+	flake.homeManagerModules.prompts-starship-kreyren = ./starship.nix;
 }

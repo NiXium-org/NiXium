@@ -4,7 +4,7 @@ let
 	inherit (config.flake) homeManagerModules;
 in {
 	# Module
-	flake.homeManagerModules."kreyren@sinnenfreude".imports = [
+	flake.homeManagerModules."kreyren@tsvetan".imports = [
 		homeManagerModules.kreyren
 		{
 			home-manager.users.kreyren.imports = [
@@ -14,14 +14,12 @@ in {
 	];
 
 	# # Standalone declaration
-	# flake.homeManagerConfigurations."kreyren@sinnenfreude" = inputs.home-manager-nixpkgs.lib.homeManagerConfiguration {
+	# flake.homeManagerConfigurations."kreyren@tsvetan" = inputs.home-manager-nixpkgs.lib.homeManagerConfiguration {
 	# 	pkgs = import inputs.nixpkgs {
-	# 		system = "x86_64-linux";
+	# 		system = "aarch64-linux";
 	# 		nixpkgs.config.allowUnfree = true;
 	# 	};
 	# 	modules = [
-	# 		{ home.stateVersion = "23.11"; }
-
 	# 		self.nixosModules.homeManagerConfiguration.kreyren.default
 
 	# 		./home-configuration.nix

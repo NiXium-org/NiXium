@@ -32,17 +32,19 @@
 #### SponsorBlock Settings
 ##### Enable SponsorBlock: TRUE
 
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 # Common Home-Manager configuration across all systems
 
 {
-	home-manager.users.kreyren.home.username = "kreyren";
+	home.username = "kreyren";
 	# home.homeDirectory = ("/home/" + config.home.username);
-	home-manager.users.kreyren.home.homeDirectory = "/home/kreyren";
+	home.homeDirectory = "/home/kreyren";
+
+	nix.settings.trusted-users = [ "kreyren" ]; # Add Kreyren in Trusted-Users
 
 	# Global Packages Installed On ALL Systems
-	home-manager.users.kreyren.home.packages = [
+	home.packages = [
 		pkgs.keepassxc
 		pkgs.xorg.xkill
 		pkgs.htop

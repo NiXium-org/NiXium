@@ -1,3 +1,3 @@
 {
-	flake.homeManagerModules.kreyren.system.dconf = ./dconf.nix;
+	flake.homeManagerModules.system-dconf-kreyren = ./dconf.nix;
 }

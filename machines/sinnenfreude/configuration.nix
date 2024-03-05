@@ -42,7 +42,6 @@ in {
 
 	services.openssh.enable = true;
 		services.tor.relay.onionServices."hiddenSSH".map = [ 22 ]; # Hidden SSH
-		users.users.root.openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOzh6FRxWUemwVeIDsr681fgJ2Q2qCnwJbvFe4xD15ve kreyren@fsfe.org" ]; # Allow root access for KREYREN
 
 	services.vikunja.enable = false;
 

@@ -1,3 +1,3 @@
 {
-	flake.homeManagerModules.kreyren.web-browsers.librewolf = ./librewolf.nix;
+	flake.homeManagerModules.web-browsers-librewolf-kreyren = ./librewolf.nix;
 }

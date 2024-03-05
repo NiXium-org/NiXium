@@ -1,3 +1,7 @@
 {
-	# imports = [ ./sinnenfreude ];
+	imports = [
+		./sinnenfreude
+		./tsvetan
+		./pelagus
+	];
 }

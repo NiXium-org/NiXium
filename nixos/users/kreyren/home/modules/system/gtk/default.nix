@@ -1,3 +1,3 @@
 {
-	flake.homeManagerModules.kreyren.system.gtk = ./gtk.nix;
+	flake.homeManagerModules.system-gtk-kreyren = ./gtk.nix;
 }

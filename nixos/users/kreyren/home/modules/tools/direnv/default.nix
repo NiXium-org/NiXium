@@ -1,3 +1,3 @@
 {
-	flake.homeManagerModules.kreyren.tools.direnv = ./direnv.nix;
+	flake.homeManagerModules.tools-direnv-kreyren = ./direnv.nix;
 }

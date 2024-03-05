@@ -1,4 +1,4 @@
-{ pkgs, config, unstable, inputs, lib, ... }:
+{ pkgs, config, unstable, crossPkgs, inputs, lib, ... }:
 
 # The Nix Confituration of TSVETAN system
 
@@ -42,6 +42,8 @@ in {
 	services.openssh.enable = true;
 		services.tor.relay.onionServices."hiddenSSH".map = [ 22 ]; # Hidden SSH
 
+	services.tor.enable = true;
+	services.tor.client.enable = true;
 	services.tor.relay = {
 		enable = true;
 		role = "relay"; # Expected to be set on-demand per device
@@ -62,16 +64,18 @@ in {
 	# 	"riscv64-linux"
 	# ];
 
+	# Temporary management
+	environment.systemPackages = [
+		unstable.fractal
+		unstable.prusa-slicer
+		(mkIf config.services.xserver.desktopManager.gnome.enable pkgs.pinentry-gnome)
+	];
+
 	# CCache
 	programs.ccache.enable = true;
 	programs.ccache.packageNames = [
 		# CCache Linux for tsvetan
 			"linuxPackages_testing"
 			"linux_testing"
-	];
-
-	environment.systemPackages = [
-		unstable.prusa-slicer
-		unstable.fractal
 	];
 }

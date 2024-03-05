@@ -1,3 +1,3 @@
 {
-	flake.homeManagerModules.kreyren.tools.git = ./git.nix;
+	flake.homeManagerModules.tools-git-kreyren = ./git.nix;
 }

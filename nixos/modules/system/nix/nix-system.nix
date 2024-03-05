@@ -17,9 +17,6 @@ in {
 			# Nullify the registry for purity
 			flake-registry = toFile "empty-flake-registry.json"
 				''{"flakes":[],"version":2}'';
-			trusted-users = [
-				"raptor"
-			];
 		};
 		gc = {
 			automatic = true;
