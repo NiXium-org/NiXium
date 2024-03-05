@@ -4,6 +4,7 @@ let
 	inherit (config.flake) nixosModules;
 in {
 	flake.nixosModules.default.imports = [
+		nixosModules.system-autoUpgrade
 		nixosModules.system-nix
 		nixosModules.system-time
 		nixosModules.system-ccache

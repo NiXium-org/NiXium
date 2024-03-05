@@ -67,4 +67,8 @@ in {
 		# 	"aarch64-linux"
 		# 	"riscv64-linux"
 		# ];
+
+	# Auto-Upgrade
+	system.autoUpgrade.enable = true;
+	system.autoUpgrade.flake = "github:kreyren/nixos-config#mracek";
 }

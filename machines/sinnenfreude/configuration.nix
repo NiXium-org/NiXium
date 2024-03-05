@@ -104,4 +104,8 @@ in {
 				"linuxPackages_testing"
 				#"linuxKernel.kernels.linux_testing"
 		];
+
+	# Auto-Upgrade
+	system.autoUpgrade.enable = true;
+	system.autoUpgrade.flake = "github:kreyren/nixos-config#sinnenfreude";
 }

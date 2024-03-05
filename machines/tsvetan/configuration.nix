@@ -78,4 +78,8 @@ in {
 			"linuxPackages_testing"
 			"linux_testing"
 	];
+
+	# Auto-Upgrade
+	system.autoUpgrade.enable = true;
+	system.autoUpgrade.flake = "github:kreyren/nixos-config#tsvetan";
 }

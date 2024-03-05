@@ -89,5 +89,4 @@ in {
 	# Auto-Upgrade
 	system.autoUpgrade.enable = true;
 	system.autoUpgrade.flake = "github:kreyren/nixos-config#tupac";
-	system.autoUpgrade.dates = "10minutes";
 }
