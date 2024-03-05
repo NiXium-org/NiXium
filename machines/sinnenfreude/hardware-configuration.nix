@@ -49,39 +49,38 @@ in {
 	];
 	boot.initrd.kernelModules = [ ];
 
-	# Nvidia
-	## NOTE(Krey): Legacy GPU supported by driver 470.xx (https://www.nvidia.com/en-us/drivers/unix/legacy-gpu)
 	hardware.opengl = {
 		enable = true;
 		driSupport = true;
 		driSupport32Bit = true;
 	};
 
-	# Configure nVidia including Optimus
-	services.xserver.videoDrivers = ["nvidia"];
+	# Nvidia
+	## NOTE(Krey): Legacy GPU supported by driver 470.xx (https://www.nvidia.com/en-us/drivers/unix/legacy-gpu)
+	# # Configure nVidia including Optimus
+	# services.xserver.videoDrivers = ["nvidia"];
+	# hardware.nvidia = {
+	# 	## Enable modesetting - Needed for Wayland compositors
+	# 	modesetting.enable = true;
 
-	hardware.nvidia = {
-		## Enable modesetting - Needed for Wayland compositors
-		modesetting.enable = true;
+	# 	## Use open-source version of kernel module (available since 515.43.04+)
+	# 	### NOTE(Krey): Assuming not available since this is legacy GPU that is supported by 470.xx
+	# 	open = false;
 
-		## Use open-source version of kernel module (available since 515.43.04+)
-		### NOTE(Krey): Assuming not available since this is legacy GPU that is supported by 470.xx
-		open = false;
+	# 	## Enable nVidia settings menu
+	# 	nvidiaSettings = true;
 
-		## Enable nVidia settings menu
-		nvidiaSettings = true;
+	# 	## Optionally you may need to select the appropriate driver version for your specific GPU
+	# 	package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
 
-		## Optionally you may need to select the appropriate driver version for your specific GPU
-		package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
-
-		prime = {
-			#sync.enable = true;
-			offload.enable = true;
-			offload.enableOffloadCmd = true;
-			intelBusId = "PCI:00:02:0"; # 00:02.0
-			nvidiaBusId = "PCI:01:00:0"; # 01:00.0
-		};
-	};
+	# 	prime = {
+	# 		#sync.enable = true;
+	# 		offload.enable = true;
+	# 		offload.enableOffloadCmd = true;
+	# 		intelBusId = "PCI:00:02:0"; # 00:02.0
+	# 		nvidiaBusId = "PCI:01:00:0"; # 01:00.0
+	# 	};
+	# };
 
 	# Steam Hardware
 	hardware.steam-hardware.enable = true;
