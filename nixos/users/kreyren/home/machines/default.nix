@@ -1,7 +1,8 @@
 {
 	imports = [
+		./pelagus
 		./sinnenfreude
 		./tsvetan
-		./pelagus
+		./tupac
 	];
 }

@@ -48,7 +48,14 @@ in {
 	services.tor.relay = {
 		enable = true;
 		role = "relay"; # Expected to be set on-demand per device
-	};
+  };
+
+  # I2P
+  services.i2pd.enable = true; # Enable the daemon
+  services.i2pd.package = unstable.i2pd;
+  services.i2pd.websocket.enable = true; # Enable web socket
+  services.i2pd.proto.socksProxy.enable = true;
+  services.i2pd.proto.sam.enable = true;
 
 	# Run lact (AMD Overclocking utility)
 	# FIXME-QA(Krey): Submit this to nixpkgs to clear up the space here

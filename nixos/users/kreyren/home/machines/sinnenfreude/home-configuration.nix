@@ -74,4 +74,25 @@
 			];
 		})
 	];
+
+	# GNOME Extensions
+	dconf.settings = {
+		"org/gnome/shell" = {
+			disable-user-extensions = false;
+
+			# The extension names can be found through `$ gnome-extensions list`
+			enabled-extensions = [
+				"Vitals@CoreCoding.com"
+				"drive-menu@gnome-shell-extensions.gcampax.github.com"
+				"blur-my-shell@aunetx"
+				"user-theme@gnome-shell-extensions.gcampax.github.com"
+				"gsconnect@andyholmes.github.io"
+				"custom-accent-colors@demiskp"
+				"desktop-cube@schneegans.github.com"
+				"caffeine@patapon.info"
+			];
+
+			disabled-extensions = [];
+		};
+	};
 }

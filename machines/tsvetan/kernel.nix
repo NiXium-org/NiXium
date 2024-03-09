@@ -12,6 +12,9 @@ in {
 	# NOTE(Krey): Whats this?
 	system.requiredKernelConfig = mkForce [];
 
+	boot.kernelModules = mkForce [];
+	boot.extraModulePackages = mkForce [];
+
 	boot.kernelPackages = pkgs.linuxPackagesFor
 		(let
 			baseKernel = crossPkgs.linux_testing;

@@ -52,10 +52,20 @@ in {
 			relay.enable = true; # Work as a relay to obstruct network sniffing
 		};
 
+	# BinFMT - Enable seemless VM-based cross-compilation
+		boot.binfmt.emulatedSystems = [
+			"aarch64-linux"
+			"riscv64-linux"
+		];
+
 	# SSH
 		services.openssh.enable = true;
 		services.tor.relay.onionServices."hiddenSSH".map = [ 22 ]; # Hidden SSH
 
 	# Firewall
 		networking.firewall.enable = mkForce true; # Enforce FireWall
+
+	# Auto-Upgrade
+	system.autoUpgrade.enable = false;
+	system.autoUpgrade.flake = "github:kreyren/nixos-config#tupac";
 }

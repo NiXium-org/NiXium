@@ -23,10 +23,10 @@ in {
 		# https://discourse.nixos.org/t/the-correct-way-to-override-the-latest-kernel-config/533/5
 		# Set according to https://nixos.wiki/wiki/Linux_kernel#Custom_configuration to test hypothesis in https://github.com/NixOS/nixpkgs/issues/260222#issuecomment-1869774655
 		# boot.kernelPackages = pkgs.linuxPackages;
-		boot.kernelPackages = pkgs.linuxPackages_hardened;
+		# boot.kernelPackages = pkgs.linuxPackages_hardened;
 		# boot.kernelPackages = crossPkgs.linuxPackages;
-    # boot.kernelPackages = crossPkgs.linuxPackages_testing;
-    # boot.kernelPatches = [
+		# boot.kernelPackages = crossPkgs.linuxPackages_testing;
+		# boot.kernelPatches = [
 			# {
 			# 	name = "teres_i-config";
 			# 	patch = ./thing.patch;
@@ -35,21 +35,21 @@ in {
 			# 	# 	THERMAL n
 			# 	# '';
 			# }
-      # {
-      # 	name = "work-patch";
-      # 	patch = ./work.patch;
-      # }
-      # {
-      # 	name = "anx6345-hotfix";
-      # 	patch = ./anx6345-hotfix.patch;
-      # }
-    # ];
+			# {
+			# 	name = "work-patch";
+			# 	patch = ./work.patch;
+			# }
+			# {
+			# 	name = "anx6345-hotfix";
+			# 	patch = ./anx6345-hotfix.patch;
+			# }
+		# ];
 
 		# Use defaults
 		boot.kernelParams = [
 			"console=ttyS0,115200n8"
 			"console=tty0"
-			"cma=128M" # Prevent crashes
+			"cma=256M" # 125 to prevent crashes in GNOME, 256 are needed for decoding H.264 videos with CEDRUS
 		];
 
 		# Kernel Modules

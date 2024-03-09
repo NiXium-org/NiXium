@@ -62,12 +62,12 @@
 
 		#nerdfonts
 		# NOTE(Krey): This was recommended, because nerdfonts might have issues with rendering -- https://github.com/TanvirOnGH/nix-config/blob/nix%2Bhome-manager/desktop/customization/font.nix#L4-L39
-		(pkgs.nerdfonts.override {
-			fonts = [
-				"Noto"
-				"FiraCode"
-			];
-		})
+		# (pkgs.nerdfonts.override {
+		# 	fonts = [
+		# 		"Noto"
+		# 		"FiraCode"
+		# 	];
+		# })
 	];
 
 	# GNOME Extensions
@@ -84,6 +84,7 @@
 				"gsconnect@andyholmes.github.io"
 				"custom-accent-colors@demiskp"
 				"desktop-cube@schneegans.github.com"
+				"caffeine@patapon.info"
 			];
 
 			disabled-extensions = [];

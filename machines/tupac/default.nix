@@ -15,15 +15,18 @@
 
 		modules = [
 			self.nixosModules.default
-
+#
 			# Users
 			self.nixosModules.users-kreyren
+			self.homeManagerModules."kreyren@tupac" # Include home management
 			self.nixosModules.users-kira
+			self.homeManagerModules."kira@tupac" # Include home management
 
 			# Principals
 			self.inputs.ragenix.nixosModules.default
 			self.inputs.lanzaboote.nixosModules.lanzaboote
 			self.inputs.impermanence.nixosModules.impermanence
+			self.inputs.home-manager.nixosModules.home-manager
 
 			# Files
 			./configuration.nix

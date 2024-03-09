@@ -101,6 +101,7 @@ in {
 				"gsconnect@andyholmes.github.io"
 				"custom-accent-colors@demiskp"
 				"desktop-cube@schneegans.github.com"
+				"caffeine@patapon.info"
 			];
 
 			disabled-extensions = [];

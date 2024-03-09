@@ -11,6 +11,9 @@ in {
 		nixosModules.system-clamav
 		nixosModules.services-tor
 		nixosModules.services-vikunja
+		{
+			environment.localBinInPath = true; # Include ~/.local/bin in PATH
+		}
 	];
 
 	imports = [

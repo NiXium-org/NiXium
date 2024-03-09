@@ -1,4 +1,7 @@
 { self, lib, flake-parts-lib, ... }:
+
+# Module to manage home manager modules via flake-parts, credit sam sung (TODO: proper credit)
+
 let
 	inherit (lib)
 		mapAttrs

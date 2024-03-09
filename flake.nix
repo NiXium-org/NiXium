@@ -62,6 +62,7 @@
 			imports = [
 				./nixos # Imports NixOS related things
 				./machines # Imports machines
+				./lib # Implement libs
 
 				inputs.flake-root.flakeModule
 				inputs.mission-control.flakeModule
