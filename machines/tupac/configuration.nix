@@ -66,6 +66,6 @@ in {
 		networking.firewall.enable = mkForce true; # Enforce FireWall
 
 	# Auto-Upgrade
-	system.autoUpgrade.enable = true;
-	system.autoUpgrade.flake = "github:kreyren/nixos-config#tupac";
+		system.autoUpgrade.enable = true;
+		system.autoUpgrade.flake = "github:kreyren/nixos-config#tupac";
 }
