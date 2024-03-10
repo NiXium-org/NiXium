@@ -4,13 +4,11 @@
 
 let
 	inherit (lib) mkIf mkForce;
-	username = "kreyren";
-	# old-username = "raptor";
 in {
-	users.users."${username}" = {
+	users.users.kreyren = {
 		description = "Raptor"; # FIXME(Krey): Figure out how to handle this
 		isNormalUser = true;
-		hashedPasswordFile = mkForce config.age.secrets.kreyren-user-password.path;
+		hashedPasswordFile = config.age.secrets.kreyren-user-password.path;
 		extraGroups = [
 			"wheel"
 			(mkIf config.virtualisation.docker.enable "docker")

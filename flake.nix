@@ -63,6 +63,7 @@
 				./nixos # Imports NixOS related things
 				./machines # Imports machines
 				./lib # Implement libs
+				./tools
 
 				inputs.flake-root.flakeModule
 				inputs.mission-control.flakeModule
@@ -119,14 +120,14 @@
 						inputs.ragenix.packages.${system}.default # To manage secrets
 						inputs.nixpkgs.legacyPackages.${system}.sbctl # To set up secureboot
 						inputs.nixpkgs.legacyPackages.${system}.fira-code # For liquratures in code editors
-						inputs.nixpkgs.legacyPackages.${system}.nixUnstable # Test
+						inputs.nixos-generators.packages.${system}.nixos-generate
 					];
 					inputsFrom = [ config.mission-control.devShell ];
 					# Environmental Variables
 					#RULES = "./secrets/secrets.nix"; # For ragenix to know where secrets are
 				};
 
-				formatter = inputs.nixpkgs.nixpkgs-fmt;
+				formatter = inputs.nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
 			};
 		};
 }
