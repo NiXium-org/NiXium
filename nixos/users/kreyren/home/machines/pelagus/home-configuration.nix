@@ -29,6 +29,7 @@ in {
 		pkgs.cura
 		pkgs.prusa-slicer
 		pkgs.fractal
+		pkgs.element-desktop
 		pkgs.qbittorrent
 		pkgs.stremio
 		pkgs.android-tools
