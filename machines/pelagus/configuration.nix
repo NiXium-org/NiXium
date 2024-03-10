@@ -77,10 +77,12 @@ in {
 		programs.kdeconnect.package = mkIf config.services.xserver.desktopManager.gnome.enable pkgs.gnomeExtensions.gsconnect; # Uses KDE thing by default which doesn't work on GNOME where we need gsconnect
 
 	# Security
-	security.sudo.enable = mkForce true; # Get rid of Sude
-	## sudo-rs blocked by: https://github.com/memorysafety/sudo-rs/issues
-	security.sudo-rs.enable = false; # Get sudo in rust
+	# Sudo
+	security.sudo.enable = mkForce false; # Get rid of Sude
+	security.sudo-rs.enable = true; # Get sudo in rust
 	security.sudo-rs.execWheelOnly = true; # Only let wheels to use sudo to avoid attack vectors such as CVE-2021-3156
+
+	# ClamAV
 	services.clamav.daemon.enable = true;
 	services.clamav.updater.enable = true; # Update virus definitions?
 
