@@ -25,6 +25,9 @@ in {
 		services.xserver.displayManager.gdm.enable = true;
 		services.xserver.desktopManager.gnome.enable = true;
 
+	# Flatpak
+		services.flatpak.enable = true;
+
 	# Networking
 		networking.networkmanager.enable = true; # Enable Networking via network-manager
 

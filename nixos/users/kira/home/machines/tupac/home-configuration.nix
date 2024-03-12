@@ -26,7 +26,7 @@ in {
 
 	home.packages = [
 		pkgs.keepassxc
-		pkgs.cura
+		# pkgs.cura # Broken: https://github.com/NixOS/nixpkgs/issues/186570
 		pkgs.prusa-slicer
 		pkgs.fractal
 		pkgs.qbittorrent
