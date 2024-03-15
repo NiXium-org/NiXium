@@ -140,8 +140,8 @@ in {
 		"org/gnome/desktop/input-sources" = {
 			shob-all-sources = true;
 			sources = [
-				(mkTuple [ "xkb" "eu" ])
-				(mkTuple [ "xkb" "cz" ])
+				(mkTuple [ "xkb" "us" ])
+				(mkTuple [ "xkb" "cz+qwerty'" ])
 			];
 			xkb-options = [ "terminate:ctrl_alt_bksp" ];
 		};
