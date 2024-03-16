@@ -1,13 +1,17 @@
-{ config, ... }:
+{ config, self, ... }:
 
 let
 	inherit (config.flake) homeManagerModules;
 in {
 	flake.homeManagerModules.kreyren.imports = [{
 		home-manager.users.kreyren.imports = [
+			self.inputs.arkenfox.hmModules.default
+
 			./home.nix
 
 			# FIXME-QA(Krey): Expected to be just `homeManagerModules.editors-kreyren` same for all others..
+			homeManagerModules.apps-flameshot-kreyren
+
 			homeManagerModules.editors-vim-kreyren
 			homeManagerModules.editors-vscode-kreyren
 
@@ -31,7 +35,7 @@ in {
 			homeManagerModules.tools-gpg-agent-kreyren
 
 			# homeManagerModules.kreyren.web-browsers.default
-			# homeManagerModules.web-browsers-firefox-kreyren # Broken
+			homeManagerModules.web-browsers-firefox-kreyren # Broken
 			homeManagerModules.web-browsers-librewolf-kreyren
 		];
 	}];

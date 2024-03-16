@@ -79,6 +79,8 @@ in {
 			"linux_testing"
 	];
 
+  zramSwap.enable = true; # Experiment
+
 	# Auto-Upgrade
 	system.autoUpgrade.enable = true;
 	system.autoUpgrade.flake = "github:kreyren/nixos-config#tsvetan";

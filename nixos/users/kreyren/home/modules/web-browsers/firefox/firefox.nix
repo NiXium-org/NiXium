@@ -1,11 +1,11 @@
-{ pkgs, config, ... }:
+{ self, config, pkgs, ... }:
 
 # WELCOME TO THE WORLD OF MINDFUCKERY SUCKAAAA!
 
 {
 	programs.firefox = {
 		package = pkgs.firefox;
-		# https://mozilla.github.io/policy-templates/
+		# Refer to https://mozilla.github.io/policy-templates/
 		policies = {
 			DisableFirefoxStudies = true;
 			DisableFirefoxAccounts = true; # Disable Firefox Sync
@@ -27,6 +27,56 @@
 				Enabled = true;
 				Locked = true;
 			};
+			Extensions.Uninstall = [
+				# FIXME(Krey): Review `~/.mozilla/firefox/Default/extensions.json` and uninstall all unwanted
+				"1und1@search.mozilla.org"
+				"allegro-pl@search.mozilla.org"
+				"amazon@search.mozilla.org"
+				"amazondotcn@search.mozilla.org"
+				"amazondotcom@search.mozilla.org"
+				"azerdict@search.mozilla.org"
+				"baidu@search.mozilla.org"
+				"bing@search.mozilla.org"
+				"bok-NO@search.mozilla.org"
+				"ceneji@search.mozilla.org"
+				"coccoc@search.mozilla.org"
+				"daum-kr@search.mozilla.org"
+				"ddg@search.mozilla.org"
+				"ebay@search.mozilla.org"
+				"ecosia@search.mozilla.org"
+				"eudict@search.mozilla.org"
+				"faclair-beag@search.mozilla.org"
+				"gmx@search.mozilla.org"
+				"google@search.mozilla.org"
+				"gulesider-NO@search.mozilla.org"
+				"leo_ende_de@search.mozilla.org"
+				"longdo@search.mozilla.org"
+				"mailcom@search.mozilla.org"
+				"mapy-cz@search.mozilla.org"
+				"mercadolibre@search.mozilla.org"
+				"mercadolivre@search.mozilla.org"
+				"naver-kr@search.mozilla.org"
+				"odpiralni@search.mozilla.org"
+				"pazaruvaj@search.mozilla.org"
+				"priberam@search.mozilla.org"
+				"prisjakt-sv-SE@search.mozilla.org"
+				"qwant@search.mozilla.org"
+				"qwantjr@search.mozilla.org"
+				"rakuten@search.mozilla.org"
+				"readmoo@search.mozilla.org"
+				"salidzinilv@search.mozilla.org"
+				"seznam-cz@search.mozilla.org"
+				"twitter@search.mozilla.org"
+				"tyda-sv-SE@search.mozilla.org"
+				"vatera@search.mozilla.org"
+				"webde@search.mozilla.org"
+				"wikipedia@search.mozilla.org"
+				"wiktionary@search.mozilla.org"
+				"wolnelektury-pl@search.mozilla.org"
+				"yahoo-jp-auctions@search.mozilla.org"
+				"yahoo-jp@search.mozilla.org"
+				"yandex@search.mozilla.org"
+			];
 			# Suggested by t0b0 thank you <3 https://gitlab.com/engmark/root/-/blob/60468eb82572d9a663b58498ce08fafbe545b808/configuration.nix#L293-310
 			ExtensionSettings = {
 				"*" = {
@@ -86,9 +136,11 @@
 				"uBlock0@raymondhill.net" = {
 					# uBlock Origin
 					install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
-					installation_mode = "force_installed";
+					installation_mode = "allowed";
 				};
+
 			};
+			# FIXME-PURITY(Krey): Figure out how to manage this
 			ExtensionUpdate = true; # There goes MY FUCKING PURITY
 			FirefoxHome = {
 				Search = true;
@@ -107,12 +159,14 @@
 				Locked = true;
 			};
 			Handlers = {
+				# FIXME-QA(Krey): Should be openned in evince if on GNOME
 				mimeTypes."application/pdf".action = "saveToDisk";
 			};
 			extensions = {
 				pdf = {
 					action = "useHelperApp";
 					ask = true;
+					# FIXME-QA(Krey): Should only happen on GNOME
 					handlers = [
 						{
 							name = "GNOME Document Viewer";
@@ -126,7 +180,7 @@
 			OfferToSaveLoginsDefault = false;
 			PasswordManagerEnabled = false; # Managed by KeepAss
 			PDFjs = {
-				Enabled = false; # Fuck No
+				Enabled = false; # Fuck No, HELL NO
 				EnablePermissions = false;
 			};
 			# Permissions = {
@@ -173,7 +227,7 @@
 				# UseHTTPProxyForAllProtocols = true;
 				# SSLProxy = hostname;
 				# FTPProxy = hostname;
-				SOCKSProxy = "127.0.0.1:9050";
+				SOCKSProxy = "127.0.0.1:9050"; # Tor
 				SOCKSVersion = 5; # 4 | 5
 				#Passthrough = <local>;
 				# AutoConfigURL = URL_TO_AUTOCONFIG;
@@ -195,7 +249,7 @@
 				PreventInstalls = true;
 				Add = [
 					{
-						Name = "SearXNG @ searx.tiekoetter.com";
+						Name = "SearXNG";
 						URLTemplate = "http://searx3aolosaf3urwnhpynlhuokqsgz47si4pzz5hvb7uuzyjncl2tid.onion/search?q={searchTerms}";
 						Method = "GET"; # GET | POST
 						IconURL = "http://searx3aolosaf3urwnhpynlhuokqsgz47si4pzz5hvb7uuzyjncl2tid.onion/favicon.ico";
@@ -210,7 +264,7 @@
 					"Bing" # Fuck you
 					"Google" # FUCK YOUU
 				];
-				Default = "SearXNG @ searx.tiekoetter.com";
+				Default = "SearXNG";
 			};
 			SearchSuggestEnabled = false;
 			ShowHomeButton = true;
@@ -239,39 +293,39 @@
 			# };
 		};
 		arkenfox = {
-			enable = false; # Decide how we want to handle these things
+			enable = true; # Decide how we want to handle these things
 			version = "118.0"; # Used on 119.0, because we don't have firefox 118.0 handy
 		};
 
 		profiles.Default = {
-			settings = {
-			# Enable letterboxing
-			"privacy.resistFingerprinting.letterboxing" = true;
+			# settings = {
+			# # Enable letterboxing
+			# "privacy.resistFingerprinting.letterboxing" = true;
 
-			# WebGL
-			"webgl.disabled" = true;
+			# # WebGL
+			# "webgl.disabled" = true;
 
-			"browser.preferences.defaultPerformanceSettings.enabled" = false;
-			"layers.acceleration.disabled" = true;
-			"privacy.globalprivacycontrol.enabled" = true;
+			# "browser.preferences.defaultPerformanceSettings.enabled" = false;
+			# "layers.acceleration.disabled" = true;
+			# "privacy.globalprivacycontrol.enabled" = true;
 
-			"browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
+			# "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
 
-			# "network.trr.mode" = 3;
+			# # "network.trr.mode" = 3;
 
-			# "network.dns.disableIPv6" = false;
+			# # "network.dns.disableIPv6" = false;
 
-			"privacy.donottrackheader.enabled" = true;
+			# "privacy.donottrackheader.enabled" = true;
 
-			# "privacy.clearOnShutdown.history" = true;
-			# "privacy.clearOnShutdown.downloads" = true;
-			# "browser.sessionstore.resume_from_crash" = true;
+			# # "privacy.clearOnShutdown.history" = true;
+			# # "privacy.clearOnShutdown.downloads" = true;
+			# # "browser.sessionstore.resume_from_crash" = true;
 
-			# See https://librewolf.net/docs/faq/#how-do-i-fully-prevent-autoplay for options
-			"media.autoplay.blocking_policy" = 2;
+			# # See https://librewolf.net/docs/faq/#how-do-i-fully-prevent-autoplay for options
+			# "media.autoplay.blocking_policy" = 2;
 
-			"privacy.resistFingerprinting" = true;
-		};
+			# "privacy.resistFingerprinting" = true;
+			# };
 			# Documentation https://arkenfox.dwarfmaster.net
 			arkenfox = if (config.programs.firefox.arkenfox.version == "118.0") then {
 				enable = true;
@@ -282,6 +336,7 @@
 				# GEOLOCATION / LANGUAGE / LOCALE
 				"0201".enable = true; # Use Mozilla geolocation service instead of Google if permission is granted [FF74+]
 				"0202".enable = true; # Disable using the OS's geolocation service
+				# WARNING(Krey): May break some input methods e.g xim/ibus for CJK languages [1]
 				"0211".enable = true; # Use en-US locale regardless of the system or region locale
 
 				# QUIETER FOX (Handles telemetry, etc..)
@@ -381,25 +436,27 @@
 			settings = {
 				"network.proxy.socks_remote_dns" = true; # Do DNS lookup through proxy (required for tor to work)
 			};
+			# FIXME-PURITY(Krey): Figure out how to make firefox to accept these addons
 			# NOTE(Krey): Check if the addon is packaged on https://gitlab.com/rycee/nur-expressions/-/blob/master/pkgs/firefox-addons/addons.json
-			# extensions = with firefox-addons; [
-			# 	ublock-origin
-			# 	i-dont-care-about-cookies
-			# 	clearurls
-			# 	sponsorblock
-			# 	noscript
-			# 	decentraleyes
-			# 	# # dont-track-me-google
-			# 	forget_me_not
-			# 	# # popupnoff
-			# 	keepassxc-browser
-			# 	terms-of-service-didnt-read
-			# 	# # dont-fuck-with-paste
-			# 	libredirect
-			# 	# # FIXME(Krey): Verify that ublock-origin doesn't block trackers
-			# 	# #privacy-badger17
-			# 	# # dark reader
-			# ];
+			# Use `nix-env -f '<nixpkgs>' -qaP -A nur.repos.rycee.firefox-addons` to list all the addons
+			extensions = with self.inputs.firefox-addons.packages.${config.nixpkgs.hostPlatform.system}; [
+				ublock-origin
+				# i-dont-care-about-cookies
+				# clearurls
+				# sponsorblock
+				# noscript
+				# decentraleyes
+				# # # dont-track-me-google
+				# forget_me_not
+				# # # popupnoff
+				# keepassxc-browser
+				# terms-of-service-didnt-read
+				# # # dont-fuck-with-paste
+				# libredirect
+				# # FIXME(Krey): Verify that ublock-origin doesn't block trackers
+				# #privacy-badger17
+				# # dark reader
+			];
 		};
 	};
 }

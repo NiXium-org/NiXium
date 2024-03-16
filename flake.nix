@@ -14,7 +14,7 @@
 		# Principle inputs
 		nixos-hardware.url = "github:NixOS/nixos-hardware";
 		nixos-flake.url = "github:srid/nixos-flake";
-		nur.url = "github:nix-community/NUR/master";
+		# nur.url = "github:nix-community/NUR/master";
 		impermanence.url = "github:nix-community/impermanence";
 		flake-parts.url = "github:hercules-ci/flake-parts";
 		mission-control.url = "github:Platonic-Systems/mission-control";
@@ -22,6 +22,11 @@
 		ragenix.url = "github:yaxitech/ragenix";
 		lanzaboote.url = "github:nix-community/lanzaboote/v0.3.0"; # MAINTAIN(Krey): has to be kept up to date
 		arkenfox.url = "github:dwarfmaster/arkenfox-nixos";
+
+		firefox-addons = {
+			url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+			inputs.nixpkgs.follows = "nixpkgs";
+		};
 
 		disko-nixpkgs = {
 			url = "github:nix-community/disko";

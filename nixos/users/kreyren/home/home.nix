@@ -32,33 +32,33 @@
 #### SponsorBlock Settings
 ##### Enable SponsorBlock: TRUE
 
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 # Common Home-Manager configuration across all systems
-
-{
+let
+	inherit (lib) mkIf;
+in {
 	home.username = "kreyren";
 	# home.homeDirectory = ("/home/" + config.home.username);
 	home.homeDirectory = "/home/kreyren";
 
-	nix.settings.trusted-users = [ "kreyren" ]; # Add Kreyren in Trusted-Users
-
 	# Global Packages Installed On ALL Systems
 	home.packages = [
 		pkgs.keepassxc
-		pkgs.xorg.xkill
-		pkgs.htop
-		pkgs.wget
 		pkgs.wcalc
 		pkgs.ripgrep
 		pkgs.pciutils # for lspci
 		pkgs.file
 		pkgs.tree
 
+		# FIXME(Krey): This should be only enabled on GNOME
+		pkgs.xdg-desktop-portal-gnome
+		pkgs.xdg-desktop-portal
+		pkgs.gnome.dconf-editor
+
 		pkgs.cryptsetup
 
 		pkgs.xclip
-		pkgs.flameshot
 		pkgs.mpv
 		pkgs.torsocks
 

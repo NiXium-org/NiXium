@@ -36,7 +36,8 @@ in {
 		pkgs.picocom
 		pkgs.bottles
 		pkgs.kicad
-		pkgs.mtr
+    pkgs.mtr
+    pkgs.vlc
 		# nix-software-center.nix-software-center
 		# pkgs.colobot
 		pkgs.nix-index
@@ -87,6 +88,8 @@ in {
 			];
 		})
 	];
+
+	services.flameshot.enable = true;
 
 	# GNOME Extensions
 	dconf.settings = {

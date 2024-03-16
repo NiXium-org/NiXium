@@ -121,7 +121,7 @@ in {
 		## Flameshot GUI
 		"org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4" = {
 			name = "Flameshot GUI";
-			command = "${pkgs.flameshot}/bin/flameshot gui";
+			command = "flameshot gui";
 			binding = "Print";
 		};
 

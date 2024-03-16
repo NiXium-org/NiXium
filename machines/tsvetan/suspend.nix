@@ -21,7 +21,7 @@ in {
 		before = [ "systemd-suspend.service" ];
 		environment = hibernateEnvironment;
 		script = ''
-			if [ "$(cat /sys/class/power_supply/AC/online)" = 0 ]; then
+			if [ "$(cat /sys/class/power_supply/axp813-ac/online)" = 0 ]; then
 				curtime=$(date +%s)
 				echo "$curtime $1" >> /tmp/autohibernate.log
 				echo "$curtime" > "$HIBERNATE_LOCK"

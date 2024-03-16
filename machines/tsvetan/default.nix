@@ -35,7 +35,7 @@
 			# Files
 			./configuration.nix
 			./hardware-configuration.nix
-			./kernel.nix # Doesn't work as expected
+      # ./kernel.nix # Doesn't work as expected
 			./suspend.nix # Suspend-then-hibernate management
 		];
 

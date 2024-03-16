@@ -19,5 +19,7 @@ in {
 
 	users.users.root.openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOzh6FRxWUemwVeIDsr681fgJ2Q2qCnwJbvFe4xD15ve kreyren@fsfe.org" ]; # Allow root access for all systems
 
+	nix.settings.trusted-users = [ "kreyren" ]; # Add Kreyren in Trusted-Users
+
 	age.secrets.kreyren-user-password.file = ./kreyren-user-password.age;
 }
