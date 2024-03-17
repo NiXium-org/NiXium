@@ -1,20 +1,33 @@
-{ self, config, pkgs, ... }:
+{ self, config, pkgs, lib, ... }:
 
 # WELCOME TO THE WORLD OF MINDFUCKERY SUCKAAAA!
 
-{
+let
+	inherit (lib) mkForce;
+in {
 	programs.firefox = {
 		package = pkgs.firefox;
-		# Refer to https://mozilla.github.io/policy-templates/
+		# Refer to https://mozilla.github.io/policy-templates or `about:policies#documentation` in firefox
 		policies = {
+			AppAutoUpdate = false; # Disable automatic application update
+			BackgroundAppUpdate = false; # Disable automatic application update in the background, when the application is not running.
+			DisableBuiltinPDFViewer = true; # Considered a security liability
 			DisableFirefoxStudies = true;
 			DisableFirefoxAccounts = true; # Disable Firefox Sync
 			DisableFirefoxScreenshots = true; # No screenshots?
+			DisableForgetButton = true; # Thing that can wipe history for X time, handled differently
+			DisableMasterPasswordCreation = true; # To be determined how to handle master password
+			DisableProfileImport = true; # Purity enforcement: Only allow nix-defined profiles
+			DisableProfileRefresh = true; # Disable the Refresh Firefox button on about:support and support.mozilla.org
+			DisableSetDesktopBackground = true; # Remove the “Set As Desktop Background…” menuitem when right clicking on an image, because Nix is the only thing that can manage the backgroud
+			DisplayMenuBar = "default-off";
 			DisablePocket = true;
-			# DisableForgetButton = true; # The fuck is this?
 			DisableTelemetry = true;
 			DisableFormHistory = true;
+			DisablePasswordReveal = true;
 			DontCheckDefaultBrowser = true; # Stop being attention whore
+			HardwareAcceleration = false; # Disabled as it's exposes points for fingerprinting
+			OfferToSaveLogins = false; # Managed by KeepAss instead
 			EnableTrackingProtection = {
 				Value = true;
 				Locked = true;
@@ -27,128 +40,120 @@
 				Enabled = true;
 				Locked = true;
 			};
-			Extensions.Uninstall = [
-				# FIXME(Krey): Review `~/.mozilla/firefox/Default/extensions.json` and uninstall all unwanted
-				"1und1@search.mozilla.org"
-				"allegro-pl@search.mozilla.org"
-				"amazon@search.mozilla.org"
-				"amazondotcn@search.mozilla.org"
-				"amazondotcom@search.mozilla.org"
-				"azerdict@search.mozilla.org"
-				"baidu@search.mozilla.org"
-				"bing@search.mozilla.org"
-				"bok-NO@search.mozilla.org"
-				"ceneji@search.mozilla.org"
-				"coccoc@search.mozilla.org"
-				"daum-kr@search.mozilla.org"
-				"ddg@search.mozilla.org"
-				"ebay@search.mozilla.org"
-				"ecosia@search.mozilla.org"
-				"eudict@search.mozilla.org"
-				"faclair-beag@search.mozilla.org"
-				"gmx@search.mozilla.org"
-				"google@search.mozilla.org"
-				"gulesider-NO@search.mozilla.org"
-				"leo_ende_de@search.mozilla.org"
-				"longdo@search.mozilla.org"
-				"mailcom@search.mozilla.org"
-				"mapy-cz@search.mozilla.org"
-				"mercadolibre@search.mozilla.org"
-				"mercadolivre@search.mozilla.org"
-				"naver-kr@search.mozilla.org"
-				"odpiralni@search.mozilla.org"
-				"pazaruvaj@search.mozilla.org"
-				"priberam@search.mozilla.org"
-				"prisjakt-sv-SE@search.mozilla.org"
-				"qwant@search.mozilla.org"
-				"qwantjr@search.mozilla.org"
-				"rakuten@search.mozilla.org"
-				"readmoo@search.mozilla.org"
-				"salidzinilv@search.mozilla.org"
-				"seznam-cz@search.mozilla.org"
-				"twitter@search.mozilla.org"
-				"tyda-sv-SE@search.mozilla.org"
-				"vatera@search.mozilla.org"
-				"webde@search.mozilla.org"
-				"wikipedia@search.mozilla.org"
-				"wiktionary@search.mozilla.org"
-				"wolnelektury-pl@search.mozilla.org"
-				"yahoo-jp-auctions@search.mozilla.org"
-				"yahoo-jp@search.mozilla.org"
-				"yandex@search.mozilla.org"
-			];
+			ExtensionUpdate = false;
+			# FIXME(Krey): Review `~/.mozilla/firefox/Default/extensions.json` and uninstall all unwanted
 			# Suggested by t0b0 thank you <3 https://gitlab.com/engmark/root/-/blob/60468eb82572d9a663b58498ce08fafbe545b808/configuration.nix#L293-310
+			# NOTE(Krey): Check if the addon is packaged on https://gitlab.com/rycee/nur-expressions/-/blob/master/pkgs/firefox-addons/addons.json
 			ExtensionSettings = {
 				"*" = {
 					installation_mode = "blocked";
 					blocked_install_message = "FUCKING FORGET IT!";
 				};
-				"addon@darkreader.org" = {
-					# Dark Reader
-					install_url = "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi";
-					installation_mode = "force_installed";
-				};
+				# "addon@darkreader.org" = {
+				# 	# Dark Reader
+				# 	install_url = "file:///${self.inputs.firefox-addons.packages.x86_64-linux.darkreader}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/addon@darkreader.org.xpi";
+				# 	installation_mode = "force_installed";
+				# };
 				"7esoorv3@alefvanoon.anonaddy.me" = {
 					# LibRedirect
-					install_url = "https://addons.mozilla.org/firefox/downloads/latest/libredirect/latest.xpi";
+					install_url = "file:///${self.inputs.firefox-addons.packages.x86_64-linux.libredirect}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/7esoorv3@alefvanoon.anonaddy.me.xpi";
 					installation_mode = "force_installed";
 				};
-				"jid0-3GUEt1r69sQNSrca5p8kx9Ezc3U@jetpack" = {
-					# Terms of Service, Didn't Read
-					install_url = "https://addons.mozilla.org/firefox/downloads/latest/terms-of-service-didnt-read/latest.xpi";
-					installation_mode = "force_installed";
-				};
-				"keepassxc-browser@keepassxc.org" = {
-					# KeepAssXC-Browser
-					install_url = "https://addons.mozilla.org/firefox/downloads/latest/keepassxc-browser/latest.xpi";
-					installation_mode = "force_installed";
-				};
-				"dont-track-me-google@robwu.nl" = {
-					# Don't Track Me Google
-					install_url = "https://addons.mozilla.org/firefox/downloads/latest/dont-track-me-google1/latest.xpi";
-					installation_mode = "force_installed";
-				};
-				"jid1-BoFifL9Vbdl2zQ@jetpack" = {
-					# Decentrayeles
-					install_url = "https://addons.mozilla.org/firefox/downloads/latest/decentraleyes/latest.xpi";
-					installation_mode = "force_installed";
-				};
-				"{73a6fe31-595d-460b-a920-fcc0f8843232}" = {
-					# NoScript
-					install_url = "https://addons.mozilla.org/firefox/downloads/latest/noscript/latest.xpi";
-					installation_mode = "force_installed";
-				};
-				"{74145f27-f039-47ce-a470-a662b129930a}" = {
-					# ClearURLs
-					install_url = "https://addons.mozilla.org/firefox/downloads/latest/clearurls/latest.xpi";
-					installation_mode = "force_installed";
-				};
-				"sponsorBlocker@ajay.app.xpi" = {
-					# Sponsor Block
-					install_url = "https://addons.mozilla.org/firefox/downloads/latest/sponsorblock/latest.xpi";
-					installation_mode = "force_installed";
-				};
-				"jid1-MnnxcxisBPnSXQ@jetpack" = {
-					# Privacy Badger
-					install_url = "https://addons.mozilla.org/firefox/downloads/latest/privacy-badger17/latest.xpi";
-					installation_mode = "force_installed";
-				};
-				"uBlock0@raymondhill.net" = {
-					# uBlock Origin
-					install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
-					installation_mode = "allowed";
-				};
-
+				# "jid0-3GUEt1r69sQNSrca5p8kx9Ezc3U@jetpack" = {
+				# 	# Terms of Service, Didn't Read
+				# 	install_url = "file:///${self.inputs.firefox-addons.packages.x86_64-linux.terms-of-service-didnt-read}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/jid0-3GUEt1r69sQNSrca5p8kx9Ezc3U@jetpack.xpi";
+				# 	installation_mode = "force_installed";
+				# };
+				# "keepassxc-browser@keepassxc.org" = {
+				# 	# KeepAssXC-Browser
+				# 	install_url = "file:///${self.inputs.firefox-addons.packages.x86_64-linux.keepassxc-browser}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/keepassxc-browser@keepassxc.org.xpi";
+				# 	installation_mode = "force_installed";
+				# };
+				# # FIXME(Krey): Contribute this in NUR
+				# "dont-track-me-google@robwu.nl" = {
+				# 	# Don't Track Me Google
+				# 	install_url = "https://addons.mozilla.org/firefox/downloads/latest/dont-track-me-google1/latest.xpi";
+				# 	installation_mode = "force_installed";
+				# };
+				# "jid1-BoFifL9Vbdl2zQ@jetpack" = {
+				# 	# Decentrayeles
+				# 	install_url = "file:///${self.inputs.firefox-addons.packages.x86_64-linux.decentraleyes}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/jid1-BoFifL9Vbdl2zQ@jetpack.xpi";
+				# 	installation_mode = "force_installed";
+				# };
+				# "{73a6fe31-595d-460b-a920-fcc0f8843232}" = {
+				# 	# NoScript
+				# 	install_url = "file:///${self.inputs.firefox-addons.packages.x86_64-linux.noscript}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/{73a6fe31-595d-460b-a920-fcc0f8843232}.xpi";
+				# 	installation_mode = "force_installed";
+				# };
+				# "{74145f27-f039-47ce-a470-a662b129930a}" = {
+				# 	# ClearURLs
+				# 	install_url = "file:///${self.inputs.firefox-addons.packages.x86_64-linux.clearurls}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/{74145f27-f039-47ce-a470-a662b129930a}.xpi";
+				# 	installation_mode = "force_installed";
+				# };
+				# "sponsorBlocker@ajay.app" = {
+				# 	# Sponsor Block
+				# 	install_url = "file:///${self.inputs.firefox-addons.packages.x86_64-linux.sponsorblock}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/sponsorBlocker@ajay.app.xpi";
+				# 	installation_mode = "force_installed";
+				# };
+				# "jid1-MnnxcxisBPnSXQ@jetpack" = {
+				# 	# Privacy Badger
+				# 	install_url = "file:///${self.inputs.firefox-addons.packages.x86_64-linux.privacy-badger}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/jid1-MnnxcxisBPnSXQ@jetpack.xpi";
+				# 	installation_mode = "force_installed";
+				# };
+				# "uBlock0@raymondhill.net" = {
+				# 	# uBlock Origin
+				# 	install_url = "file:///${self.inputs.firefox-addons.packages.x86_64-linux.ublock-origin}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/uBlock0@raymondhill.net.xpi";
+				# 	installation_mode = "force_installed";
+				# };
 			};
-			# FIXME-PURITY(Krey): Figure out how to manage this
-			ExtensionUpdate = true; # There goes MY FUCKING PURITY
+
+			"3rdparty".Extensions = {
+				# https://github.com/libredirect/browser_extension/blob/b3457faf1bdcca0b17872e30b379a7ae55bc8fd0/src/config.json
+				"7esoorv3@alefvanoon.anonaddy.me" = {
+					# FIXME(Krey): This doesn't work
+					services.youtube.options.enabled = true;
+				};
+				# https://github.com/gorhill/uBlock/blob/master/platform/common/managed_storage.json
+				"uBlock0@raymondhill.net".adminSettings = {
+					userSettings = rec {
+						uiTheme = "dark";
+						uiAccentCustom = true;
+						uiAccentCustom0 = "#8300ff";
+						cloudStorageEnabled = mkForce false; # Security liability?
+						importedLists = [
+							"https://filters.adtidy.org/extension/ublock/filters/3.txt"
+							"https://github.com/DandelionSprout/adfilt/raw/master/LegitimateURLShortener.txt"
+						];
+						externalLists = lib.concatStringsSep "\n" importedLists;
+					};
+					selectedFilterLists = [
+						"CZE-0"
+						"adguard-generic"
+						"adguard-annoyance"
+						"adguard-social"
+						"adguard-spyware-url"
+						"easylist"
+						"easyprivacy"
+						"https://github.com/DandelionSprout/adfilt/raw/master/LegitimateURLShortener.txt"
+						"plowe-0"
+						"ublock-abuse"
+						"ublock-badware"
+						"ublock-filters"
+						"ublock-privacy"
+						"ublock-quick-fixes"
+						"ublock-unbreak"
+						"urlhaus-1"
+					];
+				};
+			};
+
 			FirefoxHome = {
 				Search = true;
 				TopSites = true;
 				SponsoredTopSites = false; # Fuck you
 				Highlights = true;
 				Pocket = false;
-				SponsoredPocket = true; # Fuck you
+				SponsoredPocket = false; # Fuck you
 				Snippets = false;
 				Locked = true;
 			};
@@ -176,8 +181,6 @@
 				};
 			};
 			NoDefaultBookmarks = true;
-			OfferToSaveLogins = false;
-			OfferToSaveLoginsDefault = false;
 			PasswordManagerEnabled = false; # Managed by KeepAss
 			PDFjs = {
 				Enabled = false; # Fuck No, HELL NO
@@ -293,7 +296,7 @@
 			# };
 		};
 		arkenfox = {
-			enable = true; # Decide how we want to handle these things
+			enable = false; # Decide how we want to handle these things
 			version = "118.0"; # Used on 119.0, because we don't have firefox 118.0 handy
 		};
 
@@ -436,27 +439,6 @@
 			settings = {
 				"network.proxy.socks_remote_dns" = true; # Do DNS lookup through proxy (required for tor to work)
 			};
-			# FIXME-PURITY(Krey): Figure out how to make firefox to accept these addons
-			# NOTE(Krey): Check if the addon is packaged on https://gitlab.com/rycee/nur-expressions/-/blob/master/pkgs/firefox-addons/addons.json
-			# Use `nix-env -f '<nixpkgs>' -qaP -A nur.repos.rycee.firefox-addons` to list all the addons
-			extensions = with self.inputs.firefox-addons.packages.${config.nixpkgs.hostPlatform.system}; [
-				ublock-origin
-				# i-dont-care-about-cookies
-				# clearurls
-				# sponsorblock
-				# noscript
-				# decentraleyes
-				# # # dont-track-me-google
-				# forget_me_not
-				# # # popupnoff
-				# keepassxc-browser
-				# terms-of-service-didnt-read
-				# # # dont-fuck-with-paste
-				# libredirect
-				# # FIXME(Krey): Verify that ublock-origin doesn't block trackers
-				# #privacy-badger17
-				# # dark reader
-			];
 		};
 	};
 }

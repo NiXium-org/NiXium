@@ -1,17 +1,19 @@
-{ config, inputs, self, ... }:
+{ config, ... }:
 
 let
 	inherit (config.flake) homeManagerModules;
 in {
 	# Module
-	flake.homeManagerModules."kreyren@pelagus".imports = [
-		homeManagerModules.kreyren
-		{
-			home-manager.users.kreyren.imports = [
-				./home-configuration.nix
-			];
-		}
-	];
+	flake.homeManagerModules."kreyren@pelagus" = {
+		imports = [
+			homeManagerModules.kreyren
+			{
+				home-manager.users.kreyren.imports = [
+					./home-configuration.nix
+				];
+			}
+		];
+	};
 
 	# Standalone declaration
 	# flake.homeManagerConfigurations."kreyren@pelagus" = inputs.home-manager-nixpkgs.lib.homeManagerConfiguration {

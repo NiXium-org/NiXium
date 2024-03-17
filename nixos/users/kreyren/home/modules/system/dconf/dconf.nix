@@ -93,28 +93,28 @@ in {
 		## Terminal
 		"org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
 			name = "Open Terminal";
-			command = "${pkgs.alacritty}/bin/alacritty";
+			command = "alacritty";
 			binding = "<Super>Return";
 		};
 
 		## Web Browser
 		"org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
 			name = "Open Web Browser";
-			command = "${pkgs.firefox}/bin/firefox";
+			command = "firefox";
 			binding = "<Super>t";
 		};
 
 		## File Browser
 		"org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
 			name = "Open File Browser";
-			command = "${pkgs.gnome.nautilus}/bin/nautilus";
+			command = "nautilus";
 			binding = "<Super>e";
 		};
 
 		## xkill`
 		"org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3" = {
 			name = "xkill";
-			command = "${pkgs.xorg.xkill}/bin/xkill";
+			command = "xkill";
 			binding = "<Control>Escape";
 		};
 

@@ -18,7 +18,10 @@ in
 			homeManagerModules = mkOption {
 				type = types.lazyAttrsOf types.unspecified;
 				default = { };
-				apply = mapAttrs (k: v: { _file = "${toString self.outPath}/flake.nix#homeManagerModules.${k}"; imports = [ v ]; });
+				apply = mapAttrs (k: v: {
+					_file = "${toString self.outPath}/flake.nix#homeManagerModules.${k}";
+					imports = [ v ];
+				});
 				description = ''
 					Home manager modules.
 
