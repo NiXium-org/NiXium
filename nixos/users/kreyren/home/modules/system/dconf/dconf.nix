@@ -146,16 +146,6 @@ in {
 			xkb-options = [ "terminate:ctrl_alt_bksp" ];
 		};
 
-		# Extension: Vitals
-		"org/gnome/shell/extensions/vitals" = {
-			hot-sensors = [
-				"_memory_usage_"
-				"_system_load_1m_"
-				"__network-rx_max__"
-				"__temperature_avg__"
-			];
-		};
-
 		# Extension: Custom Accent Colors
 		## FIXME-QA(Krey): Apply this only when custom accent colors is enabled
 		"org/gnome/shell/extensions/custom-accent-colors" = {

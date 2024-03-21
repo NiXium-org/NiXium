@@ -88,6 +88,17 @@
 			];
 
 			disabled-extensions = [];
-		};
+    };
+
+    # Extension: Vitals
+    "org/gnome/shell/extensions/vitals" = {
+      hot-sensors = [
+        "_memory_usage_"
+        "_system_load_1m_"
+        "__network-rx_max__"
+        "__network-tx_max__"
+        "_voltage_axp20x_battery_in0_"
+      ];
+    };
 	};
 }

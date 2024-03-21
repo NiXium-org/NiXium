@@ -32,11 +32,22 @@ in {
 				speedFactor = 2;
 				supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
 				mandatoryFeatures = [ ];
-			}
+      }
+      {
+				# PELAGUS
+				# FIXME(Krey): Use onion service
+				#hostName = "pelagus.nixium";
+				hostName = "192.168.0.206";
+				systems = [ "x86_64-linux" "aarch64-linux" "riscv64-linux" ];
+				protocol = "ssh";
+				maxJobs = 4; # 100%, 16GB RAM available
+				speedFactor = 2;
+				supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+				mandatoryFeatures = [ ];
+      }
 		];
-		# FIXME-QA(Krey): Already set in nix management, but expected to be set from this file unless it's already set
-		# extraOptions = ''
-		# 	builders-use-substitutes = true
-		# '';
+    extraOptions = ''
+      builders-use-substitutes = true
+    '';
 	};
 }
