@@ -45,6 +45,7 @@ in {
 
 	services.vikunja.enable = false;
 
+  services.tor.enable = true;
 	services.tor.relay = {
 		enable = true;
 		role = "relay"; # Expected to be set on-demand per device
@@ -106,6 +107,6 @@ in {
 		];
 
 	# Auto-Upgrade
-	system.autoUpgrade.enable = true;
+	system.autoUpgrade.enable = false;
 	system.autoUpgrade.flake = "github:kreyren/nixos-config#sinnenfreude";
 }
