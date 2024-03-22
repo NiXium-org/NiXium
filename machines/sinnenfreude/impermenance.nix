@@ -17,7 +17,7 @@ in {
 		"/" = {
 			device = "none";
 			fsType = "tmpfs";
-			options = [ "size=3G" "mode=755" ];
+			options = [ "size=12G" "mode=755" ];
 		};
 
 		# As suggested in https://matrix.to/#/!KqkRjyTEzAGRiZFBYT:nixos.org/$ebUToAwh1VJhOKWawWq46WLD4FfZghupcApulGWEb_E (https://github.com/NixOS/nixpkgs/blob/cfc3698c31b1fb9cdcf10f36c9643460264d0ca8/nixos/modules/system/boot/tmp.nix#L51)
@@ -30,7 +30,7 @@ in {
 		"/home/raptor" = {
 			device = "none";
 			fsType = "tmpfs";
-			options = [ "size=4G" "mode=777" ];
+			options = [ "size=8G" "mode=777" ];
 		};
 
 		"/nix" = {

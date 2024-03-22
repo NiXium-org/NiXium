@@ -28,6 +28,7 @@
 			# Files
 			./configuration.nix
 			./hardware-configuration.nix
+			./distributedBuilds.nix
 		];
 
 		# FIXME-QA(Krey): This needs better management

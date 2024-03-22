@@ -1,6 +1,6 @@
 { pkgs, config, unstable, crossPkgs, inputs, lib, ... }:
 
-# The Nix Confituration of TSVETAN system
+# The Nix Configuration of TSVETAN system
 
 let
 	inherit (lib)
@@ -59,9 +59,9 @@ in {
 	# virtualisation.docker.enable = true;
 
 	# BinFMT - Enable seemless VM-based cross-compilation
-  boot.binfmt.emulatedSystems = [
-    "x86_64-linux"
-	  "riscv64-linux"
+	boot.binfmt.emulatedSystems = [
+		"x86_64-linux"
+		"riscv64-linux"
 	];
 
 	# Temporary management

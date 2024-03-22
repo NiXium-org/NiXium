@@ -64,10 +64,10 @@ in {
 		virtualisation.docker.enable = false;
 
 		# BinFMT - Enable seemless VM-based cross-compilation
-		# boot.binfmt.emulatedSystems = [
-		# 	"aarch64-linux"
-		# 	"riscv64-linux"
-		# ];
+		boot.binfmt.emulatedSystems = [
+			"aarch64-linux"
+			"riscv64-linux"
+		];
 
 	# Auto-Upgrade
 	system.autoUpgrade.enable = true;

@@ -35,9 +35,9 @@
 			# Files
 			./configuration.nix
 			./hardware-configuration.nix
-      # ./kernel.nix # Doesn't work as expected
-      ./suspend.nix # Suspend-then-hibernate management
-      ./distributed-builds.nix # Enable distributed builds
+			# ./kernel.nix # Doesn't work as expected
+			./suspend.nix # Suspend-then-hibernate management
+			./distributedBuilds.nix # Enable distributed builds
 		];
 
 		# FIXME-QA(Krey): This needs better management

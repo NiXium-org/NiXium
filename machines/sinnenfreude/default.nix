@@ -32,6 +32,7 @@
 			./configuration.nix
 			./hardware-configuration.nix
 			./impermenance.nix
+			./distributedBuilds.nix
 			# ./disko.nix # FIXME(Krey): I don't know how to implement that yet
 		];
 

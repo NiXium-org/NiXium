@@ -11,6 +11,7 @@ in {
 		nixosModules.system-clamav
 		nixosModules.services-tor
 		nixosModules.services-vikunja
+		nixosModules.services-distributedBuilds
 		{
 			environment.localBinInPath = true; # Include ~/.local/bin in PATH
 		}
