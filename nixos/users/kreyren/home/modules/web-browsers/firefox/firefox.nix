@@ -1,6 +1,10 @@
-{ self, config, pkgs, lib, ... }:
+{ config, pkgs, lib, firefox-addons, ... }:
 
 # WELCOME TO THE WORLD OF MINDFUCKERY SUCKAAAA!
+
+# TODO(Krey)
+# * `Performance -> Use recommended performance settings` is expected to be blocked by policy to be impossible to toggle back on
+# * Figure out how to set the default web browser
 
 let
 	inherit (lib) mkForce;
@@ -49,70 +53,79 @@ in {
 					installation_mode = "blocked";
 					blocked_install_message = "FUCKING FORGET IT!";
 				};
-				# "addon@darkreader.org" = {
-				# 	# Dark Reader
-				# 	install_url = "file:///${self.inputs.firefox-addons.packages.x86_64-linux.darkreader}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/addon@darkreader.org.xpi";
-				# 	installation_mode = "force_installed";
-				# };
-				"7esoorv3@alefvanoon.anonaddy.me" = {
-					# LibRedirect
-					install_url = "file:///${self.inputs.firefox-addons.packages.x86_64-linux.libredirect}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/7esoorv3@alefvanoon.anonaddy.me.xpi";
+				"{b43b974b-1d3a-4232-b226-eaa2ac6ebb69}" = {
+					# Random User-Agent Switcher
+					install_url = "https://addons.mozilla.org/firefox/downloads/latest/random_user_agent/latest.xpi";
 					installation_mode = "force_installed";
 				};
-				# "jid0-3GUEt1r69sQNSrca5p8kx9Ezc3U@jetpack" = {
-				# 	# Terms of Service, Didn't Read
-				# 	install_url = "file:///${self.inputs.firefox-addons.packages.x86_64-linux.terms-of-service-didnt-read}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/jid0-3GUEt1r69sQNSrca5p8kx9Ezc3U@jetpack.xpi";
-				# 	installation_mode = "force_installed";
-				# };
+				"addon@darkreader.org" = {
+					# Dark Reader
+					install_url = "file:///${firefox-addons.darkreader}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/addon@darkreader.org.xpi";
+					installation_mode = "force_installed";
+				};
+				"7esoorv3@alefvanoon.anonaddy.me" = {
+					# LibRedirect
+					install_url = "file:///${firefox-addons.libredirect}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/7esoorv3@alefvanoon.anonaddy.me.xpi";
+					installation_mode = "force_installed";
+				};
+				"jid0-3GUEt1r69sQNSrca5p8kx9Ezc3U@jetpack" = {
+					# Terms of Service, Didn't Read
+					install_url = "file:///${firefox-addons.terms-of-service-didnt-read}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/jid0-3GUEt1r69sQNSrca5p8kx9Ezc3U@jetpack.xpi";
+					installation_mode = "force_installed";
+				};
+				# FIXME(Krey): Figure out how to handle this
 				# "keepassxc-browser@keepassxc.org" = {
 				# 	# KeepAssXC-Browser
-				# 	install_url = "file:///${self.inputs.firefox-addons.packages.x86_64-linux.keepassxc-browser}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/keepassxc-browser@keepassxc.org.xpi";
+				# 	install_url = "file:///${firefox-addons.keepassxc-browser}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/keepassxc-browser@keepassxc.org.xpi";
 				# 	installation_mode = "force_installed";
 				# };
-				# # FIXME(Krey): Contribute this in NUR
+				# # FIXME(Krey): Contribute this in NUR or see if ublock-origin can handle these
 				# "dont-track-me-google@robwu.nl" = {
 				# 	# Don't Track Me Google
 				# 	install_url = "https://addons.mozilla.org/firefox/downloads/latest/dont-track-me-google1/latest.xpi";
 				# 	installation_mode = "force_installed";
 				# };
+				# FIXME(Krey): Figure out if we want this
 				# "jid1-BoFifL9Vbdl2zQ@jetpack" = {
 				# 	# Decentrayeles
-				# 	install_url = "file:///${self.inputs.firefox-addons.packages.x86_64-linux.decentraleyes}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/jid1-BoFifL9Vbdl2zQ@jetpack.xpi";
+				# 	install_url = "file:///${firefox-addons.decentraleyes}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/jid1-BoFifL9Vbdl2zQ@jetpack.xpi";
 				# 	installation_mode = "force_installed";
 				# };
+				# FIXME(Krey): Figure out if we want this
 				# "{73a6fe31-595d-460b-a920-fcc0f8843232}" = {
 				# 	# NoScript
-				# 	install_url = "file:///${self.inputs.firefox-addons.packages.x86_64-linux.noscript}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/{73a6fe31-595d-460b-a920-fcc0f8843232}.xpi";
+				# 	install_url = "file:///${firefox-addons.noscript}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/{73a6fe31-595d-460b-a920-fcc0f8843232}.xpi";
 				# 	installation_mode = "force_installed";
 				# };
-				# "{74145f27-f039-47ce-a470-a662b129930a}" = {
-				# 	# ClearURLs
-				# 	install_url = "file:///${self.inputs.firefox-addons.packages.x86_64-linux.clearurls}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/{74145f27-f039-47ce-a470-a662b129930a}.xpi";
-				# 	installation_mode = "force_installed";
-				# };
-				# "sponsorBlocker@ajay.app" = {
-				# 	# Sponsor Block
-				# 	install_url = "file:///${self.inputs.firefox-addons.packages.x86_64-linux.sponsorblock}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/sponsorBlocker@ajay.app.xpi";
-				# 	installation_mode = "force_installed";
-				# };
+				"{74145f27-f039-47ce-a470-a662b129930a}" = {
+					# ClearURLs
+					install_url = "file:///${firefox-addons.clearurls}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/{74145f27-f039-47ce-a470-a662b129930a}.xpi";
+					installation_mode = "force_installed";
+				};
+				"sponsorBlocker@ajay.app" = {
+					# Sponsor Block
+					install_url = "file:///${firefox-addons.sponsorblock}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/sponsorBlocker@ajay.app.xpi";
+					installation_mode = "force_installed";
+				};
+				# Q(Krey): ublock-origin already handles this right?
 				# "jid1-MnnxcxisBPnSXQ@jetpack" = {
 				# 	# Privacy Badger
-				# 	install_url = "file:///${self.inputs.firefox-addons.packages.x86_64-linux.privacy-badger}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/jid1-MnnxcxisBPnSXQ@jetpack.xpi";
+				# 	install_url = "file:///${firefox-addons.privacy-badger}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/jid1-MnnxcxisBPnSXQ@jetpack.xpi";
 				# 	installation_mode = "force_installed";
 				# };
-				# "uBlock0@raymondhill.net" = {
-				# 	# uBlock Origin
-				# 	install_url = "file:///${self.inputs.firefox-addons.packages.x86_64-linux.ublock-origin}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/uBlock0@raymondhill.net.xpi";
-				# 	installation_mode = "force_installed";
-				# };
+				"uBlock0@raymondhill.net" = {
+					# uBlock Origin
+					install_url = "file:///${firefox-addons.ublock-origin}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/uBlock0@raymondhill.net.xpi";
+					installation_mode = "force_installed";
+				};
 			};
 
 			"3rdparty".Extensions = {
-				# https://github.com/libredirect/browser_extension/blob/b3457faf1bdcca0b17872e30b379a7ae55bc8fd0/src/config.json
-				"7esoorv3@alefvanoon.anonaddy.me" = {
-					# FIXME(Krey): This doesn't work
-					services.youtube.options.enabled = true;
-				};
+				# # https://github.com/libredirect/browser_extension/blob/b3457faf1bdcca0b17872e30b379a7ae55bc8fd0/src/config.json
+				# "7esoorv3@alefvanoon.anonaddy.me" = {
+				# 	# FIXME-UPSTREAM(Krey): This doesn't work, implementation tracked in https://github.com/libredirect/browser_extension/issues/905
+				# 	services.youtube.options.enabled = true;
+				# };
 				# https://github.com/gorhill/uBlock/blob/master/platform/common/managed_storage.json
 				"uBlock0@raymondhill.net".adminSettings = {
 					userSettings = rec {
@@ -301,34 +314,36 @@ in {
 		};
 
 		profiles.Default = {
-			# settings = {
-			# # Enable letterboxing
-			# "privacy.resistFingerprinting.letterboxing" = true;
+			settings = {
+			# Enable letterboxing
+			"privacy.resistFingerprinting.letterboxing" = true;
 
-			# # WebGL
-			# "webgl.disabled" = true;
+			# WebGL
+			"webgl.disabled" = true;
 
-			# "browser.preferences.defaultPerformanceSettings.enabled" = false;
-			# "layers.acceleration.disabled" = true;
-			# "privacy.globalprivacycontrol.enabled" = true;
+			"browser.preferences.defaultPerformanceSettings.enabled" = false;
+			"layers.acceleration.disabled" = true;
+			"privacy.globalprivacycontrol.enabled" = true;
 
-			# "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
+			"browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
 
-			# # "network.trr.mode" = 3;
+			# "network.trr.mode" = 3;
 
-			# # "network.dns.disableIPv6" = false;
+			# "network.dns.disableIPv6" = false;
 
-			# "privacy.donottrackheader.enabled" = true;
+			"privacy.donottrackheader.enabled" = true;
 
-			# # "privacy.clearOnShutdown.history" = true;
-			# # "privacy.clearOnShutdown.downloads" = true;
-			# # "browser.sessionstore.resume_from_crash" = true;
+			# "privacy.clearOnShutdown.history" = true;
+			# "privacy.clearOnShutdown.downloads" = true;
+			# "browser.sessionstore.resume_from_crash" = true;
 
-			# # See https://librewolf.net/docs/faq/#how-do-i-fully-prevent-autoplay for options
-			# "media.autoplay.blocking_policy" = 2;
+			# See https://librewolf.net/docs/faq/#how-do-i-fully-prevent-autoplay for options
+			"media.autoplay.blocking_policy" = 2;
 
-			# "privacy.resistFingerprinting" = true;
-			# };
+			"privacy.resistFingerprinting" = true;
+
+			"signon.management.page.breach-alerts.enabled" = false; # Disable firefox password checking against a breach database
+			};
 			# Documentation https://arkenfox.dwarfmaster.net
 			arkenfox = if (config.programs.firefox.arkenfox.version == "118.0") then {
 				enable = true;

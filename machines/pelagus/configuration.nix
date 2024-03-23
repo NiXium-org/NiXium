@@ -9,7 +9,9 @@ let
 		mkIf
 		mkForce;
 in {
-  networking.hostName = "pelagus";
+	networking.hostName = "pelagus";
+
+	nix.distributedBuilds = true; # Perform distributed builds
 
 	# Japanese Keyboard Input
 	i18n.inputMethod.enabled = "fcitx5";
@@ -43,19 +45,19 @@ in {
 	services.openssh.enable = true;
 		services.tor.relay.onionServices."hiddenSSH".map = [ 22 ]; # Hidden SSH
 
-  services.tor.enable = true;
-  services.tor.client.enable = true;
+	services.tor.enable = true;
+	services.tor.client.enable = true;
 	services.tor.relay = {
 		enable = true;
 		role = "relay"; # Expected to be set on-demand per device
-  };
+	};
 
-  # I2P
-  services.i2pd.enable = true; # Enable the daemon
-  services.i2pd.package = unstable.i2pd;
-  services.i2pd.websocket.enable = true; # Enable web socket
-  services.i2pd.proto.socksProxy.enable = true;
-  services.i2pd.proto.sam.enable = true;
+	# I2P
+	services.i2pd.enable = true; # Enable the daemon
+	services.i2pd.package = unstable.i2pd;
+	services.i2pd.websocket.enable = true; # Enable web socket
+	services.i2pd.proto.socksProxy.enable = true;
+	services.i2pd.proto.sam.enable = true;
 
 	# Run lact (AMD Overclocking utility)
 	# FIXME-QA(Krey): Submit this to nixpkgs to clear up the space here
@@ -77,10 +79,10 @@ in {
 		programs.kdeconnect.package = mkIf config.services.xserver.desktopManager.gnome.enable pkgs.gnomeExtensions.gsconnect; # Uses KDE thing by default which doesn't work on GNOME where we need gsconnect
 
 	# Security
-	# Sudo
-	security.sudo.enable = mkForce false; # Get rid of Sude
-	security.sudo-rs.enable = true; # Get sudo in rust
-	security.sudo-rs.execWheelOnly = true; # Only let wheels to use sudo to avoid attack vectors such as CVE-2021-3156
+		# Sudo
+		security.sudo.enable = mkForce false; # Get rid of Sude
+		security.sudo-rs.enable = true; # Get sudo in rust
+		security.sudo-rs.execWheelOnly = true; # Only let wheels to use sudo to avoid attack vectors such as CVE-2021-3156
 
 	# ClamAV
 	services.clamav.daemon.enable = true;

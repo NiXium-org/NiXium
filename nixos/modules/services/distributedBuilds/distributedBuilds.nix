@@ -10,8 +10,8 @@ let
 	builder-key-path = "/etc/ssh/";
 
 # DNM(Krey): This configuration doesn't work -> Fix it
-#in mkIf config.nix.distributedBuilds {
-in {
+in mkIf config.nix.distributedBuilds {
+#in {
 	# Setup the builder user
 		users.groups."${builder-group}" = {}; # Create 'builder' user group
 

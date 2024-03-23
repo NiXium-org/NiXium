@@ -13,19 +13,19 @@ in {
 
 	# Desktop Environment
 		# GNOME
-		services.xserver.displayManager.gdm.enable = true;
-		services.xserver.desktopManager.gnome.enable = true;
+		# services.xserver.displayManager.gdm.enable = true;
+		# services.xserver.desktopManager.gnome.enable = true;
 
 	# Plymouth
 		# FIXME(Krey): Figure out how we want to use plymouth
 		#boot.plymouth.enable = true;
 
 	# X-Server
-		services.xserver.enable = true;
-		services.xserver = {
-			layout = "us"; # Use 'eu' ?
-			xkbVariant = "";
-		};
+		# services.xserver.enable = true;
+		# services.xserver = {
+		# 	layout = "us"; # Use 'eu' ?
+		# 	xkbVariant = "";
+		# };
 
 	# Firewall
 		networking.firewall.enable = mkForce true; # Enforce FireWall
@@ -48,13 +48,13 @@ in {
 
 	# Security
 		# Sudo
-		security.sudo.enable = mkForce false; # Get rid of Sude
-		security.sudo-rs.enable = true; # Get sudo in rust
-		security.sudo-rs.execWheelOnly = true; # Only let wheels to use sudo to avoid attack vectors such as CVE-2021-3156
+		# security.sudo.enable = mkForce false; # Get rid of Sude
+		# security.sudo-rs.enable = true; # Get sudo in rust
+		# security.sudo-rs.execWheelOnly = true; # Only let wheels to use sudo to avoid attack vectors such as CVE-2021-3156
 
 		# ClamAV
-		services.clamav.daemon.enable = true;
-		services.clamav.updater.enable = true; # Update virus definitions?
+		# services.clamav.daemon.enable = true;
+		# services.clamav.updater.enable = true; # Update virus definitions?
 
 	# Virtualization
 		# virtualisation.libvirtd.enable = true;
@@ -66,11 +66,11 @@ in {
 		# ];
 
 	# CCache
-		programs.ccache.enable = true;
-		programs.ccache.packageNames = [
-				"linuxPackages_testing"
-				"linux_testing"
-		];
+		# programs.ccache.enable = true;
+		# programs.ccache.packageNames = [
+		# 		"linuxPackages_testing"
+		# 		"linux_testing"
+		# ];
 
 	# Auto-Upgrade
 		system.autoUpgrade.enable = false; # In Development, do not enable until it's stabilized enough

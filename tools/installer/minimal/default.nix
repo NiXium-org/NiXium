@@ -9,9 +9,19 @@
 			};
 
 			modules = [
-				# ./configuration.nix
+				./configuration.nix
+
+				"${self.inputs.nixpkgs}/nixos/modules/installer/cd-dvd
+/installation-cd-minimal.nix"
 
 				self.inputs.nixos-generators.nixosModules.all-formats
+
+				{
+					nixpkgs.config.allowUnsupportedSystem = true; # LEEEEROOOOYY JEEEENKIIINSSSSS
+					nixpkgs.hostPlatform.system = "riscv64-linux";
+					nixpkgs.buildPlatform.system = "x86_64-linux"; #If you build on x86 other wise changes this.
+					# ... extra configs as above
+				}
 			];
 
 			# FIXME-QA(Krey): This needs better management

@@ -45,36 +45,37 @@ in {
 		hardware.deviceTree.enable = true; # https://github.com/torvalds/linux/blob/master/arch/riscv/boot/dts/thead/th1520-lichee-pi-4a.dts
 
 	# Filesystem Management
-	fileSystems = {
-		"/" = {
-			device = "/dev/disk/by-label/ROOT_NIXOS";
-			fsType = "btrfs";
-		};
-		"/boot" = {
-			device = "/dev/disk/by-label/BOOT";
-			fsType = "vfat"; # FAT32
-		};
-	};
+	# fileSystems = {
+	# 	"/" = {
+	# 		device = "/dev/disk/by-label/ROOT_NIXOS";
+	# 		fsType = "btrfs";
+	# 	};
+	# 	"/boot" = {
+	# 		device = "/dev/disk/by-label/BOOT";
+	# 		fsType = "vfat"; # FAT32
+	# 	};
+	# };
 
-	swapDevices = [{ device = "/dev/disk/by-label/SWAP"; }];
+	#swapDevices = [{ device = "/dev/disk/by-label/SWAP"; }];
 
 	# Rendering
 		# hardware.opengl.enable = true;
 
 	# Sound
-	sound.enable = true; # ALSA
+	sound.enable = false; # ALSA
 	hardware.pulseaudio.enable = false;
 	security.rtkit.enable = true;
 	services.pipewire = {
-		enable = true; # Broken AF
-		alsa.enable = true;
-		alsa.support32Bit = true;
-		pulse.enable = true;
-		jack.enable = true;
+		enable = false;
+		alsa.enable = false;
+		alsa.support32Bit = false;
+		pulse.enable = false;
+		jack.enable = false;
 
 		# use the example session manager (no others are packaged yet so this is enabled by default,
 		# no need to redefine it in your config for now)
 		#media-session.enable = true;
+
 	};
 
 	## Printing
@@ -102,12 +103,7 @@ in {
 	networking.useDHCP = mkDefault true; # Use DHCP on all adapters
 	# networking.interfaces.eno1.useDHCP = lib.mkDefault true;
 
-	networking.networkmanager.enable = true;
-
-	# Video Drivers
-	services.xserver.videoDrivers = [
-		(mkIf (config.services.xserver.enable) "amdgpu") # Use AMDGPU if we use xserver
-	];
+	# networking.networkmanager.enable = true;
 
 	nixpkgs.hostPlatform = "riscv64-linux";
 	hardware.enableRedistributableFirmware = true; # Is this really needed?
