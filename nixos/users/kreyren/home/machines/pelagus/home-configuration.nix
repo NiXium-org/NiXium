@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, unstable, ... }:
 
 let
 	inherit (lib) mkIf;
@@ -31,13 +31,15 @@ in {
 		pkgs.fractal
 		pkgs.element-desktop
 		pkgs.qbittorrent
-		pkgs.stremio
+		unstable.stremio
+		pkgs.yt-dlp
+		pkgs.youtube-dl
 		pkgs.android-tools
 		pkgs.picocom
 		pkgs.bottles
 		pkgs.kicad
-    pkgs.mtr
-    pkgs.vlc
+		pkgs.mtr
+		pkgs.vlc
 		# nix-software-center.nix-software-center
 		# pkgs.colobot
 		pkgs.nix-index
