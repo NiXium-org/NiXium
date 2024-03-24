@@ -10,6 +10,7 @@
 		# nixpkgs-unstable-small.url = "github:nixos/nixpkgs/nixos-unstable";
 		nixpkgs-master.url = "github:nixos/nixpkgs/master";
 		nixpkgs-staging.url = "github:nixos/nixpkgs/staging";
+		nixpkgs-staging-next.url = "github:nixos/nixpkgs/staging-next";
 
 		# Principle inputs
 		nixos-hardware.url = "github:NixOS/nixos-hardware";

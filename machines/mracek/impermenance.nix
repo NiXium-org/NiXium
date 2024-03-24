@@ -6,11 +6,11 @@ let
 	inherit (lib) mkIf;
 in {
 	boot.initrd.luks.devices = {
-		"luks-f9700689-2ba8-499c-8cc0-45acbc56eee4" = {
-			device = "/dev/disk/by-uuid/f9700689-2ba8-499c-8cc0-45acbc56eee4"; # Nix-store?
+		"luks-e9a7bbe8-0075-44af-82cd-7ebfd68fd28f" = {
+			device = "/dev/disk/by-uuid/e9a7bbe8-0075-44af-82cd-7ebfd68fd28f"; # Nix-store?
 		};
-		"luks-748d184c-5cf1-43fa-b8c3-782978848d7a" = {
-			device = "/dev/disk/by-uuid/748d184c-5cf1-43fa-b8c3-782978848d7a"; # SWAP?
+		"luks-70afb75c-8ade-4372-a127-915e3a06356d" = {
+			device = "/dev/disk/by-uuid/70afb75c-8ade-4372-a127-915e3a06356d"; # SWAP
 		};
 	};
 
