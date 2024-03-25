@@ -1,19 +1,33 @@
 #!/usr/bin/env sh
 # shellcheck shell=sh # POSIX
 
+# Prepared for deprecation..
+
 # Stop laughing, fuck you! This is Proof-of-concept implementation for me to figure out how i want it work so that i can later implement it in e.g. rust
 
 set -e # Exit on false return
 
 # Concept of project management solution
 
-die() { printf "FATAL: %s\n" "$2"; exit 1 ;}
-einfo() { ${PRINTF:-"printf"} "INFO: %s\n" "$1" ;}
+die() { printf "FATAL: %s\n" "$2"; exit 1 ;} # Assertion helper
+einfo() { ${PRINTF:-"printf"} "INFO: %s\n" "$1" ;} # Output helper
 
-repoDir="$(pwd)"
+repoDir="$(pwd)" # Get the full path to the repository's directory
 
+# Process arguments
 while [ "$#" -gt 0 ]; do case "$1" in
-	"build"|"test"|"boot"|"switch")
+	"verify")
+		[ -n "$2" ] || die 3 "The verify sub-command requires a SYSTEM as second argument"
+
+		einfo "Verifying the configuration for system: $2"
+
+		${NIXOS_REBUILD:-"nixos-rebuild"} dry-build \
+						--flake ".#$2" \
+						--option eval-cache false || einfo "Config verification of '$system' failed"
+
+		shift
+	;;
+	"build"|"test"|"boot"|"switch"|"dry-build")
 		case "$2" in
 			"all")
 				task="$1"
@@ -21,7 +35,7 @@ while [ "$#" -gt 0 ]; do case "$1" in
 				for system in "$repoDir"/machines/*; do
 					einfo "Building system '$system'"
 
-					HOSTNAME="$system" ${NIXOS_REBUILD:-"nixos-rebuild"} "$task" \
+					${NIXOS_REBUILD:-"nixos-rebuild"} "$task" \
 						--flake ".#$system" || einfo "System '$system' couldn't be built?, err $?"
 				done
 
@@ -41,7 +55,7 @@ while [ "$#" -gt 0 ]; do case "$1" in
 
 				einfo "Building system '$system'"
 
-				HOSTNAME="$system" ${NIXOS_REBUILD:-"nixos-rebuild"} "$task" \
+				${NIXOS_REBUILD:-"nixos-rebuild"} "$task" \
 					--flake ".#$system" || einfo "System '$system' couldn't be built?, err $?"
 
 				shift # Shift 2nd arg
@@ -52,7 +66,9 @@ while [ "$#" -gt 0 ]; do case "$1" in
 				for system in "$repoDir"/machines/*; do
 					einfo "Building system '$system'"
 
-					HOSTNAME="$system" ${NIXOS_REBUILD:-"nixos-rebuild"} switch \
+					die 1 "currently not implemented"
+
+					${NIXOS_REBUILD:-"nixos-rebuild"} switch \
 						--target-host "builder@$system.nixium" \
 						--flake ".#$system" || einfo "System '$system' couldn't be built?, err $?"
 
@@ -64,7 +80,7 @@ while [ "$#" -gt 0 ]; do case "$1" in
 
 				einfo "Building system '$system'"
 
-				HOSTNAME="$system" ${NIXOS_REBUILD:-"nixos-rebuild"} switch \
+				${NIXOS_REBUILD:-"nixos-rebuild"} switch \
 					--target-host "builder@$system.nixium" \
 					--flake ".#$system" || einfo "System '$system' couldn't be built?, err $?"
 

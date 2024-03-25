@@ -104,16 +104,49 @@
 						category = "Integrated Editors";
 						exec = "${inputs.nixpkgs.legacyPackages.${system}.emacs}/bin/emacs .";
 					};
-					# Code Formating
-					nixpkgs-fmt = {
-						description = "Format Nix Files With The Standard Nixpkgs Formater";
-						category = "Code Formating";
-						exec = "${inputs.nixpkgs.legacyPackages.${system}.nixpkgs-fmt}/bin/nixpkgs-fmt .";
+					# NOTE(Krey): Don't do automated code-formatting
+					# # Code Formating
+					# nixpkgs-fmt = {
+					# 	description = "Format Nix Files With The Standard Nixpkgs Formater";
+					# 	category = "Code Formating";
+					# 	exec = "${inputs.nixpkgs.legacyPackages.${system}.nixpkgs-fmt}/bin/nixpkgs-fmt .";
+					# };
+					# alejandra = {
+					# 	description = "Format Nix Files With The Uncompromising Nix Code Formatter (Not Recommended)";
+					# 	category = "Code Formating";
+					# 	exec = "${inputs.nixpkgs.legacyPackages.${system}.alejandra}/bin/alejandra .";
+					# };
+
+					# Management
+					"verify" = {
+						description = "Verify the system declaration(s)";
+						category = "Management";
+						exec = ''
+							if [ -n "$*" ]; then
+								echo "Checking system: $*"
+								${inputs.nixpkgs.legacyPackages.${system}.nixos-rebuild}/bin/nixos-rebuild dry-build --flake ".#$*" --option eval-cache false
+							else
+								for system in $(find ./machines/* -type d | sed "s#^./machines/##g" | tr '\n' ' '); do
+									echo "Checking system: $system"
+									${inputs.nixpkgs.legacyPackages.${system}.nixos-rebuild}/bin/nixos-rebuild dry-build --flake ".#$system" --option eval-cache false
+								done
+							fi
+						'';
 					};
-					alejandra = {
-						description = "Format Nix Files With The Uncompromising Nix Code Formatter (Not Recommended)";
-						category = "Code Formating";
-						exec = "${inputs.nixpkgs.legacyPackages.${system}.alejandra}/bin/alejandra .";
+
+					"switch" = {
+						description = "Switch the configuration on the current system";
+						category = "Management";
+						exec = ''
+							if [ -n "$*" ]; then
+								echo "Switching configuration for system: $*"
+								${inputs.nixpkgs.legacyPackages.${system}.nixos-rebuild}/bin/nixos-rebuild dry-build --flake ".#$*"
+							else
+								hostname="$(hostname --short)"
+								echo "Switching configuration for system: $hostname"
+								${inputs.nixpkgs.legacyPackages.${system}.nixos-rebuild}/bin/nixos-rebuild dry-build --flake ".#$hostname"
+							fi
+						'';
 					};
 				};
 				devShells.default = inputs.nixpkgs.legacyPackages.${system}.mkShell {

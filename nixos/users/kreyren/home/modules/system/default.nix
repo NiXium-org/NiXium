@@ -10,6 +10,7 @@ in {
 
 	imports = [
 		./dconf
-		./gtk
+    ./gtk
+    ./impermenance
 	];
 }

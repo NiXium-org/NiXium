@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, unstable, ... }:
 
 {
 	home.stateVersion = "23.11";
@@ -23,7 +23,9 @@
     pkgs.prusa-slicer
     pkgs.fractal
 		pkgs.qbittorrent
-		pkgs.stremio
+    unstable.stremio
+    pkgs.youtube-dl
+    pkgs.yt-dlp
 		pkgs.android-tools
 		pkgs.picocom
 		pkgs.bottles
@@ -77,6 +79,13 @@
 
 	# GNOME Extensions
 	dconf.settings = {
+		# Set power management for a scenario where user is logged-in
+		"org/gnome/settings-daemon/plugins/power" = {
+			power-button-action = "hibernate";
+			sleep-inactive-ac-timeout = 600; # 60*10=600 Seconds -> 10 Minutes
+			sleep-inactive-ac-type = "suspend";
+		};
+
 		"org/gnome/shell" = {
 			disable-user-extensions = false;
 

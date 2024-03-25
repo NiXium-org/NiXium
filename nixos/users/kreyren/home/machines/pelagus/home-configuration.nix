@@ -80,6 +80,7 @@ in {
 		pkgs.gnomeExtensions.desktop-cube
 		pkgs.gnomeExtensions.burn-my-windows
 		pkgs.gnomeExtensions.caffeine
+		pkgs.gnomeExtensions.shortcuts
 
 		#nerdfonts
 		# NOTE(Krey): This was recommended, because nerdfonts might have issues with rendering -- https://github.com/TanvirOnGH/nix-config/blob/nix%2Bhome-manager/desktop/customization/font.nix#L4-L39
@@ -95,6 +96,13 @@ in {
 
 	# GNOME Extensions
 	dconf.settings = {
+		# Set power management for a scenario where user is logged-in
+		"org/gnome/settings-daemon/plugins/power" = {
+			power-button-action = "hibernate";
+			sleep-inactive-ac-timeout = 1800; # 60*30=1800 Seconds -> 30 Minutes
+			sleep-inactive-ac-type = "suspend";
+		};
+
 		"org/gnome/shell" = {
 			disable-user-extensions = false;
 

@@ -73,6 +73,14 @@
 	# GNOME Extensions
 	dconf.settings = {
 		"org/gnome/shell" = {
+			# Set power management for a scenario where user is logged-in
+				# NOTE(Krey): Power Management needs standardized u-boot binary atm.. unreliable functionality
+				# "org/gnome/settings-daemon/plugins/power" = {
+				# 	power-button-action = "hibernate";
+				# 	sleep-inactive-ac-timeout = 300; # 60*5=300 Seconds -> 5 Minutes
+				# 	sleep-inactive-ac-type = "suspend";
+				# };
+
 			disable-user-extensions = false;
 
 			# The extension names can be found through `$ gnome-extensions list`

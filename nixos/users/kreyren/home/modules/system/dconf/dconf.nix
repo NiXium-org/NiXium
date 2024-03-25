@@ -68,12 +68,6 @@ in {
 			resize-with-right-button = true;
 		};
 
-		# Power
-		"org/gnome/settings-daemon/plugins/power" = {
-			power-button-action = "hibernate"; # "nothing"
-			sleep-inactive-ac-type = "nothing";
-		};
-
 		# Keybinds -- https://discourse.nixos.org/t/nixos-options-to-configure-gnome-keyboard-shortcuts/7275/4
 		"org/gnome/shell/keybinds" = {
 			## To fix conflict with keybinding
@@ -141,7 +135,7 @@ in {
 			shob-all-sources = true;
 			sources = [
 				(mkTuple [ "xkb" "us" ])
-				(mkTuple [ "xkb" "cz+qwerty'" ])
+				(mkTuple [ "xkb" "cz+qwerty" ])
 			];
 			xkb-options = [ "terminate:ctrl_alt_bksp" ];
 		};
