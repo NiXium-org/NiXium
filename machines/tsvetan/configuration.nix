@@ -82,6 +82,6 @@ in {
   zramSwap.enable = true; # Experiment
 
 	# Auto-Upgrade
-	system.autoUpgrade.enable = true;
+	system.autoUpgrade.enable = false; # Causes issues
 	system.autoUpgrade.flake = "github:kreyren/nixos-config#tsvetan";
 }
