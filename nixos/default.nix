@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config,  ... }:
 
 let
 	inherit (config.flake) nixosModules;
@@ -13,7 +13,7 @@ in {
 		nixosModules.services-vikunja
 		nixosModules.services-distributedBuilds
 		{
-			environment.localBinInPath = true; # Include ~/.local/bin in PATH
+      environment.localBinInPath = true; # Include ~/.local/bin in PATH
 		}
 	];
 

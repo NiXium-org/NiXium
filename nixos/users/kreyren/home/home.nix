@@ -62,6 +62,8 @@ in {
 		pkgs.mpv
 		pkgs.torsocks
 
+    pkgs.wakeonlan
+
 		pkgs.ix
 	];
 }

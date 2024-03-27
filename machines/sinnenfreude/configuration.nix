@@ -48,6 +48,7 @@ in {
 	services.vikunja.enable = false;
 
   services.tor.enable = true;
+  services.tor.client.enable = true;
 	services.tor.relay = {
 		enable = true;
 		role = "relay"; # Expected to be set on-demand per device
