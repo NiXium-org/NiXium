@@ -56,10 +56,19 @@ in {
 			"/var/lib/nixos" # Nix stuff
 			"/var/lib/systemd/coredump" # Dunno
 			"/etc/NetworkManager/system-connections" # WiFi configs
+
 			(mkIf config.boot.lanzaboote.enable config.boot.lanzaboote.pkiBundle) # Lanzaboote
+
 			(mkIf config.services.monero.enable config.services.monero.dataDir) # Monero
-			(mkIf config.services.vikunja.enable config.services.vikunja.database.path) # Vikunja
-			"/var/lib/vikunja/files" # Also include the files
+
+			# Vikunja
+				# FIXME-UPSTREAM(Krey): The `config.services.vikunja.database.path` points to the vikunja.db while there is also `files` directory that holds images, but the nix definition doesn't provide a thing that can be used that will store the state directory's path
+				# FIXME-UPSTREAM(Krey): It's also a symlink to /var/lib/private/vikunja for some reason.. bullshit
+				# (mkIf config.services.vikunja.enable config.services.vikunja.database.path) # Vikunja
+					"/var/lib/private/vikunja"
+
+			(mkIf config.services.tor.enable (config.services.tor.settings.DataDirectory + "/onion")) # Tor services
+
 			{ directory = "/var/lib/colord"; user = "colord"; group = "colord"; mode = "u=rwx,g=rx,o="; }
 		];
 		files = [

@@ -37,18 +37,19 @@ in {
 			#services.vaultwarden.enable = false; # Testing..
 			#services.tor.relay.onionServices."hiddenWarden".map = mkIf config.services.vaultwarden.enable [ config.services.vaultwarden.config.ROCKET_PORT ]; # Deploy an onion service for the vault warden
 
-		# Jitsi meet
-			services.jitsi-meet.enable = false; # FIXME(Krey): Add tor compatibility?
-			services.jitsi-meet.hostName = "localhost";
-
 		# Mumble
 			services.murmur.enable = true;
 				services.tor.relay.onionServices."hiddenMurmur".map = mkIf config.services.murmur.enable [ config.services.murmur.port ]; # Set up Onionized Murmur
 
+		# Gitea
+		## NOTE(Krey): As a former member of Codeberg i don't want my code management to be developed by a dictator who is surrounding himself by yes-mans and who makes up any bs reasons to kick all members who do not agree with him (the rationale to why i was kicked from codeberg is "using an emoticon"..). The gitea-drama is irrational, the management that gitea has in place is far superior to codeberg in terms of balance of power among board members and making a rational discussions over issues. Don't let codeberg manipulate you under the premise of "being independent FOSS-supporters" while being hostile to projects that they don't like such as sneedacity (that I voted to not be removed from codeberg).
+			services.gitea.enable = true;
+				services.tor.relay.onionServices."hiddenGitea".map = mkIf config.services.gitea.enable [ config.services.gitea.settings.server.HTTP_PORT ]; # Set up Onionized Gitea
+
 		# Firewall
-		networking.firewall.enable = mkForce true; # Enforce FireWall
-		# networking.firewall.allowedTCPPorts = [ ... ];
-		# networking.firewall.allowedUDPPorts = [ ... ];
+			networking.firewall.enable = mkForce true; # Enforce FireWall
+			# networking.firewall.allowedTCPPorts = [ ... ];
+			# networking.firewall.allowedUDPPorts = [ ... ];
 
 	## Configuration ##
 		services.logind.lidSwitchExternalPower = "lock"; # Lock the system on closing the lid when on external power instead of suspend/hibernation
@@ -71,6 +72,6 @@ in {
 		];
 
 	# Auto-Upgrade
-	system.autoUpgrade.enable = false;
-	system.autoUpgrade.flake = "github:kreyren/nixos-config#mracek";
+		system.autoUpgrade.enable = false;
+		system.autoUpgrade.flake = "github:kreyren/nixos-config#mracek";
 }

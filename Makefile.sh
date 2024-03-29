@@ -22,8 +22,8 @@ while [ "$#" -gt 0 ]; do case "$1" in
 		einfo "Verifying the configuration for system: $2"
 
 		${NIXOS_REBUILD:-"nixos-rebuild"} dry-build \
-						--flake ".#$2" \
-						--option eval-cache false || einfo "Config verification of '$system' failed"
+			--flake ".#$2" \
+			--option eval-cache false || einfo "Config verification of '$system' failed"
 
 		shift
 	;;
