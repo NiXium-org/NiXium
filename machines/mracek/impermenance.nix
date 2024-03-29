@@ -56,8 +56,10 @@ in {
 			"/var/lib/nixos" # Nix stuff
 			"/var/lib/systemd/coredump" # Dunno
 			"/etc/NetworkManager/system-connections" # WiFi configs
-			(mkIf config.boot.lanzaboote.enable "/etc/secureboot")
-			(mkIf config.services.monero.enable config.services.monero.dataDir)
+			(mkIf config.boot.lanzaboote.enable config.boot.lanzaboote.pkiBundle) # Lanzaboote
+			(mkIf config.services.monero.enable config.services.monero.dataDir) # Monero
+			(mkIf config.services.vikunja.enable config.services.vikunja.database.path) # Vikunja
+			"/var/lib/vikunja/files" # Also include the files
 			{ directory = "/var/lib/colord"; user = "colord"; group = "colord"; mode = "u=rwx,g=rx,o="; }
 		];
 		files = [

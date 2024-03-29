@@ -42,6 +42,10 @@ in {
 						# homeManagerModules.kreyren.web-browsers.default
 						homeManagerModules.web-browsers-firefox-kreyren
 						homeManagerModules.web-browsers-librewolf-kreyren
+
+						# GNOME extensions
+						homeManagerModules.gext-custom-accent-colors-kreyren
+						homeManagerModules.gext-shortcuts-kreyren
 					];
 				};
 

@@ -138,13 +138,15 @@
 						description = "Switch the configuration on the current system";
 						category = "Management";
 						exec = ''
+							repoDir="$PWD" # Get path to the repository
+
 							if [ -n "$*" ]; then
 								echo "Switching configuration for system: $*"
-								${inputs.nixpkgs.legacyPackages.${system}.nixos-rebuild}/bin/nixos-rebuild dry-build --flake ".#$*"
+								${self.inputs.nixpkgs.legacyPackages.${system}.openssh}/bin/ssh root@localhost ${self.inputs.nixpkgs.legacyPackages.${system}.nixos-rebuild}/bin/nixos-rebuild switch --flake "$repoDir#$*"
 							else
 								hostname="$(hostname --short)"
 								echo "Switching configuration for system: $hostname"
-								${inputs.nixpkgs.legacyPackages.${system}.nixos-rebuild}/bin/nixos-rebuild dry-build --flake ".#$hostname"
+								${self.inputs.nixpkgs.legacyPackages.${system}.openssh}/bin/ssh root@localhost ${self.inputs.nixpkgs.legacyPackages.${system}.nixos-rebuild}/bin/nixos-rebuild switch --flake "$repoDir#$hostname"
 							fi
 						'';
 					};

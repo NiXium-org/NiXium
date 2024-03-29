@@ -2,6 +2,7 @@
 	imports = [
 		./apps
 		./editors
+		./extensions
 		./prompts
 		./shells
 		./system

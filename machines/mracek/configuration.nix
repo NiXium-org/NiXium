@@ -17,20 +17,21 @@ in {
 
 		# OpenSSH
 		services.openssh.enable = true;
-      services.tor.relay.onionServices."hiddenSSH".map = mkIf config.services.tor.enable config.services.openssh.ports; # Provide hidden SSH
-      users.users.root.openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOzh6FRxWUemwVeIDsr681fgJ2Q2qCnwJbvFe4xD15ve kreyren@fsfe.org" ]; # Allow root access for all systems
+			services.tor.relay.onionServices."hiddenSSH".map = mkIf config.services.tor.enable config.services.openssh.ports; # Provide hidden SSH
+			users.users.root.openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOzh6FRxWUemwVeIDsr681fgJ2Q2qCnwJbvFe4xD15ve kreyren@fsfe.org" ]; # Allow root access for all systems
 
 		# Vikunja
 			# FIXME-PRIVACY(Krey): Force Vikunja to use the tor proxy for clearnet requests https://unix.stackexchange.com/questions/501623/forward-all-traffic-to-a-socks5-proxy-port/501713#501713
 			# FIXME-QA(Krey): Current vikunja doesn't know how to resolve HTTP/S requests so it has a hard dependency on nginx and alike.. Was told that this will be addressed in next release
 		services.vikunja.enable = true;
+			# NOTE(Krey): Currently vikunja has a hard dependency on nginx, next version is expected to be independent
 			# services.tor.relay.onionServices."hiddenVikunja".map = mkIf config.services.vikunja.enable [ config.services.vikunja.port ]; # Set up Onionized Vikunja
 			services.tor.relay.onionServices."hiddenVikunja".map = mkIf config.services.vikunja.enable [ 80 ]; # Set up Onionized Vikunja
 
 		# Monero node
-			# FIXME(Krey): Insufficient storage for monero-node
-			# services.monero.enable = false;
-			# 	services.tor.relay.onionServices."hiddenMonero".map = mkIf config.services.monero.enable [ config.services.monero.rpc.port ]; # Set up Onionized Monero Node
+			services.monero.enable = true;
+				services.monero.extraConfig = "prune-blockchain=1"; # Use pruned node
+				services.tor.relay.onionServices."hiddenMonero".map = mkIf config.services.monero.enable [ config.services.monero.rpc.port ]; # Set up Onionized Monero Node
 
 		# Vault Warden
 			#services.vaultwarden.enable = false; # Testing..
@@ -42,7 +43,7 @@ in {
 
 		# Mumble
 			services.murmur.enable = true;
-				services.tor.relay.onionServices."hiddenMurmur".map = mkIf config.services.murmur.enable [ 64738 ]; # Set up Onionized Murmur
+				services.tor.relay.onionServices."hiddenMurmur".map = mkIf config.services.murmur.enable [ config.services.murmur.port ]; # Set up Onionized Murmur
 
 		# Firewall
 		networking.firewall.enable = mkForce true; # Enforce FireWall

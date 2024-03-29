@@ -9,6 +9,7 @@
 	programs.bash.enable = true;
 	programs.direnv.enable = true; # To manage git repositories
 	programs.git.enable = true; # Generic use only
+	programs.gpg.enable = true;
 	programs.firefox.enable = true;
 	programs.vim.enable = true;
 	programs.vscode.enable = true;

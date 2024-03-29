@@ -139,18 +139,5 @@ in {
 			];
 			xkb-options = [ "terminate:ctrl_alt_bksp" ];
 		};
-
-		# Extension: Custom Accent Colors
-		## FIXME-QA(Krey): Apply this only when custom accent colors is enabled
-		"org/gnome/shell/extensions/custom-accent-colors" = {
-			accent-color = "purple";
-			theme-flatpak = true;
-			theme-gtk3 = true;
-			theme-shell = true;
-		};
-
-		"org/gnome/shell/extensions/user-theme" = {
-			name = "Custom-Accent-Colors";
-		};
 	};
 }

@@ -12,6 +12,8 @@ in {
 		nixosModules.services-tor
 		nixosModules.services-vikunja
 		nixosModules.services-distributedBuilds
+
+		nixosModules.programs-git
 		{
       environment.localBinInPath = true; # Include ~/.local/bin in PATH
 		}

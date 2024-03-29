@@ -9,9 +9,12 @@
 	programs.bash.enable = true;
 	programs.direnv.enable = true; # To manage git repositories
 	programs.git.enable = true; # Generic use only
+	programs.gpg.enable = true;
 	programs.firefox.enable = true;
 	programs.vim.enable = true;
 	programs.vscode.enable = true;
+
+	services.gpg-agent.enable = true;
 
 	nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
 		"vscode"
@@ -36,6 +39,9 @@
 		pkgs.nix-index
 		pkgs.tealdeer
 		# pkgs.ventoy-full
+
+		# FIXME_QA(Krey): Figure out how to enable this only on GNOME
+		pkgs.pinentry-gnome
 
 		(pkgs.brave.override {
 			# NOTE(Krey): Using system-wide tor which is interfiering with the brave's browsing as non-tor browsing has tor and tor browser goes through 2 Tors so this fixes it
