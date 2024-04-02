@@ -1,23 +1,40 @@
-{ config,  ... }:
+{ config, moduleWithSystem, ... }:
 
 let
 	inherit (config.flake) nixosModules;
 in {
-	flake.nixosModules.default.imports = [
-		nixosModules.system-autoUpgrade
-		nixosModules.system-nix
-		nixosModules.system-time
-		nixosModules.system-ccache
-		nixosModules.system-clamav
-		nixosModules.services-tor
-		nixosModules.services-vikunja
-		nixosModules.services-distributedBuilds
 
-		nixosModules.programs-git
+# {
+# 	flake.homeManagerModules.web-browsers-firefox-kreyren = moduleWithSystem (
+# 		perSystem@{ config }:
+# 		{
+# 			# services.foo.package = perSystem.config.packages.foo;
+# 			imports = [ ./firefox.nix ];
+# 		}
+# 	);
+# }
+
+	flake.nixosModules.default = moduleWithSystem (
+		perSystem@{ system }:
+		{ ... }:
 		{
-      environment.localBinInPath = true; # Include ~/.local/bin in PATH
+			imports = [
+				nixosModules.system-autoUpgrade
+				nixosModules.system-nix
+				nixosModules.system-time
+				nixosModules.system-ccache
+				nixosModules.system-clamav
+				nixosModules.services-tor
+				nixosModules.services-vikunja
+				nixosModules.services-distributedBuilds
+
+				nixosModules.programs-git
+				{
+					environment.localBinInPath = true; # Include ~/.local/bin in PATH
+				}
+			];
 		}
-	];
+	);
 
 	imports = [
 		./modules

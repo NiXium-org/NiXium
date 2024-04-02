@@ -34,6 +34,7 @@
 			./impermenance.nix
 			./distributedBuilds.nix
 			# ./disko.nix # FIXME(Krey): I don't know how to implement that yet
+			./remote-unlock.nix
 		];
 
 		# FIXME-QA(Krey): This needs better management

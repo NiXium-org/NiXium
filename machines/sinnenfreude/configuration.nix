@@ -2,8 +2,6 @@
 
 # The Nix Confituration of SINNENFREUDE system
 
-# SECURITY(Krey): Uses Ryzen 5 1600 which is affected by hardware vulnerabilities! SMT prohibited
-
 let
 	inherit (lib)
 		mkIf
@@ -12,6 +10,8 @@ in {
 	networking.hostName = "sinnenfreude";
 
 	nix.distributedBuilds = true; # Perform distributed builds
+
+	boot.initrd.systemd.enable = true; # Enable systemd initrd
 
 	# Japanese Keyboard Input
 	i18n.inputMethod.enabled = "fcitx5";
@@ -24,6 +24,9 @@ in {
 	# Plymouth
 	# FIXME(Krey): Figure out how we want to use plymouth
 	#boot.plymouth.enable = true;
+
+	# WakeOnLan
+	networking.interfaces.wlp13s0.wakeOnLan.enable = true; # Enable WakeOnLAN for WiFi
 
 	# X-Server
 	services.xserver.enable = true;

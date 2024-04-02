@@ -4,6 +4,7 @@
 		./ccache
 		./clamav
 		./nix
+		./security
 		./time
 		./ssh
 	];

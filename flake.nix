@@ -1,6 +1,8 @@
 {
 	description = "Kreyren's Infrastructure Management With NiXium";
 
+	# FIXME-QA(Krey): This file needs re-organization
+
 	inputs = {
 		# Release inputs
 		nixpkgs-legacy.url = "github:nixos/nixpkgs/nixos-23.05";
@@ -124,11 +126,11 @@
 						exec = ''
 							if [ -n "$*" ]; then
 								echo "Checking system: $*"
-								${inputs.nixpkgs.legacyPackages.${system}.nixos-rebuild}/bin/nixos-rebuild dry-build --flake ".#$*" --option eval-cache false
+								${inputs.nixpkgs.legacyPackages.${system}.nixos-rebuild}/bin/nixos-rebuild dry-build --flake ".#$*" --option eval-cache false --show-trace
 							else
 								for system in $(find ./machines/* -type d | sed "s#^./machines/##g" | tr '\n' ' '); do
 									echo "Checking system: $system"
-									${inputs.nixpkgs.legacyPackages.${system}.nixos-rebuild}/bin/nixos-rebuild dry-build --flake ".#$system" --option eval-cache false
+									${inputs.nixpkgs.legacyPackages.${system}.nixos-rebuild}/bin/nixos-rebuild dry-build --flake ".#$system" --option eval-cache false --show-trace || echo "WARNING: System $system failed evaluation!"
 								done
 							fi
 						'';
