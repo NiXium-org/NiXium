@@ -1,15 +1,33 @@
-{ ... }:
+{ self, ... }:
 
-# Gloobal Management of Nix for all systems
+# Global Management of Nix for all systems
 
 let
 	inherit (builtins) toFile;
 in {
 	nix = {
 		# package = pkgs.nixUnstable;
-		# nixPath = [ "nixpkgs=${flake.inputs.nixpkgs}" ]; # Enables use of `nix-shell -p ...` etc
-		# FIXME(Krey): No fucking idea how to implement this, wasted 8h on it
-		# registry.nixpkgs.flake = flake.inputs.nixpkgs; # Make `nix shell` etc use pinned nixpkgs
+
+		# Set channels
+		nixPath = [
+			"nixpkgs=${self.inputs.nixpkgs-legacy}" # Legacy
+			"nixpkgs=${self.inputs.nixpkgs}" # Stable
+			"unstable=${self.inputs.nixpkgs-unstable}" # Unstable
+			"master=${self.inputs.nixpkgs-master}" # Master
+			"staging=${self.inputs.nixpkgs-staging}" # Staging
+			"staging=${self.inputs.nixpkgs-staging-next}" # Staging-Next
+		];
+
+		# Set Flake Registries
+		registry = {
+			legacy = { flake = self.inputs.nixpkgs-legacy; };
+			nixpkgs = { flake = self.inputs.nixpkgs; };
+			unstable = { flake = self.inputs.nixpkgs-unstable; };
+			master = { flake = self.inputs.nixpkgs-master; };
+			staging = { flake = self.inputs.nixpkgs-staging; };
+			staging-next = { flake = self.inputs.nixpkgs-staging-next; };
+			# world = { flake = self.inputs.self; };
+		};
 		settings = {
 			experimental-features = "nix-command flakes";
 			auto-optimise-store = true;
