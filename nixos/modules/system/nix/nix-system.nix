@@ -1,15 +1,24 @@
-{ ... }:
+{ self, ... }:
 
-# Gloobal Management of Nix for all systems
+# Global Management of Nix for all systems
 
 let
 	inherit (builtins) toFile;
 in {
 	nix = {
 		# package = pkgs.nixUnstable;
-		# nixPath = [ "nixpkgs=${flake.inputs.nixpkgs}" ]; # Enables use of `nix-shell -p ...` etc
-		# FIXME(Krey): No fucking idea how to implement this, wasted 8h on it
-		# registry.nixpkgs.flake = flake.inputs.nixpkgs; # Make `nix shell` etc use pinned nixpkgs
+
+		# Set channels
+		nixPath = [
+			"nixpkgs=${self.inputs.nixpkgs}"
+			"unstable=${self.inputs.nixpkgs-unstable}"
+		];
+
+		# Set Flake Registries
+		registry = {
+			nixpkgs.flake = self.inputs.nixpkgs;
+			unstable.flake = self.inputs.nixpkgs-unstable;
+		};
 		settings = {
 			experimental-features = "nix-command flakes";
 			auto-optimise-store = true;
