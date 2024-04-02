@@ -80,7 +80,7 @@
 			systems = [ "x86_64-linux" "aarch64-linux" "riscv64-linux" ];
 
 			perSystem = { system, config, ... }: {
-				# FIXME-QA(Krey): Move this to  a separate file somehow?
+				# FIXME-QA(Krey): Move this to a separate file somehow?
 				# FIXME-QA(Krey): Figure out how to shorten the `inputs.nixpkgs-unstable.legacyPackages.${system}` ?
 				## _module.args.nixpkgs = inputs.nixpkgs-unstable.legacyPackages.${system};
 				## _module.args.nixpkgs = import inputs.nixpkgs { inherit system; };
@@ -144,11 +144,11 @@
 
 							if [ -n "$*" ]; then
 								echo "Switching configuration for system: $*"
-								${self.inputs.nixpkgs.legacyPackages.${system}.openssh}/bin/ssh root@localhost ${self.inputs.nixpkgs.legacyPackages.${system}.nixos-rebuild}/bin/nixos-rebuild switch --flake "$repoDir#$*"
+								${self.inputs.nixpkgs.legacyPackages.${system}.openssh}/bin/ssh root@localhost ${self.inputs.nixpkgs.legacyPackages.${system}.nixos-rebuild}/bin/nixos-rebuild switch --flake "$repoDir#$*" --option eval-cache false
 							else
 								hostname="$(hostname --short)"
 								echo "Switching configuration for system: $hostname"
-								${self.inputs.nixpkgs.legacyPackages.${system}.openssh}/bin/ssh root@localhost ${self.inputs.nixpkgs.legacyPackages.${system}.nixos-rebuild}/bin/nixos-rebuild switch --flake "$repoDir#$hostname"
+								${self.inputs.nixpkgs.legacyPackages.${system}.openssh}/bin/ssh root@localhost ${self.inputs.nixpkgs.legacyPackages.${system}.nixos-rebuild}/bin/nixos-rebuild switch --flake "$repoDir#$hostname" --option eval-cache false
 							fi
 						'';
 					};
