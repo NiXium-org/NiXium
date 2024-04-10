@@ -14,4 +14,8 @@ in {
 	"./nixos/users/kreyren/kreyren-user-password.age".publicKeys = [
 		kreyren pelagus-host sinnenfreude-host tsvetan-host tupac-host
 	];
+
+	"./machines/mracek/mracek-onion.age".publicKeys = [
+		kreyren pelagus-host sinnenfreude-host tsvetan-host tupac-host
+	];
 }

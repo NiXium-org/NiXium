@@ -167,7 +167,8 @@
 					];
 					inputsFrom = [ config.mission-control.devShell ];
 					# Environmental Variables
-					#RULES = "./secrets/secrets.nix"; # For ragenix to know where secrets are
+					# FIXME-QA(Krey): Figure out how to expand $PWD here
+					# RULES = "secrets.nix"; # For ragenix to know where secrets are
 				};
 
 				formatter = inputs.nixpkgs.legacyPackages.${system}.nixpkgs-fmt;

@@ -1,4 +1,4 @@
-{ self, lib, inputs, ... }:
+{ self, lib, inputs, config, ... }:
 
 # Flake management of MRACEK system
 
@@ -40,6 +40,7 @@ in {
 			./lanzaboote.nix
 			./distributedBuilds.nix
 			# ./disko.nix # FIXME(Krey): I don't know how to implement that yet
+			./gitea.nix
 		];
 
 		# FIXME-QA(Krey): This needs better management
@@ -50,5 +51,16 @@ in {
 				config.allowUnfree = true;
 			};
 		};
+	};
+
+	# Module exported to other systems
+	flake.nixosModules.machine-mracek = {
+		age.secrets.mracek-onion.file = ./mracek-onion.age;
+		services.tor.settings.MapAddress = [
+			"mracek.nixium ${config.age.secrets.mracek-onion.path}" # Add Tor Alias
+			#"gitea.nixium ....onion" # Export Gitea
+			#"monero.nixium ....onion"
+		];
+
 	};
 }

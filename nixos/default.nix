@@ -30,6 +30,8 @@ in {
 				nixosModules.services-distributedBuilds
 				# nixosModules.security-cve-2024-3094
 
+				nixosModules.machine-mracek
+
 				# nixosModules.programs-git
 				{
 					environment.localBinInPath = true; # Include ~/.local/bin in PATH
