@@ -46,9 +46,9 @@ in {
 				services.tor.relay.onionServices."hiddenMurmur".map = mkIf config.services.murmur.enable [ config.services.murmur.port ]; # Set up Onionized Murmur
 
 		# Gitea
-		## NOTE(Krey): As a former member of Codeberg i don't want my code management to be developed by a dictator who is surrounding himself by yes-mans and who makes up any bs reasons to kick all members who do not agree with him (the rationale to why i was kicked from codeberg is "using an emoticon"..). The gitea-drama is irrational, the management that gitea has in place is far superior to codeberg in terms of balance of power among board members and making a rational discussions over issues. Don't let codeberg manipulate you under the premise of "being independent FOSS-supporters" while being hostile to projects that they don't like such as sneedacity (that I voted to not be removed from codeberg).
 			services.gitea.enable = true;
-				services.tor.relay.onionServices."hiddenGitea".map = mkIf config.services.gitea.enable [ config.services.gitea.settings.server.HTTP_PORT ]; # Set up Onionized Gitea
+				# NOTE(Krey): It's declared this way so that we don't have to use `url.onion:3000` as the web browsers will default to using port 80 for HTTP and port 443 for HTTPS
+				services.tor.relay.onionServices."hiddenGitea".map = mkIf config.services.gitea.enable [{ port = 80; target = { port = config.services.gitea.settings.server.HTTP_PORT; }; }]; # Set up Onionized Gitea
 
 		# Firewall
 			networking.firewall.enable = mkForce true; # Enforce FireWall
