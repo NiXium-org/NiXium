@@ -54,7 +54,7 @@ in {
 		pkgs.sc-controller
 		pkgs.freetube
 		pkgs.hexchat
-		pkgs.monero-gui
+		unstable.monero-gui
 		pkgs.nextcloud-client
 		pkgs.endeavour
 		pkgs.dialect

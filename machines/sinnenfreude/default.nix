@@ -34,11 +34,12 @@
 			./impermenance.nix
 			./distributedBuilds.nix
 			# ./disko.nix # FIXME(Krey): I don't know how to implement that yet
-			./remote-unlock.nix
+			# ./remote-unlock.nix
 		];
 
 		# FIXME-QA(Krey): This needs better management
 		specialArgs = {
+			inherit self;
 			unstable = import inputs.nixpkgs-unstable {
 				system = "x86_64-linux";
 				config.allowUnfree = true;

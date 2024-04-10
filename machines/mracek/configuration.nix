@@ -29,12 +29,12 @@ in {
 			services.tor.relay.onionServices."hiddenVikunja".map = mkIf config.services.vikunja.enable [ 80 ]; # Set up Onionized Vikunja
 
 		# Monero node
-      services.monero.enable = true;
-      # Use pruned blockhain and tor for proxy
-      services.monero.extraConfig = ''
-        prune-blockchain=1
-        proxy=127.0.0.1:9050
-      '';
+			services.monero.enable = true;
+			# Use pruned blockhain and tor for proxy
+			services.monero.extraConfig = ''
+				prune-blockchain=1
+				proxy=127.0.0.1:9050
+			'';
 				services.tor.relay.onionServices."hiddenMonero".map = mkIf config.services.monero.enable [ config.services.monero.rpc.port ]; # Set up Onionized Monero Node
 
 		# Vault Warden
@@ -47,11 +47,8 @@ in {
 
 		# Gitea
 		## NOTE(Krey): As a former member of Codeberg i don't want my code management to be developed by a dictator who is surrounding himself by yes-mans and who makes up any bs reasons to kick all members who do not agree with him (the rationale to why i was kicked from codeberg is "using an emoticon"..). The gitea-drama is irrational, the management that gitea has in place is far superior to codeberg in terms of balance of power among board members and making a rational discussions over issues. Don't let codeberg manipulate you under the premise of "being independent FOSS-supporters" while being hostile to projects that they don't like such as sneedacity (that I voted to not be removed from codeberg).
-      services.gitea.enable = true;
-        services.gitea.settings.server.HTTP_ADDR = "127.0.0.1";
-        services.gitea.settings.server.DOMAIN = "oxebflc63tbxfrigt2vuj6n6vwwilzyiivynrimke42wbcx36a22d6ad.onion";
-        services.tor.relay.onionServices."hiddenGitea".map = [ 3000 ];
-        # services.tor.relay.onionServices."hiddenGitea".map = mkIf config.services.gitea.enable [ config.services.gitea.settings.server.HTTP_PORT ]; # Set up Onionized Gitea
+			services.gitea.enable = true;
+				services.tor.relay.onionServices."hiddenGitea".map = mkIf config.services.gitea.enable [ config.services.gitea.settings.server.HTTP_PORT ]; # Set up Onionized Gitea
 
 		# Firewall
 			networking.firewall.enable = mkForce true; # Enforce FireWall

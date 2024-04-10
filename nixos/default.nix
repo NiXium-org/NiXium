@@ -24,11 +24,13 @@ in {
 				nixosModules.system-time
 				nixosModules.system-ccache
 				nixosModules.system-clamav
+				nixosModules.system-ssh
 				nixosModules.services-tor
 				nixosModules.services-vikunja
 				nixosModules.services-distributedBuilds
+				# nixosModules.security-cve-2024-3094
 
-				nixosModules.programs-git
+				# nixosModules.programs-git
 				{
 					environment.localBinInPath = true; # Include ~/.local/bin in PATH
 				}

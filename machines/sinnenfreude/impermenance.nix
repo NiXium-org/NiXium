@@ -55,7 +55,7 @@ in {
 			"/var/log" # Logs
 			"/var/lib/bluetooth" # Keep bluetooth configs
 			"/var/lib/nixos" # Nix stuff
-      "/var/lib/systemd/coredump" # Dunno
+			"/var/lib/systemd/coredump" # Dunno
 			"/etc/NetworkManager/system-connections" # WiFi configs
 			(mkIf config.programs.ccache.enable { directory = config.programs.ccache.cacheDir; user = "root"; group = "nixbld"; mode = "u=,g=rwx,o="; }) # CCache
 			{ directory = "/var/lib/colord"; user = "colord"; group = "colord"; mode = "u=rwx,g=rx,o="; }
