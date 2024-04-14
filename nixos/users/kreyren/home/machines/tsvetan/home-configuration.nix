@@ -21,14 +21,14 @@
 	home.packages = [
 		pkgs.keepassxc
 		pkgs.cura
-		# pkgs.prusa-slicer
-		# pkgs.fractal
+		unstable.prusa-slicer
+		unstable.fractal
 		pkgs.qbittorrent
 		pkgs.stremio
 		pkgs.android-tools
 		pkgs.picocom
 		pkgs.bottles
-		# pkgs.kicad # Takes ages to build
+    # pkgs.kicad # Takes ages to build
 		pkgs.mtr
 		# nix-software-center.nix-software-center
 		# pkgs.colobot
@@ -49,7 +49,9 @@
 			# FIXME(Krey): Blocked by https://github.com/emersion/hydroxide/issues/235
 			#hydroxide
 		pkgs.gimp # Generic use only
-		pkgs.kooha
+    pkgs.kooha
+    # FIXME(Krey): Doesn't support aarch64-linux
+    # pkgs.tor-browser-bundle-bin
 
 		# Gnome extensions
 		pkgs.gnomeExtensions.removable-drive-menu
@@ -63,12 +65,12 @@
 
 		#nerdfonts
 		# NOTE(Krey): This was recommended, because nerdfonts might have issues with rendering -- https://github.com/TanvirOnGH/nix-config/blob/nix%2Bhome-manager/desktop/customization/font.nix#L4-L39
-		# (pkgs.nerdfonts.override {
-		# 	fonts = [
-		# 		"Noto"
-		# 		"FiraCode"
-		# 	];
-		# })
+		(pkgs.nerdfonts.override {
+		  fonts = [
+		      "Noto"
+		      "FiraCode"
+		  ];
+		})
 	];
 
 	# GNOME Extensions

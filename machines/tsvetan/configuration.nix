@@ -64,10 +64,7 @@ in {
 		"riscv64-linux"
 	];
 
-	# Temporary management
 	environment.systemPackages = [
-		unstable.fractal
-		unstable.prusa-slicer
 		(mkIf config.services.xserver.desktopManager.gnome.enable pkgs.pinentry-gnome)
 	];
 
