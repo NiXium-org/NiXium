@@ -127,7 +127,7 @@ in {
 			picture-uri-dark ="${./wallpaper.jpeg}";
 		};
 		"org/gnome/desktop/screensaver" = {
-			picture-uri ="${./wallpaper.jpeg}";
+			picture-uri ="${./lockscreen.jpg}";
 			#picture-uri = "${pkgs.gnome.gnome-backgrounds}/share/backgrounds/gnome/blobs-l.svg";
 		};
 
