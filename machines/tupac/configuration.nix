@@ -62,6 +62,9 @@ in {
 			"armv7l-linux"
 		];
 
+	# Waydroid
+		virtualisation.waydroid.enable = true;
+
 	# SSH
 		services.openssh.enable = true;
 		services.tor.relay.onionServices."hiddenSSH".map = [ 22 ]; # Hidden SSH
