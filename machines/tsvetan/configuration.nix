@@ -55,8 +55,9 @@ in {
 		programs.kdeconnect.package = mkIf config.services.xserver.desktopManager.gnome.enable pkgs.gnomeExtensions.gsconnect; # Uses KDE thing by default which doesn't work on GNOME where we need gsconnect
 
 	# Virtualization
-	# virtualisation.libvirtd.enable = true;
-	# virtualisation.docker.enable = true;
+		# virtualisation.libvirtd.enable = true;
+		# virtualisation.docker.enable = true;
+		virtualisation.waydroid.enable = true;
 
 	# BinFMT - Enable seemless VM-based cross-compilation
 	boot.binfmt.emulatedSystems = [
