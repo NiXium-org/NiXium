@@ -3,6 +3,7 @@
 let
 	inherit (lib) mkForce;
 	inherit (lib.hm.gvariant) mkTuple;
+  flameshot-gui = pkgs.writeShellScriptBin "flameshot-gui" "${pkgs.flameshot}/bin/flameshot gui";
 in {
 	# Use `$ dconf dump /` to get these
 	# dconf2nix, can be used to make this process easier -- https://github.com/gvolpe/dconf2nix
@@ -75,7 +76,8 @@ in {
 		# Keybinds -- https://discourse.nixos.org/t/nixos-options-to-configure-gnome-keyboard-shortcuts/7275/4
 		"org/gnome/shell/keybinds" = {
 			## To fix conflict with keybinding
-			show-screenshot-ui = [ "<Control>Print" ];
+			# show-screenshot-ui = [ "<Control>Print" ];
+			show-screenshot-ui = [ ];
 		};
 
 		"org/gnome/settings-daemon/plugins/media-keys" = {
@@ -109,7 +111,7 @@ in {
 			binding = "<Super>e";
 		};
 
-		## xkill`
+		## xkill
 		"org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3" = {
 			name = "xkill";
 			command = "xkill";
@@ -119,7 +121,7 @@ in {
 		## Flameshot GUI
 		"org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4" = {
 			name = "Flameshot GUI";
-			command = "flameshot gui";
+			command = "${flameshot-gui}/bin/flameshot-gui";
 			binding = "Print";
 		};
 
