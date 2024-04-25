@@ -1,4 +1,4 @@
-{ pkgs, lib, unstable, ... }:
+{ pkgs, lib, unstable, aagl-gtk-on-nix, ... }:
 
 {
 	home.stateVersion = "23.11";
@@ -65,6 +65,9 @@
 		pkgs.tor-browser-bundle-bin
 		pkgs.gimp # Generic use only
 		pkgs.kooha
+
+		# An Anime Game
+		aagl-gtk-on-nix.anime-game-launcher
 
 		# Gnome extensions
 		pkgs.gnomeExtensions.removable-drive-menu

@@ -51,6 +51,7 @@ in {
 
 				home-manager.extraSpecialArgs = {
 					inherit self;
+					aagl-gtk-on-nix = self.inputs.aagl-gtk-on-nix.packages."${system}";
 					unstable = self.inputs.nixpkgs-unstable.legacyPackages."${system}";
 					firefox-addons = self.inputs.firefox-addons.packages."${system}";
 				};
