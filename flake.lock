@@ -1,5 +1,27 @@
 {
   "nodes": {
+    "aagl-gtk-on-nix": {
+      "inputs": {
+        "flake-compat": "flake-compat",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1713629937,
+        "narHash": "sha256-NweKW1XIdB9xzdD9845ZcRH3Mlj/tdx6Sl/1YyokyBk=",
+        "owner": "ezKEa",
+        "repo": "aagl-gtk-on-nix",
+        "rev": "f2a747329d14e54024e309d2f682f55ffaea557a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ezKEa",
+        "ref": "release-23.11",
+        "repo": "aagl-gtk-on-nix",
+        "type": "github"
+      }
+    },
     "agenix": {
       "inputs": {
         "darwin": "darwin",
@@ -26,7 +48,7 @@
     },
     "arkenfox": {
       "inputs": {
-        "flake-compat": "flake-compat",
+        "flake-compat": "flake-compat_2",
         "flake-utils": "flake-utils",
         "nixpkgs": "nixpkgs",
         "pre-commit": "pre-commit"
@@ -218,6 +240,22 @@
       }
     },
     "flake-compat_3": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1696426674,
+        "narHash": "sha256-kvjfFW7WAETZlt09AgDn1MrtKzP7t90Vf7vypd3OL1U=",
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "rev": "0f9255e01c2351cc7d116c072cb317785dd33b33",
+        "type": "github"
+      },
+      "original": {
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "type": "github"
+      }
+    },
+    "flake-compat_4": {
       "flake": false,
       "locked": {
         "lastModified": 1673956053,
@@ -500,7 +538,7 @@
     "lanzaboote": {
       "inputs": {
         "crane": "crane",
-        "flake-compat": "flake-compat_3",
+        "flake-compat": "flake-compat_4",
         "flake-parts": "flake-parts_2",
         "flake-utils": "flake-utils_4",
         "nixpkgs": "nixpkgs_3",
@@ -848,7 +886,7 @@
     },
     "pre-commit": {
       "inputs": {
-        "flake-compat": "flake-compat_2",
+        "flake-compat": "flake-compat_3",
         "flake-utils": "flake-utils_2",
         "gitignore": "gitignore",
         "nixpkgs": "nixpkgs_2",
@@ -923,6 +961,7 @@
     },
     "root": {
       "inputs": {
+        "aagl-gtk-on-nix": "aagl-gtk-on-nix",
         "arkenfox": "arkenfox",
         "disko-nixpkgs": "disko-nixpkgs",
         "disko-nixpkgs-unstable": "disko-nixpkgs-unstable",

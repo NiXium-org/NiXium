@@ -40,6 +40,11 @@
 			inputs.nixpkgs.follows = "nixpkgs-unstable";
 		};
 
+		aagl-gtk-on-nix = {
+			url = "github:ezKEa/aagl-gtk-on-nix/release-23.11";
+			inputs.nixpkgs.follows = "nixpkgs";
+		};
+
 		# Home-Manager
 		home-manager = {
 			url = "github:nix-community/home-manager/release-23.11";
