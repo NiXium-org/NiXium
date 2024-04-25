@@ -21,6 +21,15 @@
 			self.inputs.lanzaboote.nixosModules.lanzaboote
 			self.inputs.impermanence.nixosModules.impermanence
 
+			## An Anime Game
+			self.inputs.aagl-gtk-on-nix.nixosModules.default {
+				networking.mihoyo-telemetry.block = true; # Block miHoYo telemetry servers
+				nix.settings = {
+					substituters = [ "https://ezkea.cachix.org" ];
+					trusted-public-keys = [ "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI=" ];
+				};
+			}
+
 			# Users
 			self.nixosModules.users-kreyren
 			self.homeManagerModules."kreyren@pelagus"
