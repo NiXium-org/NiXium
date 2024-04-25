@@ -18,6 +18,10 @@ in {
 		"org/gnome/mutter" = {
 			dynamic-workspaces=true;
 			workspaces-only-on-primary=false;
+			experimental-features = [
+				# Fractional Scaling
+				"scale-monitor-framebuffer"
+			];
 		};
 
 		"org/gnome/desktop/peripherals/touchpad" = {
