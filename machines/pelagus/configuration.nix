@@ -91,6 +91,7 @@ in {
 	# Virtualization
 	virtualisation.libvirtd.enable = true;
 	virtualisation.docker.enable = true;
+	virtualisation.waydroid.enable = true;
 
 	# BinFMT - Enable seemless VM-based cross-compilation
 	boot.binfmt.emulatedSystems = [
