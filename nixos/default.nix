@@ -22,6 +22,7 @@ in {
 				nixosModules.system-autoUpgrade
 				nixosModules.system-nix
 				nixosModules.system-time
+				nixosModules.system-locale
 				nixosModules.system-ccache
 				nixosModules.system-clamav
 				nixosModules.system-ssh

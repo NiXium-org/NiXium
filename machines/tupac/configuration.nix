@@ -72,6 +72,12 @@ in {
 	# Firewall
 		networking.firewall.enable = mkForce true; # Enforce FireWall
 
+	# Locales
+		i18n.supportedLocales = [
+			"en_US.UTF-8/UTF-8"
+			"cs_CZ.UTF-8/UTF-8"
+		];
+
 	# Auto-Upgrade
 		system.autoUpgrade.enable = true;
 		system.autoUpgrade.flake = "github:kreyren/nixos-config#tupac";

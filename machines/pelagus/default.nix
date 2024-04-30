@@ -38,6 +38,7 @@
 			./configuration.nix
 			./hardware-configuration.nix
 			./distributedBuilds.nix
+			./weeb.nix
 		];
 
 		# FIXME-QA(Krey): This needs better management
