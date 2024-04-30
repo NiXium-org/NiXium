@@ -31,7 +31,7 @@ in {
 				nixosModules.services-distributedBuilds
 				# nixosModules.security-cve-2024-3094
 
-				# nixosModules.programs-git
+				nixosModules.programs-git
 				{
 					environment.localBinInPath = true; # Include ~/.local/bin in PATH
 				}
