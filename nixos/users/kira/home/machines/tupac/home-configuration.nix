@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, aagl-gtk-on-nix, ... }:
 
 let
 	inherit (lib) mkIf;
@@ -78,6 +78,9 @@ in {
 		pkgs.gnomeExtensions.desktop-cube
 		pkgs.gnomeExtensions.burn-my-windows
 		pkgs.gnomeExtensions.caffeine
+
+		# An Anime Game
+		aagl-gtk-on-nix.anime-game-launcher
 
 		#nerdfonts
 		# NOTE(Krey): This was recommended, because nerdfonts might have issues with rendering -- https://github.com/TanvirOnGH/nix-config/blob/nix%2Bhome-manager/desktop/customization/font.nix#L4-L39
