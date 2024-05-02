@@ -22,11 +22,10 @@ in {
 	nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
 		"vscode"
 		"etlegacy"
-		"discord"
 	];
 
 	home.packages = [
-		pkgs.discord # Ugh..
+		pkgs.webcord # less ugh..
 		pkgs.keepassxc
 		# pkgs.cura # Broken: https://github.com/NixOS/nixpkgs/issues/186570
 		pkgs.prusa-slicer
