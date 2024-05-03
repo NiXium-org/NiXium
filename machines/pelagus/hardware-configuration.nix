@@ -63,16 +63,14 @@ in {
 	hardware.opengl.driSupport = true;
 	hardware.opengl.driSupport32Bit = true;
 	hardware.opengl.extraPackages = [
-		# The `2023.Q2.1` present in stable channel has issues, so trying unstable
-		## FIXME(Krey): If NixOS 23.05 then unstable else driversi686Linux.amdvlk plz
-		unstable.amdvlk
+		pkgs.amdvlk
+
 		# OpenCL
 		pkgs.rocm-opencl-icd
 		pkgs.rocm-opencl-runtime
 	];
 	hardware.opengl.extraPackages32 = [
-		# FIXME(Krey): If NixOS 23.05 then unstable else driversi686Linux.amdvlk plz
-		unstable.driversi686Linux.amdvlk
+		pkgs.driversi686Linux.amdvlk
 	];
 
 	# Steam Hardware
