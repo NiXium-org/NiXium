@@ -140,6 +140,12 @@
 						'';
 					};
 
+					"update" = {
+						description = "Update the flake locks";
+						category = "Management";
+						exec = "nix flake update";
+					};
+
 					"switch" = {
 						description = "Switch the configuration on the current system";
 						category = "Management";
