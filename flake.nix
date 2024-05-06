@@ -6,10 +6,9 @@
 	inputs = {
 		# Release inputs
 		nixpkgs-legacy.url = "github:nixos/nixpkgs/nixos-23.05";
-		nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+		nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/*.tar.gz"; # Management to always use the latest stable release
 		# # nixpkgs.url = "git+file:///home/raptor/src/nixpkgs";
 		nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-		# nixpkgs-unstable-small.url = "github:nixos/nixpkgs/nixos-unstable";
 		nixpkgs-master.url = "github:nixos/nixpkgs/master";
 		nixpkgs-staging.url = "github:nixos/nixpkgs/staging";
 		nixpkgs-staging-next.url = "github:nixos/nixpkgs/staging-next";
