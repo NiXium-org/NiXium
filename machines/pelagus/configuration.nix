@@ -85,6 +85,10 @@ in {
 		libimobiledevice
 		ifuse # optional, to mount using 'ifuse'
 	];
+
+	# Smart Card Daemon
+	services.pcscd.enable = true;
+
 	# Security
 		# Sudo
 		security.sudo.enable = mkForce false; # Get rid of Sude
