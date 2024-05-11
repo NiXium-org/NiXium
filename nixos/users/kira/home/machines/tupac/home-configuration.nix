@@ -1,4 +1,4 @@
-{ config, pkgs, lib, aagl-gtk-on-nix, ... }:
+{ config, pkgs, lib, aagl-gtk-on-nix, unstable, ... }:
 
 let
 	inherit (lib) mkIf;
@@ -29,7 +29,7 @@ in {
 		pkgs.keepassxc
 		# pkgs.cura # Broken: https://github.com/NixOS/nixpkgs/issues/186570
 		pkgs.prusa-slicer
-		pkgs.fractal
+		unstable.fractal
 		pkgs.qbittorrent
 		pkgs.stremio
 		pkgs.android-tools
