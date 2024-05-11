@@ -5,9 +5,10 @@
 
 	inputs = {
 		# Release inputs
-		nixpkgs-legacy.url = "github:nixos/nixpkgs/nixos-23.05";
+		nixpkgs-23_05.url = "github:nixos/nixpkgs/nixos-23.05";
+		nixpkgs-23_11.url = "github:nixos/nixpkgs/nixos-23.05";
 		nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/*.tar.gz"; # Management to always use the latest stable release
-		# # nixpkgs.url = "git+file:///home/raptor/src/nixpkgs";
+			# nixpkgs.url = "git+file:///home/raptor/src/nixpkgs";
 		nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 		nixpkgs-master.url = "github:nixos/nixpkgs/master";
 		nixpkgs-staging.url = "github:nixos/nixpkgs/staging";
@@ -30,11 +31,11 @@
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
 
-		disko-nixpkgs = {
+		disko = {
 			url = "github:nix-community/disko";
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
-		disko-nixpkgs-unstable = {
+		disko-unstable = {
 			url = "github:nix-community/disko";
 			inputs.nixpkgs.follows = "nixpkgs-unstable";
 		};
@@ -42,6 +43,10 @@
 		aagl-gtk-on-nix = {
 			url = "github:ezKEa/aagl-gtk-on-nix/release-23.11";
 			inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    aagl-gtk-on-nix-unstable = {
+			url = "github:ezKEa/aagl-gtk-on-nix";
 		};
 
 		# Home-Manager
@@ -50,7 +55,7 @@
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
 
-		home-manager-nixpkgs-unstable = {
+		home-manager-unstable = {
 			url = "github:nix-community/home-manager/master";
 			inputs.nixpkgs.follows = "nixpkgs-unstable";
 		};
