@@ -78,6 +78,13 @@ in {
 	programs.kdeconnect.enable = true;
 		programs.kdeconnect.package = mkIf config.services.xserver.desktopManager.gnome.enable pkgs.gnomeExtensions.gsconnect; # Uses KDE thing by default which doesn't work on GNOME where we need gsconnect
 
+	# iPhone shits
+	services.usbmuxd.enable = true;
+
+	environment.systemPackages = with pkgs; [
+		libimobiledevice
+		ifuse # optional, to mount using 'ifuse'
+	];
 	# Security
 		# Sudo
 		security.sudo.enable = mkForce false; # Get rid of Sude
