@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, unstable, ... }:
 
 let
 	inherit (lib) mkIf;
@@ -28,7 +28,7 @@ in {
 		pkgs.keepassxc
 		pkgs.cura
 		pkgs.prusa-slicer
-		pkgs.fractal
+		unstable.fractal
 		pkgs.qbittorrent
 		pkgs.stremio
 		pkgs.android-tools

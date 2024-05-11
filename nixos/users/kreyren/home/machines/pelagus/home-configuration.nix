@@ -28,7 +28,7 @@ in {
 		pkgs.keepassxc
 		pkgs.cura
 		pkgs.prusa-slicer
-		pkgs.fractal
+		unstable.fractal
 		# SECURITY(Krey): Paranoid over-reaction to a likely undisclosed vulnerability in Rust SDK Crypto
 		# pkgs.element-desktop
 		pkgs.qbittorrent

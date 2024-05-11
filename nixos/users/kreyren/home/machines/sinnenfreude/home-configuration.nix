@@ -1,4 +1,4 @@
-{ pkgs, lib, unstable, aagl-gtk-on-nix, ... }:
+{ pkgs, lib, unstable, aagl-gtk-on-nix, staging-next, ... }:
 
 {
 	home.stateVersion = "23.11";
@@ -24,7 +24,7 @@
     pkgs.keepassxc
 		pkgs.cura
     pkgs.prusa-slicer
-    pkgs.fractal
+    unstable.fractal
 		pkgs.qbittorrent
     unstable.stremio
     pkgs.youtube-dl
