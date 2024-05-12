@@ -5,14 +5,15 @@
 
 	inputs = {
 		# Release inputs
-		nixpkgs-23_05.url = "github:nixos/nixpkgs/nixos-23.05";
-		nixpkgs-23_11.url = "github:nixos/nixpkgs/nixos-23.05";
+		nixpkgs-master.url = "github:nixos/nixpkgs/master";
+		nixpkgs-staging-next.url = "github:nixos/nixpkgs/staging-next";
+		nixpkgs-staging.url = "github:nixos/nixpkgs/staging";
+		nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 		nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/*.tar.gz"; # Management to always use the latest stable release
 			# nixpkgs.url = "git+file:///home/raptor/src/nixpkgs";
-		nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-		nixpkgs-master.url = "github:nixos/nixpkgs/master";
-		nixpkgs-staging.url = "github:nixos/nixpkgs/staging";
-		nixpkgs-staging-next.url = "github:nixos/nixpkgs/staging-next";
+
+		nixpkgs-23_05.url = "github:nixos/nixpkgs/nixos-23.05";
+		nixpkgs-23_11.url = "github:nixos/nixpkgs/nixos-23.11";
 
 		# Principle inputs
 		nixos-hardware.url = "github:NixOS/nixos-hardware";
@@ -40,22 +41,20 @@
 			inputs.nixpkgs.follows = "nixpkgs-unstable";
 		};
 
-		aagl-gtk-on-nix = {
+		aagl = {
 			url = "github:ezKEa/aagl-gtk-on-nix/release-23.11";
 			inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    aagl-gtk-on-nix-unstable = {
+		};
+		aagl-unstable = {
 			url = "github:ezKEa/aagl-gtk-on-nix";
 		};
 
 		# Home-Manager
-		home-manager = {
+		hm = {
 			url = "github:nix-community/home-manager/release-23.11";
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
-
-		home-manager-unstable = {
+		hm-unstable = {
 			url = "github:nix-community/home-manager/master";
 			inputs.nixpkgs.follows = "nixpkgs-unstable";
 		};
@@ -77,10 +76,8 @@
 	outputs = inputs @ { self, ... }:
 		inputs.flake-parts.lib.mkFlake { inherit inputs; } {
 			imports = [
-				./nixos # Imports NixOS related things
-				./machines # Imports machines
+				./src/nixos # Imports NixOS related things
 				./lib # Implement libs
-				./tools
 
 				inputs.flake-root.flakeModule
 				inputs.mission-control.flakeModule
@@ -129,19 +126,27 @@
 					# };
 
 					# Management
+					# FIXME-QA(Krey): Move this into a separate files
 					"verify" = {
 						description = "Verify the system declaration(s)";
 						category = "Management";
 						exec = ''
-							if [ -n "$*" ]; then
-								echo "Checking system: $*"
-								${inputs.nixpkgs.legacyPackages.${system}.nixos-rebuild}/bin/nixos-rebuild dry-build --flake ".#$*" --option eval-cache false --show-trace
-							else
-								for system in $(find ./machines/* -type d | sed "s#^./machines/##g" | tr '\n' ' '); do
-									echo "Checking system: $system"
-									${inputs.nixpkgs.legacyPackages.${system}.nixos-rebuild}/bin/nixos-rebuild dry-build --flake ".#$system" --option eval-cache false --show-trace || echo "WARNING: System $system failed evaluation!"
-								done
-							fi
+							case "$*" in
+								all) # Verify All Systems
+									for system in $(find ./src/nixos/machines/* -type d | sed "s#^./machines/##g" | tr '\n' ' '); do
+										echo "Checking system: $system"
+										${inputs.nixpkgs.legacyPackages.${system}.nixos-rebuild}/bin/nixos-rebuild dry-build --flake ".#$system" --option eval-cache false --show-trace || echo "WARNING: System $system failed evaluation!"
+									done
+								;;
+								"") # Verify Current System
+									hostname="$(hostname --short)"
+									echo "Checking system: $hostname"
+									${inputs.nixpkgs.legacyPackages.${system}.nixos-rebuild}/bin/nixos-rebuild dry-build --flake ".#$hostname" --option eval-cache false --show-trace
+								;;
+								*) # Verify System By (derivation) Name
+									echo "Checking system: $*"
+									${inputs.nixpkgs.legacyPackages.${system}.nixos-rebuild}/bin/nixos-rebuild dry-build --flake ".#$*" --option eval-cache false --show-trace
+							esac
 						'';
 					};
 

@@ -1,6 +1,6 @@
 {
   "nodes": {
-    "aagl-gtk-on-nix": {
+    "aagl": {
       "inputs": {
         "flake-compat": "flake-compat",
         "nixpkgs": [
@@ -8,11 +8,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1713629937,
-        "narHash": "sha256-NweKW1XIdB9xzdD9845ZcRH3Mlj/tdx6Sl/1YyokyBk=",
+        "lastModified": 1715466256,
+        "narHash": "sha256-9qlKAHVA/jI0uiI7ouzHsGF3AEz44VrYlWxXcoaakj4=",
         "owner": "ezKEa",
         "repo": "aagl-gtk-on-nix",
-        "rev": "f2a747329d14e54024e309d2f682f55ffaea557a",
+        "rev": "01e812245bc243dfdc99b4c640b89cdab4874eb1",
         "type": "github"
       },
       "original": {
@@ -22,17 +22,17 @@
         "type": "github"
       }
     },
-    "aagl-gtk-on-nix-unstable": {
+    "aagl-unstable": {
       "inputs": {
         "flake-compat": "flake-compat_2",
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1715314394,
-        "narHash": "sha256-N7NFoDXEafFaIbrTQeGR/A+Tpknx9S3S2TaKHQZ31e0=",
+        "lastModified": 1715465860,
+        "narHash": "sha256-riZFBi8tiINvSMnvYXCnspDS7dQObmYTxK12y1gLLYE=",
         "owner": "ezKEa",
         "repo": "aagl-gtk-on-nix",
-        "rev": "21c365a625a35db779e59853ce6eaf9e69a8dbc6",
+        "rev": "a3ef6a44b19c927518772a8a8781d20ef4719d9f",
         "type": "github"
       },
       "original": {
@@ -44,7 +44,7 @@
     "agenix": {
       "inputs": {
         "darwin": "darwin",
-        "home-manager": "home-manager_2",
+        "home-manager": "home-manager",
         "nixpkgs": [
           "ragenix",
           "nixpkgs"
@@ -491,18 +491,18 @@
         "type": "github"
       }
     },
-    "home-manager": {
+    "hm": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1714043624,
-        "narHash": "sha256-Xn2r0Jv95TswvPlvamCC46wwNo8ALjRCMBJbGykdhcM=",
+        "lastModified": 1715381426,
+        "narHash": "sha256-wPuqrAQGdv3ISs74nJfGb+Yprm23U/rFpcHFFNWgM94=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "86853e31dc1b62c6eeed11c667e8cdd0285d4411",
+        "rev": "ab5542e9dbd13d0100f8baae2bc2d68af901f4b4",
         "type": "github"
       },
       "original": {
@@ -512,18 +512,18 @@
         "type": "github"
       }
     },
-    "home-manager-unstable": {
+    "hm-unstable": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs-unstable"
         ]
       },
       "locked": {
-        "lastModified": 1715380449,
-        "narHash": "sha256-716+f9Rj3wjSyD1xitCv2FcYbgPz1WIVDj+ZBclH99Y=",
+        "lastModified": 1715486357,
+        "narHash": "sha256-4pRuzsHZOW5W4CsXI9uhKtiJeQSUoe1d2M9mWU98HC4=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "d7682620185f213df384c363288093b486b2883f",
+        "rev": "44677a1c96810a8e8c4ffaeaad10c842402647c1",
         "type": "github"
       },
       "original": {
@@ -533,7 +533,7 @@
         "type": "github"
       }
     },
-    "home-manager_2": {
+    "home-manager": {
       "inputs": {
         "nixpkgs": [
           "ragenix",
@@ -728,16 +728,16 @@
     },
     "nixpkgs-23_11": {
       "locked": {
-        "lastModified": 1704290814,
-        "narHash": "sha256-LWvKHp7kGxk/GEtlrGYV68qIvPHkU9iToomNFGagixU=",
+        "lastModified": 1715395895,
+        "narHash": "sha256-DreMqi6+qa21ffLQqhMQL2XRUkAGt3N7iVB5FhJKie4=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "70bdadeb94ffc8806c0570eb5c2695ad29f0e421",
+        "rev": "71bae31b7dbc335528ca7e96f479ec93462323ff",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
-        "ref": "nixos-23.05",
+        "ref": "nixos-23.11",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -1020,16 +1020,16 @@
     },
     "root": {
       "inputs": {
-        "aagl-gtk-on-nix": "aagl-gtk-on-nix",
-        "aagl-gtk-on-nix-unstable": "aagl-gtk-on-nix-unstable",
+        "aagl": "aagl",
+        "aagl-unstable": "aagl-unstable",
         "arkenfox": "arkenfox",
         "disko": "disko",
         "disko-unstable": "disko-unstable",
         "firefox-addons": "firefox-addons",
         "flake-parts": "flake-parts",
         "flake-root": "flake-root",
-        "home-manager": "home-manager",
-        "home-manager-unstable": "home-manager-unstable",
+        "hm": "hm",
+        "hm-unstable": "hm-unstable",
         "impermanence": "impermanence",
         "lanzaboote": "lanzaboote",
         "mission-control": "mission-control",

@@ -11,7 +11,11 @@ let
 	mracek-host = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINMwEjZ6toL3j+8Bdc8P/dlFJZNY++xZPgzLIuNt4UEt";
 	tupac-host = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEmYpmNkpSkSSk1FnxHvPb8JlbeYh2lf3d5u8MBqGpHP";
 in {
-	"./nixos/users/kreyren/kreyren-user-password.age".publicKeys = [
+	"./src/nixos/users/kreyren/kreyren-user-password.age".publicKeys = [
 		kreyren pelagus-host sinnenfreude-host tsvetan-host tupac-host
+	];
+
+	"./src/nixos/machines/pelagus/pelagus-onion.age".publicKeys = [
+		kreyren pelagus-host
 	];
 }
