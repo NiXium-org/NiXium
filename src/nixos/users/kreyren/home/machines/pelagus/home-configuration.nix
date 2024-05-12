@@ -71,7 +71,7 @@ in {
 		pkgs.protonmail-bridge
 			# FIXME(Krey): Blocked by https://github.com/emersion/hydroxide/issues/235
 			#hydroxide
-		pkgs.gaphor
+		# pkgs.gaphor
 		pkgs.tor-browser-bundle-bin
 		pkgs.gimp # Generic use only
 		pkgs.kooha
