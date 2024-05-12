@@ -115,11 +115,11 @@
 	# Module exported to other systems
 	flake.nixosModules.machine-pelagus = {
 		age.secrets.pelagus-onion.file = ./pelagus-onion.age;
-		# services.tor.settings.MapAddress = [
-		# 	#"mracek.nixium ${config.age.secrets.mracek-onion.path}" # Add Tor Alias
-		# 	"pelagus.systems.nx ${config.age.secrets.pelagus-onion.path}"
-		# 	#"gitea.nixium ....onion" # Export Gitea
-		# 	#"monero.nixium ....onion"
-		# ];
+		services.tor.settings.MapAddress = [
+			#"mracek.nixium ${config.age.secrets.mracek-onion.path}" # Add Tor Alias
+			"pelagus.systems.nx ${config.age.secrets.pelagus-onion.path}"
+			#"gitea.nixium ....onion" # Export Gitea
+			#"monero.nixium ....onion"
+		];
 	};
 }

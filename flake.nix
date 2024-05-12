@@ -23,13 +23,21 @@
 		flake-parts.url = "github:hercules-ci/flake-parts";
 		mission-control.url = "github:Platonic-Systems/mission-control";
 		flake-root.url = "github:srid/flake-root";
-		ragenix.url = "github:yaxitech/ragenix";
 		lanzaboote.url = "github:nix-community/lanzaboote/v0.3.0"; # MAINTAIN(Krey): has to be kept up to date
 		arkenfox.url = "github:dwarfmaster/arkenfox-nixos";
 
 		firefox-addons = {
 			url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
 			inputs.nixpkgs.follows = "nixpkgs";
+		};
+
+		ragenix = {
+			url = "github:yaxitech/ragenix";
+			inputs.nixpkgs.follows = "nixpkgs";
+		};
+		ragenix-unstable = {
+			url = "github:yaxitech/ragenix";
+			inputs.nixpkgs.follows = "nixpkgs-unstable";
 		};
 
 		disko = {
