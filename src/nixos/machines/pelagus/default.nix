@@ -16,7 +16,8 @@
 			self.nixosModules.default
 
 			# Principles
-			self.inputs.ragenix.nixosModules.default
+			# self.inputs.ragenix.nixosModules.default
+			self.inputs.sops.nixosModules.sops
 			self.inputs.hm.nixosModules.home-manager
 			self.inputs.lanzaboote.nixosModules.lanzaboote
 			self.inputs.impermanence.nixosModules.impermanence
@@ -70,7 +71,8 @@
 			self.nixosModules.default
 
 			# Principles
-			self.inputs.ragenix.nixosModules.default
+			# self.inputs.ragenix.nixosModules.default
+			self.inputs.sops.nixosModules.sops
 			self.inputs.hm-unstable.nixosModules.home-manager
 			self.inputs.lanzaboote.nixosModules.lanzaboote
 			self.inputs.impermanence.nixosModules.impermanence
@@ -98,7 +100,6 @@
 		# FIXME-QA(Krey): This needs better management
 		specialArgs = {
 			inherit self;
-			inherit age;
 
 			stable = import inputs.nixpkgs {
 				system = "x86_64-linux";
@@ -113,13 +114,13 @@
 	};
 
 	# Module exported to other systems
-	flake.nixosModules.machine-pelagus = {
-		age.secrets.pelagus-onion.file = ./pelagus-onion.age;
-		services.tor.settings.MapAddress = [
-			#"mracek.nixium ${config.age.secrets.mracek-onion.path}" # Add Tor Alias
-			"pelagus.systems.nx ${config.age.secrets.pelagus-onion.path}"
-			#"gitea.nixium ....onion" # Export Gitea
-			#"monero.nixium ....onion"
-		];
-	};
+	# flake.nixosModules.machine-pelagus = {
+	# 	# age.secrets.pelagus-onion.file = "./pelagus-onion.age";
+	# 	# services.tor.settings.MapAddress = [
+	# 	# 	#"mracek.nixium ${config.age.secrets.mracek-onion.path}" # Add Tor Alias
+	# 	# 	"pelagus.systems.nx ${config.age.secrets.pelagus-onion}"
+	# 	# 	#"gitea.nixium ....onion" # Export Gitea
+	# 	# 	#"monero.nixium ....onion"
+	# 	# ];
+	# };
 }

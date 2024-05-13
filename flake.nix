@@ -1,8 +1,6 @@
 {
 	description = "Kreyren's Infrastructure Management With NiXium";
 
-	# FIXME-QA(Krey): This file needs re-organization
-
 	inputs = {
 		# Release inputs
 		nixpkgs-master.url = "github:nixos/nixpkgs/master";
@@ -10,7 +8,7 @@
 		nixpkgs-staging.url = "github:nixos/nixpkgs/staging";
 		nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 		nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/*.tar.gz"; # Management to always use the latest stable release
-			# nixpkgs.url = "git+file:///home/raptor/src/nixpkgs";
+			# nixpkgs.url = "git+file:///home/kreyren/src/nixpkgs";
 
 		nixpkgs-23_05.url = "github:nixos/nixpkgs/nixos-23.05";
 		nixpkgs-23_11.url = "github:nixos/nixpkgs/nixos-23.11";
@@ -31,14 +29,23 @@
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
 
-		ragenix = {
-			url = "github:yaxitech/ragenix";
+		sops = {
+			url = "github:Mic92/sops-nix";
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
-		ragenix-unstable = {
-			url = "github:yaxitech/ragenix";
-			inputs.nixpkgs.follows = "nixpkgs-unstable";
+		sops-unstable = {
+			url = "github:Mic92/sops-nix";
+			inputs.nixpkgs.follows = "nixpkgs";
 		};
+
+		# ragenix = {
+		# 	url = "github:yaxitech/ragenix";
+		# 	inputs.nixpkgs.follows = "nixpkgs";
+		# };
+		# ragenix-unstable = {
+		# 	url = "github:yaxitech/ragenix";
+		# 	inputs.nixpkgs.follows = "nixpkgs-unstable";
+		# };
 
 		disko = {
 			url = "github:nix-community/disko";
@@ -188,7 +195,8 @@
 						inputs.nixpkgs.legacyPackages.${system}.nil # Needed for linting
 						inputs.nixpkgs.legacyPackages.${system}.nixpkgs-fmt # Nixpkgs formatter
 						inputs.nixpkgs.legacyPackages.${system}.git # Working with the codebase
-						inputs.ragenix.packages.${system}.default # To manage secrets
+						#inputs.ragenix.packages.${system}.default # To manage secrets
+						inputs.nixpkgs.legacyPackages.${system}.sops # Secret management
 						inputs.nixpkgs.legacyPackages.${system}.sbctl # To set up secureboot
 						inputs.nixpkgs.legacyPackages.${system}.fira-code # For liquratures in code editors
 						inputs.nixos-generators.packages.${system}.nixos-generate

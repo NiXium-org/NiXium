@@ -33,7 +33,11 @@ in {
 				nixosModules.services-distributedBuilds
 				# nixosModules.security-cve-2024-3094
 
-				nixosModules.machine-pelagus
+				# nixosModules.machine-pelagus
+
+				{
+					sops.defaultSopsFile = ./.sops.yaml;
+				}
 
 				nixosModules.programs-git
 				{
