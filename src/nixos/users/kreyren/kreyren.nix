@@ -7,14 +7,14 @@
 let
 	inherit (lib) mkIf mkForce;
 in {
-	#age.secrets.kreyren-user-password.file = ./kreyren-user-password.age;
-	sops.secrets."users/kreyren/hashed-password".neededForUsers = true;
+	age.secrets.kreyren-user-password.file = ./kreyren-user-password.age;
+	#sops.secrets."users/kreyren/hashed-password".neededForUsers = true;
 
 	users.users.kreyren = {
 		description = "Raptor"; # FIXME(Krey): Figure out how to handle this
 		isNormalUser = true;
-		#hashedPasswordFile = config.age.secrets.kreyren-user-password.path;
-		hashedPasswordFile = config.sops.secrets."users/kreyren/hashed-password".path;
+		hashedPasswordFile = config.age.secrets.kreyren-user-password.path;
+		# hashedPasswordFile = config.sops.secrets."users/kreyren/hashed-password".path;
 		extraGroups = [
 			"wheel"
 			(mkIf config.virtualisation.docker.enable "docker")

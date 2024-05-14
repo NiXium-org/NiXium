@@ -35,9 +35,9 @@ in {
 
 				# nixosModules.machine-pelagus
 
-				{
-					sops.defaultSopsFile = ./.sops.yaml;
-				}
+				# {
+				# 	sops.defaultSopsFile = ./.sops.yaml;
+				# }
 
 				nixosModules.programs-git
 				{

@@ -38,14 +38,14 @@
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
 
-		# ragenix = {
-		# 	url = "github:yaxitech/ragenix";
-		# 	inputs.nixpkgs.follows = "nixpkgs";
-		# };
-		# ragenix-unstable = {
-		# 	url = "github:yaxitech/ragenix";
-		# 	inputs.nixpkgs.follows = "nixpkgs-unstable";
-		# };
+		ragenix = {
+			url = "github:yaxitech/ragenix";
+			inputs.nixpkgs.follows = "nixpkgs";
+		};
+		ragenix-unstable = {
+			url = "github:yaxitech/ragenix";
+			inputs.nixpkgs.follows = "nixpkgs-unstable";
+		};
 
 		disko = {
 			url = "github:nix-community/disko";
@@ -187,6 +187,23 @@
 							fi
 						'';
 					};
+
+					"build" = {
+						description = "build the configuration without deployment";
+						category = "Management";
+						exec = ''
+							repoDir="$PWD" # Get path to the repository
+
+							if [ -n "$*" ]; then
+								echo "Building configuration for system: $*"
+								${self.inputs.nixpkgs.legacyPackages.${system}.nixos-rebuild}/bin/nixos-rebuild build --verbose  --flake "$repoDir#$*"
+							else
+								hostname="$(hostname --short)"
+								echo "Building configuration for system: $hostname"
+								${self.inputs.nixpkgs.legacyPackages.${system}.nixos-rebuild}/bin/nixos-rebuild build --verbose --flake "$repoDir#$hostname"
+							fi
+						'';
+					};
 				};
 				devShells.default = inputs.nixpkgs.legacyPackages.${system}.mkShell {
 					name = "NiXium-devshell";
@@ -195,7 +212,7 @@
 						inputs.nixpkgs.legacyPackages.${system}.nil # Needed for linting
 						inputs.nixpkgs.legacyPackages.${system}.nixpkgs-fmt # Nixpkgs formatter
 						inputs.nixpkgs.legacyPackages.${system}.git # Working with the codebase
-						#inputs.ragenix.packages.${system}.default # To manage secrets
+						inputs.ragenix.packages.${system}.default # To manage secrets
 						inputs.nixpkgs.legacyPackages.${system}.sops # Secret management
 						inputs.nixpkgs.legacyPackages.${system}.sbctl # To set up secureboot
 						inputs.nixpkgs.legacyPackages.${system}.fira-code # For liquratures in code editors

@@ -13,7 +13,7 @@ creation_rules:
   #     # - *system_pelagus
 
   # Kreyren Password
-  - path_regex: src/nixos/users/kreyren/kreyren-user-password\.yaml
+  - path_regex: users/kreyren/kreyren-user-password\.yaml$
     key_groups:
     - pgp:
       - *admin_kreyren

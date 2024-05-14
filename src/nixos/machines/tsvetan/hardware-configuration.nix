@@ -23,7 +23,7 @@ in {
 		# https://discourse.nixos.org/t/the-correct-way-to-override-the-latest-kernel-config/533/5
 		# Set according to https://nixos.wiki/wiki/Linux_kernel#Custom_configuration to test hypothesis in https://github.com/NixOS/nixpkgs/issues/260222#issuecomment-1869774655
 		# boot.kernelPackages = pkgs.linuxPackages;
-		boot.kernelPackages = pkgs.linuxPackages_hardened;
+		# boot.kernelPackages = pkgs.linuxPackages_hardened;
 		# boot.kernelPackages = crossPkgs.linuxPackages;
 		# boot.kernelPackages = crossPkgs.linuxPackages_testing;
 		# boot.kernelPatches = [
