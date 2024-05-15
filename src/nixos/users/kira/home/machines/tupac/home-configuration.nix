@@ -1,4 +1,4 @@
-{ config, pkgs, lib, aagl, unstable, ... }:
+{ config, pkgs, lib, aagl, unstable, kreyren, ... }:
 
 let
 	inherit (lib) mkIf;
@@ -27,12 +27,10 @@ in {
 
 	home.packages = [
 		# FIXME(Krey): Management pending https://github.com/NixOS/nixpkgs/pull/311937
-		# (pkgs.webcord.override {
-		# 	# Temporary management until we get a VPN
-		# 	commandLineArgs = "--no-proxy-server";
-		# })
-		pkgs.webcord
-
+		(kreyren.webcord.override {
+			# Temporary management until we get a VPN
+			commandLineArgs = "--no-proxy-server";
+		})
 
 		pkgs.keepassxc
 		# pkgs.cura # Broken: https://github.com/NixOS/nixpkgs/issues/186570

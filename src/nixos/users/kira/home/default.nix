@@ -46,6 +46,7 @@ in {
 					aagl = self.inputs.aagl.packages."${system}";
 					unstable = self.inputs.nixpkgs-unstable.legacyPackages."${system}";
 					firefox-addons = self.inputs.firefox-addons.packages."${system}";
+					kreyren = self.inputs.nixpkgs-kreyren.legacyPackages."${system}";
 				};
 			}];
 		}

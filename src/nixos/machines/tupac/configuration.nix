@@ -50,9 +50,9 @@ in {
 		};
 
 	# Game Streaming
-	services.sunshine.enable = true;
-		services.sunshine.capSysAdmin = true;
-		services.sunshine.openFirewall = true;
+	# services.sunshine.enable = true;
+	# 	services.sunshine.capSysAdmin = true;
+	# 	services.sunshine.openFirewall = true;
 
 	# Tor
 		services.tor = {

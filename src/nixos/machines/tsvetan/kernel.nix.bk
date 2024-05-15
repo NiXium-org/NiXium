@@ -14,30 +14,33 @@ in {
 	boot.kernelModules = mkDefault [];
 	boot.extraModulePackages = mkDefault [];
 
-	boot.kernelPackages = let
-		linux_teres_pkg = { fetchFromGitHub, buildLinux, ... } @ args:
-
-			buildLinux (args // rec {
-				version = "6.9.0";
-				modDirVersion = version;
-
-				src = fetchFromGitHub {
+	boot.kernelPackages = pkgs.linuxPackagesFor
+		(let
+			baseKernel = crossPkgs.linux_testing;
+		in
+			pkgs.linuxManualConfig {
+				inherit (baseKernel) modDirVersion;
+				src = pkgs.fetchFromGitHub {
 					owner = "Kreyren";
 					repo = "linux";
 					rev = "7a9ed72485a4c6e2be3943c82013fdaf268186e4";
-					hash = "sha256-rYv/9ERN7TNUxb5WnjMy0LTHqTbrIwmp3nIDbvXlkgQ=";
 				};
-				kernelPatches = [];
-
-				# extraConfig = ''
-				# 	INTEL_SGX y
-				# '';
-
-				extraMeta.branch = "6.9.0";
-			} // (args.argsOverride or {}));
-		linux_teres = crossPkgs.callPackage linux_teres_pkg{};
-	in
-		pkgs.recurseIntoAttrs (crossPkgs.linuxPackagesFor linux_teres);
+				version = "${baseKernel.version}-teres_i";
+				# kernelPatches = [
+				# 	{
+				# 		name = "work-patch";
+				# 		patch = ./work.patch;
+				# 	}
+				# 	{
+				# 		name = "anx6345-hotfix";
+				# 		patch = ./anx6345-hotfix.patch;
+				# 	}
+				# ];
+				# configfile = ./tinykernel.config;
+				allowImportFromDerivation = true;
+				# extraMakeFlags = [ "yes2modconfig" "dtbs" ]; # Rebuild dtbs and convert on modules
+			}
+		);
 
 	nixpkgs.overlays = [
 		# FIXME-UPSTREAM(Krey): To avoid failure due to missing root module 'ahci' which is not present on aarch64 (workarounding a nix bug), or is it needed?
@@ -47,9 +50,8 @@ in {
 		})
 
 		# CCache
-		# FIXME(Krey): Implement CCache for buildLinux
-		# (mkIf config.programs.ccache.enable (self: super: {
-		# 	linuxManualConfig = super.linuxManualConfig.override { stdenv = super.ccacheStdenv; };
-		# }))
+		(mkIf config.programs.ccache.enable (self: super: {
+			linuxManualConfig = super.linuxManualConfig.override { stdenv = super.ccacheStdenv; };
+		}))
 	];
 }
