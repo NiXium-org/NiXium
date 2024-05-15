@@ -26,7 +26,14 @@ in {
 	];
 
 	home.packages = [
-		pkgs.webcord # less ugh..
+		# FIXME(Krey): Management pending https://github.com/NixOS/nixpkgs/pull/311937
+		# (pkgs.webcord.override {
+		# 	# Temporary management until we get a VPN
+		# 	commandLineArgs = "--no-proxy-server";
+		# })
+		pkgs.webcord
+
+
 		pkgs.keepassxc
 		# pkgs.cura # Broken: https://github.com/NixOS/nixpkgs/issues/186570
 		pkgs.prusa-slicer
