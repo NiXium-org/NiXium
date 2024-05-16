@@ -21,11 +21,18 @@ in {
 				version = "6.9.0";
 				modDirVersion = version;
 
-				src = fetchFromGitHub {
-					owner = "Kreyren";
-					repo = "linux";
-					rev = "7a9ed72485a4c6e2be3943c82013fdaf268186e4";
-					hash = "sha256-rYv/9ERN7TNUxb5WnjMy0LTHqTbrIwmp3nIDbvXlkgQ=";
+				# Kreyren's Fork
+				# src = fetchFromGitHub {
+				# 	owner = "Kreyren";
+				# 	repo = "linux";
+				# 	rev = "7a9ed72485a4c6e2be3943c82013fdaf268186e4";
+				# 	hash = "sha256-rYv/9ERN7TNUxb5WnjMy0LTHqTbrIwmp3nIDbvXlkgQ=";
+				# };
+
+				# Megi's pp-6.9.0 kernel
+				src = fetchTarball {
+					url = "https://xff.cz/kernels/6.9/pp.tar.gz";
+					sha256 = "19m7qz98whrxncqghz5yv55xqb2sa6jjcmaj4ydy554jn8l4sbsk";
 				};
 				kernelPatches = [];
 
