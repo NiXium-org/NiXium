@@ -70,12 +70,12 @@ in {
 	];
 
 	# CCache
-	programs.ccache.enable = true;
-	programs.ccache.packageNames = [
-		# CCache Linux for tsvetan
-			"linuxPackages_testing"
-			"linux_testing"
-	];
+	# programs.ccache.enable = true;
+	# programs.ccache.packageNames = [
+	# 	# CCache Linux for tsvetan
+	# 		"linuxPackages_testing"
+	# 		"linux_testing"
+	# ];
 
   zramSwap.enable = true; # Experiment
 

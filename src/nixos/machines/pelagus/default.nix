@@ -71,7 +71,7 @@
 			self.nixosModules.default
 
 			# Principles
-			# self.inputs.ragenix.nixosModules.default
+			self.inputs.ragenix.nixosModules.default
 			self.inputs.sops.nixosModules.sops
 			self.inputs.hm-unstable.nixosModules.home-manager
 			self.inputs.lanzaboote.nixosModules.lanzaboote

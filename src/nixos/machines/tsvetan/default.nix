@@ -35,7 +35,7 @@
 			# Files
 			./configuration.nix
 			./hardware-configuration.nix
-			./kernel.nix
+			# ./kernel.nix
 			./suspend.nix # Suspend-then-hibernate management
 			./distributedBuilds.nix # Enable distributed builds
 		];

@@ -15,7 +15,7 @@ in {
 		kreyren pelagus-host sinnenfreude-host tsvetan-host tupac-host
 	];
 
-	"./src/nixos/machines/pelagus/pelagus-onion.age".publicKeys = [
-		kreyren pelagus-host
-	];
+	# "./src/nixos/machines/pelagus/pelagus-onion.age".publicKeys = [
+	# 	kreyren pelagus-host
+	# ];
 }

@@ -25,7 +25,7 @@ in {
 		# boot.kernelPackages = pkgs.linuxPackages;
 		# boot.kernelPackages = pkgs.linuxPackages_hardened;
 		# boot.kernelPackages = crossPkgs.linuxPackages;
-		# boot.kernelPackages = crossPkgs.linuxPackages_testing;
+		boot.kernelPackages = pkgs.linuxPackages_testing;
 		# boot.kernelPatches = [
 			# {
 			# 	name = "teres_i-config";
