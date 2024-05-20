@@ -72,7 +72,7 @@ in {
 
 						nix-store = {
 							start = "1079296";
-							end = "-4G";
+							end = "20447231";
 							content = {
 								name = "nix-store";
 								type = "luks";
@@ -109,7 +109,8 @@ in {
 						};
 
 						swap = {
-							size = "100%";
+							start = "20447232";
+							end = "28833791";
 							content = {
 								name = "swap";
 								type = "luks";
