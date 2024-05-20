@@ -9,6 +9,9 @@
 #    1079296-20447231 (19367936) = -4GB Encrypted Nix Store
 #    20447232-28833791 (2095104) = Encrypted SWAP
 
+# Deployment:
+#     # nix run 'github:nix-community/disko#disko-install' -- --flake 'github:kreyren/nixos-config#tsvetan' --disk system /dev/mmcblk2
+
 # FIXME(Krey): Refer to https://github.com/nix-community/disko/issues/490
 
 # Reference: https://github.com/ryan4yin/nix-config/blob/82dccbdecaf73835153a6470c1792d397d2881fa/hosts/12kingdoms-suzu/disko-fs.nix#L21
@@ -106,8 +109,7 @@ in {
 						};
 
 						swap = {
-							start = "-4G";
-							end = "100%";
+							size = "100%";
 							content = {
 								name = "swap";
 								type = "luks";
