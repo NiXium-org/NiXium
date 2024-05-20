@@ -26,6 +26,7 @@
 			self.inputs.ragenix.nixosModules.default
 			self.inputs.impermanence.nixosModules.impermanence
 			self.inputs.hm.nixosModules.home-manager
+			self.inputs.disko.nixosModules.disko
 			#self.inputs.nixos-generators.nixosModules.all-formats # Figure out later
 
 			# Users
@@ -38,6 +39,7 @@
 			# ./kernel.nix
 			./suspend.nix # Suspend-then-hibernate management
 			./distributedBuilds.nix # Enable distributed builds
+			./disks.nix
 		];
 
 		# FIXME-QA(Krey): This needs better management

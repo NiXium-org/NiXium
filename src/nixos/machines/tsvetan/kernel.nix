@@ -29,11 +29,14 @@ in {
 				# 	hash = "sha256-rYv/9ERN7TNUxb5WnjMy0LTHqTbrIwmp3nIDbvXlkgQ=";
 				# };
 
-				# Megi's pp-6.9.0 kernel
-				src = fetchTarball {
-					url = "https://xff.cz/kernels/6.9/pp.tar.gz";
-					sha256 = "19m7qz98whrxncqghz5yv55xqb2sa6jjcmaj4ydy554jn8l4sbsk";
-				};
+				# Megi's pp-6.9.0 kernel -- Fails to build
+				# src = fetchFromGitHub {
+				# 	owner = "Kreyren";
+				# 	repo = "linux";
+				# 	rev = "133ac821f592bc7255cd3e031ea7416f1b3b2438";
+				# 	hash = "sha256-dXdVbV0nzaN1gmwW6B845L41aVFeQqII4myqbxGXAY8=";
+				# };
+
 				kernelPatches = [];
 
 				# extraConfig = ''

@@ -16,12 +16,14 @@ in {
 	i18n.inputMethod.fcitx5.addons = with pkgs; [ fcitx5-mozc ];
 
 	# Desktop Environment
-	services.xserver.enable = true;
-	services.xserver.displayManager.gdm.enable = true;
-	services.xserver.desktopManager.gnome.enable = true;
-	# services.xserver.desktopManager.xfce.enable = true;
-	# services.xserver.desktopManager.xterm.enable = true;
-	# services.xserver.displayManager.defaultSession = "xfce";
+		#  services.xserver.enable = true;
+		# GNOME
+			# services.xserver.displayManager.gdm.enable = true;
+			# services.xserver.desktopManager.gnome.enable = true;
+		# XFCE4
+			# services.xserver.desktopManager.xfce.enable = true;
+			# services.xserver.desktopManager.xterm.enable = true;
+			# services.xserver.displayManager.defaultSession = "xfce";
 
 	# X-Server
 	services.xserver = {
@@ -51,13 +53,14 @@ in {
 
 	programs.noisetorch.enable = true;
 
-	programs.kdeconnect.enable = true;
-		programs.kdeconnect.package = mkIf config.services.xserver.desktopManager.gnome.enable pkgs.gnomeExtensions.gsconnect; # Uses KDE thing by default which doesn't work on GNOME where we need gsconnect
+	# NOTE(Krey): I don't have a device that is using this rn?
+	# programs.kdeconnect.enable = true;
+	# 	programs.kdeconnect.package = mkIf config.services.xserver.desktopManager.gnome.enable pkgs.gnomeExtensions.gsconnect; # Uses KDE thing by default which doesn't work on GNOME where we need gsconnect
 
 	# Virtualization
 		# virtualisation.libvirtd.enable = true;
 		# virtualisation.docker.enable = true;
-		virtualisation.waydroid.enable = true;
+		# virtualisation.waydroid.enable = true;
 
 	# BinFMT - Enable seemless VM-based cross-compilation
 	boot.binfmt.emulatedSystems = [
@@ -66,6 +69,7 @@ in {
 	];
 
 	environment.systemPackages = [
+		# FIXME-QA(Krey): Manage this in nixium
 		(mkIf config.services.xserver.desktopManager.gnome.enable pkgs.pinentry-gnome)
 	];
 
@@ -77,7 +81,8 @@ in {
 	# 		"linux_testing"
 	# ];
 
-  zramSwap.enable = true; # Experiment
+	# NOTE(Krey): To Be Tested..
+	# zramSwap.enable = true; # Experiment
 
 	# Auto-Upgrade
 	system.autoUpgrade.enable = false; # Causes issues
