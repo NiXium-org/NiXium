@@ -63,10 +63,10 @@ in {
 		# virtualisation.waydroid.enable = true;
 
 	# BinFMT - Enable seemless VM-based cross-compilation
-	boot.binfmt.emulatedSystems = [
-		"x86_64-linux"
-		"riscv64-linux"
-	];
+	# boot.binfmt.emulatedSystems = [
+	# 	"x86_64-linux"
+	# 	"riscv64-linux"
+	# ];
 
 	environment.systemPackages = [
 		# FIXME-QA(Krey): Manage this in nixium
