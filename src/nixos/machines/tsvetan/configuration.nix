@@ -16,10 +16,10 @@ in {
 	i18n.inputMethod.fcitx5.addons = with pkgs; [ fcitx5-mozc ];
 
 	# Desktop Environment
-		#  services.xserver.enable = true;
+		services.xserver.enable = true;
 		# GNOME
-			# services.xserver.displayManager.gdm.enable = true;
-			# services.xserver.desktopManager.gnome.enable = true;
+			services.xserver.displayManager.gdm.enable = true;
+			services.xserver.desktopManager.gnome.enable = true;
 		# XFCE4
 			# services.xserver.desktopManager.xfce.enable = true;
 			# services.xserver.desktopManager.xterm.enable = true;

@@ -7,7 +7,7 @@ let
 
 	pelagus-host = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINhxI+25BwlCuEezW6Vc4mJ+EP/KO597PI2YfEU9t+vf";
 	sinnenfreude-host = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM7nLConnVyxn/ZTQXIReXo6x3CbAMky6YVmZ7iMIP5Q";
-	tsvetan-host = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ3iv9nzYHN9cGWjHgsYx4TPyaPbk0R9PY8GJ1MKrGqS";
+	tsvetan-host = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH5uH+tcDY1/1oWFwMzFwtgiI9v0riml0T//k9h+v7kj";
 	mracek-host = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINMwEjZ6toL3j+8Bdc8P/dlFJZNY++xZPgzLIuNt4UEt";
 	tupac-host = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEmYpmNkpSkSSk1FnxHvPb8JlbeYh2lf3d5u8MBqGpHP";
 in {

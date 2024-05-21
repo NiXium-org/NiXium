@@ -18,6 +18,11 @@
 
 # Reference: https://github.com/lilyinstarlight/foosteros/blob/ccaca3910a61ee790f9cfd000cf77074524676b8/hosts/minimal/disks.nix#L4
 
+# FIXME(Krey): This works surprisingly well, but it:
+# * Doesn't manage secrets
+# * Doesn't automatically connect to the WiFi
+# .. So the system is unusable as we can't log-in to it
+
 let
 	inherit (lib) mkIf;
 in {

@@ -26,7 +26,7 @@ in {
 		# boot.kernelPackages = pkgs.linuxPackages_hardened;
 		# boot.kernelPackages = pkgs.linuxPackages_6_6_hardened;
 		# boot.kernelPackages = crossPkgs.linuxPackages;
-		# boot.kernelPackages = pkgs.linuxPackages_testing;
+		boot.kernelPackages = pkgs.linuxPackages_testing;
 		# boot.kernelPatches = [
 			# {
 			# 	name = "teres_i-config";
@@ -46,13 +46,11 @@ in {
 			# }
 		# ];
 
-		# NOTE(Krey): Unsure if we need this
-		# Use defaults
-		# boot.kernelParams = [
-		# 	"console=ttyS0,115200n8"
-		# 	"console=tty0"
-		# 	"cma=256M" # 125 to prevent crashes in GNOME, 256 are needed for decoding H.264 videos with CEDRUS
-		# ];
+		boot.kernelParams = [
+			"console=ttyS0,115200n8"
+			"console=tty0"
+			"cma=256M" # 125 to prevent crashes in GNOME, 256 are needed for decoding H.264 videos with CEDRUS
+		];
 
 		# Kernel Modules
 		# boot.kernelModules = [];
