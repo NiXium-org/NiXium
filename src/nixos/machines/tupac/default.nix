@@ -29,13 +29,13 @@
 
 			## An Anime Game
 			# NOTE(Krey): lacks nixos-24.04 release
-			# self.inputs.aagl.nixosModules.default {
-			# 	networking.mihoyo-telemetry.block = true; # Block miHoYo telemetry servers
-			# 	nix.settings = {
-			# 		substituters = [ "https://ezkea.cachix.org" ];
-			# 		trusted-public-keys = [ "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI=" ];
-			# 	};
-			# }
+			self.inputs.aagl-unstable.nixosModules.default {
+				networking.mihoyo-telemetry.block = true; # Block miHoYo telemetry servers
+				nix.settings = {
+					substituters = [ "https://ezkea.cachix.org" ];
+					trusted-public-keys = [ "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI=" ];
+				};
+			}
 
 			# Temporary management
 			{
