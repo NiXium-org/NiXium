@@ -48,6 +48,7 @@ in {
 		pkgs.nix-index
 		pkgs.tealdeer
 		# pkgs.ventoy-full
+		pkgs.davinci-resolve
 
 		(pkgs.brave.override {
 			# NOTE(Krey): Using system-wide tor which is interfiering with the brave's browsing as non-tor browsing has tor and tor browser goes through 2 Tors so this fixes it
