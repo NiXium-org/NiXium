@@ -57,10 +57,11 @@
 			inputs.nixpkgs.follows = "nixpkgs-unstable";
 		};
 
-		aagl = {
-			url = "github:ezKEa/aagl-gtk-on-nix/release-23.11";
-			inputs.nixpkgs.follows = "nixpkgs";
-		};
+		# Lacks 24.05 release atm
+		# aagl = {
+		# 	url = "github:ezKEa/aagl-gtk-on-nix/release-24.05";
+		# 	inputs.nixpkgs.follows = "nixpkgs";
+		# };
 		aagl-unstable = {
 			url = "github:ezKEa/aagl-gtk-on-nix";
 		};
