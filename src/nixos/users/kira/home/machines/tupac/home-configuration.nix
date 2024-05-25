@@ -23,6 +23,7 @@ in {
 		"vscode"
 		"etlegacy"
 		"etlegacy-assets"
+		"davinci-resolve"
 	];
 
 	home.packages = [
@@ -86,7 +87,7 @@ in {
 		pkgs.gnomeExtensions.caffeine
 
 		# An Anime Game
-		aagl.anime-game-launcher
+		# aagl.anime-game-launcher
 
 		#nerdfonts
 		# NOTE(Krey): This was recommended, because nerdfonts might have issues with rendering -- https://github.com/TanvirOnGH/nix-config/blob/nix%2Bhome-manager/desktop/customization/font.nix#L4-L39
