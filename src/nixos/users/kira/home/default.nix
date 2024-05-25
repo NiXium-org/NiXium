@@ -44,6 +44,7 @@ in {
 				home-manager.extraSpecialArgs = {
 					inherit self;
 					aagl = self.inputs.aagl.packages."${system}";
+					aagl-unstable = self.inputs.aagl-unstable.packages."${system}";
 					unstable = self.inputs.nixpkgs-unstable.legacyPackages."${system}";
 					firefox-addons = self.inputs.firefox-addons.packages."${system}";
 					kreyren = self.inputs.nixpkgs-kreyren.legacyPackages."${system}";
