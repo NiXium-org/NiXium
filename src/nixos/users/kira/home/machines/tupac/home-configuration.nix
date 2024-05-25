@@ -1,4 +1,4 @@
-{ config, pkgs, lib, aagl, unstable, kreyren, ... }:
+{ config, pkgs, lib, aagl-unstable, unstable, kreyren, ... }:
 
 let
 	inherit (lib) mkIf;
@@ -50,6 +50,7 @@ in {
 		pkgs.tealdeer
 		# pkgs.ventoy-full
 		pkgs.davinci-resolve
+		pkgs.blender
 
 		(pkgs.brave.override {
 			# NOTE(Krey): Using system-wide tor which is interfiering with the brave's browsing as non-tor browsing has tor and tor browser goes through 2 Tors so this fixes it
@@ -87,7 +88,7 @@ in {
 		pkgs.gnomeExtensions.caffeine
 
 		# An Anime Game
-		# aagl.anime-game-launcher
+		aagl-unstable.anime-game-launcher
 
 		#nerdfonts
 		# NOTE(Krey): This was recommended, because nerdfonts might have issues with rendering -- https://github.com/TanvirOnGH/nix-config/blob/nix%2Bhome-manager/desktop/customization/font.nix#L4-L39

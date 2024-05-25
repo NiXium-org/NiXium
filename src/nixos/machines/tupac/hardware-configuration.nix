@@ -10,7 +10,8 @@ in {
 		boot.loader.efi.canTouchEfiVariables = true;
 
 	# Kernel
-		boot.kernelPackages = pkgs.linuxPackages;
+		# boot.kernelPackages = pkgs.linuxPackages;
+		boot.kernelPackages = pkgs.linuxPackages_xanmod_stable;
 		boot.kernelParams = [];
 		boot.kernelModules = [ "kvm-intel" ];
 		boot.extraModulePackages = [ ];
