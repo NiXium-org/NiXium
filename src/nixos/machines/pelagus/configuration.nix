@@ -17,20 +17,14 @@ in {
 	i18n.inputMethod.enabled = "fcitx5";
 	i18n.inputMethod.fcitx5.addons = with pkgs; [ fcitx5-mozc ];
 
-	# Desktop Environment
+  # Desktop Environment
+  services.xserver.enable = true;
 	services.xserver.displayManager.gdm.enable = true;
 	services.xserver.desktopManager.gnome.enable = true;
 
 	# Plymouth
 	# FIXME(Krey): Figure out how we want to use plymouth
 	#boot.plymouth.enable = true;
-
-	# X-Server
-	services.xserver.enable = true;
-	services.xserver = {
-		layout = "us"; # Use 'eu' ?
-		xkbVariant = "";
-	};
 
 	# Firewall
 	networking.firewall.enable = mkForce true; # Enforce FireWall

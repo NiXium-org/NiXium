@@ -50,6 +50,11 @@ in {
 				# NOTE(Krey): It's declared this way so that we don't have to use `url.onion:3000` as the web browsers will default to using port 80 for HTTP and port 443 for HTTPS
 				services.tor.relay.onionServices."hiddenGitea".map = mkIf config.services.gitea.enable [{ port = 80; target = { port = config.services.gitea.settings.server.HTTP_PORT; }; }]; # Set up Onionized Gitea
 
+		# Navidrome
+			services.navidrome.enable = true;
+				services.navidrome.settings.MusicFolder = "/nix/persist/system/navidrome-temp";
+				services.tor.relay.onionServices."hiddenNavidrome".map = mkIf config.services.navidrome.enable [{ port = 80; target = { port = config.services.navidrome.settings.Port; }; }];
+
 		# Firewall
 			networking.firewall.enable = mkForce true; # Enforce FireWall
 			# networking.firewall.allowedTCPPorts = [ ... ];

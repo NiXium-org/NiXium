@@ -28,16 +28,20 @@ in {
 				nixosModules.system-ccache
 				nixosModules.system-clamav
 				nixosModules.system-ssh
+				nixosModules.system-impermenance
 				nixosModules.services-tor
 				nixosModules.services-vikunja
 				nixosModules.services-distributedBuilds
 				# nixosModules.security-cve-2024-3094
 
-				# nixosModules.machine-pelagus
+				nixosModules.machine-mracek
+				nixosModules.machine-pelagus
+				nixosModules.machine-sinnenfreude
+				./hotfix.nix # FIXME-QA(Krey)
 
-				# {
-				# 	sops.defaultSopsFile = ./.sops.yaml;
-				# }
+				{
+					sops.defaultSopsFile = ./.sops.yaml;
+				}
 
 				nixosModules.programs-git
 				{

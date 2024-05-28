@@ -29,20 +29,11 @@
 
 			## An Anime Game
 			# NOTE(Krey): lacks nixos-24.04 release
-			self.inputs.aagl-unstable.nixosModules.default {
+			self.inputs.aagl.nixosModules.default {
 				networking.mihoyo-telemetry.block = true; # Block miHoYo telemetry servers
 				nix.settings = {
 					substituters = [ "https://ezkea.cachix.org" ];
 					trusted-public-keys = [ "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI=" ];
-				};
-			}
-
-			# Temporary management
-			{
-				# Set Locales
-				services.xserver = {
-					layout = "us";
-					xkbVariant = "";
 				};
 			}
 
@@ -87,19 +78,11 @@
 			self.inputs.hm-unstable.nixosModules.home-manager
 
 			## An Anime Game
-			self.inputs.aagl-unstable.nixosModules.default {
+			self.inputs.aagl.nixosModules.default {
 				networking.mihoyo-telemetry.block = true; # Block miHoYo telemetry servers
 				nix.settings = {
 					substituters = [ "https://ezkea.cachix.org" ];
 					trusted-public-keys = [ "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI=" ];
-				};
-			}
-
-			{
-				# Set layout
-				services.xserver = {
-					xkb.layout = "us";
-					xkb.variant = "";
 				};
 			}
 

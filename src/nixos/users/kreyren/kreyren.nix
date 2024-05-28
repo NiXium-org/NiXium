@@ -8,7 +8,7 @@ let
 	inherit (lib) mkIf mkForce;
 in {
 	age.secrets.kreyren-user-password.file = ./kreyren-user-password.age;
-	#sops.secrets."users/kreyren/hashed-password".neededForUsers = true;
+	# sops.secrets."users/kreyren/hashed-password".neededForUsers = true;
 
 	users.users.kreyren = {
 		description = "Raptor"; # FIXME(Krey): Figure out how to handle this

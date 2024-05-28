@@ -8,11 +8,11 @@ in {
 		homeManagerModules.kreyren
 		{
 			home-manager.users.kreyren.imports = [
-        # self.inputs.impermanence.nixosModules.home-manager
+				# self.inputs.impermanence.nixosModules.home-manager
 
 				./home-configuration.nix
 
-        # homeManagerModules.system-impermenance-kreyren # Experiment with impermenance
+				# homeManagerModules.system-impermenance-kreyren # Experiment with impermenance
 			];
 		}
 	];

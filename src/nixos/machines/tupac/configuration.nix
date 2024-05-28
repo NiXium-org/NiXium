@@ -15,13 +15,6 @@ in {
 	# Enable the X11 windowing system.
 		services.xserver.enable = true;
 
-		# FIXME(Krey): Renamed in unstable, needs management
-		# # Set layout
-		# services.xserver = {
-		# 	layout = "us";
-		# 	xkbVariant = "";
-		# };
-
 	# Enable GNOME
 		services.xserver.displayManager.gdm.enable = true;
 		services.xserver.desktopManager.gnome.enable = true;
@@ -50,9 +43,9 @@ in {
 		};
 
 	# Game Streaming
-	# services.sunshine.enable = true;
-	# 	services.sunshine.capSysAdmin = true;
-	# 	services.sunshine.openFirewall = true;
+	services.sunshine.enable = true;
+		services.sunshine.capSysAdmin = true;
+		services.sunshine.openFirewall = true;
 
 	# Tor
 		services.tor = {

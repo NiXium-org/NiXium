@@ -1,0 +1,3 @@
+[submodule "vendor/impermanence"]
+	path = vendor/impermanence
+	url = git@github.com:Kreyren/impermanence.git

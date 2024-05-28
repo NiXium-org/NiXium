@@ -3,6 +3,7 @@
 		./autoUpgrade
 		./ccache
 		./clamav
+		./impermenance
 		./locale
 		./nix
 		./security

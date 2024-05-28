@@ -6,7 +6,8 @@
 		userName = "Jacob Hrbek";
 		userEmail = "kreyren@fsfe.org";
 		signing.key = "D0501F7980EA70D192C03A52667F0DAFAF09BA2B";
-		signing.signByDefault = true;
+		# NOTE(Krey): Temporary disabled due to https://github.com/NixOS/nixpkgs/issues/35464#issuecomment-2134233517
+		signing.signByDefault = false;
 
 		delta = {
 			enable = config.programs.git.enable;

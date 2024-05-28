@@ -4,7 +4,7 @@
 # for a more complex example.
 keys:
   - &admin_kreyren D0501F7980EA70D192C03A52667F0DAFAF09BA2B
-  # - &system_pelagus 2f9777289377e1ec1feda2b1a6faab3bf05193dd
+  - &system_pelagus 2f9777289377e1ec1feda2b1a6faab3bf05193dd
 creation_rules:
   # - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
   #   key_groups:

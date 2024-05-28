@@ -4,13 +4,12 @@
 
 # Formatting strategy:
 #    Table: GPT
-#    0-30719 = U-BOOT placed on 128th block
-#    30720-1079295 (1048576) = /boot (EFI FAT32)
-#    1079296-20447231 (19367936) = -4GB Encrypted Nix Store
-#    20447232-28833791 (2095104) = Encrypted SWAP
+#    2048 - 1050623 (1048576) -- 512M EFI System
+#    1050624 - 913858559 (912807936) -- -30G nix store BTRFS
+#    913858560 - 976773119 (62914560) -- 100% Encrypted swap
 
 # Deployment:
-#     # nix run 'github:nix-community/disko#disko-install' -- --flake 'github:kreyren/nixos-config#tsvetan' --disk system /dev/mmcblk2
+#     # nix run 'github:nix-community/disko#disko-install' -- --flake 'github:kreyren/nixos-config#mracek' --disk system /dev/disk/by-id/ata-WDC_WDS500G2B0A-00SM50_21101J456803
 
 # FIXME(Krey): Refer to https://github.com/nix-community/disko/issues/490
 
@@ -27,7 +26,7 @@ let
 	inherit (lib) mkMerge;
 in {
 	config = mkMerge [
-		{ age.secrets.tsvetan-disks-password.file = ./disks-password.age; }
+		{ age.secrets.mracek-disks-password.file = ./disks-password.age; }
 
 		(if (true) then {
 			fileSystems."/nix/persist/system".neededForBoot = true;
@@ -59,7 +58,7 @@ in {
 
 				disk = {
 					system = {
-						device = "/dev/disk/by-id/mmc-R1J56L_0xd5a44fe1"; # eMMC
+						device = "/dev/disk/by-id/ata-WDC_WDS500G2B0A-00SM50_21101J456803"; # SATA SSD
 						type = "disk";
 						content = {
 							type = "gpt";
@@ -68,7 +67,7 @@ in {
 								boot = {
 									type = "EF00"; # EFI System Partition/
 									start = "30720"; # Give U-Boot 30MB for it's files
-									end = "1079295"; # +512M
+									end = "1050623"; # +512M
 									priority = 1; # Needs to be first partition
 									content = {
 										type = "filesystem";
@@ -78,14 +77,14 @@ in {
 								};
 
 								nix-store = {
-									start = "1079296";
-									end = "20447231";
+									start = "1050624";
+									end = "843188223";
 									content = {
 										name = "nix-store";
 										type = "luks";
 										settings.allowDiscards = true;
 
-										passwordFile = config.age.secrets.tsvetan-disks-password.path;
+										passwordFile = config.age.secrets.mracek-disks-password.path;
 
 										initrdUnlock = true; # Add a boot.initrd.luks.devices entry for the specified disk
 
@@ -116,8 +115,8 @@ in {
 								};
 
 								swap = {
-									start = "20447232";
-									end = "28833791";
+									start = "843188224";
+									end = "976768031";
 									content = {
 										name = "swap";
 										type = "luks";

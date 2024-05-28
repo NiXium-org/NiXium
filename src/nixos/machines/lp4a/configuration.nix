@@ -20,13 +20,6 @@ in {
 		# FIXME(Krey): Figure out how we want to use plymouth
 		#boot.plymouth.enable = true;
 
-	# X-Server
-		# services.xserver.enable = true;
-		# services.xserver = {
-		# 	layout = "us"; # Use 'eu' ?
-		# 	xkbVariant = "";
-		# };
-
 	# Firewall
 		networking.firewall.enable = mkForce true; # Enforce FireWall
 		# networking.firewall.allowedTCPPorts = [ ... ];

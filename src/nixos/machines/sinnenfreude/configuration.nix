@@ -13,6 +13,8 @@ in {
 
 	boot.initrd.systemd.enable = true; # Enable systemd initrd
 
+	boot.impermanence.enable = true;
+
 	# Japanese Keyboard Input
 	i18n.inputMethod.enabled = "fcitx5";
 	i18n.inputMethod.fcitx5.addons = with pkgs; [ fcitx5-mozc ];
@@ -41,36 +43,27 @@ in {
 	# networking.firewall.allowedUDPPorts = [ ... ];
 
 	# Services
-	services.lokinet.enable = false; # To Be Figured Out How To Use It Sanely
-	services.flatpak.enable = true;
-	services.xmrig.enable = false; # Need optimization to not affect workflow
+		services.lokinet.enable = false; # To Be Figured Out How To Use It Sanely
+		services.flatpak.enable = true;
+		services.xmrig.enable = false; # Need optimization to not affect workflow
 
-	services.openssh.enable = true;
-		services.tor.relay.onionServices."hiddenSSH".map = [ 22 ]; # Hidden SSH
+		# SSHD
+			services.openssh.enable = true;
+				services.tor.relay.onionServices."hiddenSSH".map = [ 22 ]; # Hidden SSH
 
-	services.vikunja.enable = false;
+		# Vikunja
+			services.vikunja.enable = false;
 
-	services.sunshine.enable = true;
-		services.sunshine.capSysAdmin = true;
-		services.sunshine.openFirewall = true;
+		# Sunshine
+			services.sunshine.enable = true;
+				services.sunshine.capSysAdmin = true;
+				services.sunshine.openFirewall = true;
 
   services.tor.enable = true;
   services.tor.client.enable = true;
 	services.tor.relay = {
 		enable = true;
 		role = "relay"; # Expected to be set on-demand per device
-	};
-
-	# Run lact (AMD Overclocking utility)
-	# FIXME-QA(Krey): Submit this to nixpkgs to clear up the space here
-	systemd.services.lact-daemon = {
-		enable = true;
-		wantedBy = [ "multi-user.target" ];
-		after = [ "network.target" ];
-		description = "Generate unique SSH key for the distribute builds";
-		script = ''
-			${unstable.lact}/bin/lact daemon
-		'';
 	};
 
 	programs.noisetorch.enable = true;

@@ -25,12 +25,6 @@ in {
 			# services.xserver.desktopManager.xterm.enable = true;
 			# services.xserver.displayManager.defaultSession = "xfce";
 
-	# X-Server
-	services.xserver = {
-		layout = "us"; # Use 'eu' ?
-		xkbVariant = "";
-	};
-
 	# Firewall
 	networking.firewall.enable = mkForce true; # Enforce FireWall
 	# networking.firewall.allowedTCPPorts = [ ... ];

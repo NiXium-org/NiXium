@@ -8,6 +8,8 @@ in {
 	gtk.enable = true;
 
 	programs.alacritty.enable = true; # Rust-based Hardware-accelarated terminal
+	programs.kitty.enable = true; # Alternative Rust-based Hardware-accelarated terminal for testing, potentially superrior to alacritty
+
 	programs.bash.enable = true;
 	programs.starship.enable = true;
 	programs.direnv.enable = true; # To manage git repositories
@@ -17,15 +19,18 @@ in {
 	programs.vscode.enable = true; # Generic use only
 	programs.firefox.enable = true;
 
+	# FIXME(Krey): This should be part of the GPG module
 	services.gpg-agent.enable = (mkIf config.programs.gpg.enable true);
+
 	services.flameshot.enable = true;
 
 	nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-		"vscode"
+		"vscode" # FIXNE(Krey): Uses vscodium, no idea why is this required. Likely a nixpkgs bug
+
+		# FIXME(Krey): It's ET: Legacy, what's proprietary there?
 		"etlegacy"
+		"etlegacy-assets"
 	];
-
-
 
 	home.packages = [
 		pkgs.keepassxc
@@ -33,7 +38,7 @@ in {
 		pkgs.prusa-slicer
 		unstable.fractal
 		# SECURITY(Krey): Paranoid over-reaction to a likely undisclosed vulnerability in Rust SDK Crypto
-		# pkgs.element-desktop
+		pkgs.element-desktop
 		pkgs.qbittorrent
 		unstable.stremio
 		pkgs.yt-dlp
@@ -51,7 +56,13 @@ in {
 		# pkgs.ventoy-full
 		pkgs.chromium
 
+		unstable.feishin
+
 		pkgs.libreoffice
+
+		# NOTE(Krey): Temporary management for https://github.com/NixOS/nixpkgs/issues/35464#issuecomment-2134233517
+		# pkgs.pinentry-gnome3
+		pkgs.pinentry-curses
 
 		(pkgs.brave.override {
 			# NOTE(Krey): Using system-wide tor which is interfiering with the brave's browsing as non-tor browsing has tor and tor browser goes through 2 Tors so this fixes it
@@ -70,9 +81,7 @@ in {
 		pkgs.helvum
 		pkgs.etlegacy
 		pkgs.mindustry
-		pkgs.protonmail-bridge
-			# FIXME(Krey): Blocked by https://github.com/emersion/hydroxide/issues/235
-			#hydroxide
+
 		# pkgs.gaphor
 		pkgs.tor-browser-bundle-bin
 		pkgs.gimp # Generic use only

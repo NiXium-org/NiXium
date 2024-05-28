@@ -12,6 +12,5 @@ in mkIf config.services.vikunja.enable {
 	services.vikunja.frontendHostname = mkDefault "localhost";
 
 	# FIXME(Krey): Figure out how to run this without nginx
-	services.nginx.enable = true;
-	services.vikunja.setupNginx = true;
+	# services.nginx.enable = true;
 }

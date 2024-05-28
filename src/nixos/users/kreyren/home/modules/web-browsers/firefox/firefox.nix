@@ -73,16 +73,15 @@ in {
 					install_url = "file:///${firefox-addons.terms-of-service-didnt-read}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/jid0-3GUEt1r69sQNSrca5p8kx9Ezc3U@jetpack.xpi";
 					installation_mode = "force_installed";
 				};
+				"{a4c4eda4-fb84-4a84-b4a1-f7c1cbf2a1ad}" = {
+					# Refined Github
+					install_url = "file:///${firefox-addons.refined-github}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/{a4c4eda4-fb84-4a84-b4a1-f7c1cbf2a1ad}.xpi";
+					installation_mode = "force_installed";
+				};
 				# FIXME(Krey): Figure out how to handle this
 				# "keepassxc-browser@keepassxc.org" = {
 				# 	# KeepAssXC-Browser
 				# 	install_url = "file:///${firefox-addons.keepassxc-browser}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/keepassxc-browser@keepassxc.org.xpi";
-				# 	installation_mode = "force_installed";
-				# };
-				# # FIXME(Krey): Contribute this in NUR or see if ublock-origin can handle these
-				# "dont-track-me-google@robwu.nl" = {
-				# 	# Don't Track Me Google
-				# 	install_url = "https://addons.mozilla.org/firefox/downloads/latest/dont-track-me-google1/latest.xpi";
 				# 	installation_mode = "force_installed";
 				# };
 				# FIXME(Krey): Figure out if we want this
@@ -107,12 +106,6 @@ in {
 					install_url = "file:///${firefox-addons.sponsorblock}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/sponsorBlocker@ajay.app.xpi";
 					installation_mode = "force_installed";
 				};
-				# Q(Krey): ublock-origin already handles this right?
-				# "jid1-MnnxcxisBPnSXQ@jetpack" = {
-				# 	# Privacy Badger
-				# 	install_url = "file:///${firefox-addons.privacy-badger}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/jid1-MnnxcxisBPnSXQ@jetpack.xpi";
-				# 	installation_mode = "force_installed";
-				# };
 				"uBlock0@raymondhill.net" = {
 					# uBlock Origin
 					install_url = "file:///${firefox-addons.ublock-origin}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/uBlock0@raymondhill.net.xpi";

@@ -20,6 +20,7 @@ in {
 
 			# Principles
 			self.inputs.ragenix.nixosModules.default
+			self.inputs.sops.nixosModules.sops
 			self.inputs.lanzaboote.nixosModules.lanzaboote
 			self.inputs.impermanence.nixosModules.impermanence
 			# self.disko-nixpkgs.nixosModules.disko
@@ -39,7 +40,6 @@ in {
 			./security.nix
 			./lanzaboote.nix
 			./distributedBuilds.nix
-			# ./disko.nix # FIXME(Krey): I don't know how to implement that yet
 		];
 
 		# FIXME-QA(Krey): This needs better management
@@ -51,4 +51,6 @@ in {
 			};
 		};
 	};
+
+	flake.nixosModules.machine-mracek = ./export.nix;
 }

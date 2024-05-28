@@ -1,4 +1,4 @@
-{ config, pkgs, lib, aagl-unstable, unstable, kreyren, ... }:
+{ config, pkgs, lib, aagl, aagl-unstable, unstable, kreyren, ... }:
 
 let
 	inherit (lib) mkIf;
@@ -88,7 +88,7 @@ in {
 		pkgs.gnomeExtensions.caffeine
 
 		# An Anime Game
-		aagl-unstable.anime-game-launcher
+		aagl.anime-game-launcher
 
 		#nerdfonts
 		# NOTE(Krey): This was recommended, because nerdfonts might have issues with rendering -- https://github.com/TanvirOnGH/nix-config/blob/nix%2Bhome-manager/desktop/customization/font.nix#L4-L39
