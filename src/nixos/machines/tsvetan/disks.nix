@@ -10,7 +10,7 @@
 #    20447232-28833791 (2095104) = Encrypted SWAP
 
 # Deployment:
-#     # nix run 'github:nix-community/disko#disko-install' -- --flake 'github:kreyren/nixos-config#tsvetan' --disk system /dev/mmcblk2
+#     # nix run 'github:nix-community/disko#disko-install' -- --flake 'github:kreyren/nixos-config#tsvetan' --disk system /dev/disk/by-id/mmc-R1J56L_0xd5a44fe1
 
 # FIXME(Krey): Refer to https://github.com/nix-community/disko/issues/490
 

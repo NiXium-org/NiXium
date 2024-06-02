@@ -39,9 +39,9 @@ in {
 				nixosModules.machine-sinnenfreude
 				./hotfix.nix # FIXME-QA(Krey)
 
-				{
-					sops.defaultSopsFile = ./.sops.yaml;
-				}
+				# {
+				# 	sops.defaultSopsFile = ./.sops.yaml;
+				# }
 
 				nixosModules.programs-git
 				{
