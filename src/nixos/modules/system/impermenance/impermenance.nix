@@ -17,6 +17,9 @@ in mkIf config.boot.impermanence.enable {
 
 			{ directory = "/var/lib/colord"; user = "colord"; group = "colord"; mode = "u=rwx,g=rx,o="; }
 
+			# Users
+			{ directory = "/nix/persist/users"; user = "root"; group = "users"; mode = "u=rwx,g=rwx,o="; }
+
 			# CCache
 			(mkIf config.programs.ccache.enable {
 				directory = config.programs.ccache.cacheDir;

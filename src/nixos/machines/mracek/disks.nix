@@ -26,7 +26,11 @@ let
 	inherit (lib) mkMerge;
 in {
 	config = mkMerge [
-		{ age.secrets.mracek-disks-password.file = ./disks-password.age; }
+		{
+			age.identityPaths = [ "/nix/persist/system/etc/ssh/ssh_host_ed25519_key" ]; # Change the identity path to use our disko path
+
+			age.secrets.mracek-disks-password.file = ./secrets/disks-password.age; # Supply password for disk encryption
+		}
 
 		(if (true) then {
 			fileSystems."/nix/persist/system".neededForBoot = true;
@@ -38,20 +42,6 @@ in {
 					mountOptions = [
 						"size=1G"
 						"defaults"
-						# set mode to 755, otherwise systemd will set it to 777, which cause problems.
-						# relatime: Update inode access times relative to modify or change time.
-						"mode=755"
-					];
-				};
-
-				# FIXME-QA(Krey): This should be in user's home-manager
-				nodev."/home/kreyren" = {
-					fsType = "tmpfs";
-					mountOptions = [
-						"size=1G"
-						"defaults"
-						# set mode to 755, otherwise systemd will set it to 777, which cause problems.
-						# relatime: Update inode access times relative to modify or change time.
 						"mode=755"
 					];
 				};
@@ -78,7 +68,7 @@ in {
 
 								nix-store = {
 									start = "1050624";
-									end = "843188223";
+									end = "913858559";
 									content = {
 										name = "nix-store";
 										type = "luks";
@@ -115,8 +105,8 @@ in {
 								};
 
 								swap = {
-									start = "843188224";
-									end = "976768031";
+									start = "913858560";
+									end = "976773119";
 									content = {
 										name = "swap";
 										type = "luks";

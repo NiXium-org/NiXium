@@ -64,7 +64,7 @@ in {
 
 	environment.systemPackages = [
 		# FIXME-QA(Krey): Manage this in nixium
-		(mkIf config.services.xserver.desktopManager.gnome.enable pkgs.pinentry-gnome)
+		(mkIf config.services.xserver.desktopManager.gnome.enable pkgs.pinentry-gnome3)
 	];
 
 	# CCache

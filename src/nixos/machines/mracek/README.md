@@ -6,7 +6,7 @@ Role: Permanently-ON control and minor server
 
 ## Services
 
-* [ ] BitWarden
+* [ ] VaultWarden
 * [X] Vikunja
 * [X] Tor
 * [X] Monero-node

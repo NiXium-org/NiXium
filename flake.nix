@@ -7,7 +7,10 @@
 			nixpkgs-staging-next.url = "github:nixos/nixpkgs/staging-next";
 			nixpkgs-staging.url = "github:nixos/nixpkgs/staging";
 			nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-			nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/*.tar.gz"; # Management to always use the latest stable release
+
+			# NOTE(Krey): Flakehub is returning 23.11 for some reason atm
+			nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+			# nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/*.tar.gz"; # Management to always use the latest stable release
 				# nixpkgs.url = "git+file:///home/kreyren/src/nixpkgs";
 
 			nixpkgs-23_05.url = "github:nixos/nixpkgs/nixos-23.05";
@@ -268,7 +271,11 @@
 						inputs.nixpkgs.legacyPackages.${system}.sops # Secret management
 						inputs.nixpkgs.legacyPackages.${system}.sbctl # To set up secureboot
 						inputs.nixpkgs.legacyPackages.${system}.fira-code # For liquratures in code editors
+
 						inputs.nixos-generators.packages.${system}.nixos-generate
+
+						inputs.disko.packages.${system}.disko-install
+						inputs.disko.packages.${system}.disko
 					];
 					inputsFrom = [ config.mission-control.devShell ];
 					# Environmental Variables

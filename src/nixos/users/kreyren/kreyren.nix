@@ -23,6 +23,17 @@ in {
 		openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOzh6FRxWUemwVeIDsr681fgJ2Q2qCnwJbvFe4xD15ve kreyren@fsfe.org" ];
 	};
 
+	# Set up the user directory
+	# mkIf config.boot.impermanence.enable
+	# disko.devices.nodev."/home/kreyren" = {
+	# 	fsType = "tmpfs";
+	# 	mountOptions = [
+	# 		"size=1G"
+	# 		"defaults"
+	# 		"mode=755"
+	# 	];
+	# };
+
 	users.users.root.openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOzh6FRxWUemwVeIDsr681fgJ2Q2qCnwJbvFe4xD15ve kreyren@fsfe.org" ]; # Allow root access for all systems for kreyren
 
 	nix.settings.trusted-users = [ "kreyren" ]; # Add Kreyren in Trusted-Users

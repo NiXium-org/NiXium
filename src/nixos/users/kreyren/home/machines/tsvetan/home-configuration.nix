@@ -14,6 +14,8 @@
 	programs.vim.enable = true;
 	# programs.vscode.enable = true;
 
+	# home.impermanence.enable = false;
+
 	nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
 		"vscode"
 	];

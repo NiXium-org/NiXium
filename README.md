@@ -203,6 +203,7 @@ Collection of NixOS configurations that you might find useful as a reference for
 * https://github.com/moni-dz/nix-config (flakes + flake-parts + agenix + home-manager + darwin)
 * https://github.com/vkleen/machines
 * https://github.com/wimpysworld/nix-config
+* https://github.com/gvolpe/nix-config
 
 
 Relevant GitHub Topic: https://github.com/topics/nixos-configuration

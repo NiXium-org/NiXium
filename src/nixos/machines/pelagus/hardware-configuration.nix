@@ -12,7 +12,7 @@ in {
 
 	# SECURITY
 	## FIXME(Krey): This should be it's own module applying these things based on presence of the hardware
-	security.allowSimultaneousMultithreading = mkForce false; # Ryzen 5 1600 has vulnerable SMT
+	security.allowSimultaneousMultithreading = true; # Ryzen 5 1600 has vulnerable SMT, which is managed by having a single-user without any services.
 
 	# BootLoader
 	boot.loader.systemd-boot.enable = mkForce false; # Lanzeboote uses it's own module and requires this disabled

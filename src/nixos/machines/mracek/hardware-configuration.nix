@@ -8,7 +8,22 @@ let
 		mkDefault
 		mkForce;
 in {
+	networking.hostName = "mracek";
+
 	system.stateVersion = "23.11";
+
+	services.logind.lidSwitchExternalPower = "lock"; # Lock the system on closing the lid when on external power instead of suspend/hibernation
+
+	# BinFMT - Enable seemless VM-based cross-compilation
+		boot.binfmt.emulatedSystems = [
+			"aarch64-linux"
+			"riscv64-linux"
+			"armv7l-linux"
+		];
+
+	# Auto-Upgrade
+		system.autoUpgrade.enable = false;
+		system.autoUpgrade.flake = "github:kreyren/nixos-config#mracek";
 
 	# FIXME(Krey): Can reportedly be used to enter the passphrase
 	# boot.initrd.network.ssh.enable = true;

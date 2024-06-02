@@ -23,28 +23,37 @@ in {
 			self.inputs.sops.nixosModules.sops
 			self.inputs.lanzaboote.nixosModules.lanzaboote
 			self.inputs.impermanence.nixosModules.impermanence
-			# self.disko-nixpkgs.nixosModules.disko
+			self.inputs.disko.nixosModules.disko
 
-			# Users
-			#self.nixosModules.users-kreyren
-			#self.homeManagerModules.kreyren.default
-			# self.inputs.home-manager-nixpkgs.nixosModules.home-manager
-			# {
-			# 	home-manager.users.raptor = import ../../nixos/users/kreyren/home/machines/sinnenfreude/home-configuration.nix;
-			# }
-
-			# Config
-			./configuration.nix
+			# Files
 			./hardware-configuration.nix
-			./impermenance.nix
-			./security.nix
-			./lanzaboote.nix
-			./distributedBuilds.nix
+			./disks.nix
+
+			./security/cpu.nix
+			./security/kernel.nix
+			./security/lanzaboote.nix
+			./security/network.nix
+			./security/secure-boot.nix
+			./security/sudo.nix
+
+			./services/distributedBuilds.nix
+			./services/gitea.nix
+			./services/monero.nix
+			./services/murmur.nix
+			./services/navidrome.nix
+			./services/openssh.nix
+			./services/tor.nix
+			./services/vaultwarden.nix
+			./services/vikunja.nix
 		];
 
 		# FIXME-QA(Krey): This needs better management
 		specialArgs = {
 			inherit self;
+			stable = import inputs.nixpkgs {
+				system = "x86_64-linux";
+				config.allowUnfree = true;
+			};
 			unstable = import inputs.nixpkgs-unstable {
 				system = "x86_64-linux";
 				config.allowUnfree = true;

@@ -13,6 +13,11 @@ in {
 
 	nix.distributedBuilds = true; # Perform distributed builds
 
+	services.sunshine.enable = true;
+
+
+
+
 	# Japanese Keyboard Input
 	i18n.inputMethod.enabled = "fcitx5";
 	i18n.inputMethod.fcitx5.addons = with pkgs; [ fcitx5-mozc ];
@@ -23,8 +28,7 @@ in {
 	services.xserver.desktopManager.gnome.enable = true;
 
 	# Plymouth
-	# FIXME(Krey): Figure out how we want to use plymouth
-	#boot.plymouth.enable = true;
+	boot.plymouth.enable = true;
 
 	# Firewall
 	networking.firewall.enable = mkForce true; # Enforce FireWall
@@ -42,7 +46,7 @@ in {
 	services.tor.enable = true;
 	services.tor.client.enable = true;
 	services.tor.relay = {
-		enable = true;
+		enable = false; # Due to enabled SMT this is reducing the attack vector
 		role = "relay"; # Expected to be set on-demand per device
 	};
 

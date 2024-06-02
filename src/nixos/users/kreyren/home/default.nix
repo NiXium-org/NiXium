@@ -12,6 +12,7 @@ in {
 					# These modules are used by default on all systems
 					imports = [
 						self.inputs.arkenfox.hmModules.default
+						self.inputs.ragenix.homeManagerModules.default
 
 						./home.nix
 
@@ -31,6 +32,7 @@ in {
 						# homeManagerModules.kreyren.system.default
 						homeManagerModules.system-dconf-kreyren
 						homeManagerModules.system-gtk-kreyren
+						homeManagerModules.system-impermenance-kreyren
 
 						# homeManagerModules.kreyren.terminal-emulators.default
 						homeManagerModules.terminal-emulators-alacritty-kreyren
