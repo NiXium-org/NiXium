@@ -8,6 +8,7 @@
 		./nix
 		./security
 		./time
+		./wifi
 		./ssh
 	];
 }

@@ -24,6 +24,7 @@ in {
 				nixosModules.system-autoUpgrade
 				nixosModules.system-nix
 				nixosModules.system-time
+				nixosModules.system-wifi
 				nixosModules.system-locale
 				nixosModules.system-ccache
 				nixosModules.system-clamav

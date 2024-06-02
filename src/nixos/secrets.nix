@@ -79,4 +79,9 @@ in {
 	"./machines/tupac/disks-password.age".publicKeys = [
 		kreyren tsvetan-system
 	];
+
+	# WiFi
+	"./modules/system/wifi/homeBaseKreyren-WiFi-PSK.age".publicKeys = [
+		kreyren
+	] ++ all-systems;
 }

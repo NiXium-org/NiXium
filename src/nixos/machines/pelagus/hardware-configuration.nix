@@ -8,6 +8,8 @@ let
 		mkDefault
 		mkForce;
 in {
+	networking.hostName = "pelagus";
+
 	system.stateVersion = "23.05";
 
 	# SECURITY
@@ -72,6 +74,18 @@ in {
 	hardware.opengl.extraPackages32 = [
 		pkgs.driversi686Linux.amdvlk
 	];
+
+	# Run lact (AMD Overclocking utility)
+	# FIXME-QA(Krey): Submit this to nixpkgs to clear up the space here
+	systemd.services.lact-daemon = {
+		enable = true;
+		wantedBy = [ "multi-user.target" ];
+		after = [ "network.target" ];
+		description = "Generate unique SSH key for the distribute builds";
+		script = ''
+			${unstable.lact}/bin/lact daemon
+		'';
+	};
 
 	# Steam Hardware
 	hardware.steam-hardware.enable = true;

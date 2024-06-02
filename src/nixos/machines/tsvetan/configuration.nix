@@ -18,8 +18,9 @@ in {
 	# Desktop Environment
 		services.xserver.enable = true;
 		# GNOME
-			services.xserver.displayManager.gdm.enable = true;
-			services.xserver.desktopManager.gnome.enable = true;
+			# FIXME-QA(Krey): Is unable to deploy the system via disko due to lack of system resources
+			# services.xserver.displayManager.gdm.enable = true;
+			# services.xserver.desktopManager.gnome.enable = true;
 		# XFCE4
 			# services.xserver.desktopManager.xfce.enable = true;
 			# services.xserver.desktopManager.xterm.enable = true;
