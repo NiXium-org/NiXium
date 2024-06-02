@@ -24,7 +24,7 @@
 
 			# Principles
 			self.inputs.ragenix.nixosModules.default
-			self.inputs.sops.nixosModules.sops
+			# self.inputs.sops.nixosModules.sops
 			self.inputs.impermanence.nixosModules.impermanence
 			# self.inputs.impermanence.nixosModules.home-manager
 			self.inputs.hm.nixosModules.home-manager
