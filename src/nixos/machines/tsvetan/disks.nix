@@ -27,7 +27,11 @@ let
 	inherit (lib) mkMerge;
 in {
 	config = mkMerge [
-		{ age.secrets.tsvetan-disks-password.file = ./secrets/disks-password.age; }
+		{
+			age.secrets.tsvetan-disks-password.file = ./secrets/disks-password.age;
+
+			age.identityPaths = [ "/nix/persist/system/etc/ssh/ssh_host_ed25519_key" ];
+		}
 
 		(if (true) then {
 			fileSystems."/nix/persist/system".neededForBoot = true;
