@@ -26,16 +26,6 @@ in {
 			self.inputs.disko.nixosModules.disko
 
 			# Files
-			./hardware-configuration.nix
-			./disks.nix
-
-			./security/cpu.nix
-			./security/kernel.nix
-			./security/lanzaboote.nix
-			./security/network.nix
-			./security/secure-boot.nix
-			./security/sudo.nix
-
 			./services/distributedBuilds.nix
 			./services/gitea.nix
 			./services/monero.nix
@@ -45,6 +35,11 @@ in {
 			./services/tor.nix
 			./services/vaultwarden.nix
 			./services/vikunja.nix
+
+			./configuration.nix
+			./hardware-configuration.nix
+			./security.nix
+			./disks.nix
 		];
 
 		# FIXME-QA(Krey): This needs better management

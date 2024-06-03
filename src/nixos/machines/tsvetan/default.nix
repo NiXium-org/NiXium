@@ -30,6 +30,7 @@
 			self.inputs.hm.nixosModules.home-manager
 			self.inputs.disko.nixosModules.disko
 			#self.inputs.nixos-generators.nixosModules.all-formats # Figure out later
+			self.inputs.lanzaboote.nixosModules.lanzaboote
 
 			# Users
 			self.nixosModules.users-kreyren # Add KREYREN user

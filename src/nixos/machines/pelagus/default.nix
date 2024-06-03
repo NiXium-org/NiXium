@@ -19,6 +19,7 @@
 			self.inputs.ragenix.nixosModules.default
 			self.inputs.sops.nixosModules.sops
 			self.inputs.hm.nixosModules.home-manager
+			self.inputs.disko.nixosModules.disko
 			self.inputs.lanzaboote.nixosModules.lanzaboote
 			self.inputs.impermanence.nixosModules.impermanence
 
@@ -36,9 +37,15 @@
 			self.homeManagerModules."kreyren@pelagus"
 
 			# Files
+			./services/distributedBuilds.nix
+			./services/openssh.nix
+			./services/sunshine.nix
+			./services/tor.nix
+
 			./configuration.nix
 			./hardware-configuration.nix
-			./distributedBuilds.nix
+			./disks.nix
+			./security.nix
 			# ./weeb.nix
 		];
 

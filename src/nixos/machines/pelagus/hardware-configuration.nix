@@ -16,13 +16,11 @@ in {
 	## FIXME(Krey): This should be it's own module applying these things based on presence of the hardware
 	security.allowSimultaneousMultithreading = true; # Ryzen 5 1600 has vulnerable SMT, which is managed by having a single-user without any services.
 
+	boot.impermanence.enable = true;
+
 	# BootLoader
-	boot.loader.systemd-boot.enable = mkForce false; # Lanzeboote uses it's own module and requires this disabled
 	boot.loader.systemd-boot.editor = false;
-	boot.lanzaboote = {
-		enable = true; # For Secure-Boot
-		pkiBundle = "/etc/secureboot";
-	};
+	boot.lanzaboote.enable = true;
 	boot.loader.efi.canTouchEfiVariables = true;
 
 	boot.loader.systemd-boot.memtest86.enable = true;
@@ -46,18 +44,6 @@ in {
 	# InitRD Kernel Modules
 	boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "sd_mod" ];
 	boot.initrd.kernelModules = [ "amdgpu" ];
-
-	# Filesystem Management
-	fileSystems = {
-		"/" = {
-			device = "/dev/disk/by-label/ROOT_NIXOS";
-			fsType = "btrfs";
-		};
-		"/boot" = {
-			device = "/dev/disk/by-label/BOOT";
-			fsType = "vfat"; # FAT32
-		};
-	};
 
 	swapDevices = [{ device = "/dev/disk/by-label/SWAP"; }];
 
@@ -141,4 +127,8 @@ in {
 	nixpkgs.hostPlatform = "x86_64-linux";
 	hardware.enableRedistributableFirmware = true; # Necessary Evil :(
 	hardware.cpu.amd.updateMicrocode = mkDefault config.hardware.enableRedistributableFirmware;
+
+	# Auto-Upgrade
+	system.autoUpgrade.enable = false;
+	system.autoUpgrade.flake = "github:kreyren/nixos-config#pelagus";
 }

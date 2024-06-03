@@ -1,11 +1,11 @@
 { lib, pkgs, ... }:
 
-# Kernel-related Security enforcement to manage issues on the MRACEK system
+# Global Kernel Module
 
 let
-	inherit (lib) mkForce;
+	inherit (lib) mkForce mkDefault;
 in {
-	boot.kernelPackages = mkForce pkgs.linuxPackages_hardened; # Always use Hardened Kernel
+	boot.kernelPackages = mkDefault pkgs.linuxPackages_hardened; # Always prefer the Hardened Kernel
 
 	security.lockKernelModules = mkForce true; # Do not allow loading and unloading of kernel modules
 

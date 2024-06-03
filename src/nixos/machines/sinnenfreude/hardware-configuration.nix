@@ -8,24 +8,29 @@ let
 		mkDefault
 		mkForce;
 in {
+	networking.hostName = "sinnenfreude";
+
 	system.stateVersion = "23.05";
+
+	boot.impermanence.enable = true;
+
+	# Plymouth
+	boot.plymouth.enable = true;
+
+	# WakeOnLan
+	networking.interfaces.wlp13s0.wakeOnLan.enable = true; # Enable WakeOnLAN for WiFi
 
 	# BootLoader
 	## NOTE(Krey): Has a weird BIOS, lanzaboote has issues with deployment
 	boot.loader.systemd-boot.enable = true; # Lanzeboote uses it's own module and requires this disabled
 	boot.loader.systemd-boot.editor = false;
-	boot.lanzaboote = {
-		enable = false; # For Secure-Boot
-		pkiBundle = "/etc/secureboot";
-	};
 	boot.loader.efi.canTouchEfiVariables = true;
 
 	boot.loader.systemd-boot.memtest86.enable = true;
 
-	services.fwupd.enable = true;
+	boot.initrd.systemd.enable = true; # Enable systemd initrd
 
-	# Experiment to fix cooling
-	services.thermald.enable = true;
+	services.fwupd.enable = true;
 
 	# Kernel
 	boot.kernelPackages = pkgs.linuxPackages_xanmod_stable;
@@ -63,7 +68,7 @@ in {
 		## Enable modesetting - Needed for Wayland compositors
 		modesetting.enable = true;
 
-  	## Use open-source version of kernel module (available since 515.43.04+)
+	## Use open-source version of kernel module (available since 515.43.04+)
 		### NOTE(Krey): Assuming not available since this is legacy GPU that is supported by 470.xx
 		open = false;
 
@@ -84,6 +89,8 @@ in {
 
 	# Steam Hardware
 	hardware.steam-hardware.enable = true;
+
+	services.logind.lidSwitchExternalPower = "lock"; # Lock the system on closing the lid when on external power
 
 	# Sound
 	sound.enable = true;
@@ -132,4 +139,8 @@ in {
 	nixpkgs.hostPlatform = "x86_64-linux";
 	hardware.enableRedistributableFirmware = true; # Necessary Evil :(
 	hardware.cpu.intel.updateMicrocode = mkDefault config.hardware.enableRedistributableFirmware;
+
+	# Auto-Upgrade
+	system.autoUpgrade.enable = false;
+	system.autoUpgrade.flake = "github:kreyren/nixos-config#sinnenfreude";
 }

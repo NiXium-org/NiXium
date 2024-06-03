@@ -10,7 +10,7 @@
 #    20447232-28833791 (2095104) = Encrypted SWAP
 
 # Deployment:
-#     # LC_ALL=C nix run 'github:nix-community/disko#disko-install' -- --flake 'github:kreyren/nixos-config#tsvetan' --disk system /dev/disk/by-id/mmc-R1J56L_0xd5a44fe1
+#    # LC_ALL=C nix shell 'github:nix-community/disko#disko-install' 'nixpkgs#nixos-install-tools' --command "disko-install --flake 'github:kreyren/nixos-config#tsvetan' --disk system /dev/disk/by-id/mmc-R1J56L_0xd5a44fe1"
 
 # FIXME(Krey): Refer to https://github.com/nix-community/disko/issues/490
 
@@ -27,7 +27,7 @@ let
 	inherit (lib) mkMerge;
 in {
 	config = mkMerge [
-		{ age.secrets.tsvetan-disks-password.file = ./disks-password.age; }
+		{ age.secrets.tsvetan-disks-password.file = ./secrets/disks-password.age; }
 
 		(if (true) then {
 			fileSystems."/nix/persist/system".neededForBoot = true;

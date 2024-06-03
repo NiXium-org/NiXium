@@ -49,18 +49,6 @@ in {
 					];
 				};
 
-				# FIXME-QA(Krey): This should be in user setup
-				nodev."/home/kreyren" = {
-					fsType = "tmpfs";
-					mountOptions = [
-						"size=2G"
-						"defaults"
-						# set mode to 755, otherwise systemd will set it to 777, which cause problems.
-						# relatime: Update inode access times relative to modify or change time.
-						"mode=755"
-					];
-				};
-
 				disk = {
 					system = {
 						device = "/dev/disk/by-id/ata-CT500MX500SSD1_21052CD42FFF"; # SATA SSD

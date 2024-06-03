@@ -8,5 +8,7 @@ let
 	inherit (lib) mkIf;
 in {
 	# Authorize tsvetan
-		# ...
+	users.extraUsers.builder.openssh.authorizedKeys.keys = [
+		"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF18QG9oqeeq/lQc5QDJl3hz5D4Q9bhiHFTRLJN4KSZb" # TSVETAN
+	];
 }

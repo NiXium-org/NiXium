@@ -183,7 +183,12 @@
 								all) # Verify All Systems
 									for system in $(find ./src/nixos/machines/* -type d | sed "s#^./machines/##g" | tr '\n' ' '); do
 										echo "Checking system: $system"
-										${inputs.nixpkgs.legacyPackages.${system}.nixos-rebuild}/bin/nixos-rebuild dry-build --flake ".#$system" --option eval-cache false --show-trace || echo "WARNING: System $system failed evaluation!"
+
+										if [ ! -f "./src/nixos/machines/$system/default.nix" ]; then
+											${inputs.nixpkgs.legacyPackages.${system}.nixos-rebuild}/bin/nixos-rebuild dry-build --flake ".#$system" --option eval-cache false --show-trace || echo "WARNING: System $system failed evaluation!"
+										else
+											echo "The configuration of system '$system' not yet declared, skipping.."
+										fi
 									done
 								;;
 								"") # Verify Current System

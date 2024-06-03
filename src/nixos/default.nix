@@ -25,6 +25,8 @@ in {
 				nixosModules.system-nix
 				nixosModules.system-time
 				nixosModules.system-wifi
+				nixosModules.system-firewall
+				nixosModules.system-lanzaboote
 				nixosModules.system-locale
 				nixosModules.system-ccache
 				nixosModules.system-clamav

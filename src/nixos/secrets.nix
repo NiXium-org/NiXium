@@ -9,7 +9,7 @@ let
 	mracek-system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHN94Qu1y0r2WAgfhixLo5shNOVDUqctFGVJ14wOxnE/";
 	pelagus-system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINhxI+25BwlCuEezW6Vc4mJ+EP/KO597PI2YfEU9t+vf";
 	sinnenfreude-system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM7nLConnVyxn/ZTQXIReXo6x3CbAMky6YVmZ7iMIP5Q";
-	tsvetan-system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH5uH+tcDY1/1oWFwMzFwtgiI9v0riml0T//k9h+v7kj";
+	tsvetan-system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJdqMVQ3TO5ckmk9nepAY/7zLHy555EkzBJxpfTIwuT5";
 	tupac-system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEmYpmNkpSkSSk1FnxHvPb8JlbeYh2lf3d5u8MBqGpHP";
 
 	all-systems = [
@@ -71,7 +71,7 @@ in {
 	] ++ all-systems;
 
 	# TSVETAN (system)
-	"./machines/tsvetan/disks-password.age".publicKeys = [
+	"./machines/tsvetan/secrets/disks-password.age".publicKeys = [
 		kreyren tsvetan-system
 	];
 

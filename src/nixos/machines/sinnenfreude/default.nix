@@ -43,10 +43,15 @@
 			self.nixosModules.users-kreyren
 			self.homeManagerModules."kreyren@sinnenfreude"
 
+			# Files
+			./services/distributedBuilds.nix
+			./services/openssh.nix
+			./services/tor.nix
+
 			./configuration.nix
 			./hardware-configuration.nix
-			./distributedBuilds.nix
 			./disks.nix
+			./security.nix
 			# ./remote-unlock.nix
 		];
 

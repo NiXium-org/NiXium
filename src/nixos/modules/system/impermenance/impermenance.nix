@@ -5,10 +5,12 @@
 let
 	inherit (lib) mkIf;
 in mkIf config.boot.impermanence.enable {
-	# Impermanence
 	environment.persistence."/nix/persist/system" = {
 		hideMounts = true;
 		directories = [
+			# FIXME-QA(Krey): attribute 'lanzaboote' missing
+			# (mkIf config.lanzaboote.enable config.boot.lanzaboote.pkiBundle) # Lanzaboote
+			"/etc/secureboot" # Lanzaboote
 			"/var/log" # Logs
 			"/var/lib/bluetooth" # Keep bluetooth configs
 			"/var/lib/nixos" # Nix stuff

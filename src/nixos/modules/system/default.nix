@@ -3,7 +3,9 @@
 		./autoUpgrade
 		./ccache
 		./clamav
+		./firewall
 		./impermenance
+		./lanzaboote
 		./locale
 		./nix
 		./security

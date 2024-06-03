@@ -7,8 +7,7 @@ let
 in {
 	config = mkMerge [
 		{
-			# NOTE-SECURITY(Krey): Has vulnerable CPU, system role adjusted to be able to use SMT
-			security.allowSimultaneousMultithreading = mkForce true; # Use SMT
+			security.allowSimultaneousMultithreading = mkForce false; # Vulnerable AF
 		}
 
 		# Enforce to use the Tor Proxy
