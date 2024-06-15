@@ -1,0 +1,439 @@
+#+TITLE: Impermanence
+
+  Lets you choose what files and directories you want to keep between
+  reboots - the rest are thrown away.
+
+  Why would you want this?
+
+  - It keeps your system clean by default.
+
+  - It forces you to declare settings you want to keep.
+
+  - It lets you experiment with new software without cluttering up
+    your system.
+
+  There are a few different things to set up for this to work:
+
+  - A root filesystem which somehow gets wiped on reboot. There are a
+    few ways to achieve this. See the [[#system-setup][System setup]] section for more info.
+
+  - At least one mounted volume where the files and directories you
+    want to keep are stored permanently.
+
+  - At least one of the modules in this repository, which take care of
+    linking or bind mounting files between the persistent storage
+    mount point and the root file system. See the [[#module-usage][Module usage]] section
+    for more info.
+
+* Contact
+
+  Join the [[https://matrix.to/#/#impermanence:nixos.org][matrix room]] to chat about the project.
+
+* System setup
+
+  There are many ways to wipe your root partition between boots. This
+  section lists a few common ways to accomplish this, but is by no
+  means an exhaustive list.
+
+*** tmpfs
+
+    The easiest method is to use a tmpfs filesystem for the
+    root. This is the easiest way to set up impermanence on systems
+    which currently use a traditional filesystem (ext4, xfs, etc) as
+    the root filesystem, since you don't have to repartition.
+
+    All data stored in tmpfs only resides in system memory, not on
+    disk. This automatically takes care of cleaning up between boots,
+    but also comes with some pretty significant drawbacks:
+
+    - Downloading big files or trying programs that generate large
+      amounts of data can easily result in either an out-of-memory or
+      disk-full scenario.
+
+    - If the system crashes or loses power before you've had a chance
+      to move files you want to keep to persistent storage, they're
+      gone forever.
+
+    Using tmpfs as the root filesystem, the filesystem setup would
+    look something like this:
+
+    #+begin_src nix
+      {
+        fileSystems."/" = {
+          device = "none";
+          fsType = "tmpfs";
+          options = [ "defaults" "size=25%" "mode=755" ];
+        };
+
+        fileSystems."/persistent" = {
+          device = "/dev/root_vg/root";
+          neededForBoot = true;
+          fsType = "btrfs";
+          options = [ "subvol=persistent" ];
+        };
+
+        fileSystems."/nix" = {
+          device = "/dev/root_vg/root";
+          fsType = "btrfs";
+          options = [ "subvol=nix" ];
+        };
+
+        fileSystems."/boot" = {
+          device = "/dev/disk/by-uuid/XXXX-XXXX";
+          fsType = "vfat";
+        };
+      }
+    #+end_src
+
+    where the ~size~ option determines how much system memory is allowed
+    to be used by the filesystem.
+
+*** BTRFS subvolumes
+
+    A more advanced solution which doesn't have the same drawbacks as
+    using tmpfs is to use a regular filesystem, but clean it up
+    between boots. A relatively easy way to do this is to use BTRFS
+    and create a new subvolume to use as root on boot. This also
+    allows you to keep a number of old roots around, in case of
+    crashes, power outages or other accidents.
+
+    A setup which would remove automatically remove roots that are
+    older than 30 days could look like this:
+
+    #+begin_src nix
+      {
+        fileSystems."/" = {
+          device = "/dev/root_vg/root";
+          fsType = "btrfs";
+          options = [ "subvol=root" ];
+        };
+
+        boot.initrd.postDeviceCommands = lib.mkAfter ''
+          mkdir /btrfs_tmp
+          mount /dev/root_vg/root /btrfs_tmp
+          if [[ -e /btrfs_tmp/root ]]; then
+              mkdir -p /btrfs_tmp/old_roots
+              timestamp=$(date --date="@$(stat -c %Y /btrfs_tmp/root)" "+%Y-%m-%-d_%H:%M:%S")
+              mv /btrfs_tmp/root "/btrfs_tmp/old_roots/$timestamp"
+          fi
+
+          delete_subvolume_recursively() {
+              IFS=$'\n'
+              for i in $(btrfs subvolume list -o "$1" | cut -f 9- -d ' '); do
+                  delete_subvolume_recursively "/btrfs_tmp/$i"
+              done
+              btrfs subvolume delete "$1"
+          }
+
+          for i in $(find /btrfs_tmp/old_roots/ -maxdepth 1 -mtime +30); do
+              delete_subvolume_recursively "$i"
+          done
+
+          btrfs subvolume create /btrfs_tmp/root
+          umount /btrfs_tmp
+        '';
+
+        fileSystems."/persistent" = {
+          device = "/dev/root_vg/root";
+          neededForBoot = true;
+          fsType = "btrfs";
+          options = [ "subvol=persistent" ];
+        };
+
+        fileSystems."/nix" = {
+          device = "/dev/root_vg/root";
+          fsType = "btrfs";
+          options = [ "subvol=nix" ];
+        };
+
+        fileSystems."/boot" = {
+          device = "/dev/disk/by-uuid/XXXX-XXXX";
+          fsType = "vfat";
+        };
+      }
+    #+end_src
+
+    This assumes the BTRFS filesystem can be found in an LVM volume
+    group called ~root_vg~. Adjust the path as necessary.
+
+* Module usage
+
+  There are currently two modules: one for ~NixOS~ and one for ~home-manager~.
+
+*** NixOS
+
+    To use the module, import it into your configuration with
+
+    #+begin_src nix
+      {
+        imports = [ /path/to/impermanence/nixos.nix ];
+      }
+    #+end_src
+
+    or use the provided ~nixosModules.impermanence~ flake output:
+
+    #+begin_src nix
+      {
+        inputs = {
+          impermanence.url = "github:nix-community/impermanence";
+        };
+
+        outputs = { self, nixpkgs, impermanence, ... }:
+          {
+            nixosConfigurations.sythe = nixpkgs.lib.nixosSystem {
+              system = "x86_64-linux";
+              modules = [
+                impermanence.nixosModules.impermanence
+                ./machines/sythe/configuration.nix
+              ];
+            };
+          };
+      }
+    #+end_src
+
+    This adds the ~environment.persistence~ option, which is an
+    attribute set of submodules, where the attribute name is the path
+    to persistent storage.
+
+    The impermanence module is **disabled** by default to enable programming logic for complex setups and has to be globally enabled when imported. To enable impermanence, use:
+
+    #+begin_src nix
+      {
+        boot.impermanence.enable = false;
+      }
+    #+end_src
+
+    Usage is shown best with an example:
+
+    #+begin_src nix
+      {
+        environment.persistence."/persistent" = {
+          hideMounts = true;
+          directories = [
+            "/var/log"
+            "/var/lib/bluetooth"
+            "/var/lib/nixos"
+            "/var/lib/systemd/coredump"
+            "/etc/NetworkManager/system-connections"
+            { directory = "/var/lib/colord"; user = "colord"; group = "colord"; mode = "u=rwx,g=rx,o="; }
+          ];
+          files = [
+            "/etc/machine-id"
+            { file = "/var/keys/secret_file"; parentDirectory = { mode = "u=rwx,g=,o="; }; }
+          ];
+          users.talyz = {
+            directories = [
+              "Downloads"
+              "Music"
+              "Pictures"
+              "Documents"
+              "Videos"
+              "VirtualBox VMs"
+              { directory = ".gnupg"; mode = "0700"; }
+              { directory = ".ssh"; mode = "0700"; }
+              { directory = ".nixops"; mode = "0700"; }
+              { directory = ".local/share/keyrings"; mode = "0700"; }
+              ".local/share/direnv"
+            ];
+            files = [
+              ".screenrc"
+            ];
+          };
+        };
+      }
+    #+end_src
+
+    - ~"/persistent"~ is the path to your persistent storage location
+
+      This allows for multiple different persistent storage
+      locations. If you, for example, have one location you back up
+      and one you don't, you can use both by defining two separate
+      attributes under ~environment.persistence~.
+
+    - ~directories~ are all directories you want to bind mount to
+      persistent storage. A directory can be represented either as a
+      string, simply denoting its path, or as a submodule. The
+      submodule representation is useful when the default assumptions,
+      mainly regarding permissions, are incorrect. The available
+      options are:
+
+      - ~directory~, the path to the directory you want to bind mount
+        to persistent storage. Only setting this option is
+        equivalent to the string representation.
+
+      - ~persistentStoragePath~, the path to persistent
+        storage. Defaults to the ~environment.persistence~ submodule
+        name, i.e. ~"/persistent"~ in the example. This should most
+        likely be left to its default value - don't change it unless
+        you're certain you really need to.
+
+      - ~user~, the user who should own the directory. If the directory
+        doesn't already exist in persistent storage, it will be
+        created and this user will be its owner. This also applies to
+        any parent directories which don't yet exist. Changing this
+        once the directory has been created has no effect.
+
+      - ~group~, the group who should own the directory. If the
+        directory doesn't already exist in persistent storage, it will
+        be created and this group will be its owner. This also applies
+        to any parent directories which don't yet exist. Changing this
+        once the directory has been created has no effect.
+
+      - ~mode~, the permissions to set for the directory. If the
+        directory doesn't already exist in persistent storage, it will
+        be created with this mode. Can be either an octal mode
+        (e.g. ~0700~) or a symbolic mode (e.g. ~u=rwx,g=,o=~). Parent
+        directories that don't yet exist are created with default
+        permissions. Changing this once the directory has been created
+        has no effect.
+
+    - ~files~ are all files you want to link or bind to persistent
+      storage. A file can be represented either as a string, simply
+      denoting its path, or as a submodule. The submodule
+      representation is useful when the default assumptions, mainly
+      regarding the permissions of its parent directory, are
+      incorrect. The available options are:
+
+      - ~file~, the path to the file you want to bind mount to
+        persistent storage. Only setting this option is equivalent to
+        the string representation.
+
+      - ~persistentStoragePath~, the path to persistent
+        storage. Defaults to the ~environment.persistence~ submodule
+        name, i.e. ~"/persistent"~ in the example. This should most
+        likely be left to its default value - don't change it unless
+        you're certain you really need to.
+
+      - ~parentDirectory~, the permissions that should be applied to the
+        file's parent directory, if it doesn't already
+        exist. Available options are ~user~, ~group~ and ~mode~. See their
+        definition in ~directories~ above.
+
+      If the file exists in persistent storage, it will be bind
+      mounted to the target path; otherwise it will be symlinked.
+
+    - ~hideMounts~ allows you to specify whether to hide the
+      bind mounts from showing up as mounted drives in the file
+      manager. If enabled, it sets the mount option ~x-gvfs-hide~
+      on all the bind mounts.
+
+    - ~users.talyz~ handles files and directories in ~talyz~'s home
+      directory
+
+      The ~users~ option defines a set of submodules which correspond to
+      the users' names. The ~directories~ and ~files~ options of each
+      submodule work like their root counterparts, but the paths are
+      automatically prefixed with with the user's home directory.
+
+      If the user has a non-standard home directory (i.e. not
+      ~/home/<username>~), the ~users.<username>.home~ option has to be
+      set to this path - it can't currently be automatically deduced
+      due to a limitation in ~nixpkgs~.
+
+    /Important note:/ Make sure your persistent volumes are marked with
+    ~neededForBoot~, otherwise you will run into problems.
+
+*** home-manager
+
+    Usage of the ~home-manager~ module is very similar to the one of the
+    ~NixOS~ module - the key differences are that the ~persistence~ option
+    is now under ~home~, rather than ~environment~, and the addition of
+    the submodule option ~removePrefixDirectory~.
+
+    /Important note:/ You have to use the ~home-manager~ ~NixOS~ module (in
+    the ~nixos~ directory of ~home-manager~'s repo) in order for this
+    module to work as intended.
+
+    To use the module, import it into your configuration with
+
+    #+begin_src nix
+      {
+        imports = [ /path/to/impermanence/home-manager.nix ];
+      }
+    #+end_src
+
+    This adds the ~home.persistence~ option, which is an attribute set
+    of submodules, where the attribute name is the path to persistent
+    storage.
+
+    Usage is shown best with an example:
+
+    #+begin_src nix
+      {
+        home.persistence."/persistent/home/talyz" = {
+          directories = [
+            "Downloads"
+            "Music"
+            "Pictures"
+            "Documents"
+            "Videos"
+            "VirtualBox VMs"
+            ".gnupg"
+            ".ssh"
+            ".nixops"
+            ".local/share/keyrings"
+            ".local/share/direnv"
+            {
+              directory = ".local/share/Steam";
+              method = "symlink";
+            }
+          ];
+          files = [
+            ".screenrc"
+          ];
+          allowOther = true;
+        };
+      }
+    #+end_src
+
+    - ~"/persistent/home/talyz"~ is the path to your persistent storage location
+    - ~directories~ are all directories you want to link to persistent storage
+        - It is possible to switch the linking ~method~ between bindfs (the
+          default) and symbolic links.
+    - ~files~ are all files you want to link to persistent storage. These are
+      symbolic links to their target location.
+    - ~allowOther~ allows other users, such as ~root~, to access files
+      through the bind mounted directories listed in
+      ~directories~. Useful for ~sudo~ operations, Docker, etc. Requires
+      the NixOS configuration ~programs.fuse.userAllowOther = true~.
+
+    Additionally, the ~home-manager~ module allows for compatibility
+    with ~dotfiles~ repos structured for use with [[https://www.gnu.org/software/stow/][GNU Stow]], where the
+    files linked to are one level deeper than where they should end
+    up. This can be achieved by setting ~removePrefixDirectory~ to ~true~:
+
+    #+begin_src nix
+      {
+        home.persistence."/etc/nixos/home-talyz-nixpkgs/dotfiles" = {
+          removePrefixDirectory = true;
+          files = [
+            "screen/.screenrc"
+          ];
+          directories = [
+            "fish/.config/fish"
+          ];
+        };
+      }
+    #+end_src
+
+    In the example, the ~.screenrc~ file and ~.config/fish~ directory
+    should be linked to from the home directory; ~removePrefixDirectory~
+    removes the first part of the path when deciding where to put the
+    links.
+
+    /Note:/ When using ~bindfs~ fuse filesystem for directories, the names of
+    the directories you add will be visible in the ~/etc/mtab~ file and in the
+    output of ~mount~ to all users.
+
+** Further reading
+   The following blog posts provide more information on the concept of ephemeral
+   roots:
+
+   - https://elis.nu/blog/2020/05/nixos-tmpfs-as-root/ --- [[https://github.com/etu/][@etu]]'s blog post walks
+     the reader through a NixOS-on-tmpfs installation.
+   - https://grahamc.com/blog/erase-your-darlings --- [[https://github.com/grahamc/][@grahamc]]'s blog post details
+     why one would want to erase their state at every boot, as well as how to
+     achieve this using ZFS snapshots.
+   - https://willbush.dev/blog/impermanent-nixos/ --- [[https://github.com/willbush/][@willbush]]'s blog post
+     provides a detailed NixOS-on-tmpfs guide with optional LUKS encryption, and
+     utilizing nix flakes for an opinionated install.
