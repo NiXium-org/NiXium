@@ -28,7 +28,7 @@ let
 in {
 	config = mkMerge [
 		{
-			age.secrets.tsvetan-disks-password.file = ./secrets/tsvetan-disks-password.age;
+			age.secrets.tsvetan-disks-password.file = ../secrets/tsvetan-disks-password.age;
 
 			age.identityPaths = [ "/nix/persist/system/etc/ssh/ssh_host_ed25519_key" ];
 		}

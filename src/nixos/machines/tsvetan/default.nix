@@ -46,7 +46,7 @@
 			./config/suspend.nix
 			./config/vm-build.nix
 
-			./services/binfmt.nix
+			# ./services/binfmt.nix
 			./services/distributedBuilds.nix
 			./services/openssh.nix
 			./services/tor.nix
@@ -56,26 +56,26 @@
 		specialArgs = {
 			inherit self;
 			stable = import inputs.nixpkgs {
-				system = "x86_64-linux";
+				system = "aarch64-linux";
 				config.allowUnfree = true;
 			};
 
 			unstable = import inputs.nixpkgs-unstable {
-				system = "x86_64-linux";
+				system = "aarch64-linux";
 				config.allowUnfree = true;
 			};
 
 			staging = import inputs.nixpkgs-staging {
-				system = "x86_64-linux";
+				system = "aarch64-linux";
 				config.allowUnfree = true;
 			};
 
 			staging-next = import inputs.nixpkgs-staging-next {
-				system = "x86_64-linux";
+				system = "aarch64-linux";
 				config.allowUnfree = true;
 			};
 		};
 	};
 
-	flake.nixosModules.machine-sinnenfreude = ./lib/export.nix;
+	flake.nixosModules.machine-tsvetan = ./lib/export.nix;
 }

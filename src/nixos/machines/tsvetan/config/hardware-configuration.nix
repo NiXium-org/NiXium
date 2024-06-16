@@ -31,7 +31,7 @@ in {
 		hardware.opengl = {
 			enable = true;
 			driSupport = true;
-			driSupport32Bit = true;
+			# driSupport32Bit = true; # Option driSupport32Bit only makes sense on a 64-bit system.
 		};
 
 		# Steam Hardware
