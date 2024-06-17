@@ -21,10 +21,8 @@ in mkIf config.boot.impermanence.enable {
 			{ directory = "/nix/persist/users"; user = "root"; group = "users"; mode = "u=rwx,g=rwx,o="; }
 		];
 		files = [
+			# FIXME(Krey): Should have been in the OpenSSH module
 			"/etc/ssh/ssh_host_ed25519_key"
-
-			# FIXME-QA(Krey): Should use a variable
-			(mkIf config.nix.distributedBuilds "/etc/ssh/ssh_builder_ed25519_key") # Builder account for distributed builds
 		];
 	};
 

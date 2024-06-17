@@ -62,6 +62,14 @@ in {
 		kreyren
 	] ++ all-systems;
 
+	"./machines/mracek/secrets/mracek-monero-p2p-onion.age".publicKeys = [
+		kreyren
+	] ++ all-systems; # Onion Address for Monero's P2P Onion Service
+
+	"./machines/mracek/secrets/mracek-onion-monero-p2p-private.age".publicKeys = [
+		kreyren mracek-system
+	]; # Private Key for Monero's P2P Onion Service
+
 	"./machines/mracek/secrets/mracek-murmur-onion.age".publicKeys = [
 		kreyren
 	] ++ all-systems;
@@ -79,6 +87,10 @@ in {
 	];
 
 	"./machines/mracek/secrets/mracek-onion-openssh-private.age".publicKeys = [
+		kreyren mracek-system
+	];
+
+	"./machines/mracek/secrets/mracek-builder-ssh-ed25519-private.age".publicKeys = [
 		kreyren mracek-system
 	];
 
@@ -104,6 +116,10 @@ in {
 	];
 
 	"./machines/sinnenfreude/secrets/sinnenfreude-onion-openssh-private.age".publicKeys = [
+		kreyren sinnenfreude-system
+	];
+
+	"./machines/sinnenfreude/secrets/sinnenfreude-builder-ssh-ed25519-private.age".publicKeys = [
 		kreyren sinnenfreude-system
 	];
 

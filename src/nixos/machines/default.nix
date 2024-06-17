@@ -2,6 +2,5 @@
 	imports = [
 		./mracek
 		./sinnenfreude
-		./tsvetan
 	];
 }

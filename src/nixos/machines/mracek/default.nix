@@ -26,19 +26,6 @@ in {
 			self.inputs.disko.nixosModules.disko
 			self.inputs.nixos-generators.nixosModules.all-formats
 
-			{
-				boot.impermanence.enable = true; # Use impermanence
-
-				services.gitea.enable = true;
-				services.monero.enable = true;
-				services.murmur.enable = true;
-				services.navidrome.enable = true;
-				services.openssh.enable = true;
-				services.tor.enable = true;
-				# services.vaultwarden.enable = false; # Testing..
-				services.vikunja.enable = false;
-			}
-
 			# Files
 			./services/binfmt.nix
 			./services/distributedBuilds.nix
