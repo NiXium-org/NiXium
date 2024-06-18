@@ -8,6 +8,9 @@
 
 let
 	inherit (lib) mkIf;
+
+	portsToString = ports: builtins.concatStringsSep "," (map (x: toString x.port) ports); # Define a function to convert the list of port records to a comma-separated string
+
 in mkIf config.services.monero.enable {
 	services.monero.rpc.restricted = true; # Prevent unsafe RPC calls
 
@@ -25,24 +28,22 @@ in mkIf config.services.monero.enable {
 		password = "iL0VEMoNeRoChan<3";
 	};
 
-	# FIXME-QA(Krey): Make it possible to accept list of strings for better readability without the `toString`
-	# FIXME-QA(Krey): Figure out how to get a list of unsigned integers into a string `${toString config.services.tor.settings.SOCKSPort}` in `proxy` and `tx-proxy` for Tor port
 	# FIXME-UPSTREAM(Krey): These options should be added to NixOS Module
-	services.monero.extraConfig = toString [
-    "prune-blockchain=1" # Use the pruned blockchain to save space
-    "proxy=127.0.0.1:9050" # Use Tor Proxy to access the internet
+	services.monero.extraConfig = builtins.concatStringsSep "\n" [
+		"prune-blockchain=1" # Use the pruned blockchain to save space
+		"proxy=127.0.0.1:${portsToString config.services.tor.settings.SOCKSPort}" # Use Tor Proxy to access the internet
 
-    "public-node=0" # Whether to advertise the node to the wild (0=false)
+		"public-node=0" # Do not advertise the node to the public
 
-    "no-igd=1" # Disable UPnP port mapping
+		"no-igd=1" # Disable UPnP port mapping
 
-    "tx-proxy=tor,127.0.0.1:9050,10"
+		"tx-proxy=tor,127.0.0.1:${portsToString config.services.tor.settings.SOCKSPort},10" # Use the Tor Proxy for transactions
 
-    # FIXME-QA(Krey): This should be moved in a secret file and sourced, but it seems that monerod doesn't support file including and it's not problematic to have this public. -> Implement upstream and then move to secret to source
-    "anonymous-inbound=yobndiqy7b5umy434mhvj2u7zttr2ro2nshybrmu3c354qqykqtc7pid.onion:18083,${config.services.monero.rpc.address}:18083,64"
+		# FIXME-QA(Krey): This should be moved in a secret file and sourced, but it seems that monerod doesn't support file including and it's not problematic to have this public. -> Implement upstream and then move to secret to source
+		"anonymous-inbound=yobndiqy7b5umy434mhvj2u7zttr2ro2nshybrmu3c354qqykqtc7pid.onion:18083,${config.services.monero.rpc.address}:18083,64" # Advertise the onion service for an inbound requests
 
-    "out-peers=64" # This will enable much faster sync and tx awareness; the default 8 is suboptimal nowadays
-    "in-peers=1024" # The default is unlimited; we prefer to put a cap on this
+		"out-peers=64" # This will enable much faster sync and tx awareness; the default 8 is suboptimal nowadays
+		"in-peers=1024" # The default is unlimited; we prefer to put a cap on this
 	];
 
 	# Import the private key for an onion service
