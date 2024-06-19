@@ -15,7 +15,7 @@
 							${inputs'.nixpkgs.legacyPackages.openssh}/bin/ssh root@localhost \
 								${inputs'.nixpkgs.legacyPackages.nixos-rebuild}/bin/nixos-rebuild \
 									switch \
-										--flake "git+file:///$FLAKE_ROOT#$hostname" \
+										--flake "git+file://$FLAKE_ROOT#$hostname" \
 										--option eval-cache false
 							;;
 						*)
@@ -23,7 +23,7 @@
 
 							${inputs'.nixpkgs.legacyPackages.nixos-rebuild}/bin/nixos-rebuild \
 								switch \
-									--flake "$FLAKE_ROOT#$*" \
+									--flake "git+file://$FLAKE_ROOT#$*" \
 									--target-host "root@$*.systems.nx" \
 									--option eval-cache false
 					esac
