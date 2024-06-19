@@ -13,3 +13,7 @@ A: Oh my god.. NOOO
 ## Secure Boot
 
 lanzeboote is used, but it appears to have a really fucked up UEFI as it's unable to place the secure boot into a setup mode
+
+## Maintenance Log
+
+* 18th June 2024 - Fully disassembled, deep cleaned and thermal paste replaced to fix thermal issues by Kreyren
