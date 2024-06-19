@@ -1,0 +1,7 @@
+{
+	imports = [
+		./build
+		./deploy
+		./switch
+	];
+}
