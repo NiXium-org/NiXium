@@ -6,9 +6,8 @@ in {
 	# FIXME-QA(Krey): Should only be used for home-manager NixOS Module, not expected to work in standalone setup!
 	home.persistence."/nix/persist/users/kreyren" = mkIf config.home.impermanence.enable {
 		directories = [
-			# Generic, these are always needed on all systems
-			"Documents"
 			"Downloads"
+			"Monero" # For Monero Wallet
 			"Music"
 			"Pictures"
 			"Videos"
@@ -45,7 +44,6 @@ in {
 			".stremio-server/stremio-cache"
 		];
 		files = [
-			# FIXME-QA(Krey): Should be handled declaratively per system e.g. fractional scaling
 			".config/monitors.xml"
 		];
 
