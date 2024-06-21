@@ -35,6 +35,9 @@
 			"EDITOR": "codium", // To open git things in codium
 		},
 
+		// Gtt
+		"git.autofetch": true,
+
 		// Code-eol
 		"code-eol.highlightExtraWhitespace": true,
 		"code-eol.newlineCharacter": "↵",
