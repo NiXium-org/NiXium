@@ -9,6 +9,7 @@
 
 	programs.alacritty.enable = true; # Rust-based Video-accelarated terminal
 	programs.bash.enable = true;
+	programs.starship.enable = true;
 	programs.direnv.enable = true; # To manage git repositories
 	programs.git.enable = true; # Generic use only
 	programs.gpg.enable = true;
