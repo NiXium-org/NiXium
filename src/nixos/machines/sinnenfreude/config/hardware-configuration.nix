@@ -21,7 +21,8 @@ in {
 	boot.loader.systemd-boot.memtest86.enable = true;
 
 	# Kernel
-	boot.kernelPackages = pkgs.linuxPackages_xanmod_stable;
+	# boot.kernelPackages = pkgs.linuxPackages_xanmod_stable;
+	boot.kernelPackages = pkgs.linuxPackages_rt_6_1; # Investigating https://github.com/NiXium-org/NiXium/issues/73
 
 	# Kernel Modules
 	boot.kernelModules = [ "kvm-intel" ];
