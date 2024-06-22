@@ -3,13 +3,9 @@
 # Security management of TUPAC
 
 let
-	inherit (lib) mkMerge mkForce mkDefault mkIf;
+	inherit (lib) mkMerge;
 in {
 	config = mkMerge [
-		{
-			security.allowSimultaneousMultithreading = mkForce false; # Vulnerable AF
-		}
-
 		# Enforce to use the Tor Proxy
 		# NOTE(Krey): It's currently causing issues
 		# (mkIf config.services.tor.enable {

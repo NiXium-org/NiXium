@@ -10,6 +10,10 @@ in {
 			imports = [{
 				home-manager.users.kira = {
 					imports = [
+						self.inputs.arkenfox.hmModules.default
+						self.inputs.ragenix.homeManagerModules.default
+						self.inputs.impermanence.nixosModules.home-manager.impermanence
+
 						./home.nix
 
 						# FIXME-QA(Krey): Expected to be just `homeManagerModules.editors-kira` same for all others..

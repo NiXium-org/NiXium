@@ -1,8 +1,9 @@
 { pkgs,... }:
 
-# The Setup of SINNENFREUDE system
+# The Setup of TUPAC system
 
 {
+	# WARNING(Krey): Non-impermanent setup lacks declaration for disks management
 	boot.impermanence.enable = true; # Use impermanence
 
 	boot.plymouth.enable = true;
@@ -22,6 +23,14 @@
 	programs.dconf.enable = true; # Needed for home-manager to not fail deployment (https://github.com/nix-community/home-manager/issues/3113)
 
 	# Japanese Keyboard Input
-	i18n.inputMethod.enabled = "fcitx5";
-	i18n.inputMethod.fcitx5.addons = with pkgs; [ fcitx5-mozc ];
+	# i18n.inputMethod.enabled = "fcitx5";
+	# i18n.inputMethod.fcitx5.addons = with pkgs; [ fcitx5-mozc ];
+
+	# Which locales to support
+	i18n.supportedLocales = [
+		"en_US.UTF-8/UTF-8"
+		"cs_CZ.UTF-8/UTF-8"
+	];
+
+	hardware.steam-hardware.enable = true; # Compatibility for Steam Controller
 }

@@ -1,6 +1,6 @@
 { ... }:
 
-# BinFMT Management of SINNENFREUDE
+# BinFMT Management of TUPAC
 
 {
 	boot.binfmt.emulatedSystems = [

@@ -26,13 +26,8 @@ in {
 			two-finger-scrolling-enabled = true;
 		};
 
-		# FIXME(Krey): This doesn't work, figure out why
-		# "org/gnome/Weather" = {
-		# 	locations = "[<(uint32 2, <('Brno', 'LKTB', true, [(0.857829327355213, 0.291469985083053)], [(0.85870199198121022, 0.29030642643062599)])>)>]";
-		# };
 		"org/gnome/shell/weather" = {
 			automatic-location = true;
-			#locations = "[<(uint32 2, <('Brno', 'LKTB', true, [(0.857829327355213, 0.291469985083053)], [(0.85870199198121022, 0.29030642643062599)])>)>]";
 		};
 
 		# Set the weather app in Kelvin #KelvinGang

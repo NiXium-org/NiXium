@@ -1,6 +1,6 @@
 { self, config, lib, ... }:
 
-# SINNENFREUDE-specific configuration of Tor
+# TUPAC-specific configuration of Tor
 
 let
 	inherit (lib) mkIf;

@@ -1,13 +1,13 @@
 { self, config, lib, ... }:
 
-# SINNENFREUDE-specific configuration of OpenSSH
+# TUPAC-specific configuration of OpenSSH
 
 let
 	inherit (lib) mkIf mkForce;
 in mkIf config.services.openssh.enable {
 	# Import the private key for an onion service
-	age.secrets.sinnenfreude-onion-openssh-private = {
-		file = ../secrets/sinnenfreude-onion-openssh-private.age;
+	age.secrets.tupac-onion-openssh-private = {
+		file = ../secrets/tupac-onion-openssh-private.age;
 
 		owner = "tor";
 		group = "tor";

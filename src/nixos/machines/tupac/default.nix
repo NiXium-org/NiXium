@@ -7,7 +7,7 @@
 # ⚠️ Random seed file '/boot/loader/.#bootctlrandom-seed048bca5ff68f0657' is world accessible, which is a security hole! ⚠️
 
 {
-	flake.nixosConfigurations."sinnenfreude" = inputs.nixpkgs.lib.nixosSystem {
+	flake.nixosConfigurations."tupac" = inputs.nixpkgs.lib.nixosSystem {
 		system = "x86_64-linux";
 
 		pkgs = import inputs.nixpkgs {
@@ -38,17 +38,24 @@
 			}
 
 			# Users
-			self.nixosModules.users-kreyren
-			self.homeManagerModules."kreyren@sinnenfreude"
+			self.nixosModules.users-kira
+			self.homeManagerModules."kira@tupac"
 
 			# Files
+			./config/bootloader.nix
 			./config/disks.nix
 			./config/firmware.nix
+			./config/hardware-acceleration.nix
 			./config/hardware-configuration.nix
 			./config/initrd.nix
+			./config/kernel.nix
+			./config/networking.nix
+			./config/nvidia.nix
+			./config/power-management.nix
+			./config/printing.nix
 			./config/security.nix
 			./config/setup.nix
-			./config/suspend.nix
+			./config/sound.nix
 			./config/vm-build.nix
 
 			./services/binfmt.nix
@@ -82,5 +89,5 @@
 		};
 	};
 
-	flake.nixosModules.machine-sinnenfreude = ./lib/export.nix;
+	flake.nixosModules.machine-tupac = ./lib/export.nix;
 }

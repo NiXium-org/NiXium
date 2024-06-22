@@ -4,7 +4,7 @@
 
 let
 	inherit (lib) mkIf;
-in mkIf config.nvidia.acceptLicense {
+in {
 	hardware.nvidia = {
 		modesetting.enable = true; # Enable modesetting, which is needed for Wayland compositors
 

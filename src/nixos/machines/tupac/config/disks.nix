@@ -1,6 +1,6 @@
 { config, lib, ... }:
 
-# Nix-based Disk Management of TUPAC with disko and impermenance on tmpfs
+# Nix-based Disk Management of TUPAC
 
 # Formatting strategy (Impermanence):
 #    Table: GPT

@@ -2,5 +2,6 @@
 	imports = [
 		./mracek
 		./sinnenfreude
+		./tupac
 	];
 }

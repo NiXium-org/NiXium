@@ -13,8 +13,8 @@ in mkIf config.nix.distributedBuilds {
 		# ];
 
 	# Import the SSH Keys for the builder account
-	age.secrets.sinnenfreude-builder-ssh-ed25519-private = {
-		file = ../secrets/sinnenfreude-builder-ssh-ed25519-private.age;
+	age.secrets.tupac-builder-ssh-ed25519-private = {
+		file = ../secrets/tupac-builder-ssh-ed25519-private.age;
 
 		owner = "builder";
 		group = "builder";

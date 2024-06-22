@@ -3,9 +3,11 @@
 let
 	inherit (lib) mkIf;
 in {
-	home.stateVersion = "23.11";
+	home.stateVersion = "24.05";
 
 	gtk.enable = true;
+
+	home.impermanence.enable = true;
 
 	programs.alacritty.enable = true; # Rust-based Hardware-accelarated terminal
 	programs.bash.enable = true;

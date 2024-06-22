@@ -2,35 +2,15 @@
 
 # Hardware-specific configuration of TUPAC system
 
-let
-	inherit (lib)
-		mkIf
-		mkDefault
-		mkForce;
-in {
+{
 	networking.hostName = "tupac";
 
 	system.stateVersion = "24.05";
 
-	# Hardware acceleration
-	hardware.opengl = {
-		enable = true;
-		driSupport = true;
-		driSupport32Bit = true;
-	};
-
-	# Steam Hardware
-	hardware.steam-hardware.enable = true;
-
-	# Networking
-	networking.useDHCP = mkDefault true; # Use DHCP on all adapters
-	# networking.interfaces.eno1.useDHCP = lib.mkDefault true;
-
-	networking.networkmanager.enable = true;
-
-	# Necessary Evil :(
+	# There should be nothing on this system that needs proprietary firmware, but the user likely uses proprietary peripherals
 	hardware.enableRedistributableFirmware = true;
-	hardware.cpu.intel.updateMicrocode = mkDefault config.hardware.enableRedistributableFirmware;
+
+	hardware.cpu.intel.updateMicrocode = true; # Use the proprietary CPU microcode as the CPU won't work without it
 
 	nixpkgs.hostPlatform = "x86_64-linux";
 }
