@@ -140,97 +140,97 @@ in {
 			};
 		} else {
 			# FIXME-QA(Krey): Not yet implemented
-			disk = {
-				system = {
-					device = "/dev/disk/by-id/nvme-SOLIDIGM_SSDPFKNU010TZ_BTEH24220RNQ1P0B"; # NVME SSD
-					type = "disk";
-					content = {
-						type = "gpt";
-						partitions = {
+			# disk = {
+			# 	system = {
+			# 		device = "/dev/disk/by-id/nvme-SOLIDIGM_SSDPFKNU010TZ_BTEH24220RNQ1P0B"; # NVME SSD
+			# 		type = "disk";
+			# 		content = {
+			# 			type = "gpt";
+			# 			partitions = {
 
-							boot = {
-								type = "EF00"; # EFI System Partition/
-								start = "2048";
-								end = "1050623"; # +512M
-								priority = 1; # Needs to be first partition
-								content = {
-									type = "filesystem";
-									format = "vfat"; # FAT32
-									mountpoint = "/boot";
-								};
-							};
+			# 				boot = {
+			# 					type = "EF00"; # EFI System Partition/
+			# 					start = "2048";
+			# 					end = "1050623"; # +512M
+			# 					priority = 1; # Needs to be first partition
+			# 					content = {
+			# 						type = "filesystem";
+			# 						format = "vfat"; # FAT32
+			# 						mountpoint = "/boot";
+			# 					};
+			# 				};
 
-							root_nixos = {
-								start = "1052672";
-								end = "909664255";
-								content = {
-									name = "root";
-									type = "luks";
-									settings.allowDiscards = true;
+			# 				root_nixos = {
+			# 					start = "1052672";
+			# 					end = "909664255";
+			# 					content = {
+			# 						name = "root";
+			# 						type = "luks";
+			# 						settings.allowDiscards = true;
 
-									passwordFile = config.age.secrets.tupac-disks-password.path;
+			# 						passwordFile = config.age.secrets.tupac-disks-password.path;
 
-									initrdUnlock = true; # Add a boot.initrd.luks.devices entry for the specified disk
+			# 						initrdUnlock = true; # Add a boot.initrd.luks.devices entry for the specified disk
 
-									extraFormatArgs = [
-										"--use-random" # use true random data from /dev/random, will block until enough entropy is available
-										"--label=CRYPT_NIXOS"
-									];
+			# 						extraFormatArgs = [
+			# 							"--use-random" # use true random data from /dev/random, will block until enough entropy is available
+			# 							"--label=CRYPT_NIXOS"
+			# 						];
 
-									extraOpenArgs = [
-										"--timeout 10"
-									];
+			# 						extraOpenArgs = [
+			# 							"--timeout 10"
+			# 						];
 
-									content = {
-										type = "btrfs";
-										extraArgs = [ "--label ROOT_NIXOS" ];
-										subvolumes = {
-											"@" = {
-												mountpoint = "/";
-												mountOptions = [ "compress=lzo" "noatime" ];
-											};
-										};
-									};
-								};
-							};
+			# 						content = {
+			# 							type = "btrfs";
+			# 							extraArgs = [ "--label ROOT_NIXOS" ];
+			# 							subvolumes = {
+			# 								"@" = {
+			# 									mountpoint = "/";
+			# 									mountOptions = [ "compress=lzo" "noatime" ];
+			# 								};
+			# 							};
+			# 						};
+			# 					};
+			# 				};
 
-							swap = {
-								start = "909664256";
-								end = "976773119";
-								content = {
-									name = "swap";
-									type = "luks";
+			# 				swap = {
+			# 					start = "909664256";
+			# 					end = "976773119";
+			# 					content = {
+			# 						name = "swap";
+			# 						type = "luks";
 
-									settings.allowDiscards = true;
+			# 						settings.allowDiscards = true;
 
-									passwordFile = config.age.secrets.tupac-disks-password.path;
+			# 						passwordFile = config.age.secrets.tupac-disks-password.path;
 
-									initrdUnlock = true; # Add a boot.initrd.luks.devices entry for the specified disk
+			# 						initrdUnlock = true; # Add a boot.initrd.luks.devices entry for the specified disk
 
-									extraFormatArgs = [
-										"--use-random" # use true random data from /dev/random, will block until enough entropy is available
-										"--label=CRYPT_SWAP"
-									];
+			# 						extraFormatArgs = [
+			# 							"--use-random" # use true random data from /dev/random, will block until enough entropy is available
+			# 							"--label=CRYPT_SWAP"
+			# 						];
 
-									extraOpenArgs = [
-										"--timeout 10"
-									];
+			# 						extraOpenArgs = [
+			# 							"--timeout 10"
+			# 						];
 
-									content = {
-										# FIXME-QA(Krey): Add label 'SWAP'
-										type = "swap";
-										resumeDevice = true; # resume from hiberation from this device
+			# 						content = {
+			# 							# FIXME-QA(Krey): Add label 'SWAP'
+			# 							type = "swap";
+			# 							resumeDevice = true; # resume from hiberation from this device
 
-										extraArgs = [
-											"--label SWAP"
-										];
-									};
-								};
-							};
-						};
-					};
-				};
-			};
+			# 							extraArgs = [
+			# 								"--label SWAP"
+			# 							];
+			# 						};
+			# 					};
+			# 				};
+			# 			};
+			# 		};
+			# 	};
+			# };
 		})
 	];
 }

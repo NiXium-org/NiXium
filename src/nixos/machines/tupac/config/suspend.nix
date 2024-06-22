@@ -6,13 +6,17 @@
 
 let
 	hibernateEnvironment = {
-		HIBERNATE_SECONDS = "120"; # 2 Min
+		HIBERNATE_SECONDS = 5 * 60; # 5 Minutes
 		HIBERNATE_LOCK = "/var/run/autohibernate.lock";
 		HIBERNATE_LOG = "/var/log/autohibernate.log";
 	};
 in {
 	services.logind = {
+		powerKey = "suspend"; # Give the user the ability to enforce suspension without hibernation through the power key
+		powerKeyLongPress = "poweroff"; # Long press power key will enforce poweroff
+
 		lidSwitch = "suspend-then-hibernate";
+
 		lidSwitchExternalPower = "suspend";
 	};
 
