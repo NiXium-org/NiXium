@@ -11,6 +11,7 @@ in {
 			"Pictures"
 			"Documents"
 			"Videos"
+			"Monero"
 			".gnupg"
 			".ssh"
 			".config/Element" # Element-Desktop
