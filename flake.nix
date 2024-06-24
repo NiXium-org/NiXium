@@ -114,9 +114,9 @@
 	outputs = inputs @ { self, ... }:
 		inputs.flake-parts.lib.mkFlake { inherit inputs; } {
 			imports = [
-				./src/nixos # Imports NixOS related things
+				./src # Import Source Code
 				./lib # Implement libs
-				./management # include Management
+				./tasks # Include Tasks
 
 				inputs.flake-root.flakeModule
 				inputs.mission-control.flakeModule

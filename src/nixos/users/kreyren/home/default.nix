@@ -33,6 +33,7 @@ in {
 					homeManagerModules.system-dconf-kreyren
 					homeManagerModules.system-gtk-kreyren
 					homeManagerModules.system-impermanence-kreyren
+					homeManagerModules.system-nix-kreyren
 
 					# homeManagerModules.kreyren.terminal-emulators.default
 					homeManagerModules.terminal-emulators-alacritty-kreyren

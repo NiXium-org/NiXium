@@ -12,5 +12,6 @@ in {
 		./dconf
 		./gtk
 		./impermanence
+		./nix
 	];
 }

@@ -22,7 +22,7 @@ in {
 
 	# Kernel
 	# boot.kernelPackages = pkgs.linuxPackages_xanmod_stable;
-	boot.kernelPackages = pkgs.linuxPackages_rt_6_1; # Investigating https://github.com/NiXium-org/NiXium/issues/73
+	boot.kernelPackages = pkgs.linuxPackages_6_8_hardened;
 
 	# Kernel Modules
 	boot.kernelModules = [ "kvm-intel" ];
@@ -37,27 +37,27 @@ in {
 	# Nvidia
 	## NOTE(Krey): Legacy GPU supported by driver 470.xx (https://www.nvidia.com/en-us/drivers/unix/legacy-gpu)
 	# Configure nVidia including Optimus
-	services.xserver.videoDrivers = ["nvidia"];
-	hardware.nvidia = {
-		modesetting.enable = true; # Enable modesetting - Needed for Wayland compositors
+	# services.xserver.videoDrivers = ["nvidia"];
+	# hardware.nvidia = {
+	# 	modesetting.enable = true; # Enable modesetting - Needed for Wayland compositors
 
-		# GTX760M is not supported: This version of NVIDIA driver does not provide a corresponding opensource kernel driver
-		open = false; # Whether to use the open-source driver
+	# 	# GTX760M is not supported: This version of NVIDIA driver does not provide a corresponding opensource kernel driver
+	# 	open = false; # Whether to use the open-source driver
 
-		# Enable Nvidia settings menu
-		nvidiaSettings = true;
+	# 	# Enable Nvidia settings menu
+	# 	nvidiaSettings = true;
 
-		## Optionally you may need to select the appropriate driver version for your specific GPU
-		package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
+	# 	## Optionally you may need to select the appropriate driver version for your specific GPU
+	# 	package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
 
-		prime = {
-			sync.enable = false; # Sync Mode
-			offload.enable = true; # OffLoading Mode
-			offload.enableOffloadCmd = true; # Provide `nvidia-run` executable to enforce use of dGPU
-			intelBusId = "PCI:00:02:0"; # 00:02.0
-			nvidiaBusId = "PCI:01:00:0"; # 01:00.0
-		};
-	};
+	# 	prime = {
+	# 		sync.enable = false; # Sync Mode
+	# 		offload.enable = true; # OffLoading Mode
+	# 		offload.enableOffloadCmd = true; # Provide `nvidia-run` executable to enforce use of dGPU
+	# 		intelBusId = "PCI:00:02:0"; # 00:02.0
+	# 		nvidiaBusId = "PCI:01:00:0"; # 01:00.0
+	# 	};
+	# };
 
 	# Steam Hardware
 	hardware.steam-hardware.enable = true;

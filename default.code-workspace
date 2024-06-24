@@ -1,11 +1,7 @@
 {
 	"folders": [
-		{
-			"path": "."
-		},
-		{
-			"path": "vendor/impermanence"
-		}
+		{ "path": "." },
+		{ "path": "vendor/impermanence" },
 	],
 
 	"settings": {

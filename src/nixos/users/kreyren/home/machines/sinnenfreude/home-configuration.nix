@@ -1,4 +1,4 @@
-{ pkgs, lib, unstable, aagl, staging-next, ... }:
+{ pkgs, lib, unstable, aagl, ... }:
 
 {
 	home.stateVersion = "24.05";
@@ -17,64 +17,79 @@
 	programs.firefox.enable = true;
 	programs.vim.enable = true;
 	programs.vscode.enable = true;
+	programs.nix-index.enable = true;
 
 	services.gpg-agent.enable = true;
 
 	nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+		# FIXME(Krey): Using vscodium, no idea why this needs 'vscode' set
 		"vscode"
+
+		# FIXME(Krey): It's ET: Legacy, what's proprietary there?
+		"etlegacy"
+		"etlegacy-assets"
 	];
 
 	home.packages = [
-		pkgs.simplex-chat-desktop
-		pkgs.session-desktop
-		pkgs.keepassxc
+		# Instant-Chats
+			# FIXME-QA(Krey): Use this on GTK-based desktop environments
+				pkgs.fractal # GTK4+ Matrix Client Written in Rust
+				pkgs.element-desktop # To Be Deprecated by Fractal, but still needed for fallback
+			# FIXME-QA(Krey): Enable this on QT-based desktop environments
+				# pkgs.nheko # QT-based Matrix Client
+
+			# Temporary management of Post-Quantum Safety until matrix manages it, see https://github.com/matrix-org/matrix-spec/issues/975 for details
+			pkgs.simplex-chat-desktop
+			pkgs.session-desktop
+
+			# Temporary managment of IRC until it's implemented in our matrix server
+			pkgs.hexchat # Unmaintained package, no better known for the protocol
+
+		# Slicers
 		pkgs.cura
 		pkgs.prusa-slicer
-		unstable.fractal
-		pkgs.qbittorrent
-		unstable.stremio
-		pkgs.youtube-dl
+		pkgs.orca-slicer # Prusa-slicer fork by BambuLab adapted by the community
+
+		# Games
+		aagl.anime-game-launcher # An Anime Game
+		pkgs.colobot
+		pkgs.etlegacy # Wolfenstein: Enemy Territory
+		pkgs.airshipper # Veloren
+		pkgs.mindustry
+
+		# Web Browsers
+		(pkgs.brave.override { commandLineArgs = "--no-proxy-server"; }) # Do Not Use system-wide Tor Proxy as it's causing issues with the brave's functionality
+		pkgs.tor-browser-bundle-bin
+
+		# Engineering
+		pkgs.blender
+		pkgs.freecad
+		pkgs.gimp
+		pkgs.kicad
+
+		# Utility
+		pkgs.keepassxc
 		pkgs.yt-dlp
 		pkgs.android-tools
-		pkgs.picocom
-		pkgs.bottles
-		pkgs.kicad
-		pkgs.mtr
-		# nix-software-center.nix-software-center
-		# pkgs.colobot
-		pkgs.nix-index
-		pkgs.tealdeer
-		# pkgs.ventoy-full
-
-		# FIXME_QA(Krey): Figure out how to enable this only on GNOME
-		# FIXME(Krey): on NixOS 23.11 it's pinentry-gnome, but on unstable it's pinentry-gnome3
-		pkgs.pinentry-gnome3
-
-		(pkgs.brave.override {
-			# NOTE(Krey): Using system-wide tor which is interfiering with the brave's browsing as non-tor browsing has tor and tor browser goes through 2 Tors so this fixes it
-			commandLineArgs = "--no-proxy-server";
-		})
-
-		pkgs.sc-controller
-		pkgs.freetube
-		pkgs.hexchat
+		pkgs.picocom # Interface for Serial Console devices
+		pkgs.bottles # Wine Management Tool
+		pkgs.mtr # Packet Loss Tester
+		pkgs.sc-controller # Steam Controller Software
 		pkgs.monero-gui
+		pkgs.dialect # Language Translator
+		pkgs.endeavour # To-Do Notes
+		# FIXME-QA(Krey): As of 24th Jun 2024 this doesn't build
+			# pkgs.gaphor # Mind Maps
+		pkgs.kooha # Screen Recorder
+		pkgs.qbittorrent # Torrents
+		pkgs.tealdeer # TLDR Pages Implementation
 		pkgs.nextcloud-client
-		pkgs.endeavour
-		pkgs.dialect
-		pkgs.freecad
-		pkgs.airshipper
-		pkgs.mindustry
-		pkgs.protonmail-bridge
-			# FIXME(Krey): Blocked by https://github.com/emersion/hydroxide/issues/235
-			#hydroxide
-		# pkgs.gaphor
-		pkgs.tor-browser-bundle-bin
-		pkgs.gimp # Generic use only
-		pkgs.kooha
 
-		# An Anime Game
-		aagl.anime-game-launcher
+		# Video
+		pkgs.stremio # Media Server Client
+		pkgs.freetube # YouTube Client
+		pkgs.mpv
+		pkgs.vlc
 
 		# Gnome extensions
 		pkgs.gnomeExtensions.removable-drive-menu
@@ -83,17 +98,16 @@
 		pkgs.gnomeExtensions.gsconnect
 		pkgs.gnomeExtensions.custom-accent-colors
 
-		#nerdfonts
-		# NOTE(Krey): This was recommended, because nerdfonts might have issues with rendering -- https://github.com/TanvirOnGH/nix-config/blob/nix%2Bhome-manager/desktop/customization/font.nix#L4-L39
-		(pkgs.nerdfonts.override {
-			fonts = [
-				"Noto"
-				"FiraCode"
-			];
-		})
+		# Fonts
+		# This was recommended, because nerdfonts might have issues with rendering -- https://github.com/TanvirOnGH/nix-config/blob/nix%2Bhome-manager/desktop/customization/font.nix#L4-L39
+		(pkgs.nerdfonts.override { fonts = [ "Noto" "FiraCode"]; }) # Needed for starship
+
+		# FIXME_QA(Krey): Figure out how to enable this only on GNOME
+		# FIXME(Krey): on NixOS 23.11 it's pinentry-gnome, but on unstable it's pinentry-gnome3
+		pkgs.pinentry-gnome3
 	];
 
-	# GNOME Extensions
+	# Per-system adjustments to the GNOME Extensions
 	dconf.settings = {
 		# Set power management for a scenario where user is logged-in
 		"org/gnome/settings-daemon/plugins/power" = {

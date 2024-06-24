@@ -1,10 +1,11 @@
-{ lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 let
-	inherit (lib) mkForce;
-in {
+	inherit (lib) mkForce mkIf;
+in mkIf config.programs.vscode.enable {
 	programs.vscode = {
 		package = pkgs.vscodium;
+		# FIXME(Krey): This should be set to false by default
 		enableExtensionUpdateCheck = mkForce false; # Enforce purity
 		enableUpdateCheck = false;
 		extensions = with pkgs.vscode-extensions; [
@@ -16,8 +17,6 @@ in {
 			#edwinhuish.better-comments-next
 			# FIXME(Krey): Needs to be packages
 			#ahmadawais.shades-of-purple
-			# FIXME(Krey): Needs management as it blocks TOR
-			#shyykoserhiy.vscode-spotify
 		];
 		userSettings = {
 			# Zoom with mouse wheel
@@ -29,7 +28,7 @@ in {
 			"window.zoomLevel" = 2;
 
 			# Set Theme
-			## FIXME(Krey): Needs to be packaged
+			# FIXME(Krey): Needs to be packaged
 			#"workbench.colorTheme" = "Shades of Purple (Super Dark)";
 		};
 	};

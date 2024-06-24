@@ -93,7 +93,7 @@ in {
 		## Terminal
 		"org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
 			name = "Open Terminal";
-			command = "alacritty";
+			command = "kitty";
 			binding = "<Super>Return";
 		};
 
