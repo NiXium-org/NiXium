@@ -230,8 +230,8 @@ in {
 			};
 			PromptForDownloadLocation = true;
 			Proxy = {
-				Mode = "system"; # none | system | manual | autoDetect | autoConfig;
-				Locked = true;
+				Mode = "manual"; # none | system | manual | autoDetect | autoConfig;
+				Locked = true; # Do not allow the user to change the proxy settings
 				# HTTPProxy = hostname;
 				# UseHTTPProxyForAllProtocols = true;
 				# SSLProxy = hostname;

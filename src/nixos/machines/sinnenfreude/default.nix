@@ -53,6 +53,7 @@
 
 			./services/binfmt.nix
 			./services/distributedBuilds.nix
+			./services/lokinet.nix
 			./services/openssh.nix
 			./services/tor.nix
 		];

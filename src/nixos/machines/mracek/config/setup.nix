@@ -12,6 +12,7 @@ in {
 	nix.distributedBuilds = true; # Perform distributed builds
 
 	services.gitea.enable = true;
+	services.lokinet.enable = true;
 	services.monero.enable = true;
 	services.murmur.enable = true;
 	services.navidrome.enable = true;

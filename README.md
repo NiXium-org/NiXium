@@ -11,6 +11,7 @@ We are using:
 * [mission-control](https://github.comPlatonic-Systems/mission-control) to administrate this repository
 * [lanzaboote](https://github.com/nix-community/lanzaboote) for declarative secure boot
 * [nixos-generators](https://github.com/nix-community/nixos-generators) to generate filesystem images
+* [LOKINET](https://lokinet.org) Low-latency Post-Quantum Safe (NTRU Prime) onion-router acting as a transmission layer between systems
 
 Trusted community members are welcomed to commit their systems for collective administration and share of resources.
 

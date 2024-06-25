@@ -45,14 +45,14 @@ in {
 			temperature-unit = "kelvin";
 		};
 
-		# Set up Proxy
-		"system/proxy" = {
-			mode = "manual";
-		};
-		"system/proxy/socks" = {
-			host = "127.0.0.1";
-			port = 9050;
-		};
+		# # Set up Proxy
+		# "system/proxy" = {
+		# 	mode = "manual";
+		# };
+		# "system/proxy/socks" = {
+		# 	host = "127.0.0.1";
+		# 	port = 9050;
+		# };
 
 		# Bottles
 		"com/usebottles/bottles" = {
