@@ -39,7 +39,7 @@
 				# pkgs.nheko # QT-based Matrix Client
 
 			# Temporary management of Post-Quantum Safety until matrix manages it, see https://github.com/matrix-org/matrix-spec/issues/975 for details
-			pkgs.simplex-chat-desktop
+			unstable.simplex-chat-desktop
 			pkgs.session-desktop
 
 			# Temporary managment of IRC until it's implemented in our matrix server

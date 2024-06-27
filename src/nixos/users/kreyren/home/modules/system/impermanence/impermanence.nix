@@ -15,6 +15,10 @@ in {
 			".gnupg"
 			".local/state/nix/profiles"
 			".ssh"
+			".cache"
+
+			# FIXME-QA(Krey): This should be applied only when simplex is installed
+			".local/share/simplex"
 
 			# FIXME-QA(Krey): Should only be applied if `monero-gui` package is installed
 			"Monero"
