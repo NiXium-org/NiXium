@@ -40,6 +40,7 @@ in {
 				nixosModules.system-locale
 				nixosModules.system-nix
 				nixosModules.system-security
+				nixosModules.system-security-nvidia
 				nixosModules.system-time
 				nixosModules.system-wifi
 
