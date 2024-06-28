@@ -1,5 +1,6 @@
 {
 	imports = [
+		./bootloader
 		./ccache
 		./clamav
 		./environment

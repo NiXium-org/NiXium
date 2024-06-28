@@ -29,6 +29,7 @@ in {
 				nixosModules.services-sshd
 				nixosModules.services-tor
 
+				nixosModules.system-bootloader
 				nixosModules.system-ccache
 				nixosModules.system-clamav
 				nixosModules.system-environment
