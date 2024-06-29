@@ -1,6 +1,6 @@
 { self, inputs, ... }:
 
-# Flake management of SINNENFREUDE system
+# Flake management of TUPAC system
 
 # FIXME-SECURITY(Krey): To Be Managed..
 # ⚠️ Mount point '/boot' which backs the random seed file is world accessible, which is a security hole! ⚠️
@@ -38,6 +38,8 @@
 			}
 
 			# Users
+			self.nixosModules.users-kreyren
+			self.homeManagerModules."kreyren@tupac"
 			self.nixosModules.users-kira
 			self.homeManagerModules."kira@tupac"
 
@@ -89,5 +91,5 @@
 		};
 	};
 
-	flake.nixosModules.machine-tupac = ./lib/export.nix;
+	flake.nixosModules.machine-tupac = ./lib/tupac-export.nix;
 }

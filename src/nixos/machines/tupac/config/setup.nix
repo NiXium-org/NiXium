@@ -1,16 +1,18 @@
-{ pkgs,... }:
+{ ... }:
 
 # The Setup of TUPAC system
 
 {
-	# WARNING(Krey): Non-impermanent setup lacks declaration for disks management
-	boot.impermanence.enable = true; # Use impermanence
+	networking.hostName = "tupac";
 
-	boot.plymouth.enable = true;
+	# WARNING(Krey): Non-impermanent setup was not tested, but expected to work
+	boot.impermanence.enable = true; # Whether To Use Impermanence
+
+	boot.plymouth.enable = false; # Show eyecandy on bootup?
 
 	nix.distributedBuilds = true; # Perform distributed builds
 
-	programs.noisetorch.enable = true;
+	programs.noisetorch.enable = true; # Microphone filtering
 
 	services.flatpak.enable = true;
 	services.openssh.enable = true;
@@ -33,4 +35,11 @@
 	];
 
 	hardware.steam-hardware.enable = true; # Compatibility for Steam Controller
+
+	hardware.enableRedistributableFirmware = true; 	# There should be nothing on this system that needs proprietary firmware, but the user likely uses proprietary peripherals
+
+	hardware.cpu.intel.updateMicrocode = true; # Use the proprietary CPU microcode as the CPU won't work without it
+
+	# FIXME(Krey): This should be managed elsewhere
+	nixpkgs.hostPlatform = "x86_64-linux";
 }

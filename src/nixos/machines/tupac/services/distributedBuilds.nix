@@ -28,7 +28,7 @@ in mkIf config.nix.distributedBuilds {
 	};
 
 	# Set the pubkey
-	environment.etc."ssh/ssh_builder_ed25519_key.pub".text = "ssh-ed25519 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGNpn2sAM07pqQFI3HxiuOxppiEz8OwGDaSMKc7GL8VE builder@sinnenfreude";
+	environment.etc."ssh/ssh_builder_ed25519_key.pub".text = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINBSPCMXZ6377AeL5ZKdv7Y041CIJ2lhKl/YH/tbY7xc builder@tupac";
 
 	# Impermanence
 	environment.persistence."/nix/persist/system".files = mkIf config.boot.impermanence.enable [

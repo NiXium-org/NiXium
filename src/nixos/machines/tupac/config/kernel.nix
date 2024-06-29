@@ -3,7 +3,7 @@
 # Kernel management of TUPAC
 
 {
-	# NOTE(Krey): Use the stable Xanmod Kernel (https://xanmod.org) as it's designed for high-performance workstation systems to make them more efficient
+	# Use the stable Xanmod Kernel (https://xanmod.org) as it's designed for high-performance workstation systems to make them more efficient
 	boot.kernelPackages = pkgs.linuxPackages_xanmod_stable; # Specify which kernel to use
 
 	# Kernel Modules

@@ -1,3 +1,3 @@
 {
-	flake.homeManagerModules.system-impermanence-kreyren = ./impermanence.nix;
+	flake.homeManagerModules.system-impermanence-kira = ./impermanence.nix;
 }

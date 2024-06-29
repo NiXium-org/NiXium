@@ -1,3 +1,4 @@
 .direnv
 result
 system.raw
+*.log

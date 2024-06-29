@@ -8,6 +8,7 @@
 		# Auto-Generated
 		"xhci_pci"
 		"nvme"
+		"uas"
 		"usb_storage"
 		"sd_mod"
 		"sdhci_pci"

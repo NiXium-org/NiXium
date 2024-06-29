@@ -6,7 +6,7 @@
 
 let
 	hibernateEnvironment = {
-		HIBERNATE_SECONDS = 5 * 60; # 5 Minutes
+		HIBERNATE_SECONDS = "300"; # 5 Minutes
 		HIBERNATE_LOCK = "/var/run/autohibernate.lock";
 		HIBERNATE_LOG = "/var/log/autohibernate.log";
 	};
@@ -27,7 +27,7 @@ in {
 		environment = hibernateEnvironment;
 		script = ''
 			# If suspended on battery power..
-			if [ "$(cat /sys/class/power_supply/BAT0/power_now)" != 0 ]; then
+			if [ "$(cat /sys/class/power_supply/BAT0/status)" != "Charging" ]; then
 				curtime=$(date +%s)
 				echo "$curtime $1" >> "$HIBERNATE_LOG"
 				echo "$curtime" > "$HIBERNATE_LOCK"

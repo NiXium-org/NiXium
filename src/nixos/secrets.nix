@@ -3,7 +3,7 @@
 let
 	# Users
 	kreyren = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOzh6FRxWUemwVeIDsr681fgJ2Q2qCnwJbvFe4xD15ve";
-	# kira = "ssh-ed25519 ...";
+	kira = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICDWzJOwfuNEniLzxeQJxa9Ys+zna4U0SVh7dw1VYN3A";
 
 	# Systems
 	mracek-system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP8d9Nz64gE+x/+Dar4zknmXMAZXUAxhF1IgrA9DO4Ma";
@@ -23,6 +23,11 @@ in {
 	# Kreyren (user)
 	"./users/kreyren/kreyren-user-password.age".publicKeys = [
 		kreyren
+	] ++ all-systems;
+
+	# Kira (user)
+	"./users/kira/kira-user-password.age".publicKeys = [
+		kreyren kira
 	] ++ all-systems;
 
 	# MRACEK (system)
@@ -129,18 +134,28 @@ in {
 	];
 
 	# TUPAC (system)
-	"./machines/tupac/secrets/disks-password.age".publicKeys = [
-		kreyren tupac-system
+	"./machines/tupac/secrets/tupac-ssh-ed25519-private.age".publicKeys = [
+		kreyren kira tupac-system
+	];
+	"./machines/tupac/secrets/tupac-disks-password.age".publicKeys = [
+		kreyren kira tupac-system
 	];
 	"./machines/tupac/secrets/tupac-onion.age".publicKeys = [
-		kreyren tupac-system
+		kreyren kira tupac-system
 	];
 	"./machines/tupac/secrets/tupac-onion-secretKey.age".publicKeys = [
-		kreyren tupac-system
+		kreyren kira tupac-system
+	];
+	"./machines/tupac/secrets/tupac-onion-openssh-private.age".publicKeys = [
+		kreyren kira tupac-system
+	];
+
+	"./machines/tupac/secrets/tupac-builder-ssh-ed25519-private.age".publicKeys = [
+		kreyren kira tupac-system
 	];
 
 	# WiFi
 	"./modules/system/wifi/homeBaseKreyren-WiFi-PSK.age".publicKeys = [
-		kreyren
+		kreyren kira
 	] ++ all-systems;
 }

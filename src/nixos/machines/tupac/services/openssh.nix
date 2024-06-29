@@ -17,13 +17,10 @@ in mkIf config.services.openssh.enable {
 		symlink = false; # Appears to not work as symlink
 	};
 
-	services.tor.relay.onionServices."openssh" = {
-		map = mkIf config.services.tor.enable config.services.openssh.ports; # Provide hidden SSH
-		# secretKey = "/run/keys/tor/onion/openssh/hs_ed25519_secret_key";
-	};
+	services.tor.relay.onionServices."openssh".map = mkIf config.services.tor.enable config.services.openssh.ports; # Provide hidden SSH
 
 	# Set the pubkey
-	environment.etc."ssh/ssh_host_ed25519_key.pub".text = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIAXnS4xUPWwjBdKDvvy5OInLbs3oeHUUs5qUsX+fBji root@sinnenfreude";
+	environment.etc."ssh/ssh_host_ed25519_key.pub".text = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEmYpmNkpSkSSk1FnxHvPb8JlbeYh2lf3d5u8MBqGpHP root@tupac";
 
 	services.openssh.hostKeys = mkForce []; # Do not generate SSH keys
 }

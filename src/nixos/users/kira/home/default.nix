@@ -30,6 +30,7 @@ in {
 						# homeManagerModules.kira.system.default
 						homeManagerModules.system-dconf-kira
 						homeManagerModules.system-gtk-kira
+						homeManagerModules.system-impermanence-kira
 
 						# homeManagerModules.kira.terminal-emulators.default
 						homeManagerModules.terminal-emulators-alacritty-kira

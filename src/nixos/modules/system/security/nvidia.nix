@@ -4,7 +4,7 @@
 
 let
 	inherit (lib) mkIf mkForce;
-in mkIf (config.hardware.nvidia.package.version == "535.154") {
+in mkIf (config.boot.kernelPackages.nvidiaPackages.production.version == "535.154") {
 	hardware.nvidia = {
 		# This is the latest driver with the CVE patches + explicit sync
 		# CVE‑2024‑0090
@@ -24,7 +24,5 @@ in mkIf (config.hardware.nvidia.package.version == "535.154") {
 			settingsSha256 = "sha256-PMh5efbSEq7iqEMBr2+VGQYkBG73TGUh6FuDHZhmwHk=";
 			persistencedSha256 = "sha256-KAYIvPjUVilQQcD04h163MHmKcQrn2a8oaXujL2Bxro=";
 		};
-
-		open = mkForce true; # Recommended by Nvidia
 	};
 }
