@@ -19,6 +19,9 @@ in {
 			".ssh"
 			".cache"
 
+			# NOTE(Krey): Temporary management until we get Storage Server with declarative sync
+			".local/db"
+
 			# FIXME-QA(Krey): This should be applied only when simplex is installed
 			".local/share/simplex"
 

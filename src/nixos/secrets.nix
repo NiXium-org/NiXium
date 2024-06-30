@@ -141,7 +141,7 @@ in {
 		kreyren kira tupac-system
 	];
 	"./machines/tupac/secrets/tupac-onion.age".publicKeys = [
-		kreyren kira tupac-system
+		kreyren kira tupac-system sinnenfreude-system
 	];
 	"./machines/tupac/secrets/tupac-onion-secretKey.age".publicKeys = [
 		kreyren kira tupac-system

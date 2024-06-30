@@ -51,7 +51,7 @@ in {
 		pkgs.nix-index
 		pkgs.tealdeer
 		# pkgs.ventoy-full
-		pkgs.davinci-resolve
+		# pkgs.davinci-resolve
 		pkgs.blender
 
 		(pkgs.brave.override {

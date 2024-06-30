@@ -123,12 +123,12 @@ in {
 		# Background
 		"org/gnome/desktop/background" = {
 			#picture-uri="${pkgs.gnome.gnome-backgrounds}/share/backgrounds/gnome/blobs-l.svg";
-			picture-uri ="./wallpaper.jpeg";
+			picture-uri ="${./wallpaper.jpeg}";
 			#picture-uri-dark="${pkgs.gnome.gnome-backgrounds}/share/backgrounds/gnome/blobs-d.svg";
-			picture-uri-dark ="./wallpaper.jpeg";
+			picture-uri-dark ="${./wallpaper.jpeg}";
 		};
 		"org/gnome/desktop/screensaver" = {
-			picture-uri ="./wallpaper.jpeg";
+			picture-uri ="${./wallpaper.jpeg}";
 			#picture-uri = "${pkgs.gnome.gnome-backgrounds}/share/backgrounds/gnome/blobs-l.svg";
 		};
 

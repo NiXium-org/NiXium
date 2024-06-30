@@ -23,6 +23,7 @@ in mkIf config.boot.impermanence.enable {
 		files = [
 			# FIXME(Krey): Should have been in the OpenSSH module
 			"/etc/ssh/ssh_host_ed25519_key"
+			"/etc/machine-id"
 		];
 	};
 

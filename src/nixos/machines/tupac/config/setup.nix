@@ -12,6 +12,7 @@
 
 	nix.distributedBuilds = true; # Perform distributed builds
 
+	programs.steam.enable = true;
 	programs.noisetorch.enable = true; # Microphone filtering
 
 	services.flatpak.enable = true;

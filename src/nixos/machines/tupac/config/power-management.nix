@@ -17,7 +17,8 @@ in {
 
 		lidSwitch = "suspend-then-hibernate";
 
-		lidSwitchExternalPower = "suspend";
+		# FIXME(Krey): Figure out how to wake it up from suspend while on external power
+		lidSwitchExternalPower = "ignore";
 	};
 
 	systemd.services."awake-after-suspend-for-a-time" = {
