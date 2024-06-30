@@ -9,7 +9,8 @@ in {
 
 	home.impermanence.enable = true;
 
-	programs.alacritty.enable = true; # Rust-based Hardware-accelarated terminal
+	programs.alacritty.enable = false; # Rust-based Hardware-accelarated terminal
+	programs.kitty.enable = true; # Alternative Rust-based Hardware-accelarated terminal for testing, potentially superrior to alacritty
 	programs.bash.enable = true;
 	programs.starship.enable = true;
 	programs.direnv.enable = true; # To manage git repositories

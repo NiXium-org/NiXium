@@ -88,7 +88,7 @@ in {
 		## Terminal
 		"org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
 			name = "Open Terminal";
-			command = "${pkgs.alacritty}/bin/alacritty";
+			command = "${pkgs.kitty}/bin/kitty";
 			binding = "<Super>Return";
 		};
 
