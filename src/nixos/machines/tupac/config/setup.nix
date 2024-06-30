@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 # The Setup of TUPAC system
 
@@ -8,7 +8,15 @@
 	# WARNING(Krey): Non-impermanent setup was not tested, but expected to work
 	boot.impermanence.enable = true; # Whether To Use Impermanence
 
-	boot.plymouth.enable = false; # Show eyecandy on bootup?
+	boot.plymouth.enable = true; # Show eyecandy on bootup?
+	boot.plymouth = {
+		theme = "deus_ex";
+		themePackages = with pkgs; [
+			(adi1090x-plymouth-themes.override {
+				selected_themes = [ "deus_ex" ];
+			})
+		];
+	};
 
 	nix.distributedBuilds = true; # Perform distributed builds
 
@@ -34,6 +42,8 @@
 		"en_US.UTF-8/UTF-8"
 		"cs_CZ.UTF-8/UTF-8"
 	];
+
+	time.timeZone = "Europe/Prague";
 
 	hardware.steam-hardware.enable = true; # Compatibility for Steam Controller
 

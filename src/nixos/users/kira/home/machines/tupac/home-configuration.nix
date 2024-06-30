@@ -30,11 +30,12 @@ in {
 	];
 
 	home.packages = [
-		# FIXME(Krey): Management pending https://github.com/NixOS/nixpkgs/pull/311937
-		(kreyren.webcord.override {
-			# Temporary management until we get a VPN
-			commandLineArgs = "--no-proxy-server";
-		})
+		# # FIXME(Krey): Management pending https://github.com/NixOS/nixpkgs/pull/311937
+		# (kreyren.webcord.override {
+		# 	# Temporary management until we get a VPN
+		# 	commandLineArgs = "--no-proxy-server";
+		# })
+		pkgs.goofcord
 
 		pkgs.keepassxc
 		# pkgs.cura # Broken: https://github.com/NixOS/nixpkgs/issues/186570
@@ -52,7 +53,7 @@ in {
 		pkgs.nix-index
 		pkgs.tealdeer
 		# pkgs.ventoy-full
-		# pkgs.davinci-resolve
+		pkgs.davinci-resolve
 		pkgs.blender
 
 		(pkgs.brave.override {
@@ -79,6 +80,10 @@ in {
 		pkgs.tor-browser-bundle-bin
 		pkgs.gimp # Generic use only
 		pkgs.kooha
+
+		pkgs.session-desktop
+		pkgs.element-desktop
+		pkgs.simplex-chat-desktop
 
 		# Gnome extensions
 		pkgs.gnomeExtensions.removable-drive-menu

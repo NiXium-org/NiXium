@@ -19,6 +19,16 @@ in {
 			".ssh"
 			".cache"
 
+			".config/WebCord"
+			".config/goofcord"
+
+			# Steam
+			# FIXME(Krey): This should only contain the authorization files, steam games and cache everything else should be handled by steam on startup
+			".local/share/Steam"
+
+			# Session
+			"~/.config/Session"
+
 			# NOTE(Krey): Temporary management until we get Storage Server with declarative sync
 			".local/db"
 			".config/Nextcloud"
@@ -53,6 +63,7 @@ in {
 		files = [
 			# FIXME-QA(Krey): This should be generated for each system
 			".config/monitors.xml"
+			".steam/steam.token"
 		];
 		allowOther = true;
 	};
