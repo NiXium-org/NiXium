@@ -21,6 +21,7 @@ in {
 
 			# NOTE(Krey): Temporary management until we get Storage Server with declarative sync
 			".local/db"
+			".config/Nextcloud"
 
 			# FIXME-QA(Krey): This should be applied only when simplex is installed
 			".local/share/simplex"
