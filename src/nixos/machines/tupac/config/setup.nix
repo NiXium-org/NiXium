@@ -5,7 +5,6 @@
 {
 	networking.hostName = "tupac";
 
-	# WARNING(Krey): Non-impermanent setup was not tested, but expected to work
 	boot.impermanence.enable = true; # Whether To Use Impermanence
 
 	boot.plymouth.enable = true; # Show eyecandy on bootup?
@@ -37,6 +36,7 @@
 
 	time.timeZone = "Europe/Prague";
 
+	# Experiment
 	hardware.bluetooth.enable = true;
 	hardware.enableAllFirmware = true;
 
