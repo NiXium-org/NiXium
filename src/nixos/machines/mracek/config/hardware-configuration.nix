@@ -10,8 +10,6 @@ let
 in {
 	networking.hostName = "mracek";
 
-	system.stateVersion = "24.05";
-
 	services.logind.lidSwitchExternalPower = "lock"; # Lock the system on closing the lid when on external power instead of suspend/hibernation
 
 	# BootLoader
