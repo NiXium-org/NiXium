@@ -9,14 +9,6 @@
 	boot.impermanence.enable = true; # Whether To Use Impermanence
 
 	boot.plymouth.enable = true; # Show eyecandy on bootup?
-	boot.plymouth = {
-		theme = "deus_ex";
-		themePackages = with pkgs; [
-			(adi1090x-plymouth-themes.override {
-				selected_themes = [ "deus_ex" ];
-			})
-		];
-	};
 
 	nix.distributedBuilds = true; # Perform distributed builds
 
@@ -44,6 +36,9 @@
 	];
 
 	time.timeZone = "Europe/Prague";
+
+	hardware.bluetooth.enable = true;
+	hardware.enableAllFirmware = true;
 
 	hardware.steam-hardware.enable = true; # Compatibility for Steam Controller
 
