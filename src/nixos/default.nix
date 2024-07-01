@@ -24,6 +24,9 @@ in {
 			imports = [
 				nixosModules.programs-git
 
+				nixosModules.security
+				nixosModules.security-nvidia
+
 				nixosModules.services-distributedBuilds
 				nixosModules.services-monero
 				nixosModules.services-sshd
@@ -39,8 +42,6 @@ in {
 				nixosModules.system-lanzaboote
 				nixosModules.system-locale
 				nixosModules.system-nix
-				nixosModules.system-security
-				nixosModules.system-security-nvidia
 				nixosModules.system-time
 				nixosModules.system-wifi
 

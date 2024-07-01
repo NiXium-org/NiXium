@@ -42,13 +42,17 @@
 			self.homeManagerModules."kreyren@sinnenfreude"
 
 			# Files
+			./config/bootloader.nix
 			./config/disks.nix
 			./config/firmware.nix
-			./config/hardware-configuration.nix
+			./config/hardware-acceleration.nix
 			./config/initrd.nix
+			./config/kernel.nix
+			./config/networking.nix
+			./config/nvidia.nix
 			./config/security.nix
 			./config/setup.nix
-			./config/suspend.nix
+			./config/suspend-then-hibernate.nix
 			./config/vm-build.nix
 
 			./services/binfmt.nix
