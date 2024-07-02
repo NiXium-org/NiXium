@@ -38,12 +38,18 @@ in {
 			./services/vaultwarden.nix
 			./services/vikunja.nix
 
+			./config/bootloader.nix
 			./config/disks.nix
 			./config/firmware.nix
-			./config/hardware-configuration.nix
+			./config/hardware-acceleration.nix
+			./config/initrd.nix
+			./config/kernel.nix
+			./config/networking.nix
+			./config/power-management.nix
 			./config/remote-unlock.nix
 			./config/security.nix
 			./config/setup.nix
+			./config/sound.nix
 			./config/vm-build.nix
 		];
 

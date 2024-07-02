@@ -5,6 +5,8 @@
 let
 	inherit (lib) mkIf;
 in {
+	networking.hostName = "mracek";
+
 	boot.impermanence.enable = true; # Use impermanence
 
 	boot.plymouth.enable = true;
@@ -23,4 +25,6 @@ in {
 	users.users.root.openssh.authorizedKeys.keys = mkIf config.services.openssh.enable [
 		"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOzh6FRxWUemwVeIDsr681fgJ2Q2qCnwJbvFe4xD15ve kreyren@fsfe.org" # Allow root access for the Super Administrator (KREYREN)
 	];
+
+	nixpkgs.hostPlatform = "x86_64-linux";
 }

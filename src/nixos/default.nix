@@ -24,6 +24,9 @@ in {
 			imports = [
 				nixosModules.programs-git
 
+				nixosModules.security
+				nixosModules.security-nvidia
+
 				nixosModules.services-distributedBuilds
 				nixosModules.services-monero
 				nixosModules.services-sshd

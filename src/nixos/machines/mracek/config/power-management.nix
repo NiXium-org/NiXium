@@ -12,6 +12,7 @@
 	];
 
 	services.logind.lidSwitch = "lock"; # Do not suspend on lid close event
+	services.logind.lidSwitchExternalPower = "lock"; # Lock the system on closing the lid when on external power instead of suspend/hibernation
 
 	services.thermald.enable = true; # Use the temperature management daemon
 
