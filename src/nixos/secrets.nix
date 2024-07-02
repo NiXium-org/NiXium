@@ -4,6 +4,7 @@ let
 	# Users
 	kreyren = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOzh6FRxWUemwVeIDsr681fgJ2Q2qCnwJbvFe4xD15ve";
 	kira = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICWLIYYAXRUD0+bg5CXsxh9F4spvqCz4jaxvtGMsezl/";
+	kira = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICWLIYYAXRUD0+bg5CXsxh9F4spvqCz4jaxvtGMsezl/";
 
 	# Systems
 	mracek-system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP8d9Nz64gE+x/+Dar4zknmXMAZXUAxhF1IgrA9DO4Ma";
@@ -23,6 +24,11 @@ in {
 	# Kreyren (user)
 	"./users/kreyren/kreyren-user-password.age".publicKeys = [
 		kreyren
+	] ++ all-systems;
+
+	# Kira (user)
+	"./users/kira/kira-user-password.age".publicKeys = [
+		kreyren kira
 	] ++ all-systems;
 
 	# Kira (user)
