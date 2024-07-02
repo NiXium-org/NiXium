@@ -46,7 +46,7 @@ in mkMerge [
 			nodev."/" = {
 				fsType = "tmpfs";
 				mountOptions = [
-					"size=2G"
+					"size=4G"
 					"defaults"
 					# set mode to 755, otherwise systemd will set it to 777, which cause problems.
 					# relatime: Update inode access times relative to modify or change time.
