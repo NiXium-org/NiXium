@@ -5,6 +5,12 @@
 let
 	inherit (lib) mkMerge;
 in {
+	# NOTE(Krey): Make it impossible to hibernate
+	security.protectKernelImage = false;
+
+	# NOTE(Krey): Experiment
+	security.lockKernelModules = false;
+
 	# config = mkMerge [
 	# 	# Enforce to use the Tor Proxy
 	# 	# NOTE(Krey): It's currently causing issues
