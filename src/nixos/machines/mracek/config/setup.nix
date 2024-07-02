@@ -8,6 +8,8 @@ in {
 	networking.hostName = "mracek";
 	age.secrets.mracek-ssh-ed25519-private.file = ../secrets/mracek-ssh-ed25519-private.age; # Experiment
 
+	networking.hostName = "mracek";
+
 	boot.impermanence.enable = true; # Use impermanence
 
 	boot.plymouth.enable = true;
