@@ -26,13 +26,8 @@ in {
 			two-finger-scrolling-enabled = true;
 		};
 
-		# FIXME(Krey): This doesn't work, figure out why
-		# "org/gnome/Weather" = {
-		# 	locations = "[<(uint32 2, <('Brno', 'LKTB', true, [(0.857829327355213, 0.291469985083053)], [(0.85870199198121022, 0.29030642643062599)])>)>]";
-		# };
 		"org/gnome/shell/weather" = {
 			automatic-location = true;
-			#locations = "[<(uint32 2, <('Brno', 'LKTB', true, [(0.857829327355213, 0.291469985083053)], [(0.85870199198121022, 0.29030642643062599)])>)>]";
 		};
 
 		# Set the weather app in Kelvin #KelvinGang
@@ -93,7 +88,7 @@ in {
 		## Terminal
 		"org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
 			name = "Open Terminal";
-			command = "${pkgs.alacritty}/bin/alacritty";
+			command = "${pkgs.kitty}/bin/kitty";
 			binding = "<Super>Return";
 		};
 
@@ -128,12 +123,12 @@ in {
 		# Background
 		"org/gnome/desktop/background" = {
 			#picture-uri="${pkgs.gnome.gnome-backgrounds}/share/backgrounds/gnome/blobs-l.svg";
-			picture-uri ="./wallpaper.jpeg";
+			picture-uri ="${./wallpaper.jpeg}";
 			#picture-uri-dark="${pkgs.gnome.gnome-backgrounds}/share/backgrounds/gnome/blobs-d.svg";
-			picture-uri-dark ="./wallpaper.jpeg";
+			picture-uri-dark ="${./wallpaper.jpeg}";
 		};
 		"org/gnome/desktop/screensaver" = {
-			picture-uri ="./wallpaper.jpeg";
+			picture-uri ="${./wallpaper.jpeg}";
 			#picture-uri = "${pkgs.gnome.gnome-backgrounds}/share/backgrounds/gnome/blobs-l.svg";
 		};
 

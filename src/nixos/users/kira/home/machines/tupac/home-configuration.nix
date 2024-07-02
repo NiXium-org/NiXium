@@ -3,11 +3,14 @@
 let
 	inherit (lib) mkIf;
 in {
-	home.stateVersion = "23.11";
+	home.stateVersion = "24.05";
 
 	gtk.enable = true;
 
-	programs.alacritty.enable = true; # Rust-based Hardware-accelarated terminal
+	home.impermanence.enable = true;
+
+	programs.alacritty.enable = false; # Rust-based Hardware-accelarated terminal
+	programs.kitty.enable = true; # Alternative Rust-based Hardware-accelarated terminal for testing, potentially superrior to alacritty
 	programs.bash.enable = true;
 	programs.starship.enable = true;
 	programs.direnv.enable = true; # To manage git repositories
@@ -27,11 +30,12 @@ in {
 	];
 
 	home.packages = [
-		# FIXME(Krey): Management pending https://github.com/NixOS/nixpkgs/pull/311937
-		(kreyren.webcord.override {
-			# Temporary management until we get a VPN
-			commandLineArgs = "--no-proxy-server";
-		})
+		# # FIXME(Krey): Management pending https://github.com/NixOS/nixpkgs/pull/311937
+		# (kreyren.webcord.override {
+		# 	# Temporary management until we get a VPN
+		# 	commandLineArgs = "--no-proxy-server";
+		# })
+		pkgs.goofcord
 
 		pkgs.keepassxc
 		# pkgs.cura # Broken: https://github.com/NixOS/nixpkgs/issues/186570
@@ -77,6 +81,10 @@ in {
 		pkgs.gimp # Generic use only
 		pkgs.kooha
 
+		pkgs.session-desktop
+		pkgs.element-desktop
+		pkgs.simplex-chat-desktop
+
 		# Gnome extensions
 		pkgs.gnomeExtensions.removable-drive-menu
 		pkgs.gnomeExtensions.vitals
@@ -118,6 +126,43 @@ in {
 			];
 
 			disabled-extensions = [];
+		};
+
+		# System Monitor
+		"org/gnome/gnome-system-monitor" = {
+			show-dependencies = false;
+			show-whose-processes= "user";
+		};
+
+		"org/gnome/gnome-system-monitor/disktreenew" = {
+			col-6-visible = true;
+			col-6-width = 0;
+		};
+
+		"org/gnome/shell/extensions/vitals" = {
+			fixed-widths = true;
+			hide-icons = false;
+			hide-zeros = false;
+			icon-style = 1;
+			include-static-info = false;
+			menu-centered = false;
+			network-speed-format = 1;
+			position-in-panel = 1;
+			show-battery = true;
+			show-gpu = true;
+			update-time = 3;
+			use-higher-precision = true;
+
+			hot-sensors = [
+				"_memory_usage_"
+				"_system_load_1m_"
+				"__temperature_avg__"
+				"_temperature_gpu_"
+				"_voltage_bat0_in0_"
+				"__network-rx_max__"
+				"__network-tx_max__"
+				"_storage_free_"
+			];
 		};
 	};
 }

@@ -24,7 +24,9 @@
 			impermanence.url = "github:kreyren/impermanence"; # Use a fork to manage https://github.com/nix-community/impermanence/issues/167
 			flake-parts.url = "github:hercules-ci/flake-parts";
 			mission-control.url = "github:Platonic-Systems/mission-control";
+
 			flake-root.url = "github:srid/flake-root";
+			# NOTE(Krey): Lanzaboote was updated to 0.4.1, but those versions are not compatible with the nixpkgs stable channel
 			lanzaboote.url = "github:nix-community/lanzaboote/v0.3.0"; # MAINTAIN(Krey): has to be kept up to date -- https://github.com/nix-community/lanzaboote/issues/343
 			arkenfox.url = "github:dwarfmaster/arkenfox-nixos";
 
