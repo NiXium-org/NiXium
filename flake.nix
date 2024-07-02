@@ -146,6 +146,10 @@
 						inputs.nixpkgs.legacyPackages.${system}.sbctl # To set up secureboot
 						inputs.nixpkgs.legacyPackages.${system}.fira-code # For liquratures in code editors
 
+						# Networking
+						inputs.nixpkgs.legacyPackages.${system}.nmap
+						inputs.nixpkgs.legacyPackages.${system}.dig
+
 						inputs.nixos-generators.packages.${system}.nixos-generate
 
 						inputs.disko.packages.${system}.disko-install

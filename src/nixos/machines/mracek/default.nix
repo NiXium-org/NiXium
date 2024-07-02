@@ -30,6 +30,7 @@ in {
 			./services/binfmt.nix
 			./services/distributedBuilds.nix
 			./services/gitea.nix
+			./services/lokinet.nix
 			./services/monero.nix
 			./services/murmur.nix
 			./services/navidrome.nix

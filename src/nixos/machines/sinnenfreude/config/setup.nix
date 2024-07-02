@@ -13,6 +13,7 @@
 
 	services.flatpak.enable = true;
 	services.openssh.enable = true;
+	services.lokinet.enable = true;
 	services.tor.enable = true;
 
 	# Desktop Environment
