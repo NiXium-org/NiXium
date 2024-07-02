@@ -16,6 +16,9 @@ in {
 			".ssh"
 			".cache"
 
+			# FIXME-QA(Krey): This should be applied only when hexchat is installed
+			".config/hexchat"
+
 			# FIXME-QA(Krey): This should be applied only when simplex is installed
 			".local/share/simplex"
 

@@ -10,8 +10,6 @@ let
 in {
 	networking.hostName = "sinnenfreude";
 
-	system.stateVersion = "24.05";
-
 	# BootLoader
 	## NOTE(Krey): Has a weird BIOS, lanzaboote has issues with deployment
 	boot.loader.systemd-boot.enable = true; # Lanzeboote uses it's own module and requires this disabled

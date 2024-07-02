@@ -10,6 +10,7 @@
 		./lanzaboote
 		./locale
 		./nix
+		./release
 		./security
 		./time
 		./wifi
