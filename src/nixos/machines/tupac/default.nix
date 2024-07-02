@@ -48,7 +48,6 @@
 			./config/disks.nix
 			./config/firmware.nix
 			./config/hardware-acceleration.nix
-			./config/hardware-configuration.nix
 			./config/initrd.nix
 			./config/kernel.nix
 			./config/networking.nix

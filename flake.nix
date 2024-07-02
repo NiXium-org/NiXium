@@ -26,7 +26,7 @@
 			mission-control.url = "github:Platonic-Systems/mission-control";
 
 			flake-root.url = "github:srid/flake-root";
-			lanzaboote.url = "github:nix-community/lanzaboote/v0.3.0"; # MAINTAIN(Krey): has to be kept up to date -- https://github.com/nix-community/lanzaboote/issues/343
+			lanzaboote.url = "github:nix-community/lanzaboote/v0.4.1"; # MAINTAIN(Krey): has to be kept up to date -- https://github.com/nix-community/lanzaboote/issues/343
 			arkenfox.url = "github:dwarfmaster/arkenfox-nixos";
 
 		firefox-addons = {

@@ -1,3 +1,3 @@
 {
-	flake.nixosModules.system-release = ./locale.nix;
+	flake.nixosModules.system-release = ./release.nix;
 }

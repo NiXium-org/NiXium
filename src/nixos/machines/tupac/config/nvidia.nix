@@ -2,11 +2,9 @@
 
 # Nvidia management of TUPAC including optimus
 
-let
-	inherit (lib) mkIf;
-in {
+{
 	hardware.nvidia = {
-		modesetting.enable = true; # Enable modesetting, which is needed for Wayland compositors
+		modesetting.enable = true; # Modesetting, which is needed for Wayland compositors
 
 		powerManagement.finegrained = true; # Turns off GPU when not in use
 
