@@ -6,9 +6,14 @@
 
 {
 	perSystem = { system, pkgs, inputs', ... }: {
-		install-task = pkgs.writeShellScriptBin "install-task" ''
-			echo hello
-		'';
+		apps.install-task.program = pkgs.writeShellApplication {
+			name = "install-task";
+			runtimeInputs = [
+				inputs'.disko.packages.disko-install
+				pkgs.age
+			];
+			text = (builtins.readFile ./script.sh);
+		};
 	};
 }
 
