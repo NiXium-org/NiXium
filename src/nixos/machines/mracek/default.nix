@@ -3,7 +3,7 @@
 # Flake management of MRACEK system
 
 let
-	inherit (lib) mkForce mkIf;
+	inherit (lib) mkForce;
 in {
 	# Main Configuration
 	flake.nixosConfigurations."mracek" = inputs.nixpkgs.lib.nixosSystem {
@@ -82,13 +82,16 @@ in {
 	# Task to INSTALL the specified derivation on current system including the firmware in a fully declarative way
 	perSystem = { system, pkgs, inputs', self', ... }: {
 		packages.nixos-mracek-install = pkgs.writeShellApplication {
-			name = "install-task";
+			name = "nixos-mracek-install";
 			runtimeInputs = [
 				inputs'.disko.packages.disko-install
 				pkgs.age
 			];
-			text = (builtins.readFile ./mracek-install.sh);
+			text = (builtins.readFile ./scripts/mracek-install.sh);
 		};
+
+		# Declare for `nix run`
+		apps.nixos-mracek-install.program = self'.packages.nixos-mracek-install;
 	};
 
 	# Module export to other systems in the infrastructure
