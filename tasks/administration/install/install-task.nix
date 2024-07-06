@@ -8,18 +8,18 @@
 
 {
 	perSystem = { system, pkgs, inputs', self', ... }: {
-		# Make this callable from `nix run`
-		apps.install-task.program = self'.packages.install-task;
+		# # Make this callable from `nix run`
+		# apps.install-task.program = self'.packages.install-task;
 
-		# Package Declaration
-		packages.install-task = pkgs.writeShellApplication {
-			name = "install-task";
-			runtimeInputs = [
-				inputs'.disko.packages.disko-install
-				pkgs.age
-			];
-			text = (builtins.readFile ./script.sh);
-		};
+		# # Package Declaration
+		# packages.install-task = pkgs.writeShellApplication {
+		# 	name = "install-task";
+		# 	runtimeInputs = [
+		# 		inputs'.disko.packages.disko-install
+		# 		pkgs.age
+		# 	];
+		# 	text = (builtins.readFile ./script.sh);
+		# };
 
 		# Integration in mission-control
 		mission-control.scripts = {
@@ -27,11 +27,8 @@
 				description = "Perform full declarative reinstallation of SYSTEM on a set DISK";
 				category = "Administration";
 				exec = ''
-					echo "Inputs are: $*"
-
-					${self'.packages.install-task}/bin/install-task
-
-					echo ${self.nixosConfigurations.mracek.config.disko.devices.disk.system.device}
+					system="$1"
+					nix run ".#packages.x86_64-linux.nixos-$system-install"
 				'';
 			};
 		};
