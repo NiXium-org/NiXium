@@ -8,7 +8,8 @@
 	home.impermanence.enable = true;
 
 	programs.alacritty.enable = true; # Rust-based Video-accelarated terminal
-	programs.kitty.enable = true; # Alternative Rust-based Hardware-accelarated terminal for testing, potentially superrior to alacritty
+	# FIXME(Krey): Doesn't work with scaling below 100% on GNOME
+	programs.kitty.enable = false; # Alternative Rust-based Hardware-accelarated terminal for testing, potentially superrior to alacritty
 	programs.bash.enable = true;
 	programs.starship.enable = true;
 	programs.direnv.enable = true; # To manage git repositories
