@@ -8,6 +8,12 @@ in {
 	config = mkMerge [
 		{
 			security.allowSimultaneousMultithreading = mkForce false; # Vulnerable AF
+
+			# NOTE(Krey): Breaks USB
+			security.lockKernelModules = false;
+
+			# NOTE(Krey): Breaks hibernation
+			security.protectKernelImage = false;
 		}
 
 		# Enforce to use the Tor Proxy
