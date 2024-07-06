@@ -28,7 +28,7 @@
 		"editor.wordWrap": "on", // Enforce word-wrapped coding style
 		"terminal.integrated.defaultProfile.linux": "bash", // Use bash by default
 		"terminal.integrated.env.linux": {
-			"EDITOR": "codium", // To open git things in codium
+			"EDITOR": "nano", // To open git things in codium
 		},
 
 		// Gtt
