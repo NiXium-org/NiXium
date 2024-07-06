@@ -23,4 +23,6 @@ in mkIf config.services.openssh.enable {
 	environment.etc."ssh/ssh_host_ed25519_key.pub".text = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP8d9Nz64gE+x/+Dar4zknmXMAZXUAxhF1IgrA9DO4Ma root@mracek";
 
 	services.openssh.hostKeys = mkForce []; # Do not generate SSH keys
+
+	services.openssh.openFirewall = true;
 }

@@ -22,5 +22,5 @@ ragenixDir="/run/agenix"
 }
 
 # Install System
-sudo disko-install --flake '.#mracek' --disk system /dev/sda \
+sudo disko-install --flake '.#mracek' --disk system $(realpath /dev/disk/by-id/ata-WDC_WDS500G2B0A-00SM50_21101J456803) \
 	--extra-files "$ragenixDir/mracek-ssh-ed25519-private" /nix/persist/system/etc/ssh/ssh_host_ed25519_key

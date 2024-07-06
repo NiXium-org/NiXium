@@ -8,7 +8,7 @@ let
 	inherit (lib) mkIf;
 in mkIf config.services.vikunja.enable {
 	# Import the private key for an onion service
-	age.secrets.mracek-onion-vikunja-private = {
+	age.secrets.mracek-onion-vikunja-private = mkIf config.services.tor.enable {
 		file = ../secrets/mracek-onion-vikunja-private.age;
 
 		owner = "tor";
@@ -22,8 +22,12 @@ in mkIf config.services.vikunja.enable {
 	# Deploy The Onion Service
 	services.tor.relay.onionServices."vikunja" = {
 		map = mkIf config.services.tor.enable [{
-			target = { port = config.services.vikunja.settings.server.HTTP_PORT or 80; };
+			target = { port = config.services.vikunja.port; };
 			port = 80;
 		}];
 	};
+
+	services.vikunja.frontendScheme = "http";
+
+	services.vikunja.frontendHostname = "vikunja.nx";
 }
