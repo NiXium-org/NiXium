@@ -1,8 +1,7 @@
 #!/usr/bin/env sh
 # shellcheck shell=sh # POSIX
 
-age --help
-disko-install --help
+echo "${*:-"whee"}"
 
 # system="$1"
 # disk="$2"
