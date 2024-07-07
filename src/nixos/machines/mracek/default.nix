@@ -80,6 +80,7 @@ in {
 	};
 
 	# Task to perform installation of MRACEK in NixOS distribution
+	# Task to perform installation of MRACEK in NixOS distribution
 	perSystem = { system, pkgs, inputs', self', ... }: {
 		packages.nixos-mracek-install = pkgs.writeShellApplication {
 			name = "nixos-mracek-install";
