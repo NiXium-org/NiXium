@@ -29,6 +29,8 @@
 	i18n.inputMethod.enabled = "fcitx5";
 	i18n.inputMethod.fcitx5.addons = with pkgs; [ fcitx5-mozc ];
 
+	age.secrets.sinnenfreude-ssh-ed25519-private.file = ../secrets/sinnenfreude-ssh-ed25519-private.age; # Declare private key
+
 	# Necessary Evil :(
 	hardware.enableRedistributableFirmware = true;
 	hardware.cpu.intel.updateMicrocode = true;

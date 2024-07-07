@@ -36,6 +36,8 @@
 
 	time.timeZone = "Europe/Prague";
 
+	age.secrets.tupac-ssh-ed25519-private.file = ../secrets/tupac-ssh-ed25519-private.age; # Declare private key
+
 	# Experiment
 	hardware.bluetooth.enable = true;
 	hardware.enableAllFirmware = true;
