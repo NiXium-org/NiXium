@@ -86,7 +86,7 @@
 		};
 	};
 
-	# Task to perform installation of sinnenfreude in NixOS distribution
+	# Task to perform installation of SINNENFREUDE in NixOS distribution
 	perSystem = { system, pkgs, inputs', self', ... }: {
 		packages.nixos-sinnenfreude-install = pkgs.writeShellApplication {
 			name = "nixos-sinnenfreude-install";

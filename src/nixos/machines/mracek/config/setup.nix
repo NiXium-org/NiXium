@@ -6,11 +6,6 @@ let
 	inherit (lib) mkIf;
 in {
 	networking.hostName = "mracek";
-	age.secrets.mracek-ssh-ed25519-private.file = ../secrets/mracek-ssh-ed25519-private.age; # Experiment
-
-	networking.hostName = "mracek";
-
-	age.secrets.mracek-ssh-ed25519-private.file = ../secrets/mracek-ssh-ed25519-private.age; # Experiment
 
 	boot.impermanence.enable = true; # Use impermanence
 
@@ -30,6 +25,8 @@ in {
 	users.users.root.openssh.authorizedKeys.keys = mkIf config.services.openssh.enable [
 		"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOzh6FRxWUemwVeIDsr681fgJ2Q2qCnwJbvFe4xD15ve kreyren@fsfe.org" # Allow root access for the Super Administrator (KREYREN)
 	];
+
+	age.secrets.mracek-ssh-ed25519-private.file = ../secrets/mracek-ssh-ed25519-private.age; # Delare private key
 
 	nixpkgs.hostPlatform = "x86_64-linux";
 }

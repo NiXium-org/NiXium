@@ -8,19 +8,6 @@
 
 {
 	perSystem = { system, pkgs, inputs', self', ... }: {
-		# # Make this callable from `nix run`
-		# apps.install-task.program = self'.packages.install-task;
-
-		# # Package Declaration
-		# packages.install-task = pkgs.writeShellApplication {
-		# 	name = "install-task";
-		# 	runtimeInputs = [
-		# 		inputs'.disko.packages.disko-install
-		# 		pkgs.age
-		# 	];
-		# 	text = (builtins.readFile ./script.sh);
-		# };
-
 		# Integration in mission-control
 		mission-control.scripts = {
 			"install" = {
