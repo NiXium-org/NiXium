@@ -88,12 +88,14 @@ in {
 				pkgs.age
 			];
 			text = ''
+				# FIXME-QA(Krey): This should be a runtimeInput
 				die() { printf "FATAL: %s\n" "$2"; exit ;}
 
-				[ -f "${self.nixosConfigurations.mracek.config.disko.devices.disk.system.device}" ] || die 1 "Expected device was not found, refusing to install"
+				# FIXME(Krey): Should we adapt this to allow parsing a different disk?
+				# [ -f "${self.nixosConfigurations.mracek.config.disko.devices.disk.system.device}" ] || die 1 "Expected device was not found, refusing to install"
 
-				ragenixTempDir="/var/tmp/nixium"
-				ragenixIdentity="$HOME/.ssh/id_ed25519"
+				[ -n "$ragenixTempDir" ] || ragenixTempDir="$/var/tmp/nixium"
+				[ -n "$ragenixIdentity" ] || ragenixIdentity="$HOME/.ssh/id_ed25519"
 
 				[ -d "$ragenixTempDir" ] || sudo mkdir "$ragenixTempDir"
 				sudo chown -R "$USER:users" "$ragenixTempDir"
