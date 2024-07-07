@@ -6,6 +6,7 @@ let
 	inherit (lib) mkIf;
 in {
 	networking.hostName = "mracek";
+	age.secrets.mracek-ssh-ed25519-private.file = ../secrets/mracek-ssh-ed25519-private.age; # Experiment
 
 	boot.impermanence.enable = true; # Use impermanence
 

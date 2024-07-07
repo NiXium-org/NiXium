@@ -79,7 +79,7 @@ in {
 		};
 	};
 
-	# Task to INSTALL the specified derivation on current system including the firmware in a fully declarative way
+	# Task to perform installation of MRACEK in NixOS distribution
 	perSystem = { system, pkgs, inputs', self', ... }: {
 		packages.nixos-mracek-install = pkgs.writeShellApplication {
 			name = "nixos-mracek-install";
@@ -87,7 +87,28 @@ in {
 				inputs'.disko.packages.disko-install
 				pkgs.age
 			];
-			text = (builtins.readFile ./scripts/mracek-install.sh);
+			text = ''
+				die() { printf "FATAL: %s\n" "$2"; exit ;}
+
+				[ -f "${self.nixosConfigurations.mracek.config.disko.devices.disk.system.device}" ] || die 1 "Expected device was not found, refusing to install"
+
+				ragenixTempDir="/var/tmp/nixium"
+				ragenixIdentity="$HOME/.ssh/id_ed25519"
+
+				[ -d "$ragenixTempDir" ] || sudo mkdir "$ragenixTempDir"
+				sudo chown -R "$USER:users" "$ragenixTempDir"
+				sudo chmod -R 700 "$ragenixTempDir"
+
+				[ -s "$ragenixTempDir/mracek-disks-password" ] || age --identity "$ragenixIdentity" --decrypt --output "$ragenixTempDir/mracek-disks-password" "${self.nixosConfigurations.mracek.config.age.secrets.mracek-disks-password.file}"
+
+				[ -s "$ragenixTempDir/mracek-ssh-ed25519-private" ] || age --identity "$ragenixIdentity" --decrypt --output "$ragenixTempDir/mracek-ssh-ed25519-private" "${self.nixosConfigurations.mracek.config.age.secrets.mracek-ssh-ed25519-private.file}"
+
+				sudo disko-install \
+					--dry-run \
+					--flake "git+file://$FLAKE_ROOT#mracek" \
+					--disk system "$(realpath ${self.nixosConfigurations.mracek.config.disko.devices.disk.system.device})" \
+					--extra-files "$ragenixTempDir/mracek-ssh-ed25519-private" /nix/persist/system/etc/ssh/ssh_host_ed25519_key
+			'';
 		};
 
 		# Declare for `nix run`
