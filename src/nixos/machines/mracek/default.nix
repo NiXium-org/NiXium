@@ -92,11 +92,10 @@ in {
 				# FIXME-QA(Krey): This should be a runtimeInput
 				die() { printf "FATAL: %s\n" "$2"; exit ;}
 
-				# FIXME(Krey): Should we adapt this to allow parsing a different disk?
-				# [ -f "${self.nixosConfigurations.mracek.config.disko.devices.disk.system.device}" ] || die 1 "Expected device was not found, refusing to install"
+				[ -f "${self.nixosConfigurations.mracek.config.disko.devices.disk.system.device}" ] || die 1 "Expected device was not found, refusing to install"
 
-				[ -n "$ragenixTempDir" ] || ragenixTempDir="$/var/tmp/nixium"
-				[ -n "$ragenixIdentity" ] || ragenixIdentity="$HOME/.ssh/id_ed25519"
+				ragenixTempDir="/var/tmp/nixium"
+				ragenixIdentity="$HOME/.ssh/id_ed25519"
 
 				[ -d "$ragenixTempDir" ] || sudo mkdir "$ragenixTempDir"
 				sudo chown -R "$USER:users" "$ragenixTempDir"
@@ -107,7 +106,6 @@ in {
 				[ -s "$ragenixTempDir/mracek-ssh-ed25519-private" ] || age --identity "$ragenixIdentity" --decrypt --output "$ragenixTempDir/mracek-ssh-ed25519-private" "${self.nixosConfigurations.mracek.config.age.secrets.mracek-ssh-ed25519-private.file}"
 
 				sudo disko-install \
-					--dry-run \
 					--flake "git+file://$FLAKE_ROOT#mracek" \
 					--disk system "$(realpath ${self.nixosConfigurations.mracek.config.disko.devices.disk.system.device})" \
 					--extra-files "$ragenixTempDir/mracek-ssh-ed25519-private" /nix/persist/system/etc/ssh/ssh_host_ed25519_key
