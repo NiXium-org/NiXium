@@ -18,8 +18,6 @@
 	services.openssh.enable = true;
 	services.tor.enable = true;
 	services.hardware.openrgb.enable = true;
-		services.hardware.openrgb.motherboard = "intel";
-		services.hardware.openrgb.package = pkgs.openrgb-with-all-plugins;
 
 	# Desktop Environment
 	services.xserver.enable = true;

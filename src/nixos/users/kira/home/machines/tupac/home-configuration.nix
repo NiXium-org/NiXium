@@ -39,6 +39,7 @@ in {
 			'';
 		}))
 
+		# PRIVACY(Krey): Temporary management with adjusted threat model used only as a fallback in case webcord fails in production
 		(pkgs.discord.overrideAttrs (super: {
 			postInstall = ''
 				wrapProgram $out/bin/discord \
