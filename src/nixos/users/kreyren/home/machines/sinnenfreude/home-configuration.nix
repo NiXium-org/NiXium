@@ -22,6 +22,7 @@
 	programs.nix-index.enable = true;
 
 	services.gpg-agent.enable = true;
+	services.flameshot.enable = true;
 
 	nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
 		# FIXME(Krey): Using vscodium, no idea why this needs 'vscode' set

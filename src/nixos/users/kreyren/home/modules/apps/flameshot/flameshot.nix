@@ -1,6 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, lib, config, ... }:
 
 let
+	inherit (lib) mkIf;
+
 	# Wayland fix https://github.com/NixOS/nixpkgs/issues/292700#issuecomment-1974953531
 	flameshotGrim = pkgs.flameshot.overrideAttrs (oldAttrs: {
 		src = pkgs.fetchFromGitHub {
@@ -15,8 +17,18 @@ let
 		];
 		buildInputs = oldAttrs.buildInputs ++ [ pkgs.libsForQt5.kguiaddons ];
 	});
-in {
-	services.flameshot = {
-		package = flameshotGrim;
+in mkIf config.services.flameshot.enable {
+	services.flameshot.package = flameshotGrim; # Set the patched flameshot as our flameshot
+
+	# Workaround for Unit tray.target required by flameshot (https://github.com/nix-community/home-manager/issues/2064)
+	xsession.enable = true;
+	systemd.user.targets.tray = {
+		Unit = {
+			Description = "Home Manager System Tray";
+			Wants = [ "graphical-session-pre.target" ];
+		};
 	};
+
+	# FIXME-QA(Krey): This should be a wrapper
+	home.packages = [ pkgs.grim ]; # Add the dependency
 }
