@@ -35,7 +35,6 @@
 		# Instant-Chats
 			# FIXME-QA(Krey): Use this on GTK-based desktop environments
 				pkgs.fractal # GTK4+ Matrix Client Written in Rust
-				pkgs.element-desktop # To Be Deprecated by Fractal, but still needed for fallback
 			# FIXME-QA(Krey): Enable this on QT-based desktop environments
 				# pkgs.nheko # QT-based Matrix Client
 
@@ -45,6 +44,9 @@
 
 			# Temporary managment of IRC until it's implemented in our matrix server
 			pkgs.hexchat # Unmaintained package, no better known for the protocol
+
+			# Discord client for flexibility
+			pkgs.dissent
 
 		# Slicers
 		pkgs.cura

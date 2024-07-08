@@ -14,6 +14,7 @@ in mkIf config.nix.distributedBuilds {
 		# Add the builder user
 			users.users."${builder-account}" = {
 				description = "User used for distributed builds on nixium";
+				uid = 5000;
 				isNormalUser = true;
 				createHome = false; # Do Not Create the home for the user
 				group = builder-group;

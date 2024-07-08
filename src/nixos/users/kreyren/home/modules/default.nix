@@ -8,6 +8,7 @@
 		./system
 		./terminal-emulators
 		./tools
+		./vpn
 		./web-browsers
 	];
 }

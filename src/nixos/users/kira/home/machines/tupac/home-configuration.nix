@@ -35,7 +35,14 @@ in {
 		# 	# Temporary management until we get a VPN
 		# 	commandLineArgs = "--no-proxy-server";
 		# })
-		pkgs.goofcord
+
+		# Use ProtonVPN for WebCord
+			(pkgs.webcord.overrideAttrs (super: {
+				postInstall = ''
+					wrapProgram $out/bin/webcord \
+						--append-flags "--proxy-server=socks5://127.0.0.1:25344"
+				'';
+			}))
 
 		pkgs.keepassxc
 		# pkgs.cura # Broken: https://github.com/NixOS/nixpkgs/issues/186570

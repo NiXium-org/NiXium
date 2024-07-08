@@ -12,6 +12,7 @@ in {
 
 	users.users.kreyren = {
 		description = "Raptor"; # FIXME(Krey): Figure out how to handle this
+		uid = 1000;
 		isNormalUser = true;
 		createHome = true;
 		hashedPasswordFile = config.age.secrets.kreyren-user-password.path;

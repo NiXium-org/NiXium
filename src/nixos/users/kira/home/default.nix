@@ -29,6 +29,7 @@ in {
 
 						# homeManagerModules.kira.system.default
 						homeManagerModules.system-dconf-kira
+						homeManagerModules.system-flatpak-kira
 						homeManagerModules.system-gtk-kira
 						homeManagerModules.system-impermanence-kira
 
@@ -39,6 +40,8 @@ in {
 						homeManagerModules.tools-direnv-kira
 						homeManagerModules.tools-git-kira
 						homeManagerModules.tools-gpg-agent-kira
+
+						homeManagerModules.vpn-protonvpn-kira
 
 						# homeManagerModules.kira.web-browsers.default
 						# homeManagerModules.web-browsers-firefox-kira # Broken
