@@ -17,6 +17,8 @@
 	services.openssh.enable = true;
 	services.tor.enable = true;
 
+	networking.wireguard.enable = false;
+
 	# Desktop Environment
 	services.xserver.enable = true;
 	services.xserver.displayManager.gdm.enable = true;

@@ -31,6 +31,7 @@ in {
 
 					# homeManagerModules.kreyren.system.default
 					homeManagerModules.system-dconf-kreyren
+					homeManagerModules.system-flatpak-kreyren
 					homeManagerModules.system-gtk-kreyren
 					homeManagerModules.system-impermanence-kreyren
 					homeManagerModules.system-nix-kreyren
@@ -42,6 +43,8 @@ in {
 					homeManagerModules.tools-direnv-kreyren
 					homeManagerModules.tools-git-kreyren
 					homeManagerModules.tools-gpg-agent-kreyren
+
+					homeManagerModules.vpn-protonvpn-kreyren
 
 					# homeManagerModules.kreyren.web-browsers.default
 					homeManagerModules.web-browsers-firefox-kreyren
@@ -55,6 +58,7 @@ in {
 
 			home-manager.extraSpecialArgs = {
 				inherit self;
+
 				aagl = self.inputs.aagl.packages."${system}";
 				unstable = self.inputs.nixpkgs-unstable.legacyPackages."${system}";
 				staging-next = self.inputs.nixpkgs-staging-next.legacyPackages."${system}";

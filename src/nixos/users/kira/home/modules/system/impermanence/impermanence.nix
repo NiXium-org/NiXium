@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ lib, config, nixosConfig, ... }:
 
 let
 	inherit (lib) mkIf;
@@ -19,8 +19,11 @@ in {
 			".ssh"
 			".cache"
 
+			# FIXME-QA(Krey): Should only be applied if `webcord` is installed
 			".config/WebCord"
-			".config/goofcord"
+
+			# FIXME-QA(Krey): Should only be applied if `discord` is installed
+			".config/discord"
 
 			# Steam
 			# FIXME(Krey): This should only contain the authorization files, steam games and cache everything else should be handled by steam on startup
@@ -51,8 +54,7 @@ in {
 			# FIXME-QA(Krey): Should only be applied if fractal is installed
 			".local/share/fractal"
 
-			# FIXME-QA(Krey): Should only be applied if flatpak is installed
-			".local/share/flatpak"
+			(mkIf nixosConfig.services.flatpak.enable ".local/share/flatpak")
 
 			# FIXME-QA(Krey): Should only be applied if `anime-game-launcher` is installed
 			".local/share/anime-game-launcher"

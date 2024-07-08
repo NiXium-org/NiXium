@@ -7,6 +7,7 @@ in {
 
 	users.users.kira = {
 		description = "Veloraptor";
+		uid = 1001;
 		isNormalUser = true;
 		hashedPasswordFile = config.age.secrets.kira-user-password.path;
 		extraGroups = [

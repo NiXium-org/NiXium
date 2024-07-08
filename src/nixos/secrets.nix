@@ -25,10 +25,18 @@ in {
 		kreyren
 	] ++ all-systems;
 
+	"./users/kreyren/home/modules/vpn/kreyren-wireproxy-protonvpn-config.age".publicKeys = [
+		kreyren sinnenfreude-system
+	];
+
 	# Kira (user)
 	"./users/kira/kira-user-password.age".publicKeys = [
 		kreyren kira
 	] ++ all-systems;
+
+	"./users/kira/home/modules/vpn/kira-wireproxy-protonvpn-config.age".publicKeys = [
+		kira kreyren tupac-system
+	];
 
 	# MRACEK (system)
 	"./machines/mracek/secrets/mracek-disks-password.age".publicKeys = [
