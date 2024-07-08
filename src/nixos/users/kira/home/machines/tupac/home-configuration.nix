@@ -27,22 +27,27 @@ in {
 		"etlegacy"
 		"etlegacy-assets"
 		"davinci-resolve"
+		"discord"
 	];
 
 	home.packages = [
-		# # FIXME(Krey): Management pending https://github.com/NixOS/nixpkgs/pull/311937
-		# (kreyren.webcord.override {
-		# 	# Temporary management until we get a VPN
-		# 	commandLineArgs = "--no-proxy-server";
-		# })
-
 		# Use ProtonVPN for WebCord
-			(pkgs.webcord.overrideAttrs (super: {
-				postInstall = ''
-					wrapProgram $out/bin/webcord \
-						--append-flags "--proxy-server=socks5://127.0.0.1:25344"
-				'';
-			}))
+		(pkgs.webcord.overrideAttrs (super: {
+			postInstall = ''
+				wrapProgram $out/bin/webcord \
+					--append-flags "--proxy-server=socks5://127.0.0.1:25344"
+			'';
+		}))
+
+		(pkgs.discord.overrideAttrs (super: {
+			postInstall = ''
+				wrapProgram $out/bin/discord \
+					--append-flags "--no-proxy-server"
+
+				wrapProgram $out/bin/Discord \
+					--append-flags "--no-proxy-server"
+			'';
+		}))
 
 		pkgs.keepassxc
 		# pkgs.cura # Broken: https://github.com/NixOS/nixpkgs/issues/186570

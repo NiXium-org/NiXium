@@ -19,8 +19,11 @@ in {
 			".ssh"
 			".cache"
 
+			# FIXME-QA(Krey): Should only be applied if `webcord` is installed
 			".config/WebCord"
-			".config/goofcord"
+
+			# FIXME-QA(Krey): Should only be applied if `discord` is installed
+			".config/discord"
 
 			# Steam
 			# FIXME(Krey): This should only contain the authorization files, steam games and cache everything else should be handled by steam on startup
