@@ -16,6 +16,7 @@
 	programs.git.enable = true; # Generic use only
 	programs.gpg.enable = true;
 	programs.firefox.enable = true;
+	programs.librewolf.enable = true;
 	programs.vim.enable = true;
 	programs.vscode.enable = true;
 	programs.nix-index.enable = true;
@@ -61,7 +62,6 @@
 		pkgs.mindustry
 
 		# Web Browsers
-		(pkgs.brave.override { commandLineArgs = "--no-proxy-server"; }) # Do Not Use system-wide Tor Proxy as it's causing issues with the brave's functionality
 		pkgs.tor-browser-bundle-bin
 
 		# Engineering

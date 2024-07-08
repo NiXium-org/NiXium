@@ -5,8 +5,7 @@
 let
 	inherit (lib) mkIf;
 in {
-	#boot.kernelPackages = pkgs.linuxPackages_6_9_hardened;
-	boot.kernelPackages = pkgs.linuxPackages;
+	boot.kernelPackages = pkgs.linuxPackages_hardened;
 
 	# SECURITY(Krey): Some packages run in electron which requires this, in process of getting rid of them
 	#security.unprivilegedUsernsClone = true;
