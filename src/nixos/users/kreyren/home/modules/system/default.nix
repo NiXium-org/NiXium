@@ -10,6 +10,7 @@ in {
 
 	imports = [
 		./dconf
+		./flatpak
 		./gtk
 		./impermanence
 		./nix

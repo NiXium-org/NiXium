@@ -9,6 +9,8 @@
 
 	nix.settings.trusted-users = [ "kira" ]; # Add Kira in Trusted-Users
 
+	xsession.numlock.enable = true; # Enable numlock on boot
+
 	# Global Packages Installed On ALL Systems
 	home.packages = [
 		pkgs.keepassxc

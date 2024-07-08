@@ -44,6 +44,8 @@ in {
 
 	systemd.user.startServices = true; # Start all needed services on activation and deactivate the obsolets instead of suggesting what to do
 
+	xsession.numlock.enable = true; # Enable numlock on boot
+
 	# Global Packages Installed On ALL Systems
 	home.packages = [
 		pkgs.keepassxc
