@@ -9,8 +9,8 @@ in {
 
 	home.impermanence.enable = true;
 
-	programs.alacritty.enable = false; # Rust-based Hardware-accelarated terminal
-	programs.kitty.enable = true; # Alternative Rust-based Hardware-accelarated terminal for testing, potentially superrior to alacritty
+	programs.alacritty.enable = true; # Rust-based Hardware-accelarated terminal
+	programs.kitty.enable = false; # Alternative Rust-based Hardware-accelarated terminal for testing, potentially superrior to alacritty
 	programs.bash.enable = true;
 	programs.starship.enable = true;
 	programs.direnv.enable = true; # To manage git repositories
@@ -46,6 +46,7 @@ in {
 		pkgs.tealdeer
 		# pkgs.ventoy-full
 		pkgs.blender
+		pkgs.gparted
 
 		(pkgs.brave.override {
 			# NOTE(Krey): Using system-wide tor which is interfiering with the brave's browsing as non-tor browsing has tor and tor browser goes through 2 Tors so this fixes it
