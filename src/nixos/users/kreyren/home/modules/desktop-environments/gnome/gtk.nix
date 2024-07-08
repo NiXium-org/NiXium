@@ -1,5 +1,7 @@
 { pkgs, ... }:
 
+# DESIGN(Krey): How do i want to manage this?
+
 {
 	gtk = {
 		theme = {
