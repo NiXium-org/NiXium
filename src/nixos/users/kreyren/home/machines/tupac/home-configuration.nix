@@ -29,6 +29,22 @@ in {
 	];
 
 	home.packages = [
+		# Instant-Chats
+			# FIXME-QA(Krey): Use this on GTK-based desktop environments
+				pkgs.fractal # GTK4+ Matrix Client Written in Rust
+			# FIXME-QA(Krey): Enable this on QT-based desktop environments
+				# pkgs.nheko # QT-based Matrix Client
+
+			# Temporary management of Post-Quantum Safety until matrix manages it, see https://github.com/matrix-org/matrix-spec/issues/975 for details
+			unstable.simplex-chat-desktop
+			pkgs.session-desktop
+
+			# Temporary managment of IRC until it's implemented in our matrix server
+			pkgs.hexchat # Unmaintained package, no better known for the protocol
+
+			# Discord client for flexibility
+			pkgs.dissent
+
 		pkgs.keepassxc
 		# pkgs.cura # Broken: https://github.com/NixOS/nixpkgs/issues/186570
 		pkgs.prusa-slicer
