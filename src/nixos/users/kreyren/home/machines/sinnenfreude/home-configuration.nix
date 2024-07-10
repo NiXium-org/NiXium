@@ -64,7 +64,12 @@
 
 		# Web Browsers
 		pkgs.tor-browser-bundle-bin # Standard Tor Web Browser
-		pkgs.brave # Standard Insecure Web Browser
+		(pkgs.brave.overrideAttrs (super: {
+			postInstall = ''
+				wrapProgram $out/bin/brave \
+					--append-flags "--no-proxy-server"
+			'';
+		})) # Standard Insecure Web Browser
 
 		# Engineering
 		pkgs.blender
