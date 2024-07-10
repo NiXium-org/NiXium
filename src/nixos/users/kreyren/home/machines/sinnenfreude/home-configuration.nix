@@ -15,8 +15,8 @@
 	programs.direnv.enable = true; # To manage git repositories
 	programs.git.enable = true; # Generic use only
 	programs.gpg.enable = true;
-	programs.firefox.enable = true;
-	programs.librewolf.enable = true;
+	programs.firefox.enable = true; # Fully hardened web browser (Privacy > Comfort)
+	programs.librewolf.enable = true; # Lesser security web browser (Comfort > Privacy)
 	programs.vim.enable = true;
 	programs.vscode.enable = true;
 	programs.nix-index.enable = true;
@@ -63,7 +63,8 @@
 		pkgs.mindustry
 
 		# Web Browsers
-		pkgs.tor-browser-bundle-bin
+		pkgs.tor-browser-bundle-bin # Standard Tor Web Browser
+		pkgs.brave # Standard Insecure Web Browser
 
 		# Engineering
 		pkgs.blender
