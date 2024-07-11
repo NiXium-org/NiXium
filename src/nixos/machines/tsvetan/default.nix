@@ -116,6 +116,7 @@ in {
 	};
 
 	# Recovery configuration
+		# FIXME(Krey): Figure out how to generate an image with u-boot starting at 128th block to not rely on the systems's firmware on SPI flash
 	flake.nixosModules."nixos-tsvetan-recovery" = inputs.nixpkgs.lib.nixosSystem {
 		system = "aarch64-linux";
 
