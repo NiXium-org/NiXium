@@ -171,15 +171,16 @@ in {
 		};
 	};
 
-	packages.aarch64-linux.nixos-tsvetan-recovery = self.inputs.nixos-generators.nixosGenerate {
-																								# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-		system = "aarch64-linux";
-		modules = [ self.nixosModules.aarch64-linux.nixos-tsvetan-recovery ];
-		format = "sd-aarch64-installer";
-	};
+	# BLOCKED(Krey): https://github.com/nix-community/nixos-generators/issues/349
+	# packages.aarch64-linux.nixos-tsvetan-recovery = self.inputs.nixos-generators.nixosGenerate {
+	# 																							# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+	# 	system = "aarch64-linux";
+	# 	modules = [ self.nixosModules.aarch64-linux.nixos-tsvetan-recovery ];
+	# 	format = "sd-aarch64-installer";
+	# };
 
-	# Declare for `nix run`
-	apps.nixos-tsvetan-recovery.program = self.packages.aarch64-linux.nixos-tsvetan-recovery;
+	# # Declare for `nix run`
+	# apps.nixos-tsvetan-recovery.program = self.packages.aarch64-linux.nixos-tsvetan-recovery;
 
 	# Module export to other systems in the infrastructure
 	flake.nixosModules.machine-tsvetan = ./lib/tsvetan-export.nix;
