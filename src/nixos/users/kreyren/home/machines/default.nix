@@ -2,5 +2,6 @@
 	imports = [
 		./sinnenfreude
 		./tupac
+		./tsvetan
 	];
 }

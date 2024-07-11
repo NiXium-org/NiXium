@@ -25,6 +25,10 @@ in {
 			self.inputs.disko.nixosModules.disko
 			self.inputs.nixos-generators.nixosModules.all-formats
 
+			# Users
+			self.nixosModules.users-kreyren
+			self.homeManagerModules."kreyren@tsvetan"
+
 			# Files
 			./config/bootloader.nix
 			./config/disks.nix
