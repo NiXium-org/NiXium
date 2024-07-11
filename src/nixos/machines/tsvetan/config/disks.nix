@@ -51,6 +51,7 @@ in {
 					system = {
 						device = "/dev/disk/by-id/mmc-R1J56L_0xd5a44fe1"; # eMMC
 						type = "disk";
+						imageSize = "16G"; # Size of the generated image, max 16GB to match the capacity of the eMMC
 						content = {
 							type = "gpt";
 							partitions = {
@@ -67,11 +68,11 @@ in {
 									};
 								};
 
-								nix-store = {
-									start = "1079296";
-									end = "20447231";
+								store = {
+									priority = 3;
+									size = "100%";
 									content = {
-										name = "nix-store";
+										name = "store";
 										type = "luks";
 										settings.allowDiscards = true;
 
@@ -106,8 +107,8 @@ in {
 								};
 
 								swap = {
-									start = "20447232";
-									end = "28833791";
+									priority = 2;
+									size = "4G";
 									content = {
 										name = "swap";
 										type = "luks";

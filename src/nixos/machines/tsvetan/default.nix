@@ -26,10 +26,6 @@ in {
 			self.inputs.nixos-generators.nixosModules.all-formats
 
 			# Files
-			./services/distributedBuilds.nix
-			./services/openssh.nix
-			./services/tor.nix
-
 			./config/bootloader.nix
 			./config/disks.nix
 			./config/firmware.nix
@@ -42,6 +38,10 @@ in {
 			./config/setup.nix
 			./config/sound.nix
 			./config/vm-build.nix
+
+			./services/distributedBuilds.nix
+			./services/openssh.nix
+			./services/tor.nix
 		];
 
 		specialArgs = {
@@ -68,6 +68,42 @@ in {
 				config.allowUnfree = mkForce false; # Forbid proprietary code
 			};
 		};
+	};
+
+	# Task to perform installation of TSVETAN in NixOS distribution
+	perSystem = { system, pkgs, inputs', self', ... }: {
+		packages.nixos-tsvetan-install = pkgs.writeShellApplication {
+			name = "nixos-tsvetan-install";
+			runtimeInputs = [
+				inputs'.disko.packages.disko-install
+				pkgs.age
+			];
+			text = ''
+				# FIXME-QA(Krey): This should be a runtimeInput
+				die() { printf "FATAL: %s\n" "$2"; exit ;}
+
+				[ -f "${self.nixosConfigurations.tsvetan.config.disko.devices.disk.system.device}" ] || die 1 "Expected device was not found, refusing to install"
+
+				ragenixTempDir="/var/tmp/nixium"
+				ragenixIdentity="$HOME/.ssh/id_ed25519"
+
+				[ -d "$ragenixTempDir" ] || sudo mkdir "$ragenixTempDir"
+				sudo chown -R "$USER:users" "$ragenixTempDir"
+				sudo chmod -R 700 "$ragenixTempDir"
+
+				[ -s "$ragenixTempDir/tsvetan-disks-password" ] || age --identity "$ragenixIdentity" --decrypt --output "$ragenixTempDir/tsvetan-disks-password" "${self.nixosConfigurations.tsvetan.config.age.secrets.tsvetan-disks-password.file}"
+
+				[ -s "$ragenixTempDir/tsvetan-ssh-ed25519-private" ] || age --identity "$ragenixIdentity" --decrypt --output "$ragenixTempDir/tsvetan-ssh-ed25519-private" "${self.nixosConfigurations.tsvetan.config.age.secrets.tsvetan-ssh-ed25519-private.file}"
+
+				sudo disko-install \
+					--flake "git+file://$FLAKE_ROOT#mracek" \
+					--disk system "$(realpath ${self.nixosConfigurations.tsvetan.config.disko.devices.disk.system.device})" \
+					--extra-files "$ragenixTempDir/tsvetan-ssh-ed25519-private" /nix/persist/system/etc/ssh/ssh_host_ed25519_key
+			'';
+		};
+
+		# Declare for `nix run`
+		apps.nixos-mracek-install.program = self'.packages.nixos-mracek-install;
 	};
 
 	# Module export to other systems in the infrastructure

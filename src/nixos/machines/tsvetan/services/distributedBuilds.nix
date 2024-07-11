@@ -8,19 +8,19 @@ let
 	inherit (lib) mkIf;
 in {
 	# Import the SSH Keys for the builder account
-	age.secrets.tsvetan-builder-ssh-ed25519-private = {
-		file = ../secrets/tsvetan-builder-ssh-ed25519-private.age;
+	# age.secrets.tsvetan-builder-ssh-ed25519-private = {
+	# 	file = ../secrets/tsvetan-builder-ssh-ed25519-private.age;
 
-		owner = "builder";
-		group = "builder";
-		mode = "660"; # rw-rw----
+	# 	owner = "builder";
+	# 	group = "builder";
+	# 	mode = "660"; # rw-rw----
 
-		path = (if config.boot.impermanence.enable
-			then "/nix/persist/system/etc/ssh/ssh_builder_ed25519_key"
-			else "/etc/ssh/ssh_builder_ed25519_key");
+	# 	path = (if config.boot.impermanence.enable
+	# 		then "/nix/persist/system/etc/ssh/ssh_builder_ed25519_key"
+	# 		else "/etc/ssh/ssh_builder_ed25519_key");
 
-		symlink = false; # Appears to not work as symlink
-	};
+	# 	symlink = false; # Appears to not work as symlink
+	# };
 
 	# Set the pubkey
 	# environment.etc."ssh/ssh_builder_ed25519_key.pub".text = "ssh-ed25519 ssh-ed25519 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJIGULjxE0+f8yz08cgtU9WtRQtxa3QUIyaw0cILRl/y builder@mracek";

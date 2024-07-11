@@ -1,11 +1,11 @@
 { config, lib, ... }:
 
-# Setup of MRACEK
+# Setup of TSVETAN
 
 let
 	inherit (lib) mkIf;
 in {
-	networking.hostName = "tsetan";
+	networking.hostName = "tsvetan";
 
 	boot.impermanence.enable = true; # Use impermanence
 

@@ -5,6 +5,7 @@
 {
 	sound.enable = true; # ALSA
 
+	# Disable Pulseaudio as pipewire manages that within it's declaration
 	hardware.pulseaudio.enable = false;
 
 	services.pipewire = {
