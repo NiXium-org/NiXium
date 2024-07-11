@@ -1,9 +1,9 @@
-{ self, config, lib, inputs, ... }:
+{ self, lib, inputs, ... }:
 
 # Flake management of TSVETAN system
 
 let
-	inherit (lib) mkForce mkIf;
+	inherit (lib) mkForce;
 in {
 	# Main Configuration
 	flake.nixosConfigurations."tsvetan" = inputs.nixpkgs.lib.nixosSystem {
@@ -103,6 +103,11 @@ in {
 					--flake "git+file://$FLAKE_ROOT#mracek" \
 					--disk system "$(realpath ${self.nixosConfigurations.tsvetan.config.disko.devices.disk.system.device})" \
 					--extra-files "$ragenixTempDir/tsvetan-ssh-ed25519-private" /nix/persist/system/etc/ssh/ssh_host_ed25519_key
+
+				# FIXME(Krey): Flash u-boot, currently blocked by https://github.com/OLIMEX/DIY-LAPTOP/issues/73 (flashing it manually via SPI clamp and ch341a programmer atm)
+
+				# FIXME(Krey): Flash firmware for keyboard
+				# FIXME(Krey): Flash firmware for touchpad
 			'';
 		};
 
@@ -110,6 +115,71 @@ in {
 		apps.nixos-mracek-install.program = self'.packages.nixos-mracek-install;
 	};
 
+	# Recovery configuration
+	flake.nixosModules."nixos-tsvetan-recovery" = inputs.nixpkgs.lib.nixosSystem {
+		system = "aarch64-linux";
+
+		pkgs = import inputs.nixpkgs {
+			system = "aarch64-linux";
+			config.allowUnfree = mkForce false; # Forbid proprietary code
+		};
+
+		modules = [
+			self.nixosModules.default # Load NiXium's Global configuration
+
+			# Principles
+			self.inputs.ragenix.nixosModules.default
+			self.inputs.sops.nixosModules.sops
+			self.inputs.lanzaboote.nixosModules.lanzaboote
+			self.inputs.impermanence.nixosModules.impermanence
+			self.inputs.disko.nixosModules.disko
+			self.inputs.nixos-generators.nixosModules.sd-aarch64-installer
+
+			# Users
+			self.nixosModules.users-kreyren
+
+			{
+				# WORKAROUND(Krey): https://github.com/NixOS/nixpkgs/issues/286196
+				boot.loader.efi.canTouchEfiVariables = false;
+			}
+		];
+
+		specialArgs = {
+			inherit self;
+
+			# Priciple args
+			stable = import inputs.nixpkgs {
+				system = "aarch64-linux";
+				config.allowUnfree = mkForce false; # Forbid proprietary code
+			};
+
+			unstable = import inputs.nixpkgs-unstable {
+				system = "aarch64-linux";
+				config.allowUnfree = mkForce false; # Forbid proprietary code
+			};
+
+			staging = import inputs.nixpkgs-staging {
+				system = "aarch64-linux";
+				config.allowUnfree = mkForce false; # Forbid proprietary code
+			};
+
+			staging-next = import inputs.nixpkgs-staging-next {
+				system = "aarch64-linux";
+				config.allowUnfree = mkForce false; # Forbid proprietary code
+			};
+		};
+	};
+
+	packages.aarch64-linux.nixos-tsvetan-recovery = self.inputs.nixos-generators.nixosGenerate {
+																								# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+		system = "aarch64-linux";
+		modules = [ self.nixosModules.aarch64-linux.nixos-tsvetan-recovery ];
+		format = "sd-aarch64-installer";
+	};
+
+	# Declare for `nix run`
+	apps.nixos-tsvetan-recovery.program = self.packages.aarch64-linux.nixos-tsvetan-recovery;
+
 	# Module export to other systems in the infrastructure
-		flake.nixosModules.machine-tsvetan = ./lib/tsvetan-export.nix;
+	flake.nixosModules.machine-tsvetan = ./lib/tsvetan-export.nix;
 }
