@@ -36,7 +36,8 @@
 				# pkgs.nheko # QT-based Matrix Client
 
 			# Temporary management of Post-Quantum Safety until matrix manages it, see https://github.com/matrix-org/matrix-spec/issues/975 for details
-			unstable.simplex-chat-desktop
+			# Doesn't support aarch64-linux
+			# unstable.simplex-chat-desktop
 			# pkgs.session-desktop
 
 			# Temporary managment of IRC until it's implemented in our matrix server
@@ -52,7 +53,8 @@
 		pkgs.orca-slicer # Prusa-slicer fork by BambuLab adapted by the community
 
 		# Web Browsers
-		pkgs.tor-browser-bundle-bin # Standard Tor Web Browser
+			# Doesn't support aarch64-linux
+				# pkgs.tor-browser-bundle-bin # Standard Tor Web Browser
 		(pkgs.brave.overrideAttrs (super: {
 			postInstall = ''
 				wrapProgram $out/bin/brave \

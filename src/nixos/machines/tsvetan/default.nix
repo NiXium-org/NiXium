@@ -20,9 +20,11 @@ in {
 			# Principles
 			self.inputs.ragenix.nixosModules.default
 			self.inputs.sops.nixosModules.sops
+			self.inputs.hm.nixosModules.home-manager
+			self.inputs.disko.nixosModules.disko
 			self.inputs.lanzaboote.nixosModules.lanzaboote
 			self.inputs.impermanence.nixosModules.impermanence
-			self.inputs.disko.nixosModules.disko
+			self.inputs.arkenfox.hmModules.default
 			self.inputs.nixos-generators.nixosModules.all-formats
 
 			# Users
@@ -118,7 +120,7 @@ in {
 	# Recovery configuration
 		# FIXME(Krey): Figure out how to generate an image with u-boot starting at 128th block to not rely on the systems's firmware on SPI flash
 		# BLOCKER(Krey): Should be nixosModules once https://github.com/nix-community/nixos-generators/issues/349 is fixed
-	flake.nixosConfigurations."nixos-tsvetan-recovery" = inputs.nixpkgs.lib.nixosSystem {
+	nixosConfigurations."nixos-tsvetan-recovery" = inputs.nixpkgs.lib.nixosSystem {
 		system = "aarch64-linux";
 
 		pkgs = import inputs.nixpkgs {
@@ -173,14 +175,14 @@ in {
 	};
 
 	# BLOCKED(Krey): https://github.com/nix-community/nixos-generators/issues/349
-	# packages.aarch64-linux.nixos-tsvetan-recovery = self.inputs.nixos-generators.nixosGenerate {
-	# 	system = "aarch64-linux";
-	# 	modules = [ self.nixosModules.aarch64-linux.nixos-tsvetan-recovery ];
-	# 	format = "sd-aarch64-installer";
-	# };
+	packages.aarch64-linux.nixos-tsvetan-recovery = self.inputs.nixos-generators.nixosGenerate {
+		system = "aarch64-linux";
+		modules = [ self.nixosModules.aarch64-linux.nixos-tsvetan-recovery ];
+		format = "sd-aarch64-installer";
+	};
 
-	# # Declare for `nix run`
-	# apps.nixos-tsvetan-recovery.program = self.packages.aarch64-linux.nixos-tsvetan-recovery;
+	# Declare for `nix run`
+	apps.nixos-tsvetan-recovery.program = self.packages.aarch64-linux.nixos-tsvetan-recovery;
 
 	# Module export to other systems in the infrastructure
 	flake.nixosModules.machine-tsvetan = ./lib/tsvetan-export.nix;

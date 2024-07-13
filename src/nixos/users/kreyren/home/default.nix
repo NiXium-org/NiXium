@@ -61,7 +61,9 @@ in {
 			home-manager.extraSpecialArgs = {
 				inherit self;
 
-				aagl = self.inputs.aagl.packages."${system}";
+				# Supports only x86_64-linux atm
+				aagl = self.inputs.aagl.packages.x86_64-linux;
+
 				unstable = self.inputs.nixpkgs-unstable.legacyPackages."${system}";
 				staging-next = self.inputs.nixpkgs-staging-next.legacyPackages."${system}";
 				firefox-addons = self.inputs.firefox-addons.packages."${system}";

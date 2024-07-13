@@ -14,7 +14,7 @@ let
 in {
 	config = mkMerge [
 		{
-			age.secrets.tsvetan-disks-password.file = ./secrets/tsvetan-disks-password.age;
+			age.secrets.tsvetan-disks-password.file = ../secrets/tsvetan-disks-password.age;
 		}
 
 		(if (true) then {
