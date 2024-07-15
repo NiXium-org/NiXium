@@ -88,7 +88,7 @@ in {
 				# FIXME-QA(Krey): This should be a runtimeInput
 				die() { printf "FATAL: %s\n" "$2"; exit ;}
 
-				[ -f "${self.nixosConfigurations.tsvetan.config.disko.devices.disk.system.device}" ] || die 1 "Expected device was not found, refusing to install"
+				[ -b "${self.nixosConfigurations.tsvetan.config.disko.devices.disk.system.device}" ] || die 1 "Expected device was not found, refusing to install"
 
 				ragenixTempDir="/var/tmp/nixium"
 				ragenixIdentity="$HOME/.ssh/id_ed25519"
