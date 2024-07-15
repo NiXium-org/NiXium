@@ -1,4 +1,4 @@
-{ self, lib, inputs, ... }:
+{ self, config, lib, inputs, ... }:
 
 # Flake management of TSVETAN system
 
@@ -102,7 +102,7 @@ in {
 				[ -s "$ragenixTempDir/tsvetan-ssh-ed25519-private" ] || age --identity "$ragenixIdentity" --decrypt --output "$ragenixTempDir/tsvetan-ssh-ed25519-private" "${self.nixosConfigurations.tsvetan.config.age.secrets.tsvetan-ssh-ed25519-private.file}"
 
 				sudo disko-install \
-					--flake "git+file://$FLAKE_ROOT#mracek" \
+					--flake "git+file://${lib.getExe config.flake-root.package}#mracek" \
 					--disk system "$(realpath ${self.nixosConfigurations.tsvetan.config.disko.devices.disk.system.device})" \
 					--extra-files "$ragenixTempDir/tsvetan-ssh-ed25519-private" /nix/persist/system/etc/ssh/ssh_host_ed25519_key
 
