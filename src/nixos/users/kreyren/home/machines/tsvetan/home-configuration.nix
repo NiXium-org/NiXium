@@ -66,7 +66,7 @@
 		pkgs.blender
 		pkgs.freecad
 		pkgs.gimp
-		pkgs.kicad
+		pkgs.kicad-small
 
 		# Utility
 		pkgs.keepassxc

@@ -83,15 +83,12 @@ in {
 			runtimeInputs = [
 				inputs'.disko.packages.disko-install
 				pkgs.age
-				inputs.flake-root.flakeModule
 			];
 			text = ''
 				# FIXME-QA(Krey): This should be a runtimeInput
 				die() { printf "FATAL: %s\n" "$2"; exit ;}
 
-				echo "KREYREN: ${lib.getExe config.flake-root.package}"
-
-				[ -b "${self.nixosConfigurations.tsvetan.config.disko.devices.disk.system.device}" ] || die 1 "Expected device was not found, refusing to install"
+				# [ -b "${self.nixosConfigurations.tsvetan.config.disko.devices.disk.system.device}" ] || die 1 "Expected device was not found, refusing to install"
 
 				ragenixTempDir="/var/tmp/nixium"
 				ragenixIdentity="$HOME/.ssh/id_ed25519"
@@ -106,7 +103,8 @@ in {
 
 				# FIXME(Krey): This should be using flake-root for the flake to refer to the repository in the nix store
 				sudo disko-install \
-					--flake "git+file://$FLAKE_ROOT#tsvetan" \
+					--dry-run \
+					--flake ".#tsvetan" \
 					--disk system "$(realpath ${self.nixosConfigurations.tsvetan.config.disko.devices.disk.system.device})" \
 					--extra-files "$ragenixTempDir/tsvetan-ssh-ed25519-private" /nix/persist/system/etc/ssh/ssh_host_ed25519_key
 
