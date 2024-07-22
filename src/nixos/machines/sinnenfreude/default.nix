@@ -6,6 +6,8 @@
 # ⚠️ Mount point '/boot' which backs the random seed file is world accessible, which is a security hole! ⚠️
 # ⚠️ Random seed file '/boot/loader/.#bootctlrandom-seed048bca5ff68f0657' is world accessible, which is a security hole! ⚠️
 
+# TODO(Krey): Deploy Xen
+
 {
 	flake.nixosConfigurations."sinnenfreude" = inputs.nixpkgs.lib.nixosSystem {
 		system = "x86_64-linux";
