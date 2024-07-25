@@ -6,13 +6,11 @@
 # ⚠️ Mount point '/boot' which backs the random seed file is world accessible, which is a security hole! ⚠️
 # ⚠️ Random seed file '/boot/loader/.#bootctlrandom-seed048bca5ff68f0657' is world accessible, which is a security hole! ⚠️
 
-# TODO(Krey): Deploy Xen
-
 {
-	flake.nixosConfigurations."sinnenfreude" = inputs.nixpkgs.lib.nixosSystem {
+	flake.nixosConfigurations."sinnenfreude" = inputs.nixpkgs-324693.lib.nixosSystem {
 		system = "x86_64-linux";
 
-		pkgs = import inputs.nixpkgs {
+		pkgs = import inputs.nixpkgs-324693 {
 			system = "x86_64-linux";
 			config.allowUnfree = true;
 			config.nvidia.acceptLicense = true; # Fuck You Nvidia, I am forced into this!
