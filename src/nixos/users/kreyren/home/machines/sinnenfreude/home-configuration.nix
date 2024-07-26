@@ -57,7 +57,7 @@
 
 		# Games
 		aagl.anime-game-launcher # An Anime Game
-		pkgs.colobot
+		# pkgs.colobot
 		pkgs.etlegacy # Wolfenstein: Enemy Territory
 		pkgs.airshipper # Veloren
 		pkgs.mindustry
