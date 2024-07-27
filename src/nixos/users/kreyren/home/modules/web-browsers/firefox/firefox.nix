@@ -77,11 +77,6 @@ in {
 					install_url = "file:///${firefox-addons.jump-cutter}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/jump-cutter@example.com.xpi";
 					installation_mode = "force_installed";
 				};
-				"deArrow@ajay.app" = {
-					# DeArrow
-					install_url = "file:///${firefox-addons.dearrow}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/deArrow@ajay.app.xpi";
-					installation_mode = "force_installed";
-				};
 				"addon@darkreader.org" = {
 					# Dark Reader
 					install_url = "file:///${firefox-addons.darkreader}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/addon@darkreader.org.xpi";
