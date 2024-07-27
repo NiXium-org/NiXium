@@ -12,12 +12,12 @@ let
 	inherit (lib) mkForce;
 in {
 	programs.firefox = {
-		package = pkgs.firefox-esr-128; # Higher version needed for github-refined
+		package = pkgs.firefox-esr;
 		# Refer to https://mozilla.github.io/policy-templates or `about:policies#documentation` in firefox
 		policies = {
 			AppAutoUpdate = false; # Disable automatic application update
 			BackgroundAppUpdate = false; # Disable automatic application update in the background, when the application is not running.
-			BlockAboutAddons = false;
+			BlockAboutAddons = true;
 			BlockAboutConfig = true;
 			BlockAboutProfiles = true;
 			BlockAboutSupport = true;
@@ -58,6 +58,10 @@ in {
 			# FIXME(Krey): Review `~/.mozilla/firefox/Default/extensions.json` and uninstall all unwanted
 			# Suggested by t0b0 thank you <3 https://gitlab.com/engmark/root/-/blob/60468eb82572d9a663b58498ce08fafbe545b808/configuration.nix#L293-310
 			# NOTE(Krey): Check if the addon is packaged on https://gitlab.com/rycee/nur-expressions/-/blob/master/pkgs/firefox-addons/addons.json the ID can be obtained by trying to install that in firefox
+			# Can be used to restrict domains per extension:
+				# "restricted_domains": [
+				# 	"TEST_BLOCKED_DOMAIN"
+				# ]
 			ExtensionSettings = {
 				"*" = {
 					installation_mode = "blocked";
