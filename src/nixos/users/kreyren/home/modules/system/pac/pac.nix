@@ -24,6 +24,7 @@
 					|| (dnsDomainIs(host, "extranix.com") || shExpMatch(host, "(*.extranix.com|extranix.com)"))
 					|| (dnsDomainIs(host, "pimsnel.com") || shExpMatch(host, "(*.pimsnel.com|pimsnel.com)")) // Used by extranix for assets
 					|| (dnsDomainIs(host, "unpkg.com") || shExpMatch(host, "(*.unpkg.com|unpkg.com)")) // Used by extranix for package database
+					|| (dnsDomainIs(host, "gitlab.com") || shExpMatch(host, "(*.gitlab.com|gitlab.com)")) // Used by extranix for package database
 				) return "SOCKS5 127.0.0.1:25344"; // Personal ProtonVPN;
 
 				// Allow direct connections for LAN traffic
