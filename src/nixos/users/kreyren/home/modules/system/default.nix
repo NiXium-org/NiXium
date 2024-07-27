@@ -14,5 +14,6 @@ in {
 		./gtk
 		./impermanence
 		./nix
+		./pac
 	];
 }

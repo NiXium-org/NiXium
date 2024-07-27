@@ -6,15 +6,24 @@
 # * `Performance -> Use recommended performance settings` is expected to be blocked by policy to be impossible to toggle back on
 # * Figure out how to set the default web browser
 
+# This extension can be used to generate the policies through GUI: https://addons.mozilla.org/en-US/firefox/addon/enterprise-policy-generator/
+
 let
 	inherit (lib) mkForce;
 in {
 	programs.firefox = {
-		package = pkgs.firefox;
+		package = pkgs.firefox-esr;
 		# Refer to https://mozilla.github.io/policy-templates or `about:policies#documentation` in firefox
 		policies = {
 			AppAutoUpdate = false; # Disable automatic application update
 			BackgroundAppUpdate = false; # Disable automatic application update in the background, when the application is not running.
+			BlockAboutAddons = true;
+			BlockAboutConfig = true;
+			BlockAboutProfiles = true;
+			BlockAboutSupport = true;
+			CaptivePortal = false;
+			DisableAppUpdate = true;
+			DisableFeedbackCommands = true;
 			DisableBuiltinPDFViewer = true; # Considered a security liability
 			DisableFirefoxStudies = true;
 			DisableFirefoxAccounts = true; # Disable Firefox Sync
@@ -24,7 +33,8 @@ in {
 			DisableProfileImport = true; # Purity enforcement: Only allow nix-defined profiles
 			DisableProfileRefresh = true; # Disable the Refresh Firefox button on about:support and support.mozilla.org
 			DisableSetDesktopBackground = true; # Remove the “Set As Desktop Background…” menuitem when right clicking on an image, because Nix is the only thing that can manage the backgroud
-			DisplayMenuBar = "default-off";
+			DisableSystemAddonUpdate = true; # Do not allow addon updates
+			DisplayMenuBar = "default-off"; # Whether to show the menu bar
 			DisablePocket = true;
 			DisableTelemetry = true;
 			DisableFormHistory = true;
@@ -44,10 +54,14 @@ in {
 				Enabled = true;
 				Locked = true;
 			};
-			ExtensionUpdate = false;
+			ExtensionUpdate = false; # Purity Enforcement: Do not update extensions
 			# FIXME(Krey): Review `~/.mozilla/firefox/Default/extensions.json` and uninstall all unwanted
 			# Suggested by t0b0 thank you <3 https://gitlab.com/engmark/root/-/blob/60468eb82572d9a663b58498ce08fafbe545b808/configuration.nix#L293-310
 			# NOTE(Krey): Check if the addon is packaged on https://gitlab.com/rycee/nur-expressions/-/blob/master/pkgs/firefox-addons/addons.json the ID can be obtained by trying to install that in firefox
+			# Can be used to restrict domains per extension:
+				# "restricted_domains": [
+				# 	"TEST_BLOCKED_DOMAIN"
+				# ]
 			ExtensionSettings = {
 				"*" = {
 					installation_mode = "blocked";
@@ -164,7 +178,7 @@ in {
 			};
 
 			FirefoxHome = {
-				Search = true;
+				Search = false;
 				TopSites = true;
 				SponsoredTopSites = false; # Fuck you
 				Highlights = true;
@@ -196,7 +210,7 @@ in {
 					];
 				};
 			};
-			NoDefaultBookmarks = true;
+			NoDefaultBookmarks = true; # Do not set default bookmarks
 			PasswordManagerEnabled = false; # Managed by KeepAss
 			PDFjs = {
 				Enabled = false; # Fuck No, HELL NO
@@ -240,16 +254,16 @@ in {
 			};
 			PromptForDownloadLocation = true;
 			Proxy = {
-				Mode = "system"; # none | system | manual | autoDetect | autoConfig;
+				Mode = "autoConfig"; # none | system | manual | autoDetect | autoConfig;
 				Locked = true;
 				# HTTPProxy = hostname;
 				# UseHTTPProxyForAllProtocols = true;
 				# SSLProxy = hostname;
 				# FTPProxy = hostname;
-				SOCKSProxy = "127.0.0.1:9050"; # Tor
-				SOCKSVersion = 5; # 4 | 5
+				# SOCKSProxy = "127.0.0.1:9050"; # Tor
+				# SOCKSVersion = 5; # 4 | 5
 				#Passthrough = <local>;
-				# AutoConfigURL = URL_TO_AUTOCONFIG;
+				AutoConfigURL = "file://${config.home.homeDirectory}/.config/proxy.pac";
 				# AutoLogin = true;
 				UseProxyForDNS = true;
 			};
@@ -264,6 +278,7 @@ in {
 				OfflineApps = true;
 				Locked = true;
 			};
+			SearchBar = "separate";
 			SearchEngines = {
 				PreventInstalls = true;
 				Add = [

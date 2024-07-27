@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ lib, pkgs, config, ... }:
 
 let
 	inherit (lib) mkForce;
@@ -47,11 +47,8 @@ in {
 
 		# Set up Proxy
 		"system/proxy" = {
-			mode = "manual";
-		};
-		"system/proxy/socks" = {
-			host = "127.0.0.1";
-			port = 9050;
+			mode = "auto";
+			autoconfig-url = "file://${config.home.homeDirectory}/.config/proxy.pac";
 		};
 
 		# Bottles
@@ -100,7 +97,7 @@ in {
 		## Web Browser
 		"org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
 			name = "Open Web Browser";
-			command = "firefox";
+			command = "firefox-esr";
 			binding = "<Super>t";
 		};
 
