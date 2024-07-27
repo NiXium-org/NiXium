@@ -58,10 +58,6 @@ in {
 			# FIXME(Krey): Review `~/.mozilla/firefox/Default/extensions.json` and uninstall all unwanted
 			# Suggested by t0b0 thank you <3 https://gitlab.com/engmark/root/-/blob/60468eb82572d9a663b58498ce08fafbe545b808/configuration.nix#L293-310
 			# NOTE(Krey): Check if the addon is packaged on https://gitlab.com/rycee/nur-expressions/-/blob/master/pkgs/firefox-addons/addons.json the ID can be obtained by trying to install that in firefox
-			# Can be used to restrict domains per extension:
-				# "restricted_domains": [
-				# 	"TEST_BLOCKED_DOMAIN"
-				# ]
 			ExtensionSettings = {
 				"*" = {
 					installation_mode = "blocked";
@@ -75,6 +71,11 @@ in {
 				"jump-cutter@example.com" = {
 					# Jump Cutter
 					install_url = "file:///${firefox-addons.jump-cutter}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/jump-cutter@example.com.xpi";
+					installation_mode = "force_installed";
+				};
+				"deArrow@ajay.app" = {
+					# DeArrow
+					install_url = "file:///${firefox-addons.dearrow}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/deArrow@ajay.app.xpi";
 					installation_mode = "force_installed";
 				};
 				"addon@darkreader.org" = {
