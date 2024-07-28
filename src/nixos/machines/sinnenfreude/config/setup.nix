@@ -12,12 +12,16 @@
 	nix.distributedBuilds = true; # Perform distributed builds
 
 	programs.noisetorch.enable = true;
+	programs.appimage.binfmt = true; # Compatibility layer for Appimages
 
 	services.flatpak.enable = true;
 	services.openssh.enable = true;
 	services.tor.enable = true;
 
 	networking.wireguard.enable = false;
+
+	virtualisation.xen.enable = true;
+	virtualisation.xen.efi.enable = true;
 
 	# Desktop Environment
 	services.xserver.enable = true;

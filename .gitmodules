@@ -1,3 +1,7 @@
 [submodule "vendor/impermanence"]
 	path = vendor/impermanence
 	url = git@github.com:NiXium-org/impermanence.git
+[submodule "vendor/nixpkgs"]
+	path = vendor/nixpkgs
+	url = git@github.com:NixOS/nixpkgs.git
+	branch = master

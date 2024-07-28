@@ -15,6 +15,8 @@
 			nixpkgs-24_05.url = "github:nixos/nixpkgs/nixos-24.05";
 
 			nixpkgs-kreyren.url = "github:kreyren/nixpkgs/central";
+			# nixpkgs-nixium.url = "github:NiXium-org/nixpkgs/central";
+			nixpkgs-324693.url = "github:NiXium-org/nixpkgs/pr-324693";
 
 		# Principle inputs
 			nixos-hardware.url = "github:NixOS/nixos-hardware";

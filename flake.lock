@@ -948,6 +948,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-324693": {
+      "locked": {
+        "lastModified": 1721865092,
+        "narHash": "sha256-N37dK440BRtFtJHGp5l8w84AM6rI4QFOCHha6Vn1I4g=",
+        "owner": "NiXium-org",
+        "repo": "nixpkgs",
+        "rev": "ca194482f0a78db849a77af75bb02a280719f5c2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NiXium-org",
+        "ref": "pr-324693",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-kreyren": {
       "locked": {
         "lastModified": 1715779573,
@@ -1307,6 +1323,7 @@
         "nixpkgs-23_05": "nixpkgs-23_05",
         "nixpkgs-23_11": "nixpkgs-23_11",
         "nixpkgs-24_05": "nixpkgs-24_05",
+        "nixpkgs-324693": "nixpkgs-324693",
         "nixpkgs-kreyren": "nixpkgs-kreyren",
         "nixpkgs-master": "nixpkgs-master",
         "nixpkgs-staging": "nixpkgs-staging",

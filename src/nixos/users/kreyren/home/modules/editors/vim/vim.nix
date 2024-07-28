@@ -49,6 +49,16 @@ in mkIf config.programs.vim.enable {
 
 		plugins = [
 			pkgs.vimPlugins.vim-numbertoggle # Intelligent line numbers (https://github.com/jeffkreeftmeijer/vim-numbertoggle)
+			pkgs.vimPlugins.ale
+			pkgs.vimPlugins.vim-lsp
+			pkgs.vimPlugins.vim-lsp-ale
 		];
 	};
+
+	home.packages = [
+		pkgs.bashate
+		pkgs.shellcheck
+		pkgs.nodePackages.cspell
+		pkgs.vim-language-server
+	];
 }
