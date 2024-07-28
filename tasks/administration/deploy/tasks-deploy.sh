@@ -71,7 +71,7 @@ case "$distro" in
 		}
 
 		# Check if the system is defined
-		[ -f "$FLAKE_ROOT/src/nixos/machines/$machine" ] || die 1 "This system '$machine' is not implemented in NiXium's management of distribution '$distro'"
+		[ -d "$FLAKE_ROOT/src/nixos/machines/$machine" ] || die 1 "This system '$machine' is not implemented in NiXium's management of distribution '$distro'"
 
 		# Process the system
 		echo "Deploying system '$machine' in distribution '$distro' and release '$release'"
