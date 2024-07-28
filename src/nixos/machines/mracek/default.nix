@@ -6,7 +6,7 @@ let
 	inherit (lib) mkForce;
 in {
 	# Main Configuration
-	flake.nixosConfigurations."mracek" = inputs.nixpkgs.lib.nixosSystem {
+	flake.nixosConfigurations."nixos-mracek" = inputs.nixpkgs.lib.nixosSystem {
 		system = "x86_64-linux";
 
 		pkgs = import inputs.nixpkgs {

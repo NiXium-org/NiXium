@@ -7,7 +7,7 @@
 # ⚠️ Random seed file '/boot/loader/.#bootctlrandom-seed048bca5ff68f0657' is world accessible, which is a security hole! ⚠️
 
 {
-	flake.nixosConfigurations."tupac" = inputs.nixpkgs.lib.nixosSystem {
+	flake.nixosConfigurations."nixos-tupac" = inputs.nixpkgs.lib.nixosSystem {
 		system = "x86_64-linux";
 
 		pkgs = import inputs.nixpkgs {

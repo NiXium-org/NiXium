@@ -7,16 +7,8 @@
 # ⚠️ Random seed file '/boot/loader/.#bootctlrandom-seed048bca5ff68f0657' is world accessible, which is a security hole! ⚠️
 
 {
-	flake.nixosConfigurations."sinnenfreude" = inputs.nixpkgs.lib.nixosSystem {
-		system = "x86_64-linux";
-
-		pkgs = import inputs.nixpkgs {
-			system = "x86_64-linux";
-			config.allowUnfree = true;
-			config.nvidia.acceptLicense = true; # Fuck You Nvidia, I am forced into this!
-		};
-
-		modules = [
+	flake.nixosModules."nixos-sinnenfreude" = {
+		imports = [
 			self.nixosModules.default
 
 			# Principles
@@ -60,8 +52,95 @@
 			./services/openssh.nix
 			./services/tor.nix
 		];
+	};
 
-		# FIXME-QA(Krey): This needs better management
+	# Stable Release
+	flake.nixosConfigurations."nixos-sinnenfreude-stable" = inputs.nixpkgs.lib.nixosSystem {
+		system = "x86_64-linux";
+
+		pkgs = import inputs.nixpkgs {
+			system = "x86_64-linux";
+			config.allowUnfree = true;
+			config.nvidia.acceptLicense = true; # Fuck You Nvidia, I am forced into this!
+		};
+
+		modules = [ self.nixosModules."nixos-sinnenfreude" ];
+
+		# FIXME-QA(Krey): Figure out if we can put this into nixos-sinnenfreude module to avoid reusing it for everything else
+		specialArgs = {
+			inherit self;
+			stable = import inputs.nixpkgs {
+				system = "x86_64-linux";
+				config.allowUnfree = true;
+			};
+
+			unstable = import inputs.nixpkgs-unstable {
+				system = "x86_64-linux";
+				config.allowUnfree = true;
+			};
+
+			staging = import inputs.nixpkgs-staging {
+				system = "x86_64-linux";
+				config.allowUnfree = true;
+			};
+
+			staging-next = import inputs.nixpkgs-staging-next {
+				system = "x86_64-linux";
+				config.allowUnfree = true;
+			};
+		};
+	};
+
+	# Unstable Release
+	flake.nixosConfigurations."nixos-sinnenfreude-unstable" = inputs.nixpkgs-unstable.lib.nixosSystem {
+		system = "x86_64-linux";
+
+		pkgs = import inputs.nixpkgs-unstable {
+			system = "x86_64-linux";
+			config.allowUnfree = true;
+			config.nvidia.acceptLicense = true; # Fuck You Nvidia, I am forced into this!
+		};
+
+		modules = [ self.nixosModules."nixos-sinnenfreude" ];
+
+		# FIXME-QA(Krey): Figure out if we can put this into nixos-sinnenfreude module to avoid reusing it for everything else
+		specialArgs = {
+			inherit self;
+			stable = import inputs.nixpkgs {
+				system = "x86_64-linux";
+				config.allowUnfree = true;
+			};
+
+			unstable = import inputs.nixpkgs-unstable {
+				system = "x86_64-linux";
+				config.allowUnfree = true;
+			};
+
+			staging = import inputs.nixpkgs-staging {
+				system = "x86_64-linux";
+				config.allowUnfree = true;
+			};
+
+			staging-next = import inputs.nixpkgs-staging-next {
+				system = "x86_64-linux";
+				config.allowUnfree = true;
+			};
+		};
+	};
+
+	# Master Release
+	flake.nixosConfigurations."nixos-sinnenfreude-master" = inputs.nixpkgs-master.lib.nixosSystem {
+		system = "x86_64-linux";
+
+		pkgs = import inputs.nixpkgs-master {
+			system = "x86_64-linux";
+			config.allowUnfree = true;
+			config.nvidia.acceptLicense = true; # Fuck You Nvidia, I am forced into this!
+		};
+
+		modules = [ self.nixosModules."nixos-sinnenfreude" ];
+
+		# FIXME-QA(Krey): Figure out if we can put this into nixos-sinnenfreude module to avoid reusing it for everything else
 		specialArgs = {
 			inherit self;
 			stable = import inputs.nixpkgs {
@@ -122,5 +201,6 @@
 		apps.nixos-sinnenfreude-install.program = self'.packages.nixos-sinnenfreude-install;
 	};
 
+	# Export to other systems
 	flake.nixosModules.machine-sinnenfreude = ./lib/export.nix;
 }

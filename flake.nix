@@ -153,6 +153,8 @@
 
 						inputs.disko.packages.${system}.disko-install
 						inputs.disko.packages.${system}.disko
+
+						inputs.nixpkgs.legacyPackages.${system}.nodePackages.eslint
 					];
 					inputsFrom = [
 						config.mission-control.devShell
