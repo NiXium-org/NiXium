@@ -44,7 +44,11 @@
 			};
 			sops-unstable = {
 				url = "github:Mic92/sops-nix";
-				inputs.nixpkgs.follows = "nixpkgs";
+				inputs.nixpkgs.follows = "nixpkgs-unstable";
+			};
+			sops-master = {
+				url = "github:Mic92/sops-nix";
+				inputs.nixpkgs.follows = "nixpkgs-master";
 			};
 
 		# Ragenix
@@ -56,6 +60,10 @@
 				url = "github:yaxitech/ragenix";
 				inputs.nixpkgs.follows = "nixpkgs-unstable";
 			};
+			ragenix-master = {
+				url = "github:yaxitech/ragenix";
+				inputs.nixpkgs.follows = "nixpkgs-master";
+			};
 
 		# DISKO
 			disko = {
@@ -66,9 +74,12 @@
 				url = "github:nix-community/disko";
 				inputs.nixpkgs.follows = "nixpkgs-unstable";
 			};
+			disko-master = {
+				url = "github:nix-community/disko";
+				inputs.nixpkgs.follows = "nixpkgs-master";
+			};
 
 		# AAGL
-			# FIXME(Krey): Lacks 24.05 release atm --
 			aagl = {
 				url = "github:ezKEa/aagl-gtk-on-nix/release-24.05";
 				inputs.nixpkgs.follows = "nixpkgs-24_05";
@@ -84,7 +95,12 @@
 			};
 
 			aagl-unstable = {
-				url = "github:ezKEa/aagl-gtk-on-nix";
+				url = "github:ezKEa/aagl-gtk-on-nix/main";
+				inputs.nixpkgs.follows = "nixpkgs-unstable";
+			};
+			aagl-master = {
+				url = "github:ezKEa/aagl-gtk-on-nix/main";
+				inputs.nixpkgs.follows = "nixpkgs-master";
 			};
 
 		# Home-Manager
@@ -106,10 +122,22 @@
 				url = "github:nix-community/home-manager/master";
 				inputs.nixpkgs.follows = "nixpkgs-unstable";
 			};
+			hm-master = {
+				url = "github:nix-community/home-manager/master";
+				inputs.nixpkgs.follows = "nixpkgs-master";
+			};
 
 		nixos-generators = {
 			url = "github:nix-community/nixos-generators";
 			inputs.nixpkgs.follows = "nixpkgs";
+		};
+		nixos-generators-unstable = {
+			url = "github:nix-community/nixos-generators";
+			inputs.nixpkgs.follows = "nixpkgs-unstable";
+		};
+		nixos-generators-master = {
+			url = "github:nix-community/nixos-generators";
+			inputs.nixpkgs.follows = "nixpkgs-master";
 		};
 	};
 

@@ -7,7 +7,7 @@ command -v die 1>/dev/null || die() { printf "FATAL: %s\n" "$2"; exit 1 ;} # Ter
 hostname="$(hostname --short)" # Capture the hostname of the current system
 
 # FIXME-QA(Krey): Hacky af
-derivation="$(grep "$hostname" "$FLAKE_ROOT/config/machine-derivatios.conf" | sed -E 's#^(\w+)(\s)([a-z\-]+)#\3#g')"
+derivation="$(grep "$hostname" "$FLAKE_ROOT/config/machine-derivations.conf" | sed -E 's#^(\w+)(\s)([a-z\-]+)#\3#g')"
 
 [ "$#" != 0 ] || {
 	echo "Switching derivation '$derivation' on current system"

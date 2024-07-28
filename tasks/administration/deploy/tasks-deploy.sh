@@ -31,7 +31,7 @@ command -v die 1>/dev/null || die() { printf "FATAL: %s\n" "$2"; exit 1 ;} # Ter
 
 # If special argument 'all' is used then deploy the specified distribution and release on all systems
 [ "$1" != "all" ] || {
-	for system in $(grep -vP "^#" "$FLAKE_ROOT/config/machine-derivatios.conf" | grep -vP "^/n$" | sed -E 's#^(\w+)(\s)([a-z\-]+)#\1#g' | tr '\n' ' '); do
+	for system in $(grep -vP "^#" "$FLAKE_ROOT/config/machine-derivations.conf" | grep -vP "^/n$" | sed -E 's#^(\w+)(\s)([a-z\-]+)#\1#g' | tr '\n' ' '); do
 		derivation="$(grep mracek ./config/machine-derivatios.conf | sed -E 's#^(\w+)(\s)([a-z\-]+)#\3#g')"
 
 		nixos-rebuild switch \
