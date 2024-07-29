@@ -122,7 +122,8 @@
 			"editorconfig.editorconfig",
 			"pkief.material-icon-theme",
 			"markwylde.vscode-filesize",
-			"plorefice.devicetree"
+			"plorefice.devicetree",
+			"timonwong.shellcheck"
 		]
 	}
 }
