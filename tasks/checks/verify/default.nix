@@ -1,5 +1,7 @@
 { ... }:
 
+# POLICY: non-fatal failures on NixOS with releases OTHER-THAN stable are to be ignored, stable always actionable.
+
 {
 	perSystem = { inputs', pkgs, ... }: {
 		mission-control.scripts = {

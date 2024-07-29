@@ -18,8 +18,15 @@ in {
 		})
 
 		(mkIf (config.system.nixos.release == "24.11") {
-			hardware.graphics.enable = true;
-			hardware.graphics.enable32Bit = true;
+			# FIXME(Krey): Bugged in master
+			# hardware.graphics.enable = true;
+			# hardware.graphics.enable32Bit = true;
+
+			# hardware.opengl = {
+			# 	enable = true;
+			# 	driSupport = true;
+			# 	driSupport32Bit = true;
+			# };
 		})
 	];
 }
