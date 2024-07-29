@@ -51,4 +51,6 @@ in {
 
 		allowOther = true; # FIXME-DOCS(Krey): What is this used for?
 	};
+
+	home.stateVersion = nixosConfig.system.nixos.release; # Impermanence does not have state
 }

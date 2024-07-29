@@ -25,7 +25,7 @@
 			self.inputs.arkenfox.hmModules.default
 
 			# An Anime Game
-			self.inputs.aagl-master.nixosModules.default {
+			self.inputs.aagl-unstable.nixosModules.default {
 				networking.mihoyo-telemetry.block = true; # Block miHoYo telemetry servers
 				nix.settings = {
 					substituters = [ "https://ezkea.cachix.org" ];
@@ -92,6 +92,6 @@
 		};
 
 		# Declare for `nix run`
-		apps.nixos-sinnenfreude-install.program = self'.packages.nixos-sinnenfreude-install;
+		apps.nixos-sinnenfreude-unstable-install.program = self'.packages.nixos-sinnenfreude-unstable-install;
 	};
 }

@@ -69,4 +69,6 @@ in {
 		];
 		allowOther = true;
 	};
+
+	home.stateVersion = nixosConfig.system.nixos.release; # Impermanence does not have state
 }

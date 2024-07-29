@@ -1,26 +1,39 @@
-{ ... }:
+{ config, lib, ... }:
 
 # Sound management of MRACEK
 
 # NOTE(Krey): Sound is expected to never be used and only takes out power -> Disable everything
 
-{
-	sound.enable = false;
+let
+	inherit (lib) mkMerge mkIf;
+in {
+	config = mkMerge [
+		(mkIf (config.system.nixos.release == "24.05") {
+			sound.enable = false;
 
-	hardware.pulseaudio.enable = false;
+			hardware.pulseaudio.enable = false;
 
-	services.pipewire = {
-		enable = false;
-		alsa.enable = false;
-		alsa.support32Bit = false;
-		pulse.enable = false;
-		# If you want to use JACK applications, uncomment this
-		#jack.enable = true;
+			services.pipewire = {
+				enable = false;
+				alsa.enable = false;
+				alsa.support32Bit = false;
+				pulse.enable = false;
+			};
+		})
 
-		# use the example session manager (no others are packaged yet so this is enabled by default,
-		# no need to redefine it in your config for now)
-		#media-session.enable = true;
-	};
+		(mkIf (config.system.nixos.release == "24.11") {
+			hardware.pulseaudio.enable = false;
 
-	security.rtkit.enable = false;
+			services.pipewire = {
+				enable = false;
+				alsa.enable = false;
+				alsa.support32Bit = false;
+				pulse.enable = false;
+			};
+		})
+
+		{
+			security.rtkit.enable = false; # To Get Real-Time priority for Audio
+		}
+	];
 }

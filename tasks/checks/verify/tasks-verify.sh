@@ -27,8 +27,11 @@ command -v die 1>/dev/null || die() { printf "FATAL: %s\n" "$2"; exit 1 ;} # Ter
 		--flake "git+file://$FLAKE_ROOT#nixos-$1-stable" \
 		--option eval-cache false \
 		--show-trace || die 1 "Verification of the '$1' system on NixOS distribution using stable release failed"
+
+	exit 0 # Success
 }
 
+# FIXME-QA(Krey): Hacky af
 nixosSystems="$(find "$FLAKE_ROOT/src/nixos/machines/"* -maxdepth 0 -type d | sed "s#^$FLAKE_ROOT/src/nixos/machines/##g" | tr '\n' ' ')" # Get a space-separated list of all systems in the nixos distribution of NiXium
 
 # If special argument 'all' is used then verify all systems across all distributions and all releases
@@ -67,7 +70,7 @@ case "$distro" in
 				status="$(cat "$FLAKE_ROOT/src/nixos/machines/$system/status")"
 				case "$status" in
 					"OK")
-						echo "Checking system '$system' in distribution '$distro'"
+						echo "Checking release '$release' of distribution '$distro' for system '$system'"
 
 						nixos-rebuild \
 							dry-build \

@@ -77,10 +77,10 @@ case "$distro" in
 		echo "Deploying system '$machine' in distribution '$distro' and release '$release'"
 
 		nixos-rebuild \
-			build \
+			switch \
 			--flake "git+file://$FLAKE_ROOT#nixos-$machine-$release" \
 			--option eval-cache false \
-			--show-trace || echo "WARNING: System '$machine' in distribution '$distro' failed evaluation!"
+			--target-host "root@$machine.systems.nx"  || echo "WARNING: System '$machine' in distribution '$distro' failed evaluation!"
 	;;
 	*) die 1 "Distribution '$distro' is not implemented for deployments!"
 esac

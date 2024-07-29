@@ -5,8 +5,6 @@
 let
 	inherit (lib) mkIf;
 in {
-	home.stateVersion = "24.05";
-
 	gtk.enable = true;
 
 	home.impermanence.enable = true;

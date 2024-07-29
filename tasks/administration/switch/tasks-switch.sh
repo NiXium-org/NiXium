@@ -9,6 +9,7 @@ hostname="$(hostname --short)" # Capture the hostname of the current system
 # FIXME-QA(Krey): Hacky af
 derivation="$(grep "$hostname" "$FLAKE_ROOT/config/machine-derivations.conf" | sed -E 's#^(\w+)(\s)([a-z\-]+)#\3#g')"
 
+# If no argument is used then switch the specified distribution on the current system
 [ "$#" != 0 ] || {
 	echo "Switching derivation '$derivation' on current system"
 
@@ -16,12 +17,14 @@ derivation="$(grep "$hostname" "$FLAKE_ROOT/config/machine-derivations.conf" | s
 		nixos-rebuild switch \
 			--flake "git+file://$FLAKE_ROOT#$derivation" \
 			--option eval-cache false || die 1 "Derivation '$derivation' failed to deploy on current system"
+
+	exit 0 # Success
 }
 
 # Input check
-[ -n "$distro" ] || die 1 "First Argument (distribution) is required for the install task"
-[ -n "$machine" ] || die 1 "Second Argument (machine) is required for the install task"
-[ -n "$release" ] || die 1 "Third Argument (release) is required for the install task"
+[ -n "$distro" ] || die 1 "First Argument (distribution) is required for the switch task"
+[ -n "$machine" ] || die 1 "Second Argument (machine) is required for the switch task"
+[ -n "$release" ] || die 1 "Third Argument (release) is required for the switch task"
 
 ssh root@localhost \
 		nixos-rebuild switch \
