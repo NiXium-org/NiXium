@@ -64,7 +64,7 @@ nixosSystems="$(find "$FLAKE_ROOT/src/nixos/machines/"* -maxdepth 0 -type d | se
 # Process Arguments
 distro="$1" # e.g. nixos
 machine="$2" # e.g. tupac, tsvetan, sinnenfreude
-release="$3" # Optional argument uses stable as default, ability to set supported release e.g. unstable or master
+release="${3:-"stable"}" # Optional argument uses stable as default, ability to set supported release e.g. unstable or master
 
 case "$distro" in
 	"nixos") # NixOS Management
@@ -79,7 +79,7 @@ case "$distro" in
 
 						nixos-rebuild \
 							dry-build \
-							--flake "git+file://$FLAKE_ROOT#nixos-$system-${release:-"stable"}" \
+							--flake "git+file://$FLAKE_ROOT#nixos-$system-$release" \
 							--option eval-cache false \
 							--show-trace || echo "WARNING: System '$system' in distribution '$distro' failed evaluation!"
 					;;
@@ -97,9 +97,9 @@ case "$distro" in
 
 		nixos-rebuild \
 			dry-build \
-			--flake "git+file://$FLAKE_ROOT#nixos-$machine-${release:-"stable"}" \
+			--flake "git+file://$FLAKE_ROOT#nixos-$machine-$release" \
 			--option eval-cache false \
-			--show-trace || echo "WARNING: System '$machine' in distribution '$distro' failed evaluation!"
+			--show-trace || echo "WARNING: System '$machine' in distribution '$distro' and release '$release' failed evaluation!"
 	;;
 	*) die 1 "Distribution '$distro' is not implemented!"
 esac
