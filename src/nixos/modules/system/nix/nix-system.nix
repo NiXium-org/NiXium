@@ -18,7 +18,7 @@ in {
 			"staging-next=${self.inputs.nixpkgs-staging-next}" # Staging-Next
 		];
 
-		channel.enable = false; # Do not use legacy nix-commands
+		channel.enable = mkDefault false; # Do not use legacy nix-commands
 
 		# Set Flake Registries
 		registry = {

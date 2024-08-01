@@ -19,6 +19,8 @@
 
 	networking.wireguard.enable = false;
 
+	nix.channel.enable = true; # To be able to use nix repl :l <nixpkgs> as loading flake loads only 16 variables
+
 	# Desktop Environment
 	services.xserver.enable = true;
 	services.xserver.displayManager.gdm.enable = true;
