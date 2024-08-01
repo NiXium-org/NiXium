@@ -21,7 +21,7 @@ in {
 		channel.enable = false; # Do not use legacy nix-commands
 
 		# Set Flake Registries
-		registry = mkDefault {
+		registry = {
 			nixpkgs = { flake = self.inputs.nixpkgs; };
 			unstable = { flake = self.inputs.nixpkgs-unstable; };
 			master = { flake = self.inputs.nixpkgs-master; };
@@ -60,7 +60,7 @@ in {
 		];
 		files = [
 			"/etc/machine-id" # Unique ID of the system
-			{ file = "/etc/nix/id_rsa"; parentDirectory = { mode = "u=rwx,g=,o="; }; }
+			{ file = "/etc/nix/id_rsa"; parentDirectory = { mode = "u=rwx,g=rx,o=rx"; }; }
 		];
 	};
 }
