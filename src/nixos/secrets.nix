@@ -7,6 +7,7 @@ let
 
 	# Systems
 	mracek-system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP8d9Nz64gE+x/+Dar4zknmXMAZXUAxhF1IgrA9DO4Ma";
+	nxc-system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ/lF7knlORp85fNCyF2CYVrH8O0cC6OxLwOxoGRvTBt";
 	pelagus-system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINhxI+25BwlCuEezW6Vc4mJ+EP/KO597PI2YfEU9t+vf";
 	sinnenfreude-system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIAXnS4xUPWwjBdKDvvy5OInLbs3oeHUUs5qUsX+fBji";
 	tsvetan-system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJdqMVQ3TO5ckmk9nepAY/7zLHy555EkzBJxpfTIwuT5";
@@ -105,6 +106,27 @@ in {
 
 	"./machines/mracek/secrets/mracek-builder-ssh-ed25519-private.age".publicKeys = [
 		kreyren mracek-system
+	];
+
+	# NXC (system)
+	"./machines/nxc/secrets/nxc-disks-password.age".publicKeys = [
+		kreyren nxc-system
+	];
+
+	"./machines/nxc/secrets/nxc-openssh-onion.age".publicKeys = [
+		kreyren
+	] ++ all-systems;
+
+	"./machines/nxc/secrets/nxc-ssh-ed25519-private.age".publicKeys = [
+		kreyren nxc-system
+	];
+
+	"./machines/nxc/secrets/nxc-onion-openssh-private.age".publicKeys = [
+		kreyren nxc-system
+	];
+
+	"./machines/nxc/secrets/nxc-builder-ssh-ed25519-private.age".publicKeys = [
+		kreyren nxc-system
 	];
 
 	# PELAGUS (system)

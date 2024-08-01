@@ -1,0 +1,3 @@
+# NXC
+
+Role: Compute Server
