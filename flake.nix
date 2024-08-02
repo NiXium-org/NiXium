@@ -143,13 +143,10 @@
 			url = "github:nix-community/nixos-generators";
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
-		nixos-generators-unstable = {
-			url = "github:nix-community/nixos-generators";
-			inputs.nixpkgs.follows = "nixpkgs-unstable";
-		};
-		nixos-generators-master = {
-			url = "github:nix-community/nixos-generators";
-			inputs.nixpkgs.follows = "nixpkgs-master";
+
+		nixos-anywhere = {
+			url = "github:nix-community/nixos-anywhere/main";
+			inputs.nixpkgs.follows = "nixpkgs";
 		};
 	};
 
@@ -196,7 +193,7 @@
 						inputs.disko.packages.${system}.disko-install
 						inputs.disko.packages.${system}.disko
 
-						inputs.nixpkgs.legacyPackages.${system}.nodePackages.eslint
+						inputs.nixos-anywhere.packages.${system}.nixos-anywhere
 					];
 					inputsFrom = [
 						config.mission-control.devShell
