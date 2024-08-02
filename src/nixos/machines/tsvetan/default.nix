@@ -85,6 +85,8 @@ in {
 				pkgs.age
 			];
 			text = ''
+				export LC_ALL=C # Set locale to avoid disko-install from breaking
+
 				# FIXME-QA(Krey): This should be a runtimeInput
 				die() { printf "FATAL: %s\n" "$2"; exit ;}
 
