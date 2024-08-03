@@ -3,7 +3,7 @@
 # Declaration for UNSTABLE release of NixOS for TUPAC
 
 {
-	flake.nixosConfigurations."nixos-tupac-unstable" = inputs.nixpkgs.lib.nixosSystem {
+	flake.nixosConfigurations."nixos-tupac-unstable" = inputs.nixpkgs-unstable.lib.nixosSystem {
 		system = "x86_64-linux";
 
 		pkgs = import inputs.nixpkgs-unstable {

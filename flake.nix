@@ -28,7 +28,19 @@
 			flake-root.url = "github:srid/flake-root";
 			# NOTE(Krey): Lanzaboote was updated to 0.4.1, but those versions are not compatible with the nixpkgs stable channel
 			lanzaboote.url = "github:nix-community/lanzaboote/v0.3.0"; # MAINTAIN(Krey): has to be kept up to date -- https://github.com/nix-community/lanzaboote/issues/343
-			arkenfox.url = "github:dwarfmaster/arkenfox-nixos";
+
+		arkenfox = {
+			url = "github:dwarfmaster/arkenfox-nixos";
+			inputs.nixpkgs.follows = "nixpkgs";
+		};
+		arkenfox-unstable = {
+			url = "github:dwarfmaster/arkenfox-nixos";
+			inputs.nixpkgs.follows = "nixpkgs-unstable";
+		};
+		arkenfox-master = {
+			url = "github:dwarfmaster/arkenfox-nixos";
+			inputs.nixpkgs.follows = "nixpkgs-master";
+		};
 
 		firefox-addons = {
 			url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";

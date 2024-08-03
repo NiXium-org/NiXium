@@ -1,21 +1,35 @@
-{ config, ... }:
+{ config, lib, ... }:
 
 # Sound management of TUPAC
 
-# NOTE(Krey): `hardware.pulseaudio.enable` seems to need to be set to false for services.pipewire.pulse.enable to allow true for pulse integration in pipewire
-
 {
-	sound.enable = true; # Whether to use ALSA
-	hardware.pulseaudio.enable = false; # Whether to use pulseaudio
-	services.pipewire.enable = true; # Whether to use pipewire
+	"24.05" = {
+		sound.enable = true; # Whether to use ALSA
+		hardware.pulseaudio.enable = false; # Whether to use pulseaudio, requires to be turned off if pipewire is used
+		services.pipewire.enable = true; # Whether to use pipewire
 
-	# Pipewire
-	# FIXME-QA(Krey): This should be reviewed whether we want to move it into a global configuration
-	services.pipewire = {
-		alsa.enable = config.sound.enable; # Integrate alse in pipewire
-		alsa.support32Bit = config.sound.enable; # Allow 32-bit ALSA support
-		pulse.enable = true; # Integrate pulseaudio in pipewire
+		# Pipewire
+		services.pipewire = {
+			alsa.enable = config.sound.enable; # Integrate alse in pipewire
+			alsa.support32Bit = config.sound.enable; # Allow 32-bit ALSA support
+			pulse.enable = true; # Integrate pulseaudio in pipewire
+		};
+
+		security.rtkit.enable = true; # Allow real-time scheduling priority to user
 	};
 
-	security.rtkit.enable = true; # Allow real-time scheduling priority to user
-}
+	# Option 'sound' has been removed
+	"24.11" = {
+		hardware.pulseaudio.enable = false; # Whether to use pulseaudio, requires to be turned off if pipewire is used
+		services.pipewire.enable = true; # Whether to use pipewire
+
+		# Pipewire
+		services.pipewire = {
+			alsa.enable = true; # Integrate alse in pipewire
+			alsa.support32Bit = true; # Allow 32-bit ALSA support
+			pulse.enable = true; # Integrate pulseaudio in pipewire
+		};
+
+		security.rtkit.enable = true; # Allow real-time scheduling priority to user
+	};
+}."${lib.trivial.release}"
