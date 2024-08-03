@@ -5,5 +5,6 @@
 		./editors
 		./release
 		./secrets
+		./tools
 	];
 }

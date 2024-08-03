@@ -19,20 +19,25 @@ command -v die 1>/dev/null || die() { printf "FATAL: %s\n" "$2"; exit 1 ;} # Ter
 	exit 0 # Success
 }
 
-# Assume that we are always checking against nixos distribution with stable release
+# If only 1 argument is provided then deploy the configured system on said unique machine name
 [ "$#" != 1 ] || {
-	echo "Deploying stable release of NixOS distribution for system '$1' on the current host"
+	machine="$1"
+	derivation="$(grep "$machine" "$FLAKE_ROOT/config/machine-derivations.conf" | sed -E 's#^(\w+)(\s)([a-z\-]+)#\3#g')"
+
+	echo "Deploying configured derivation for '$machine', which is: $derivation"
 
 	nixos-rebuild switch \
-		--flake "git+file://$FLAKE_ROOT#nixos-$1-stable" \
+		--flake "git+file://$FLAKE_ROOT#$derivation" \
 		--option eval-cache false \
-		--show-trace || die 1 "Deployment of the Stable NixOS distribution for '$1' system on current host failed"
+		--target-host "root@$machine.systems.nx" || die 1 "Deployment of the configured derivation '$derivation' on machine '$machine' failed"
+
+		exit 0 # Success
 }
 
 # If special argument 'all' is used then deploy the specified distribution and release on all systems
 [ "$1" != "all" ] || {
 	for system in $(grep -vP "^#" "$FLAKE_ROOT/config/machine-derivations.conf" | grep -vP "^/n$" | sed -E 's#^(\w+)(\s)([a-z\-]+)#\1#g' | tr '\n' ' '); do
-		derivation="$(grep mracek ./config/machine-derivatios.conf | sed -E 's#^(\w+)(\s)([a-z\-]+)#\3#g')"
+		derivation="$(grep mracek "$FLAKE_ROOT/config/machine-derivations.conf" | sed -E 's#^(\w+)(\s)([a-z\-]+)#\3#g')"
 
 		nixos-rebuild switch \
 		--flake "git+file://$FLAKE_ROOT#$derivation" \
