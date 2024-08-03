@@ -37,6 +37,7 @@
 		# FIXME-QA(Krey): Figure out if we can put this into nixos-sinnenfreude module to avoid reusing it for everything else
 		specialArgs = {
 			inherit self;
+
 			stable = import inputs.nixpkgs {
 				system = "x86_64-linux";
 				config.allowUnfree = true;

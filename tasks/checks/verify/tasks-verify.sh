@@ -64,7 +64,7 @@ nixosSystems="$(find "$FLAKE_ROOT/src/nixos/machines/"* -maxdepth 0 -type d | se
 # Process Arguments
 distro="$1" # e.g. nixos
 machine="$2" # e.g. tupac, tsvetan, sinnenfreude
-release="${3:-"stable"}" # Optional argument uses stable as default, ability to set supported release e.g. unstable or master
+release="$3" # Optional argument uses stable as default, ability to set supported release e.g. unstable or master
 
 case "$distro" in
 	"nixos") # NixOS Management
@@ -92,8 +92,24 @@ case "$distro" in
 		# Check if the system is defined
 		[ -d "$FLAKE_ROOT/src/nixos/machines/$machine" ] || die 1 "This system '$machine' is not implemented in NiXium's management of distribution '$distro'"
 
+		[ -n "$3" ] || {
+			echo "Processing all available releases for machine '$machine' in distribution '$distro'"
+
+			for release in $(find "$FLAKE_ROOT/src/nixos/machines/$machine/releases/"* -maxdepth 0 -type f | sed -E "s#^$FLAKE_ROOT/src/nixos/machines/$machine/releases/##g" | sed -E "s#.nix##g" | tr '\n' ' '); do
+				echo "Checking system '$machine' in distribution '$distro', release '$release'"
+
+				nixos-rebuild \
+					dry-build \
+					--flake "git+file://$FLAKE_ROOT#nixos-$machine-$release" \
+					--option eval-cache false \
+					--show-trace || die 1 "System '$machine' in distribution '$distro' of release '$release' failed evaluation!"
+			done
+
+			exit 0 # Success
+		}
+
 		# Process the system
-		echo "Checking system '$machine' in distribution '$distro'"
+		echo "Checking system '$machine' in distribution '$distro' and release '$release'"
 
 		nixos-rebuild \
 			dry-build \
