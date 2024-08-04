@@ -94,7 +94,13 @@ in {
 		pkgs.gimp # Generic use only
 		pkgs.kooha
 
-		pkgs.session-desktop
+		# Session uses system proxy by default which breaks functionality
+		(pkgs.session-desktop.overrideAttrs (super: {
+			postInstall = ''
+				wrapProgram $out/bin/session-desktop \
+					--append-flags "--no-proxy-server"
+			'';
+		}))
 		pkgs.element-desktop
 		pkgs.simplex-chat-desktop
 

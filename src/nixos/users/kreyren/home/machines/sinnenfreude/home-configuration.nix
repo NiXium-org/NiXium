@@ -41,8 +41,14 @@
 
 			# Temporary management of Post-Quantum Safety until matrix manages it, see https://github.com/matrix-org/matrix-spec/issues/975 for details
 			unstable.simplex-chat-desktop
-			pkgs.session-desktop
 
+			# Session uses system proxy by default which breaks functionality
+			(pkgs.session-desktop.overrideAttrs (super: {
+				postInstall = ''
+					wrapProgram $out/bin/session-desktop \
+						--append-flags "--no-proxy-server"
+				'';
+			}))
 			# Temporary managment of IRC until it's implemented in our matrix server
 			pkgs.hexchat # Unmaintained package, no better known for the protocol
 
