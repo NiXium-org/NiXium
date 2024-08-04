@@ -1,4 +1,4 @@
-{ moduleWithSystem, config, self, ... }:
+{ moduleWithSystem, config, self, pkgs, ... }:
 
 let
 	inherit (config.flake) homeManagerModules;
@@ -44,6 +44,7 @@ in {
 					homeManagerModules.tools-direnv-kreyren
 					homeManagerModules.tools-git-kreyren
 					homeManagerModules.tools-gpg-agent-kreyren
+					homeManagerModules.tools-ragenix-kreyren
 
 					homeManagerModules.vpn-protonvpn-kreyren
 

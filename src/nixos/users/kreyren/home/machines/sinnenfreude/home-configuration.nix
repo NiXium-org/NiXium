@@ -1,8 +1,10 @@
-{ pkgs, lib, unstable, aagl, ... }:
+{ config, pkgs, lib, unstable, aagl, ... }:
 
-{
-	home.stateVersion = "24.05";
+# FIXME(Krey): trace: evaluation warning: The ‘gnome.dconf-editor’ was moved to top-level. Please use ‘pkgs.dconf-editor’ directly. -- Channel 24.11
 
+let
+	inherit (lib) mkIf;
+in {
 	gtk.enable = true;
 
 	home.impermanence.enable = true;
@@ -56,7 +58,6 @@
 			pkgs.dissent
 
 		# Slicers
-		pkgs.cura
 		pkgs.prusa-slicer
 		pkgs.super-slicer-beta # Prusa-slicer fork by community. Includes additional features, but lags behind in releases
 		pkgs.orca-slicer # Prusa-slicer fork by BambuLab adapted by the community
@@ -100,7 +101,8 @@
 		pkgs.qbittorrent # Torrents
 		pkgs.tealdeer # TLDR Pages Implementation
 		pkgs.nextcloud-client
-		pkgs.printrun
+		# FIXME(Krey): To be managed..
+		#(mkIf (config.system.nixos.release != "24.11") pkgs.printrun) # Currently broken in unstable+
 
 		# Video
 		pkgs.stremio # Media Server Client

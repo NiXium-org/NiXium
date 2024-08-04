@@ -8,8 +8,20 @@
 			"switch" = {
 				description = "Switch the configuration on the current supported system or specified";
 				category = "Administration";
-				# FIXME-QA(Krey): This makes the declaration more functional, but looks like an ugly hack
-				exec = toString ((import ./script.nix { inherit pkgs; }).switch-task + /bin/switch-task);
+
+				exec = pkgs.writeShellApplication {
+					name = "tasks-switch";
+
+					runtimeInputs = [
+						pkgs.nixos-install-tools
+						pkgs.openssh
+						pkgs.nixos-rebuild
+						pkgs.gnused
+						pkgs.git
+					];
+
+					text = builtins.readFile ./tasks-switch.sh;
+				};
 			};
 		};
 	};

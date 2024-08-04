@@ -28,7 +28,19 @@
 			flake-root.url = "github:srid/flake-root";
 			# NOTE(Krey): Lanzaboote was updated to 0.4.1, but those versions are not compatible with the nixpkgs stable channel
 			lanzaboote.url = "github:nix-community/lanzaboote/v0.3.0"; # MAINTAIN(Krey): has to be kept up to date -- https://github.com/nix-community/lanzaboote/issues/343
-			arkenfox.url = "github:dwarfmaster/arkenfox-nixos";
+
+		arkenfox = {
+			url = "github:dwarfmaster/arkenfox-nixos";
+			inputs.nixpkgs.follows = "nixpkgs";
+		};
+		arkenfox-unstable = {
+			url = "github:dwarfmaster/arkenfox-nixos";
+			inputs.nixpkgs.follows = "nixpkgs-unstable";
+		};
+		arkenfox-master = {
+			url = "github:dwarfmaster/arkenfox-nixos";
+			inputs.nixpkgs.follows = "nixpkgs-master";
+		};
 
 		firefox-addons = {
 			url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
@@ -44,7 +56,11 @@
 			};
 			sops-unstable = {
 				url = "github:Mic92/sops-nix";
-				inputs.nixpkgs.follows = "nixpkgs";
+				inputs.nixpkgs.follows = "nixpkgs-unstable";
+			};
+			sops-master = {
+				url = "github:Mic92/sops-nix";
+				inputs.nixpkgs.follows = "nixpkgs-master";
 			};
 
 		# Ragenix
@@ -56,6 +72,10 @@
 				url = "github:yaxitech/ragenix";
 				inputs.nixpkgs.follows = "nixpkgs-unstable";
 			};
+			ragenix-master = {
+				url = "github:yaxitech/ragenix";
+				inputs.nixpkgs.follows = "nixpkgs-master";
+			};
 
 		# DISKO
 			disko = {
@@ -66,9 +86,12 @@
 				url = "github:nix-community/disko";
 				inputs.nixpkgs.follows = "nixpkgs-unstable";
 			};
+			disko-master = {
+				url = "github:nix-community/disko";
+				inputs.nixpkgs.follows = "nixpkgs-master";
+			};
 
 		# AAGL
-			# FIXME(Krey): Lacks 24.05 release atm --
 			aagl = {
 				url = "github:ezKEa/aagl-gtk-on-nix/release-24.05";
 				inputs.nixpkgs.follows = "nixpkgs-24_05";
@@ -84,7 +107,12 @@
 			};
 
 			aagl-unstable = {
-				url = "github:ezKEa/aagl-gtk-on-nix";
+				url = "github:ezKEa/aagl-gtk-on-nix/main";
+				inputs.nixpkgs.follows = "nixpkgs-unstable";
+			};
+			aagl-master = {
+				url = "github:ezKEa/aagl-gtk-on-nix/main";
+				inputs.nixpkgs.follows = "nixpkgs-master";
 			};
 
 		# Home-Manager
@@ -106,10 +134,22 @@
 				url = "github:nix-community/home-manager/master";
 				inputs.nixpkgs.follows = "nixpkgs-unstable";
 			};
+			hm-master = {
+				url = "github:nix-community/home-manager/master";
+				inputs.nixpkgs.follows = "nixpkgs-master";
+			};
 
 		nixos-generators = {
 			url = "github:nix-community/nixos-generators";
 			inputs.nixpkgs.follows = "nixpkgs";
+		};
+		nixos-generators-unstable = {
+			url = "github:nix-community/nixos-generators";
+			inputs.nixpkgs.follows = "nixpkgs-unstable";
+		};
+		nixos-generators-master = {
+			url = "github:nix-community/nixos-generators";
+			inputs.nixpkgs.follows = "nixpkgs-master";
 		};
 	};
 
@@ -153,6 +193,8 @@
 
 						inputs.disko.packages.${system}.disko-install
 						inputs.disko.packages.${system}.disko
+
+						inputs.nixpkgs.legacyPackages.${system}.nodePackages.eslint
 					];
 					inputsFrom = [
 						config.mission-control.devShell

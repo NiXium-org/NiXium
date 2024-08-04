@@ -1,24 +1,35 @@
-{ ... }:
+{ config, lib, ... }:
 
 # Sound management of SINNENFREUDE
 
 {
-	sound.enable = true;
+	"24.05" = {
+		sound.enable = true; # Whether to use ALSA
+		hardware.pulseaudio.enable = false; # Whether to use pulseaudio, requires to be turned off if pipewire is used
+		services.pipewire.enable = true; # Whether to use pipewire
 
-	hardware.pulseaudio.enable = false;
+		# Pipewire
+		services.pipewire = {
+			alsa.enable = config.sound.enable; # Integrate alse in pipewire
+			alsa.support32Bit = config.sound.enable; # Allow 32-bit ALSA support
+			pulse.enable = true; # Integrate pulseaudio in pipewire
+		};
 
-	services.pipewire = {
-		enable = true;
-		alsa.enable = true;
-		alsa.support32Bit = true;
-		pulse.enable = true;
-		# If you want to use JACK applications, uncomment this
-		#jack.enable = true;
-
-		# use the example session manager (no others are packaged yet so this is enabled by default,
-		# no need to redefine it in your config for now)
-		#media-session.enable = true;
+		security.rtkit.enable = true; # Allow real-time scheduling priority to user
 	};
 
-	security.rtkit.enable = true;
-}
+	# Option 'sound' has been removed
+	"24.11" = {
+		hardware.pulseaudio.enable = false; # Whether to use pulseaudio, requires to be turned off if pipewire is used
+		services.pipewire.enable = true; # Whether to use pipewire
+
+		# Pipewire
+		services.pipewire = {
+			alsa.enable = true; # Integrate alse in pipewire
+			alsa.support32Bit = true; # Allow 32-bit ALSA support
+			pulse.enable = true; # Integrate pulseaudio in pipewire
+		};
+
+		security.rtkit.enable = true; # Allow real-time scheduling priority to user
+	};
+}."${lib.trivial.release}"
