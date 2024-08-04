@@ -3,7 +3,10 @@
 let
 	inherit (lib) mkIf;
 in {
-	age.secrets.kreyren-wireproxy-protonvpn-config.file = ./kreyren-wireproxy-protonvpn-config.age;
+	age.secrets.kreyren-wireproxy-protonvpn-config = {
+		file = ./kreyren-wireproxy-protonvpn-config.age;
+		symlink = false;
+	};
 
 	# FIXME(Krey): Make an option for this
 	systemd.user.services.wireproxy-protonvpn = {

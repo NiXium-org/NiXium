@@ -11,8 +11,8 @@ in {
 
 	imports = [
 		./direnv
-    # ./eid
 		./git
 		./gpg-agent
+		./ragenix
 	];
 }

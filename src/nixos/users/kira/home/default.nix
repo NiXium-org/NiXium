@@ -40,6 +40,7 @@ in {
 						homeManagerModules.tools-direnv-kira
 						homeManagerModules.tools-git-kira
 						homeManagerModules.tools-gpg-agent-kira
+						homeManagerModules.tools-ragenix-kira
 
 						homeManagerModules.vpn-protonvpn-kira
 

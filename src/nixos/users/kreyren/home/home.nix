@@ -39,8 +39,7 @@ let
 	inherit (lib) mkIf;
 in {
 	home.username = "kreyren";
-	# home.homeDirectory = ("/home/" + config.home.username);
-	home.homeDirectory = "/home/kreyren";
+	home.homeDirectory = ("/home/" + config.home.username);
 
 	systemd.user.startServices = true; # Start all needed services on activation and deactivate the obsolets instead of suggesting what to do
 

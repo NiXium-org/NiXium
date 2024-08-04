@@ -13,5 +13,6 @@ in {
 		./direnv
 		./git
 		./gpg-agent
+		./ragenix
 	];
 }
