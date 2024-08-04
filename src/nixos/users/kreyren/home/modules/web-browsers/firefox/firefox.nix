@@ -12,7 +12,7 @@ let
 	inherit (lib) mkForce;
 in {
 	programs.firefox = {
-		package = pkgs.firefox-esr;
+		package = pkgs.firefox-esr-128; # Higher version needed for github-refined
 		# Refer to https://mozilla.github.io/policy-templates or `about:policies#documentation` in firefox
 		policies = {
 			AppAutoUpdate = false; # Disable automatic application update

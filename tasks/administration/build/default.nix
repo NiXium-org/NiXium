@@ -8,9 +8,20 @@
 			"build" = {
 				description = "Build and cache the system configuration without deployment";
 				category = "Administration";
-				# FIXME-QA(Krey): This makes the declaration more functional, but looks like an ugly hack
-				# FIXME(Krey): Does not accept arguments, likely a mission-control bug as the declaration is same with deploy where it works without issues
-				exec = toString ((import ./script.nix { inherit pkgs; }).build-task + /bin/build-task);
+
+				exec = pkgs.writeShellApplication {
+					name = "tasks-build";
+
+					runtimeInputs = [
+						pkgs.nixos-install-tools
+						pkgs.nixos-rebuild
+						pkgs.gnused
+						pkgs.git
+					];
+
+					# FIXME(Krey): This should use flake-root to set absolute path
+					text = builtins.readFile ./tasks-build.sh;
+				};
 			};
 		};
 	};
