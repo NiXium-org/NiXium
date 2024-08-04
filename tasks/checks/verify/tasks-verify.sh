@@ -51,12 +51,13 @@ nixosSystems="$(find "$FLAKE_ROOT/src/nixos/machines/"* -maxdepth 0 -type d | se
 
 # Assume that we are always checking against nixos distribution with stable release
 [ "$#" != 1 ] || {
-	echo "Checking stable release of system '$1' in NixOS distribution"
+	derivation="$1"
+	echo "Checking derivation: $derivation"
 
 	nixos-rebuild dry-build \
-		--flake "git+file://$FLAKE_ROOT#nixos-$1-stable" \
+		--flake "git+file://$FLAKE_ROOT#$derivation" \
 		--option eval-cache false \
-		--show-trace || die 1 "Verification of the '$1' system on NixOS distribution using stable release failed"
+		--show-trace || die 1 "Verification of the derivation '$derivation' failed"
 
 	exit 0 # Success
 }
