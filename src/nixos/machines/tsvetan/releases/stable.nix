@@ -60,6 +60,7 @@ in {
 			runtimeInputs = [
 				inputs'.disko.packages.disko-install
 				pkgs.age
+				pkgs.nixos-install-tools
 			];
 			runtimeEnv = {
 				LC_ALL = "C"; # Set locale to avoid disko-install from breaking
@@ -82,7 +83,7 @@ in {
 				[ -s "$ragenixTempDir/tsvetan-ssh-ed25519-private" ] || age --identity "$ragenixIdentity" --decrypt --output "$ragenixTempDir/tsvetan-ssh-ed25519-private" "${self.nixosConfigurations.nixos-tsvetan-stable.config.age.secrets.tsvetan-ssh-ed25519-private.file}"
 
 				# FIXME(Krey): This should be using flake-root for the flake to refer to the repository in the nix store
-				sudo disko-install \
+				sudo --preserve-env=PATH disko-install \
 					--flake ".#nixos-tsvetan-stable" \
 					--disk system "$(realpath ${self.nixosConfigurations.nixos-tsvetan-stable.config.disko.devices.disk.system.device})" \
 					--extra-files "$ragenixTempDir/tsvetan-ssh-ed25519-private" /nix/persist/system/etc/ssh/ssh_host_ed25519_key
