@@ -8,9 +8,9 @@ let
 	inherit (lib) mkIf;
 in {
 	# Authorize TSVETAN
-		# users.extraUsers.builder.openssh.authorizedKeys.keys = [
-		# 	"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF18QG9oqeeq/lQc5QDJl3hz5D4Q9bhiHFTRLJN4KSZb" # TSVETAN
-		# ];
+		users.extraUsers.builder.openssh.authorizedKeys.keys = [
+			"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPiYirfvpV+4unRyv5j9/B9a65UDfIe2cWM1UjJWqK5T" # TSVETAN
+		];
 
 	# Import the SSH Keys for the builder account
 	age.secrets.mracek-builder-ssh-ed25519-private = {

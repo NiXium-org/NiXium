@@ -55,19 +55,20 @@ in {
 
 	# Task to perform installation of TSVETAN in NixOS distribution
 	perSystem = { system, pkgs, inputs', self', ... }: {
-		packages.nixos-tsvetan-install = pkgs.writeShellApplication {
-			name = "nixos-tsvetan-install";
+		packages.nixos-tsvetan-stable-install = pkgs.writeShellApplication {
+			name = "nixos-tsvetan-stable-install";
 			runtimeInputs = [
 				inputs'.disko.packages.disko-install
 				pkgs.age
 			];
+			runtimeEnv = {
+				LC_ALL = "C"; # Set locale to avoid disko-install from breaking
+			};
 			text = ''
-				export LC_ALL=C # Set locale to avoid disko-install from breaking
-
 				# FIXME-QA(Krey): This should be a runtimeInput
 				die() { printf "FATAL: %s\n" "$2"; exit ;}
 
-				[ -b "${self.nixosConfigurations.tsvetan.config.disko.devices.disk.system.device}" ] || die 1 "Expected device was not found, refusing to install"
+				[ -b "${self.nixosConfigurations.nixos-tsvetan-stable.config.disko.devices.disk.system.device}" ] || die 1 "Expected device was not found, refusing to install"
 
 				ragenixTempDir="/var/tmp/nixium"
 				ragenixIdentity="$HOME/.ssh/id_ed25519"
@@ -76,15 +77,14 @@ in {
 				sudo chown -R "$USER:users" "$ragenixTempDir"
 				sudo chmod -R 700 "$ragenixTempDir"
 
-				[ -s "$ragenixTempDir/tsvetan-disks-password" ] || age --identity "$ragenixIdentity" --decrypt --output "$ragenixTempDir/tsvetan-disks-password" "${self.nixosConfigurations.tsvetan.config.age.secrets.tsvetan-disks-password.file}"
+				[ -s "$ragenixTempDir/tsvetan-disks-password" ] || age --identity "$ragenixIdentity" --decrypt --output "$ragenixTempDir/tsvetan-disks-password" "${self.nixosConfigurations.nixos-tsvetan-stable.config.age.secrets.tsvetan-disks-password.file}"
 
-				[ -s "$ragenixTempDir/tsvetan-ssh-ed25519-private" ] || age --identity "$ragenixIdentity" --decrypt --output "$ragenixTempDir/tsvetan-ssh-ed25519-private" "${self.nixosConfigurations.tsvetan.config.age.secrets.tsvetan-ssh-ed25519-private.file}"
+				[ -s "$ragenixTempDir/tsvetan-ssh-ed25519-private" ] || age --identity "$ragenixIdentity" --decrypt --output "$ragenixTempDir/tsvetan-ssh-ed25519-private" "${self.nixosConfigurations.nixos-tsvetan-stable.config.age.secrets.tsvetan-ssh-ed25519-private.file}"
 
 				# FIXME(Krey): This should be using flake-root for the flake to refer to the repository in the nix store
 				sudo disko-install \
-					--dry-run \
-					--flake ".#tsvetan" \
-					--disk system "$(realpath ${self.nixosConfigurations.tsvetan.config.disko.devices.disk.system.device})" \
+					--flake ".#nixos-tsvetan-stable" \
+					--disk system "$(realpath ${self.nixosConfigurations.nixos-tsvetan-stable.config.disko.devices.disk.system.device})" \
 					--extra-files "$ragenixTempDir/tsvetan-ssh-ed25519-private" /nix/persist/system/etc/ssh/ssh_host_ed25519_key
 
 				# FIXME(Krey): Flash u-boot, currently blocked by https://github.com/OLIMEX/DIY-LAPTOP/issues/73 (flashing it manually via SPI clamp and ch341a programmer atm)
@@ -95,7 +95,7 @@ in {
 		};
 
 		# Declare for `nix run`
-		apps.nixos-tsvetan-install.program = self'.packages.nixos-tsvetan-install;
+		apps.nixos-tsvetan-stable-install.program = self'.packages.nixos-tsvetan-stable-install;
 	};
 
 	# Recovery configuration

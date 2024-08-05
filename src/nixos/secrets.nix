@@ -143,6 +143,9 @@ in {
 	"./machines/tsvetan/secrets/tsvetan-disks-password.age".publicKeys = [
 		kreyren tsvetan-system
 	];
+	"./machines/tsvetan/secrets/tsvetan-builder-ssh-ed25519-private.age".publicKeys = [
+		kreyren tsvetan-system
+	];
 
 	# TUPAC (system)
 	"./machines/tupac/secrets/tupac-ssh-ed25519-private.age".publicKeys = [

@@ -16,5 +16,7 @@ in {
 	services.openssh.enable = true;
 	services.tor.enable = true;
 
+	age.secrets.sinnenfreude-ssh-ed25519-private.file = ../secrets/sinnenfreude-ssh-ed25519-private.age; # Declare private key
+
 	nixpkgs.hostPlatform = "aarch64-linux";
 }
