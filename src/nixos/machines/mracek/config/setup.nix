@@ -21,6 +21,7 @@ in {
 	services.tor.enable = true;
 	services.vaultwarden.enable = false; # Testing..
 	services.vikunja.enable = true;
+	services.znc.enable = true;
 
 	users.users.root.openssh.authorizedKeys.keys = mkIf config.services.openssh.enable [
 		"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOzh6FRxWUemwVeIDsr681fgJ2Q2qCnwJbvFe4xD15ve kreyren@fsfe.org" # Allow root access for the Super Administrator (KREYREN)
