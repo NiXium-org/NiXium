@@ -65,15 +65,15 @@
 
 		# Ragenix
 			ragenix = {
-				url = "github:yaxitech/ragenix";
+				url = "github:NiXium-org/ragenix";
 				inputs.nixpkgs.follows = "nixpkgs";
 			};
 			ragenix-unstable = {
-				url = "github:yaxitech/ragenix";
+				url = "github:NiXium-org/ragenix";
 				inputs.nixpkgs.follows = "nixpkgs-unstable";
 			};
 			ragenix-master = {
-				url = "github:yaxitech/ragenix";
+				url = "github:NiXium-org/ragenix";
 				inputs.nixpkgs.follows = "nixpkgs-master";
 			};
 

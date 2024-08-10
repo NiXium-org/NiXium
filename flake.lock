@@ -121,15 +121,15 @@
         "systems": "systems_5"
       },
       "locked": {
-        "lastModified": 1707830867,
-        "narHash": "sha256-PAdwm5QqdlwIqGrfzzvzZubM+FXtilekQ/FA0cI49/o=",
-        "owner": "ryantm",
+        "lastModified": 1723259941,
+        "narHash": "sha256-b+uqzj+Wa6xgMS9aNbX4I+sXeb5biPDi39VgvSFqFvU=",
+        "owner": "NiXium-org",
         "repo": "agenix",
-        "rev": "8cb01a0e717311680e0cbca06a76cbceba6f3ed6",
+        "rev": "523e80ebc2a6d8b36633fa849ee58fd9d37e86bc",
         "type": "github"
       },
       "original": {
-        "owner": "ryantm",
+        "owner": "NiXium-org",
         "repo": "agenix",
         "type": "github"
       }
@@ -145,15 +145,15 @@
         "systems": "systems_7"
       },
       "locked": {
-        "lastModified": 1707830867,
-        "narHash": "sha256-PAdwm5QqdlwIqGrfzzvzZubM+FXtilekQ/FA0cI49/o=",
-        "owner": "ryantm",
+        "lastModified": 1723259941,
+        "narHash": "sha256-b+uqzj+Wa6xgMS9aNbX4I+sXeb5biPDi39VgvSFqFvU=",
+        "owner": "NiXium-org",
         "repo": "agenix",
-        "rev": "8cb01a0e717311680e0cbca06a76cbceba6f3ed6",
+        "rev": "523e80ebc2a6d8b36633fa849ee58fd9d37e86bc",
         "type": "github"
       },
       "original": {
-        "owner": "ryantm",
+        "owner": "NiXium-org",
         "repo": "agenix",
         "type": "github"
       }
@@ -169,15 +169,15 @@
         "systems": "systems_9"
       },
       "locked": {
-        "lastModified": 1707830867,
-        "narHash": "sha256-PAdwm5QqdlwIqGrfzzvzZubM+FXtilekQ/FA0cI49/o=",
-        "owner": "ryantm",
+        "lastModified": 1723259941,
+        "narHash": "sha256-b+uqzj+Wa6xgMS9aNbX4I+sXeb5biPDi39VgvSFqFvU=",
+        "owner": "NiXium-org",
         "repo": "agenix",
-        "rev": "8cb01a0e717311680e0cbca06a76cbceba6f3ed6",
+        "rev": "523e80ebc2a6d8b36633fa849ee58fd9d37e86bc",
         "type": "github"
       },
       "original": {
-        "owner": "ryantm",
+        "owner": "NiXium-org",
         "repo": "agenix",
         "type": "github"
       }
@@ -1789,15 +1789,15 @@
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1718869541,
-        "narHash": "sha256-smhpGh1x/8mNl+sFL8SbeWnx0bK4HWjmdRA3mIwGjPU=",
-        "owner": "yaxitech",
+        "lastModified": 1723260120,
+        "narHash": "sha256-DnqnBtbFujHG+/uEtg9BFp2DaYKGQQn38EQlr9dUe74=",
+        "owner": "NiXium-org",
         "repo": "ragenix",
-        "rev": "8a254bbaa93fbd38e16f70fa81af6782794e046e",
+        "rev": "502d72445928333c5846787bf5761574122404af",
         "type": "github"
       },
       "original": {
-        "owner": "yaxitech",
+        "owner": "NiXium-org",
         "repo": "ragenix",
         "type": "github"
       }
@@ -1813,15 +1813,15 @@
         "rust-overlay": "rust-overlay_3"
       },
       "locked": {
-        "lastModified": 1718869541,
-        "narHash": "sha256-smhpGh1x/8mNl+sFL8SbeWnx0bK4HWjmdRA3mIwGjPU=",
-        "owner": "yaxitech",
+        "lastModified": 1723260120,
+        "narHash": "sha256-DnqnBtbFujHG+/uEtg9BFp2DaYKGQQn38EQlr9dUe74=",
+        "owner": "NiXium-org",
         "repo": "ragenix",
-        "rev": "8a254bbaa93fbd38e16f70fa81af6782794e046e",
+        "rev": "502d72445928333c5846787bf5761574122404af",
         "type": "github"
       },
       "original": {
-        "owner": "yaxitech",
+        "owner": "NiXium-org",
         "repo": "ragenix",
         "type": "github"
       }
@@ -1837,15 +1837,15 @@
         "rust-overlay": "rust-overlay_4"
       },
       "locked": {
-        "lastModified": 1718869541,
-        "narHash": "sha256-smhpGh1x/8mNl+sFL8SbeWnx0bK4HWjmdRA3mIwGjPU=",
-        "owner": "yaxitech",
+        "lastModified": 1723260120,
+        "narHash": "sha256-DnqnBtbFujHG+/uEtg9BFp2DaYKGQQn38EQlr9dUe74=",
+        "owner": "NiXium-org",
         "repo": "ragenix",
-        "rev": "8a254bbaa93fbd38e16f70fa81af6782794e046e",
+        "rev": "502d72445928333c5846787bf5761574122404af",
         "type": "github"
       },
       "original": {
-        "owner": "yaxitech",
+        "owner": "NiXium-org",
         "repo": "ragenix",
         "type": "github"
       }
