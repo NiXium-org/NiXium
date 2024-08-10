@@ -36,7 +36,7 @@ in {
 		pkgs.android-tools
 		pkgs.picocom
 		pkgs.bottles
-		pkgs.kicad
+		pkgs.kicad-small
 		pkgs.mtr
 		# nix-software-center.nix-software-center
 		pkgs.colobot
@@ -45,6 +45,14 @@ in {
 		# pkgs.ventoy-full
 		pkgs.blender
 		pkgs.gparted
+
+		# Session uses system proxy by default which breaks functionality
+			(pkgs.session-desktop.overrideAttrs (super: {
+				postInstall = ''
+					wrapProgram $out/bin/session-desktop \
+						--append-flags "--no-proxy-server"
+				'';
+			}))
 
 		(pkgs.brave.override {
 			# NOTE(Krey): Using system-wide tor which is interfiering with the brave's browsing as non-tor browsing has tor and tor browser goes through 2 Tors so this fixes it

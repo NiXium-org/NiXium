@@ -14,6 +14,8 @@
 	programs.steam.enable = true;
 	programs.noisetorch.enable = true; # Microphone filtering
 
+	programs.nix-ld.enable = true;
+
 	services.flatpak.enable = true;
 	services.openssh.enable = true;
 	services.tor.enable = true;

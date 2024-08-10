@@ -57,14 +57,14 @@ in {
 		pkgs.android-tools
 		pkgs.picocom
 		pkgs.bottles
-		pkgs.kicad
+		pkgs.kicad-small
 		pkgs.mtr
 		# nix-software-center.nix-software-center
 		pkgs.colobot
 		pkgs.nix-index
 		pkgs.tealdeer
 		# pkgs.ventoy-full
-		pkgs.davinci-resolve
+		# pkgs.davinci-resolve
 		pkgs.blender
 
 		(pkgs.brave.override {
