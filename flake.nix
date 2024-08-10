@@ -73,7 +73,7 @@
 				inputs.nixpkgs.follows = "nixpkgs-unstable";
 			};
 			ragenix-master = {
-				url = "github:yaxitech/ragenix";
+				url = "github:NiXium-org/ragenix";
 				inputs.nixpkgs.follows = "nixpkgs-master";
 			};
 
@@ -151,11 +151,6 @@
 			url = "github:nix-community/nixos-generators";
 			inputs.nixpkgs.follows = "nixpkgs-master";
 		};
-
-		nixos-anywhere = {
-			url = "github:nix-community/nixos-anywhere/main";
-			inputs.nixpkgs.follows = "nixpkgs";
-		};
 	};
 
 	outputs = inputs @ { self, ... }:
@@ -194,16 +189,12 @@
 						inputs.nixpkgs.legacyPackages.${system}.sbctl # To set up secureboot
 						inputs.nixpkgs.legacyPackages.${system}.fira-code # For liquratures in code editors
 
-						inputs.nixpkgs.legacyPackages.${system}.flashrom
-
 						inputs.nixos-generators.packages.${system}.nixos-generate
 
 						inputs.disko.packages.${system}.disko-install
 						inputs.disko.packages.${system}.disko
 
 						inputs.nixpkgs.legacyPackages.${system}.nodePackages.eslint
-
-						inputs.nixos-anywhere.packages.${system}.nixos-anywhere
 					];
 					inputsFrom = [
 						config.mission-control.devShell
