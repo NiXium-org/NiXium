@@ -1,8 +1,6 @@
 { pkgs, config, ... }:
 
-let
-	inherit (lib) mkIf;
-in {
+{
 	age.secrets.kreyren-wireproxy-protonvpn-config = {
 		file = ./kreyren-wireproxy-protonvpn-config.age;
 		symlink = false;
