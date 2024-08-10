@@ -75,9 +75,9 @@ in {
 				sudo chown -R "$USER:users" "$ragenixTempDir"
 				sudo chmod -R 700 "$ragenixTempDir"
 
-				[ -s "$ragenixTempDir/tsvetan-disks-password" ] || age --identity "$ragenixIdentity" --decrypt --output "$ragenixTempDir/tsvetan-disks-password" "${self.nixosConfigurations.nixos-tsvetan-stable.config.age.secrets.tsvetan-disks-password.file}"
+				[ -s "$ragenixTempDir/tsvetan-disks-password" ] || age --identity "$ragenixIdentity" --decrypt --output "$ragenixTempDir/tsvetan-disks-password" "${self.nixosConfigurations.nixos-tsvetan-stable.config.age.secrets.tsvetan-disks-password.path}"
 
-				[ -s "$ragenixTempDir/tsvetan-ssh-ed25519-private" ] || age --identity "$ragenixIdentity" --decrypt --output "$ragenixTempDir/tsvetan-ssh-ed25519-private" "${self.nixosConfigurations.nixos-tsvetan-stable.config.age.secrets.tsvetan-ssh-ed25519-private.file}"
+				[ -s "$ragenixTempDir/tsvetan-ssh-ed25519-private" ] || age --identity "$ragenixIdentity" --decrypt --output "$ragenixTempDir/tsvetan-ssh-ed25519-private" "${self.nixosConfigurations.nixos-tsvetan-stable.config.age.secrets.tsvetan-ssh-ed25519-private.path}"
 
 				# FIXME(Krey): This should be using flake-root for the flake to refer to the repository in the nix store
 				sudo --preserve-env=PATH disko-install \

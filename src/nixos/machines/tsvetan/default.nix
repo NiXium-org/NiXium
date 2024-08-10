@@ -22,7 +22,7 @@ in {
 			./config/initrd.nix
 			./config/kernel.nix
 			./config/networking.nix
-			./config/power-management.nix
+			# ./config/power-management.nix
 			./config/security.nix
 			./config/setup.nix
 			./config/sound.nix
