@@ -80,8 +80,10 @@ in {
 				[ -s "$ragenixTempDir/tsvetan-ssh-ed25519-private" ] || age --identity "$ragenixIdentity" --decrypt --output "$ragenixTempDir/tsvetan-ssh-ed25519-private" "${self.nixosConfigurations.nixos-tsvetan-stable.config.age.secrets.tsvetan-ssh-ed25519-private.path}"
 
 				# FIXME(Krey): This should be using flake-root for the flake to refer to the repository in the nix store
-				sudo --preserve-env=PATH disko-install \
+				sudo env "PATH=$PATH" disko-install \
 					--flake ".#nixos-tsvetan-stable" \
+					--mode format \
+					--debug \
 					--disk system "$(realpath ${self.nixosConfigurations.nixos-tsvetan-stable.config.disko.devices.disk.system.device})" \
 					--extra-files "$ragenixTempDir/tsvetan-ssh-ed25519-private" /nix/persist/system/etc/ssh/ssh_host_ed25519_key
 
