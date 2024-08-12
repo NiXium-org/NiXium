@@ -36,7 +36,7 @@ in {
 
 	imports = [
 		# ./releases/master.nix
-		./releases/stable.nix
+		./releases/stable
 		# ./releases/unstable.nix
 	];
 

@@ -62,36 +62,13 @@ in {
 				pkgs.age
 				pkgs.nixos-install-tools
 			];
-			text = ''
-				# FIXME-QA(Krey): This should be a runtimeInput
-				die() { printf "FATAL: %s\n" "$2"; exit ;}
-
-				[ -b "${self.nixosConfigurations.nixos-tsvetan-stable.config.disko.devices.disk.system.device}" ] || die 1 "Expected device was not found, refusing to install"
-
-				ragenixTempDir="/var/tmp/nixium"
-				ragenixIdentity="$HOME/.ssh/id_ed25519"
-
-				[ -d "$ragenixTempDir" ] || sudo mkdir "$ragenixTempDir"
-				sudo chown -R "$USER:users" "$ragenixTempDir"
-				sudo chmod -R 700 "$ragenixTempDir"
-
-				[ -s "$ragenixTempDir/tsvetan-disks-password" ] || age --identity "$ragenixIdentity" --decrypt --output "$ragenixTempDir/tsvetan-disks-password" "${self.nixosConfigurations.nixos-tsvetan-stable.config.age.secrets.tsvetan-disks-password.path}"
-
-				[ -s "$ragenixTempDir/tsvetan-ssh-ed25519-private" ] || age --identity "$ragenixIdentity" --decrypt --output "$ragenixTempDir/tsvetan-ssh-ed25519-private" "${self.nixosConfigurations.nixos-tsvetan-stable.config.age.secrets.tsvetan-ssh-ed25519-private.path}"
-
-				# FIXME(Krey): This should be using flake-root for the flake to refer to the repository in the nix store
-				sudo env "PATH=$PATH" disko-install \
-					--flake ".#nixos-tsvetan-stable" \
-					--mode format \
-					--debug \
-					--disk system "$(realpath ${self.nixosConfigurations.nixos-tsvetan-stable.config.disko.devices.disk.system.device})" \
-					--extra-files "$ragenixTempDir/tsvetan-ssh-ed25519-private" /nix/persist/system/etc/ssh/ssh_host_ed25519_key
-
-				# FIXME(Krey): Flash u-boot, currently blocked by https://github.com/OLIMEX/DIY-LAPTOP/issues/73 (flashing it manually via SPI clamp and ch341a programmer atm)
-
-				# FIXME(Krey): Flash firmware for keyboard
-				# FIXME(Krey): Flash firmware for touchpad
-			'';
+			runtimeEnv = {
+				systemDevice = self.nixosConfigurations.nixos-tsvetan-stable.config.disko.devices.disk.system.device;
+				systemDeviceBlock = self.nixosConfigurations.nixos-tsvetan-stable.config.disko.devices.disk.system.device;
+				secretTsvetanPasswordPath = self.nixosConfigurations.nixos-tsvetan-stable.config.age.secrets.tsvetan-disks-password.path;
+				secretTsvetanKeyPath = self.nixosConfigurations.nixos-tsvetan-stable.config.age.secrets.tsvetan-ssh-ed25519-private.path;
+			};
+			text = builtins.readFile ./tsvetan-nixos-stable-deploy.sh;
 		};
 
 		# Declare for `nix run`
