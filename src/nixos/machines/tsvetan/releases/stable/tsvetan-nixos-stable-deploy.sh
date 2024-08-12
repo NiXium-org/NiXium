@@ -1,3 +1,7 @@
+# shellcheck shell=sh # POSIX
+
+# shellcheck disable=SC2312 # Upstream bug fixed in master, pending release: https://github.com/koalaman/shellcheck/issues/3042
+
 # shellcheck disable=SC2154 # Variables provided to the environment by Nix
 echo "$systemDevice" >/dev/null
 echo "$systemDeviceBlock" >/dev/null
@@ -8,8 +12,7 @@ echo "$secretTsvetanKeyPath" >/dev/null
 die() { printf "FATAL: %s\n" "$2"; exit ;}
 
 # We have to use `env PATH=$PATH` so that used commands are ensured to use the correct PATH to see the expected binaries
-# shellcheck disable=SC2068 # We expect the splitting
-esudo() { sudo env "PATH=$PATH" $@ ;}
+esudo() { sudo env "PATH=$PATH" "$@" ;}
 
 [ -b "$systemDevice" ] || die 1 "Expected device was not found, refusing to install for safety"
 
@@ -30,7 +33,6 @@ ragenixIdentity="$HOME/.ssh/id_ed25519"
 
 # For the system to be able to process the runtime it needs 4GB of swap, if it does not have it then create a swap file
 	swapFile="/swapfile"
-	# shellcheck disable=SC2312 # We don't re-use the commands to need separate declaration, FIXME suggest upstream to adjust this check
 	[ "$(awk '/SwapTotal/ {print $2}' /proc/meminfo)" >= 4194304 ] || {
 		swapon -s | grep -q "$swapFile" || esudo swapoff "$swapFile" # Deactivate the swapfile if it's already there so that we can resize it
 		[ "$(stat -c%s "$swapFile")" >= 4194304 ] || esudo dd if=/dev/zero of="$swapFile" bs=1M count=4096 conv=notrunc # Resize the swap file to the desired size
