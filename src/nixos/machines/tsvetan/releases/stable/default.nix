@@ -58,14 +58,18 @@ in {
 		packages.nixos-tsvetan-stable-install = pkgs.writeShellApplication {
 			name = "nixos-tsvetan-stable-install";
 			runtimeInputs = [
-				inputs'.disko.packages.disko-install
-				pkgs.age
-				pkgs.nixos-install-tools
+				inputs'.disko.packages.disko-install # disko-install
+				pkgs.age # age
+				pkgs.nixos-install-tools # nixos-install
+				pkgs.gawk # awk
 			];
 			runtimeEnv = {
 				systemDevice = self.nixosConfigurations.nixos-tsvetan-stable.config.disko.devices.disk.system.device;
+
 				systemDeviceBlock = self.nixosConfigurations.nixos-tsvetan-stable.config.disko.devices.disk.system.device;
+
 				secretTsvetanPasswordPath = self.nixosConfigurations.nixos-tsvetan-stable.config.age.secrets.tsvetan-disks-password.path;
+
 				secretTsvetanKeyPath = self.nixosConfigurations.nixos-tsvetan-stable.config.age.secrets.tsvetan-ssh-ed25519-private.path;
 			};
 			text = builtins.readFile ./tsvetan-nixos-stable-deploy.sh;
