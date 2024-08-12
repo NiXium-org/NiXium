@@ -1,7 +1,5 @@
 # shellcheck shell=sh # POSIX
 
-# shellcheck disable=SC2312 # Upstream bug fixed in master, pending release: https://github.com/koalaman/shellcheck/issues/3042
-
 # shellcheck disable=SC2154 # Variables provided to the environment by Nix
 echo "$systemDevice" >/dev/null
 echo "$systemDeviceBlock" >/dev/null
@@ -36,6 +34,7 @@ ragenixIdentity="$HOME/.ssh/id_ed25519"
 
 # For the system to be able to process the runtime it needs 4GB of swap, if it does not have it then create a swap file
 	swapFile="/swapfile"
+	# shellcheck disable=SC2312 # Upstream bug, should not output with the `|| echo 0` used as the de-factor '|| true' recommended
 	[ "$(awk '/SwapTotal/ {print $2}' /proc/meminfo || echo 0)" -ge 4194304 ] || {
 		swapon -s | grep -q "$swapFile" || esudo swapoff "$swapFile" # Deactivate the swapfile if it's already there so that we can resize it
 		[ "$(stat -c%s "$swapFile" || echo 0)" -lt 4194304 ] || esudo dd if=/dev/zero of="$swapFile" bs=1M count=4096 conv=notrunc # Resize the swap file to the desired size
@@ -49,19 +48,20 @@ ragenixIdentity="$HOME/.ssh/id_ed25519"
 
 	# Swap file exists, is at expected size, but not activated
 	swapon -s | grep -q "$swapFile" || {
+		# shellcheck disable=SC2312 # Upstream bug, should not output with the `|| echo 0` used as the de-factor '|| true' recommended
 		[ "$(stat -c%s "$swapFile" || echo 0)" -lt 4194304 ] || esudo swapon "$swapFile"
 	}
 
 nixos-rebuild build --flake "$FLAKE_ROOT#nixos-tsvetan-stable" # pre-build the configuration
 
-esudo disko-install \
+esudo nixos-anywhere \
 	--flake "$FLAKE_ROOT#nixos-tsvetan-stable" \
-	--mode format \
+	-i "$ragenixIdentity" \
 	--debug \
-	--disk system "$(realpath "$systemDeviceBlock")" \
 	--extra-files "$ragenixTempDir/tsvetan-ssh-ed25519-private" /nix/persist/system/etc/ssh/ssh_host_ed25519_key \
 	--option max-jobs 0 \
-	--option cores 0
+	--option cores 0 \
+	"root@tsvetan.systems.nx"
 
 # FIXME(Krey): Flash u-boot, currently blocked by https://github.com/OLIMEX/DIY-LAPTOP/issues/73 (flashing it manually via SPI clamp and ch341a programmer atm)
 

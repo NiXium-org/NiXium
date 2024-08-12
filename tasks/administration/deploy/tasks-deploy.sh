@@ -1,4 +1,6 @@
 # shellcheck shell=sh # POSIX
+
+# FIXME-QA(Krey): Replace this with bashOptions instead
 set +u # Do not fail on nounset as we use command-line arguments for logic
 
 hostname="$(hostname --short)" # Capture the hostname of the current system
@@ -51,26 +53,25 @@ distro="$1" # e.g. nixos
 machine="$2" # e.g. tupac, tsvetan, sinnenfreude
 release="${3-"stable"}" # Optional argument uses stable as default, ability to set supported release e.g. unstable or master
 
-nixosSystems="$(find "$FLAKE_ROOT/src/nixos/machines/"* -maxdepth 0 -type d | sed "s#^$FLAKE_ROOT/src/nixos/machines/##g" | tr '\n' ' ')" # Get a space-separated list of all systems in the nixos distribution of NiXium
-
 case "$distro" in
 	"nixos") # NixOS Management
+		nixosSystems="$(find "$FLAKE_ROOT/src/nixos/machines/"* -maxdepth 0 -type d | sed "s#^$FLAKE_ROOT/src/nixos/machines/##g" | tr '\n' ' ')" # Get a space-separated list of all systems in the nixos distribution of NiXium
 
 		# Process all systems in NixOS distribution if `nixos all` is used
 		[ "$machine" != "all" ] || {
-			for system in $nixosSystems; do
-				status="$(cat "$FLAKE_ROOT/src/nixos/machines/$system/status")"
+			for machine in $nixosSystems; do
+				status="$(cat "$FLAKE_ROOT/src/nixos/machines/$machine/status")"
 				case "$status" in
 					"OK")
-						echo "Deploying NixOS distribution release '$release' on system '$system'"
+						echo "Deploying NixOS distribution release '$release' on machine '$machine'"
 
 						nixos-rebuild switch \
-							--flake "git+file://$FLAKE_ROOT#nixos-$system-$release}" \
+							--flake "git+file://$FLAKE_ROOT#nixos-$machine-$release}" \
 							--option eval-cache false \
-							--target-host "root@$system.systems.nx" || die 1 "System '$system' in distribution '$distro' and release '$release' failed deployment!"
+							--target-host "root@$machine.systems.nx" || die 1 "System '$machine' in distribution '$distro' and release '$release' failed deployment!"
 					;;
-					"WIP") echo "Configuration for system '$system' in distribution '$distro' is marked a Work-in-Progress, skipping build.." ;;
-					*) echo "System '$system' reports undeclared status state: $status"
+					"WIP") echo "Configuration for system '$machine' in distribution '$distro' is marked a Work-in-Progress, skipping build.." ;;
+					*) echo "System '$machine' reports undeclared status state: $status"
 				esac
 			done
 		}
