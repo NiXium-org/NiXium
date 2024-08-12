@@ -64,7 +64,7 @@ case "$distro" in
 						derivation="$(defaultDerivation "$machine")"
 						echo "Attempting to HIJACK machine '$machine' in NixOS distribution with derivation '$derivation'"
 
-						# TODO(Krey): Run a custom nix run command here that is declared within the system to perform nixos-anywhere payload
+						nix run "$FLAKE_ROOT#$distro-$machine-$release-hijack"
 					;;
 					"WIP") echo "Configuration for system '$machine' in distribution '$distro' is marked a Work-in-Progress, skipping build.." ;;
 					*) echo "System '$machine' reports undeclared status state: $status"
