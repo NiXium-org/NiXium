@@ -68,10 +68,11 @@ in {
 
 				systemDeviceBlock = self.nixosConfigurations.nixos-tsvetan-stable.config.disko.devices.disk.system.device;
 
-				secretTsvetanPasswordPath = self.nixosConfigurations.nixos-tsvetan-stable.config.age.secrets.tsvetan-disks-password.path;
+				secretTsvetanPasswordPath = self.nixosConfigurations.nixos-tsvetan-stable.config.age.secrets.tsvetan-disks-password.file;
 
-				secretTsvetanKeyPath = self.nixosConfigurations.nixos-tsvetan-stable.config.age.secrets.tsvetan-ssh-ed25519-private.path;
+				secretTsvetanKeyPath = self.nixosConfigurations.nixos-tsvetan-stable.config.age.secrets.tsvetan-ssh-ed25519-private.file;
 			};
+			bashOptions = [ "errexit" "xtrace" ];
 			text = builtins.readFile ./tsvetan-nixos-stable-deploy.sh;
 		};
 
