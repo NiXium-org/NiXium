@@ -59,7 +59,9 @@ esudo disko-install \
 	--mode format \
 	--debug \
 	--disk system "$(realpath "$systemDeviceBlock")" \
-	--extra-files "$ragenixTempDir/tsvetan-ssh-ed25519-private" /nix/persist/system/etc/ssh/ssh_host_ed25519_key
+	--extra-files "$ragenixTempDir/tsvetan-ssh-ed25519-private" /nix/persist/system/etc/ssh/ssh_host_ed25519_key \
+	--option max-jobs 0 \
+	--option cores 0
 
 # FIXME(Krey): Flash u-boot, currently blocked by https://github.com/OLIMEX/DIY-LAPTOP/issues/73 (flashing it manually via SPI clamp and ch341a programmer atm)
 
