@@ -38,7 +38,7 @@ ragenixIdentity="$HOME/.ssh/id_ed25519"
 	# shellcheck disable=SC2312 # Upstream bug, should not output with the `|| echo 0` used as the de-factor '|| true' recommended
 	[ "$(awk '/SwapTotal/ {print $2}' /proc/meminfo || echo 0)" -ge 4194304 ] || {
 		! swapon -s | grep -q "$swapFile" || esudo swapoff "$swapFile" # Deactivate the swapfile if it's already there so that we can resize it
-		[ "$(stat -c%s "$swapFile" || echo 0)" -lt 4194304 ] || esudo dd if=/dev/zero of="$swapFile" bs=1M count=4096 conv=notrunc # Resize the swap file to the desired size
+		[ "$(stat -c%s "$swapFile" || echo 0)" -ge 4194304 ] || esudo dd if=/dev/zero of="$swapFile" bs=1M count=4096 conv=notrunc # Resize the swap file to the desired size
 
 		# Ensure correct permissions
 		esudo chmod 600 "$swapFile"
