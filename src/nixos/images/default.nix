@@ -1,3 +1,3 @@
 {
-	imports = [./test ];
+	imports = [./minimal ];
 }
