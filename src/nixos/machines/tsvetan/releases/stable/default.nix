@@ -105,6 +105,6 @@ in {
 			};
 
 			# Declare for `nix run`
-				apps.nixos-tsvetan-stable-hijack.program = self'.packages.nixos-tsvetan-stable-install;
+				apps.nixos-tsvetan-stable-hijack.program = self'.packages.nixos-tsvetan-stable-hijack;
 	};
 }

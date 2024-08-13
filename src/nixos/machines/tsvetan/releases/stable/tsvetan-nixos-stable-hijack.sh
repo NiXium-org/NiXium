@@ -6,6 +6,8 @@ echo "$systemDeviceBlock" >/dev/null
 echo "$secretTsvetanPasswordPath" >/dev/null
 echo "$secretTsvetanKeyPath" >/dev/null
 
+targetSystem="root@192.168.0.62"
+
 # FIXME-QA(Krey): This should be a runtimeInput
 die() { printf "FATAL: %s\n" "$2"; exit ;}
 
@@ -54,14 +56,13 @@ ragenixIdentity="$HOME/.ssh/id_ed25519"
 
 nixos-rebuild build --flake "$FLAKE_ROOT#nixos-tsvetan-stable" # pre-build the configuration
 
+# ssh "$targetSystem" "echo 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOzh6FRxWUemwVeIDsr681fgJ2Q2qCnwJbvFe4xD15ve kreyren@fsfe.org' > /root/.ssh/authorized_keys"
+
 esudo nixos-anywhere \
 	--flake "$FLAKE_ROOT#nixos-tsvetan-stable" \
 	-i "$ragenixIdentity" \
 	--debug \
-	--extra-files "$ragenixTempDir/tsvetan-ssh-ed25519-private" /nix/persist/system/etc/ssh/ssh_host_ed25519_key \
-	--option max-jobs 0 \
-	--option cores 0 \
-	"root@tsvetan.systems.nx"
+	"$targetSystem"
 
 # FIXME(Krey): Flash u-boot, currently blocked by https://github.com/OLIMEX/DIY-LAPTOP/issues/73 (flashing it manually via SPI clamp and ch341a programmer atm)
 
