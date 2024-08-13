@@ -16,7 +16,7 @@
 	programs.git.enable = true; # Generic use only
 	programs.gpg.enable = true;
 	programs.firefox.enable = true; # Fully hardened web browser (Privacy > Comfort)
-	programs.librewolf.enable = true; # Lesser security web browser (Comfort > Privacy)
+	programs.librewolf.enable = false; # Lesser security web browser (Comfort > Privacy)
 	programs.vim.enable = true;
 	programs.vscode.enable = true;
 	programs.nix-index.enable = true;
@@ -44,29 +44,29 @@
 			pkgs.hexchat # Unmaintained package, no better known for the protocol
 
 			# Discord client for flexibility
-			pkgs.dissent
+			# pkgs.dissent
 
 		# Slicers
 		# pkgs.cura
 		# pkgs.prusa-slicer
 		# pkgs.super-slicer-beta # Prusa-slicer fork by community. Includes additional features, but lags behind in releases
-		pkgs.orca-slicer # Prusa-slicer fork by BambuLab adapted by the community
+		# pkgs.orca-slicer # Prusa-slicer fork by BambuLab adapted by the community
 
 		# Web Browsers
 			# Doesn't support aarch64-linux
 				# pkgs.tor-browser-bundle-bin # Standard Tor Web Browser
-		(pkgs.brave.overrideAttrs (super: {
-			postInstall = ''
-				wrapProgram $out/bin/brave \
-					--append-flags "--no-proxy-server"
-			'';
-		})) # Standard Insecure Web Browser
+		# (pkgs.brave.overrideAttrs (super: {
+		# 	postInstall = ''
+		# 		wrapProgram $out/bin/brave \
+		# 			--append-flags "--no-proxy-server"
+		# 	'';
+		# })) # Standard Insecure Web Browser
 
 		# Engineering
-		pkgs.blender
-		pkgs.freecad
-		pkgs.gimp
-		pkgs.kicad-small
+		# pkgs.blender
+		# pkgs.freecad
+		# pkgs.gimp
+		# pkgs.kicad-small
 
 		# Utility
 		pkgs.keepassxc
@@ -76,19 +76,19 @@
 		pkgs.mtr # Packet Loss Tester
 		pkgs.sc-controller # Steam Controller Software
 		pkgs.monero-gui
-		pkgs.dialect # Language Translator
-		pkgs.endeavour # To-Do Notes
+		# pkgs.dialect # Language Translator
+		# pkgs.endeavour # To-Do Notes
 		# FIXME-QA(Krey): As of 24th Jun 2024 this doesn't build
 			# pkgs.gaphor # Mind Maps
-		pkgs.kooha # Screen Recorder
-		pkgs.qbittorrent # Torrents
+		# pkgs.kooha # Screen Recorder
+		# pkgs.qbittorrent # Torrents
 		pkgs.tealdeer # TLDR Pages Implementation
-		pkgs.nextcloud-client
-		pkgs.printrun
+		# pkgs.nextcloud-client
+		# pkgs.printrun
 
 		# Video
-		pkgs.stremio # Media Server Client
-		pkgs.freetube # YouTube Client
+		# pkgs.stremio # Media Server Client
+		# pkgs.freetube # YouTube Client
 		pkgs.mpv
 		pkgs.vlc
 
