@@ -56,7 +56,7 @@ ragenixIdentity="$HOME/.ssh/id_ed25519"
 
 nixos-rebuild build --flake "$FLAKE_ROOT#nixos-tsvetan-stable" # pre-build the configuration
 
-# ssh "$targetSystem" "echo 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOzh6FRxWUemwVeIDsr681fgJ2Q2qCnwJbvFe4xD15ve kreyren@fsfe.org' > /root/.ssh/authorized_keys"
+
 
 esudo nixos-anywhere \
 	--flake "$FLAKE_ROOT#nixos-tsvetan-stable" \
