@@ -53,17 +53,15 @@ ragenixIdentity="$HOME/.ssh/id_ed25519"
 		[ "$(stat -c%s "$swapFile" || echo 0)" -lt 4194304 ] || esudo swapon "$swapFile"
 	}
 
-nixos-rebuild build --flake "$FLAKE_ROOT#nixos-tsvetan-stable" # pre-build the configuration
+nixos-rebuild build --flake "${FLAKE_ROOT:-.}#nixos-tsvetan-stable" # pre-build the configuration
 
 # shellcheck disable=SC2312 # We are expecting to trigger a script failure if the `realpath` fails, apparently fixed in master shellcheck
-esudo nixos-anywhere \
-	--flake "$FLAKE_ROOT#nixos-tsvetan-stable" \
+esudo disko-install \
+	--flake "${FLAKE_ROOT:-.}#nixos-tsvetan-stable" \
 	--mode format \
 	--debug \
 	--disk system "$(realpath "$systemDeviceBlock")" \
-	--extra-files "$ragenixTempDir/tsvetan-ssh-ed25519-private" /nix/persist/system/etc/ssh/ssh_host_ed25519_key \
-	--option max-jobs 0 \
-	--option cores 0
+	--extra-files "$ragenixTempDir/tsvetan-ssh-ed25519-private" /nix/persist/system/etc/ssh/ssh_host_ed25519_key
 
 # FIXME(Krey): Flash u-boot, currently blocked by https://github.com/OLIMEX/DIY-LAPTOP/issues/73 (flashing it manually via SPI clamp and ch341a programmer atm)
 
