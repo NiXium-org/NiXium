@@ -51,7 +51,7 @@ in {
 					system = {
 						device = "/dev/disk/by-id/mmc-R1J56L_0xd5a44fe1"; # eMMC
 						type = "disk";
-						imageSize = "16G"; # Size of the generated image, max 16GB to match the capacity of the eMMC
+						# imageSize = "16G"; # Size of the generated image, max 16GB to match the capacity of the eMMC
 						content = {
 							type = "gpt";
 							partitions = {
