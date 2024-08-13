@@ -108,7 +108,7 @@ in {
 
 								swap = {
 									priority = 2;
-									size = "4G";
+									size = "2G";
 									content = {
 										name = "swap";
 										type = "luks";
