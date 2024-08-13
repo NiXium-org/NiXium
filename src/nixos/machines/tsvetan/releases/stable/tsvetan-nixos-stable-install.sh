@@ -42,7 +42,7 @@ ragenixIdentity="$HOME/.ssh/id_ed25519"
 
 		# Ensure correct permissions
 		esudo chmod 600 "$swapFile"
-		esudo chown root:root
+		esudo chown root:root "$swapFile"
 
 		esudo mkswap "$swapFile" # Make swap
 	}
