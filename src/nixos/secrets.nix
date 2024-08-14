@@ -26,7 +26,7 @@ in {
 	] ++ all-systems;
 
 	"./users/kreyren/home/modules/vpn/kreyren-wireproxy-protonvpn-config.age".publicKeys = [
-		kreyren sinnenfreude-system
+		kreyren sinnenfreude-system tsvetan-system
 	];
 
 	# Kira (user)
