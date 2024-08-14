@@ -8,7 +8,7 @@ We are using:
 * [flake-parts](https://github.com/hercules-ci/flake-parts) for nix flake management
 * [home-manager](https://github.com/nix-community/home-manager) for user configuration
 * [ragenix](https://github.com/yaxitech/ragenix) for Secrets
-* [mission-control](https://github.comPlatonic-Systems/mission-control) to administrate this repository
+* [mission-control](https://github.com/Platonic-Systems/mission-control) to administrate this repository
 * [lanzaboote](https://github.com/nix-community/lanzaboote) for declarative secure boot
 * [nixos-generators](https://github.com/nix-community/nixos-generators) to generate filesystem images
 
