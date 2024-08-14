@@ -12,6 +12,9 @@ die() { printf "FATAL: %s\n" "$2"; exit ;}
 # We have to use `env PATH=$PATH` so that used commands are ensured to use the correct PATH to see the expected binaries
 esudo() { sudo env "PATH=$PATH" "$@" ;}
 
+# Refer to https://github.com/srid/flake-root/discussions/5 for details tldr flake-root doesn't currently allow parsing the specific commit
+[ -n "$FLAKE_ROOT" ] || FLAKE_ROOT="github:kreyren/nixos-config/$(curl -s -X GET "https://api.github.com/repos/kreyren/nixos-config/commits?sha=add-tsvetan" | jq -r '.[0].sha')"
+
 [ -b "$systemDevice" ] || die 1 "Expected device was not found, refusing to install for safety"
 
 ragenixTempDir="/run/agenix"
@@ -53,11 +56,11 @@ ragenixIdentity="$HOME/.ssh/id_ed25519"
 		[ "$(stat -c%s "$swapFile" || echo 0)" -lt 4194304 ] || esudo swapon "$swapFile"
 	}
 
-nixos-rebuild build --flake "${FLAKE_ROOT:-.}#nixos-tsvetan-stable" # pre-build the configuration
+nixos-rebuild build --flake "$FLAKE_ROOT#nixos-tsvetan-stable" # pre-build the configuration
 
 # shellcheck disable=SC2312 # We are expecting to trigger a script failure if the `realpath` fails, apparently fixed in master shellcheck
 esudo disko-install \
-	--flake "${FLAKE_ROOT:-.}#nixos-tsvetan-stable" \
+	--flake "$FLAKE_ROOT#nixos-tsvetan-stable" \
 	--mode format \
 	--debug \
 	--disk system "$(realpath "$systemDeviceBlock")" \
