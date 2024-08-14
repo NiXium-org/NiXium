@@ -73,6 +73,25 @@ in mkIf config.nix.distributedBuilds {
 				supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
 				mandatoryFeatures = [ ];
 			}
+			{
+				# TUPAC
+				hostName = "tupac.systems.nx";
+				systems = [ "x86_64-linux" "aarch64-linux" ];
+				protocol = "ssh-ng";
+
+				# FIXME-QA(Krey): Set this as a variable from nixos/modules/distributedBuilds
+				sshUser = "builder";
+				# sshUser = builder-account;
+
+				# FIXME-QA(Krey): Set this as a variable from nixos/modules/distributedBuilds
+				sshKey = "/etc/ssh/ssh_builder_ed25519_key";
+				#sshKey = "${builder-key-path}/ssh_${builder-account}_ed25519_key";
+
+				maxJobs = 2; # 50% of system resources
+				speedFactor = 2;
+				supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+				mandatoryFeatures = [ ];
+			}
 		];
 	};
 }
