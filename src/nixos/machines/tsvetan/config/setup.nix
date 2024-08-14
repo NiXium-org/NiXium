@@ -16,9 +16,6 @@ in {
 	services.openssh.enable = true;
 	services.tor.enable = true;
 
-	# DO NOT MERGE: Backdoor to figure out what the fuck is wrong with this build
-	users.users.root.password = "1234";
-
 	# Desktop Environment
 	services.xserver.enable = true;
 	services.xserver.displayManager.gdm.enable = true;
