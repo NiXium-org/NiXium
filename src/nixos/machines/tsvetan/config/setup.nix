@@ -16,13 +16,16 @@ in {
 	services.openssh.enable = true;
 	services.tor.enable = true;
 
+	# DO NOT MERGE: Backdoor to figure out what the fuck is wrong with this build
+	users.users.root.password = "1234";
+
 	# Desktop Environment
 	services.xserver.enable = true;
 	services.xserver.displayManager.gdm.enable = true;
 	services.xserver.desktopManager.gnome.enable = true;
 		programs.dconf.enable = true; # Needed for home-manager to not fail deployment (https://github.com/nix-community/home-manager/issues/3113)
 
-	age.secrets.tsvetan-ssh-ed25519-private.file = ../secrets/tsvetan-ssh-ed25519-private.age; # Declare private key
+	age.secrets.tsvetan-ssh-ed25519-private.file = ../secrets/tsvetan-ssh-ed25519-private.age; # Declare private key/
 
 	nixpkgs.hostPlatform = "aarch64-linux";
 }
