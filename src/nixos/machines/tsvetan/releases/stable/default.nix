@@ -65,6 +65,8 @@ in {
 					pkgs.age # age
 					pkgs.nixos-install-tools # nixos-install
 					pkgs.gawk # awk
+					pkgs.curl
+					pkgs.jq
 				];
 				runtimeEnv = {
 					systemDevice = self.nixosConfigurations.nixos-tsvetan-stable.config.disko.devices.disk.system.device;
@@ -91,8 +93,6 @@ in {
 					pkgs.age # age
 					pkgs.nixos-install-tools # nixos-install
 					pkgs.gawk # awk
-					pkgs.curl
-					pkgs.jq
 				];
 				runtimeEnv = {
 					systemDevice = self.nixosConfigurations.nixos-tsvetan-stable.config.disko.devices.disk.system.device;
