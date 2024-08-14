@@ -11,7 +11,7 @@ in {
 
 		pkgs = import inputs.nixpkgs {
 			system = "aarch64-linux";
-			config.allowUnfree = mkForce false; # Forbid proprietary code
+			config.allowUnfree = true;
 		};
 
 		modules = [
