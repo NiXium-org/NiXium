@@ -35,9 +35,9 @@ in {
 	};
 
 	imports = [
-		# ./releases/master.nix
+		./releases/master
 		./releases/stable
-		# ./releases/unstable.nix
+		./releases/unstable
 	];
 
 	# Module export to other systems in the infrastructure
