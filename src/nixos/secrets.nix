@@ -107,14 +107,6 @@ in {
 		kreyren mracek-system
 	];
 
-	# PELAGUS (system)
-	"./machines/pelagus/secrets/disks-password.age".publicKeys = [
-		kreyren pelagus-system
-	];
-	"./machines/pelagus/secrets/pelagus-onion.age".publicKeys = [
-		kreyren
-	] ++ all-systems;
-
 	# SINNENFREUDE (system)
 	"./machines/sinnenfreude/secrets/sinnenfreude-disks-password.age".publicKeys = [
 		kreyren sinnenfreude-system
@@ -147,8 +139,8 @@ in {
 		kreyren tsvetan-system
 	];
 	"./machines/tsvetan/secrets/tsvetan-openssh-onion.age".publicKeys = [
-		kreyren tsvetan-system
-	];
+		kreyren kira
+	] ++ all-systems;
 
 	# TUPAC (system)
 	"./machines/tupac/secrets/tupac-ssh-ed25519-private.age".publicKeys = [
