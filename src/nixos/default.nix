@@ -58,7 +58,6 @@ in {
 	);
 
 	imports = [
-		./images
 		./machines
 		./modules
 		./users
