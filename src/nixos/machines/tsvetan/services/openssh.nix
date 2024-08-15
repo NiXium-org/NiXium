@@ -20,7 +20,7 @@ in mkIf config.services.openssh.enable {
 	services.tor.relay.onionServices."openssh".map = mkIf config.services.tor.enable config.services.openssh.ports; # Provide hidden SSH
 
 	# Set the pubkey
-	environment.etc."ssh/ssh_host_ed25519_key.pub".text = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP7kiI7Y5lqjdcPIbrJkStyM0peCiUZ0VDNzEYV/0Ycr root@tsvetan";
+	environment.etc."ssh/ssh_host_ed25519_key.pub".text = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICyjJlb2weRLgGINt8qvG1S3DRWydUfHRvRXvaYf0azw root@tsvetan";
 
 	services.openssh.hostKeys = mkForce []; # Do not generate SSH keys
 

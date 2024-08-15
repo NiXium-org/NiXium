@@ -35,18 +35,6 @@ in {
 					];
 				};
 
-				# FIXME-QA(Krey): This should be in user's home-manager
-				nodev."/home/kreyren" = {
-					fsType = "tmpfs";
-					mountOptions = [
-						"size=1G"
-						"defaults"
-						# set mode to 755, otherwise systemd will set it to 777, which cause problems.
-						# relatime: Update inode access times relative to modify or change time.
-						"mode=755"
-					];
-				};
-
 				disk = {
 					system = {
 						device = "/dev/disk/by-id/mmc-R1J56L_0xd5a44fe1"; # eMMC

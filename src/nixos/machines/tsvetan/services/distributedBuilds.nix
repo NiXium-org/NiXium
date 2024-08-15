@@ -7,7 +7,8 @@
 let
 	inherit (lib) mkIf;
 in mkIf config.nix.distributedBuilds {
-	nix.settings.max-jobs = 0; # Do not perform any nix builds on tsvetan if distributed builds are enabled
+	# DNM(Krey): Set to 2 for testing..
+	nix.settings.max-jobs = 2; # Do not perform any nix builds on tsvetan if distributed builds are enabled
 
 	# Set up the Build Account
 		# Import the SSH Keys for the builder account

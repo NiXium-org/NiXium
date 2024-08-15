@@ -40,4 +40,20 @@ in {
 	users.users.root.openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOzh6FRxWUemwVeIDsr681fgJ2Q2qCnwJbvFe4xD15ve kreyren@fsfe.org" ]; # Allow root access for all systems for kreyren
 
 	nix.settings.trusted-users = [ "kreyren" ]; # Add Kreyren in Trusted-Users
+
+	# Impermanence
+	environment.persistence."/nix/persist/system".directories = mkIf config.boot.impermanence.enable [
+		{
+			directory = "/nix/var/nix/profiles/per-user/kreyren";
+			user = "kreyren";
+			group = "users";
+			mode = "u=rwx,g=rx,o=rx";
+		}
+		{
+			directory = "/home/kreyren";
+			user = "kreyren";
+			group = "users";
+			mode = "u=rwx,g=rx,o=rx";
+		}
+	];
 }

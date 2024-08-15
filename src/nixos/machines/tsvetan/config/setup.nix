@@ -9,7 +9,8 @@ in {
 
 	boot.impermanence.enable = true; # Use impermanence
 
-	boot.plymouth.enable = true;
+	# FIXME(Krey): Fails to deploy during initrd and then breaks GNOME deployment
+	boot.plymouth.enable = false;
 
 	nix.distributedBuilds = true; # Perform distributed builds
 
