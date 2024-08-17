@@ -42,18 +42,10 @@ in {
 	nix.settings.trusted-users = [ "kreyren" ]; # Add Kreyren in Trusted-Users
 
 	# Impermanence
-	environment.persistence."/nix/persist/system".directories = mkIf config.boot.impermanence.enable [
-		{
-			directory = "/nix/var/nix/profiles/per-user/kreyren";
-			user = "kreyren";
-			group = "users";
-			mode = "u=rwx,g=rx,o=rx";
-		}
-		{
-			directory = "/home/kreyren";
-			user = "kreyren";
-			group = "users";
-			mode = "u=rwx,g=rx,o=rx";
-		}
-	];
+	environment.persistence."/nix/persist/system".directories = mkIf config.boot.impermanence.enable [{
+		directory = "/nix/var/nix/profiles/per-user/kreyren";
+		user = "kreyren";
+		group = "users";
+		mode = "u=rwx,g=rx,o=rx";
+	}];
 }

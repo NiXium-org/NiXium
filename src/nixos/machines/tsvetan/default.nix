@@ -11,8 +11,8 @@ in {
 			self.nixosModules.default
 
 			# Users
-			self.nixosModules.users-kreyren
-			self.homeManagerModules."kreyren@tsvetan"
+			# self.nixosModules.users-kreyren
+			# self.homeManagerModules."kreyren@tsvetan"
 
 			# Files
 			./config/bootloader.nix

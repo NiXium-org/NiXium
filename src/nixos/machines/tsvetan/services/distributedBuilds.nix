@@ -7,8 +7,13 @@
 let
 	inherit (lib) mkIf;
 in mkIf config.nix.distributedBuilds {
-	# DNM(Krey): Set to 2 for testing..
-	nix.settings.max-jobs = 2; # Do not perform any nix builds on tsvetan if distributed builds are enabled
+	# DNM(Krey): Set to 1 for debugging
+	nix.settings.max-jobs = 1; # Do not perform any nix builds on tsvetan if distributed builds are enabled
+
+	# Authorize TUPAC
+		users.extraUsers.builder.openssh.authorizedKeys.keys = [
+			"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINBSPCMXZ6377AeL5ZKdv7Y041CIJ2lhKl/YH/tbY7xc" # TUPAC
+		];
 
 	# Set up the Build Account
 		# Import the SSH Keys for the builder account
@@ -17,7 +22,7 @@ in mkIf config.nix.distributedBuilds {
 
 			owner = "builder";
 			group = "builder";
-			mode = "660"; # rw-rw----
+			mode = "400"; # r--------
 
 			path = (if config.boot.impermanence.enable
 				then "/nix/persist/system/etc/ssh/ssh_builder_ed25519_key"
@@ -27,7 +32,7 @@ in mkIf config.nix.distributedBuilds {
 		};
 
 		# Set the pubkey
-		environment.etc."ssh/ssh_builder_ed25519_key.pub".text = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPiYirfvpV+4unRyv5j9/B9a65UDfIe2cWM1UjJWqK5T builder@tsvetan";
+		environment.etc."ssh/ssh_builder_ed25519_key.pub".text = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID3Zr7TFTxa1jKrTl/R5wMDTr9WtmTzgmc7NUnRjUKaD root@tsvetan";
 
 		# Impermanence
 		environment.persistence."/nix/persist/system".files = mkIf config.boot.impermanence.enable [

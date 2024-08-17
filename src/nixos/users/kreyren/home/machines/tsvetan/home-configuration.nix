@@ -38,6 +38,7 @@
 			# Temporary management of Post-Quantum Safety until matrix manages it, see https://github.com/matrix-org/matrix-spec/issues/975 for details
 			# Doesn't support aarch64-linux
 			# unstable.simplex-chat-desktop
+			# Doesn't support aarch64-linux
 			# pkgs.session-desktop
 
 			# Temporary managment of IRC until it's implemented in our matrix server
@@ -84,7 +85,7 @@
 		# pkgs.qbittorrent # Torrents
 		pkgs.tealdeer # TLDR Pages Implementation
 		# pkgs.nextcloud-client
-		# pkgs.printrun
+		pkgs.printrun
 
 		# Video
 		# pkgs.stremio # Media Server Client
