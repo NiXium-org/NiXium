@@ -12,7 +12,9 @@ in {
 
 	# Always use network manager for convinience
 	# FIXME-QA(Krey): Set to false by `/nixos/modules/services/networking/networkmanager.nix`, better management needed
-	networking.networkmanager.enable = mkForce true;
+	# networking.networkmanager.enable = mkForce true;
 
 	networking.wireless.enable = true;
+	networking.wireless.userControlled.enable = true; # Allow controlling wpa_supplicant via wpa_cli command
+	systemd.services.wpa_supplicant.wantedBy = [ "multi-user.target" ]; # Start wpa_supplicant service on startup
 }
