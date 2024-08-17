@@ -23,7 +23,9 @@ in {
 	# services.xserver.desktopManager.gnome.enable = true;
 	# 	programs.dconf.enable = true; # Needed for home-manager to not fail deployment (https://github.com/nix-community/home-manager/issues/3113)
 
-		users.users.root.openssh.authorizedKeys.keys = mkIf config.services.openssh.enable [
+	users.users.root.password = "1234"; # Temporary backdoor for development
+
+	users.users.root.openssh.authorizedKeys.keys = mkIf config.services.openssh.enable [
 		"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOzh6FRxWUemwVeIDsr681fgJ2Q2qCnwJbvFe4xD15ve kreyren@fsfe.org" # Allow root access for the Super Administrator (KREYREN)
 	];
 
