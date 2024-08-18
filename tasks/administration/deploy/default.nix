@@ -11,12 +11,14 @@
 
 				exec = pkgs.writeShellApplication {
 					name = "tasks-build";
-
+					bashOptions = [ "errexit" ];
 					runtimeInputs = [
 						pkgs.nixos-install-tools
 						pkgs.nixos-rebuild
 						pkgs.gnused
 						pkgs.git
+						pkgs.fping
+						pkgs.dig
 					];
 
 					# FIXME(Krey): This should use flake-root to set absolute path

@@ -9,7 +9,7 @@ let
 	mracek-system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP8d9Nz64gE+x/+Dar4zknmXMAZXUAxhF1IgrA9DO4Ma";
 	pelagus-system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINhxI+25BwlCuEezW6Vc4mJ+EP/KO597PI2YfEU9t+vf";
 	sinnenfreude-system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIAXnS4xUPWwjBdKDvvy5OInLbs3oeHUUs5qUsX+fBji";
-	tsvetan-system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICyjJlb2weRLgGINt8qvG1S3DRWydUfHRvRXvaYf0azw";
+	tsvetan-system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP7kiI7Y5lqjdcPIbrJkStyM0peCiUZ0VDNzEYV/0Ycr";
 	tupac-system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEmYpmNkpSkSSk1FnxHvPb8JlbeYh2lf3d5u8MBqGpHP";
 
 	all-systems = [

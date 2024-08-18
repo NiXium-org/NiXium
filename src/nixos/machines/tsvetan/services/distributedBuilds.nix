@@ -15,6 +15,10 @@ in mkIf config.nix.distributedBuilds {
 			"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINBSPCMXZ6377AeL5ZKdv7Y041CIJ2lhKl/YH/tbY7xc" # TUPAC
 		];
 
+		# Experiment
+		# FIXME(Krey): No idea why it's using this way
+		programs.ssh.knownHosts."tupac.systems.nx".publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEmYpmNkpSkSSk1FnxHvPb8JlbeYh2lf3d5u8MBqGpHP";
+
 	# Set up the Build Account
 		# Import the SSH Keys for the builder account
 		age.secrets.tsvetan-builder-ssh-ed25519-private = {
