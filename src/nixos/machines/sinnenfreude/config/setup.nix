@@ -12,6 +12,7 @@
 	nix.distributedBuilds = true; # Perform distributed builds
 
 	programs.noisetorch.enable = true;
+	programs.adb.enable = true;
 
 	services.flatpak.enable = true;
 	services.openssh.enable = true;

@@ -11,6 +11,7 @@
 
 	nix.distributedBuilds = true; # Perform distributed builds
 
+	programs.adb.enable = true;
 	programs.steam.enable = true;
 	programs.noisetorch.enable = true; # Microphone filtering
 
