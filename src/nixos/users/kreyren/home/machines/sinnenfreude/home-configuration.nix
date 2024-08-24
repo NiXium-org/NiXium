@@ -57,6 +57,8 @@ in {
 			# Discord client for flexibility
 			pkgs.dissent
 
+		pkgs.libreoffice
+
 		# Slicers
 		pkgs.prusa-slicer
 		pkgs.super-slicer-beta # Prusa-slicer fork by community. Includes additional features, but lags behind in releases
