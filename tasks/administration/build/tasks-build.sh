@@ -27,6 +27,8 @@ command -v die 1>/dev/null || die() { printf "FATAL: %s\n" "$2"; exit 1 ;} # Ter
 		--flake "git+file://$FLAKE_ROOT#nixos-$1-stable" \
 		--option eval-cache false \
 		--show-trace || die 1 "Build of the '$1' system on NixOS distribution using stable release failed"
+
+	exit 0 # Success
 }
 
 nixosSystems="$(find "$FLAKE_ROOT/src/nixos/machines/"* -maxdepth 0 -type d | sed "s#^$FLAKE_ROOT/src/nixos/machines/##g" | tr '\n' ' ')" # Get a space-separated list of all systems in the nixos distribution of NiXium

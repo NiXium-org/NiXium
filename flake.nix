@@ -151,6 +151,19 @@
 			url = "github:nix-community/nixos-generators";
 			inputs.nixpkgs.follows = "nixpkgs-master";
 		};
+
+		nixos-anywhere = {
+			url = "github:nix-community/nixos-anywhere/main";
+			inputs.nixpkgs.follows = "nixpkgs";
+		};
+		nixos-anywhere-unstable = {
+			url = "github:nix-community/nixos-anywhere/main";
+			inputs.nixpkgs.follows = "nixpkgs-unstable";
+		};
+		nixos-anywhere-master = {
+			url = "github:nix-community/nixos-anywhere/main";
+			inputs.nixpkgs.follows = "nixpkgs-master";
+		};
 	};
 
 	outputs = inputs @ { self, ... }:
@@ -177,10 +190,12 @@
 					name = "NiXium-devshell";
 					nativeBuildInputs = [
 						inputs.nixpkgs.legacyPackages.${system}.bashInteractive # For terminal
-						inputs.nixpkgs.legacyPackages.${system}.nil # Needed for linting
 						inputs.nixpkgs.legacyPackages.${system}.nixpkgs-fmt # Nixpkgs formatter
 						inputs.nixpkgs.legacyPackages.${system}.git # Working with the codebase
 						inputs.nixpkgs.legacyPackages.${system}.nano # Editor to work with the codebase in cli
+
+						inputs.nixpkgs.legacyPackages.${system}.shellcheck # Linting shell
+						inputs.nixpkgs.legacyPackages.${system}.nil # Linting Nix
 
 						inputs.ragenix.packages.${system}.default # To manage secrets
 						inputs.nixpkgs.legacyPackages.${system}.age # Managing age files
@@ -193,6 +208,8 @@
 
 						inputs.disko.packages.${system}.disko-install
 						inputs.disko.packages.${system}.disko
+
+						inputs.nixos-anywhere.packages.${system}.nixos-anywhere
 
 						inputs.nixpkgs.legacyPackages.${system}.nodePackages.eslint
 					];

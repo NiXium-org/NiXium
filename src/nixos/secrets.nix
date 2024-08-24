@@ -9,7 +9,7 @@ let
 	mracek-system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP8d9Nz64gE+x/+Dar4zknmXMAZXUAxhF1IgrA9DO4Ma";
 	pelagus-system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINhxI+25BwlCuEezW6Vc4mJ+EP/KO597PI2YfEU9t+vf";
 	sinnenfreude-system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIAXnS4xUPWwjBdKDvvy5OInLbs3oeHUUs5qUsX+fBji";
-	tsvetan-system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJdqMVQ3TO5ckmk9nepAY/7zLHy555EkzBJxpfTIwuT5";
+	tsvetan-system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP7kiI7Y5lqjdcPIbrJkStyM0peCiUZ0VDNzEYV/0Ycr";
 	tupac-system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEmYpmNkpSkSSk1FnxHvPb8JlbeYh2lf3d5u8MBqGpHP";
 
 	all-systems = [
@@ -26,7 +26,7 @@ in {
 	] ++ all-systems;
 
 	"./users/kreyren/home/modules/vpn/kreyren-wireproxy-protonvpn-config.age".publicKeys = [
-		kreyren sinnenfreude-system
+		kreyren sinnenfreude-system tsvetan-system
 	];
 
 	# Kira (user)
@@ -107,14 +107,6 @@ in {
 		kreyren mracek-system
 	];
 
-	# PELAGUS (system)
-	"./machines/pelagus/secrets/disks-password.age".publicKeys = [
-		kreyren pelagus-system
-	];
-	"./machines/pelagus/secrets/pelagus-onion.age".publicKeys = [
-		kreyren
-	] ++ all-systems;
-
 	# SINNENFREUDE (system)
 	"./machines/sinnenfreude/secrets/sinnenfreude-disks-password.age".publicKeys = [
 		kreyren sinnenfreude-system
@@ -137,9 +129,18 @@ in {
 	];
 
 	# TSVETAN (system)
-	"./machines/tsvetan/secrets/disks-password.age".publicKeys = [
+	"./machines/tsvetan/secrets/tsvetan-ssh-ed25519-private.age".publicKeys = [
 		kreyren tsvetan-system
 	];
+	"./machines/tsvetan/secrets/tsvetan-disks-password.age".publicKeys = [
+		kreyren tsvetan-system
+	];
+	"./machines/tsvetan/secrets/tsvetan-builder-ssh-ed25519-private.age".publicKeys = [
+		kreyren tsvetan-system
+	];
+	"./machines/tsvetan/secrets/tsvetan-openssh-onion.age".publicKeys = [
+		kreyren kira
+	] ++ all-systems;
 
 	# TUPAC (system)
 	"./machines/tupac/secrets/tupac-ssh-ed25519-private.age".publicKeys = [
@@ -149,7 +150,7 @@ in {
 		kreyren kira tupac-system
 	];
 	"./machines/tupac/secrets/tupac-onion.age".publicKeys = [
-		kreyren kira tupac-system sinnenfreude-system mracek-system
+		kreyren kira tupac-system sinnenfreude-system mracek-system tsvetan-system
 	];
 	"./machines/tupac/secrets/tupac-onion-secretKey.age".publicKeys = [
 		kreyren kira tupac-system

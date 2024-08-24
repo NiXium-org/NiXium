@@ -21,7 +21,5 @@ in {
 		LC_TIME = "en_US.UTF-8";
 	};
 
-	i18n.supportedLocales = mkDefault [
-		"en_US.UTF-8/UTF-8"
-	];
+	i18n.supportedLocales = mkDefault [ "en_US.UTF-8/UTF-8" ];
 }

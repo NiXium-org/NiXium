@@ -54,6 +54,14 @@ in mkMerge [
 				];
 			};
 
+			# Added to manage nixos-generators builds
+			nodev."/tmp" = {
+				fsType = "tmpfs";
+				mountOptions = [
+					"size=8G"
+				];
+			};
+
 			disk = {
 				system = {
 					device = "/dev/disk/by-id/ata-CT500MX500SSD1_21052CD42FFF"; # SATA SSD

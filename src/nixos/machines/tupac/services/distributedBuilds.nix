@@ -8,9 +8,9 @@ let
 	inherit (lib) mkIf;
 in mkIf config.nix.distributedBuilds {
 	# Authorize TSVETAN
-		# users.extraUsers.builder.openssh.authorizedKeys.keys = [
-		# 	"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF18QG9oqeeq/lQc5QDJl3hz5D4Q9bhiHFTRLJN4KSZb" # TSVETAN
-		# ];
+		users.extraUsers.builder.openssh.authorizedKeys.keys = [
+			"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID3Zr7TFTxa1jKrTl/R5wMDTr9WtmTzgmc7NUnRjUKaD" # TSVETAN
+		];
 
 	# Import the SSH Keys for the builder account
 	age.secrets.tupac-builder-ssh-ed25519-private = {

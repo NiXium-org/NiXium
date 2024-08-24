@@ -23,4 +23,6 @@ in mkIf config.services.openssh.enable {
 	environment.etc."ssh/ssh_host_ed25519_key.pub".text = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEmYpmNkpSkSSk1FnxHvPb8JlbeYh2lf3d5u8MBqGpHP root@tupac";
 
 	services.openssh.hostKeys = mkForce []; # Do not generate SSH keys
+
+	services.openssh.openFirewall = mkForce true; # Temporary management to let tsvetan build it's derivation
 }

@@ -1,0 +1,6 @@
+shell=sh # Write POSIX whenever possible
+
+enable=avoid-nullary-conditions # Suggest explicitly using -n in `[ $var ]`
+enable=check-extra-masked-returns # Check for additional cases where exit codes are masked
+enable=check-set-e-suppressed # Notify when set -e is suppressed during function invocation
+enable=quote-safe-variables # Suggest quoting variables without metacharacters (for consistency)

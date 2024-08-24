@@ -142,5 +142,16 @@ in {
 			];
 			xkb-options = [ "terminate:ctrl_alt_bksp" ];
 		};
+
+		"org/gnome/settings-daemon/plugins/power" = {
+			power-button-action = "hibernate";
+
+			# Managed via system service instead that does suspen-then-hibernate
+				power-inactive-ac-type = "nothing";
+				power-inactive-ac-timeout = "600";
+
+				power-inactive-battery-type = "nothing";
+				power-inactive-battery-timeout = "600";
+		};
 	};
 }

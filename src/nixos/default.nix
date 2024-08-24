@@ -48,6 +48,7 @@ in {
 
 				nixosModules.machine-mracek
 				nixosModules.machine-sinnenfreude
+				nixosModules.machine-tsvetan
 				nixosModules.machine-tupac
 
 				# {
