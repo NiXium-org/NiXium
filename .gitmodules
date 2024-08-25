@@ -7,3 +7,6 @@
 [submodule "vendor/ragenix"]
 	path = vendor/ragenix
 	url = git@github.com:NiXium-org/ragenix.git
+[submodule "robotnix"]
+	path = vendor/robotnix
+	url = git@github.com:nix-community/robotnix.git

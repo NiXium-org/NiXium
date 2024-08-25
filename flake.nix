@@ -139,6 +139,12 @@
 				inputs.nixpkgs.follows = "nixpkgs-master";
 			};
 
+		robotnix = {
+			# url = "github:danielfullmer/robotnix";
+			url = "git+file:///nix/persist/NiXium/vendor/robotnix";
+			inputs.nixpkgs.follows = "nixpkgs";
+		};
+
 		nixos-generators = {
 			url = "github:nix-community/nixos-generators";
 			inputs.nixpkgs.follows = "nixpkgs";
