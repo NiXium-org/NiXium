@@ -65,34 +65,27 @@ in {
 	# Task to perform installation of MRACEK in NixOS distribution
 	perSystem = { system, pkgs, inputs', self', ... }: {
 		packages.nixos-mracek-stable-install = pkgs.writeShellApplication {
-			name = "nixos-mracek-stable-install";
-			runtimeInputs = [
-				inputs'.disko.packages.disko-install
-				pkgs.age
-			];
-			text = ''
-				# FIXME-QA(Krey): This should be a runtimeInput
-				die() { printf "FATAL: %s\n" "$2"; exit ;}
+				name = "nixos-mracek-stable-install";
+				bashOptions = [ "errexit" "xtrace" ];
+				runtimeInputs = [
+					inputs'.disko.packages.disko-install # disko-install
+					pkgs.age # age
+					pkgs.nixos-install-tools # nixos-install
+					pkgs.gawk # awk
+					pkgs.curl
+					pkgs.jq
+				];
+				runtimeEnv = {
+					systemDevice = self.nixosConfigurations.nixos-mracek-stable.config.disko.devices.disk.system.device;
 
-				[ -f "${self.nixosConfigurations.mracek.config.disko.devices.disk.system.device}" ] || die 1 "Expected device was not found, refusing to install"
+					systemDeviceBlock = self.nixosConfigurations.nixos-mracek-stable.config.disko.devices.disk.system.device;
 
-				ragenixTempDir="/var/tmp/nixium"
-				ragenixIdentity="$HOME/.ssh/id_ed25519"
+					secretPasswordPath = self.nixosConfigurations.nixos-mracek-stable.config.age.secrets.mracek-disks-password.file;
 
-				[ -d "$ragenixTempDir" ] || sudo mkdir "$ragenixTempDir"
-				sudo chown -R "$USER:users" "$ragenixTempDir"
-				sudo chmod -R 700 "$ragenixTempDir"
-
-				[ -s "$ragenixTempDir/mracek-disks-password" ] || age --identity "$ragenixIdentity" --decrypt --output "$ragenixTempDir/mracek-disks-password" "${self.nixosConfigurations.mracek.config.age.secrets.mracek-disks-password.file}"
-
-				[ -s "$ragenixTempDir/mracek-ssh-ed25519-private" ] || age --identity "$ragenixIdentity" --decrypt --output "$ragenixTempDir/mracek-ssh-ed25519-private" "${self.nixosConfigurations.mracek.config.age.secrets.mracek-ssh-ed25519-private.file}"
-
-				sudo disko-install \
-					--flake "git+file://$FLAKE_ROOT#mracek" \
-					--disk system "$(realpath ${self.nixosConfigurations.mracek.config.disko.devices.disk.system.device})" \
-					--extra-files "$ragenixTempDir/mracek-ssh-ed25519-private" /nix/persist/system/etc/ssh/ssh_host_ed25519_key
-			'';
-		};
+					secretSSHHostKeyPath = self.nixosConfigurations.nixos-mracek-stable.config.age.secrets.mracek-ssh-ed25519-private.file;
+				};
+				text = builtins.readFile ./mracek-nixos-stable-install.sh;
+			};
 
 		# Declare for `nix run`
 		apps.nixos-mracek-stable-install.program = self'.packages.nixos-mracek-stable-install;

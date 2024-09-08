@@ -183,6 +183,7 @@
 						inputs.nixpkgs.legacyPackages.${system}.nixpkgs-fmt # Nixpkgs formatter
 						inputs.nixpkgs.legacyPackages.${system}.git # Working with the codebase
 						inputs.nixpkgs.legacyPackages.${system}.nano # Editor to work with the codebase in cli
+						inputs.nixpkgs.legacyPackages.${system}.jq # Manipulating JSON data
 
 						inputs.ragenix.packages.${system}.default # To manage secrets
 						inputs.nixpkgs.legacyPackages.${system}.age # Managing age files
