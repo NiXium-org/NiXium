@@ -14,7 +14,7 @@ echo "$secretSSHHostKeyPath" >/dev/null
 # # We have to use `env PATH=$PATH` so that used commands are ensured to use the correct PATH to see the expected binaries
 # esudo() { sudo env "PATH=$PATH" "$@" ;}
 
-pwd
+echo "$0"
 exit 23
 
 # # FIXME(Krey): This should be managed for all used scripts
