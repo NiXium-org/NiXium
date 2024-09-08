@@ -29,15 +29,15 @@ esudo chown "$USER:users" "$ragenixTempDir" # Ensure expected ownership
 esudo chmod 700 "$ragenixTempDir" # Ensure expected permission
 
 # The disk password has to be in /run/agenix/ for `disko-install` to not fail
-[ -s "$ragenixTempDir/mracek-disks-password" ] || esudo age --identity "$ragenixIdentity" --decrypt --output "$ragenixTempDir/mracek-disks-password" "$secretPasswordPath"
+[ -s "$ragenixTempDir/sinnenfreude-disks-password" ] || esudo age --identity "$ragenixIdentity" --decrypt --output "$ragenixTempDir/sinnenfreude-disks-password" "$secretPasswordPath"
 
-[ -s "$ragenixTempDir/mracek-ssh-ed25519-private" ] || esudo age --identity "$ragenixIdentity" --decrypt --output "$ragenixTempDir/mracek-ssh-ed25519-private" "$secretSSHHostKeyPath"
+[ -s "$ragenixTempDir/sinnenfreude-ssh-ed25519-private" ] || esudo age --identity "$ragenixIdentity" --decrypt --output "$ragenixTempDir/sinnenfreude-ssh-ed25519-private" "$secretSSHHostKeyPath"
 
-nixos-rebuild build --flake "$FLAKE_ROOT#nixos-mracek-stable" # pre-build the configuration
+nixos-rebuild build --flake "$FLAKE_ROOT#nixos-sinnenfreude-stable" # pre-build the configuration
 
 esudo disko-install \
-	--flake "$FLAKE_ROOT#nixos-mracek-stable" \
+	--flake "$FLAKE_ROOT#nixos-sinnenfreude-stable" \
 	--mode format \
 	--debug \
 	--disk system "$(realpath "$systemDeviceBlock")" \
-	--extra-files "$ragenixTempDir/mracek-ssh-ed25519-private" /nix/persist/system/etc/ssh/ssh_host_ed25519_key
+	--extra-files "$ragenixTempDir/sinnenfreude-ssh-ed25519-private" /nix/persist/system/etc/ssh/ssh_host_ed25519_key

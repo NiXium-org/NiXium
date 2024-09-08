@@ -17,6 +17,16 @@ in {
 		modules = [
 			self.nixosModules."nixos-mracek"
 
+			{
+				nix.nixPath = [
+					"nixpkgs=${self.inputs.nixpkgs}"
+				];
+
+				nix.registry = {
+					nixpkgs = { flake = self.inputs.nixpkgs; };
+				};
+			}
+
 			# Principles
 			self.inputs.ragenix.nixosModules.default
 			self.inputs.sops.nixosModules.sops
@@ -62,7 +72,7 @@ in {
 		};
 	};
 
-	# Task to perform installation of MRACEK in NixOS distribution
+	# Task to perform installation of MRACEK in NixOS distribution, stable release
 	perSystem = { system, pkgs, inputs', self', ... }: {
 		packages.nixos-mracek-stable-install = pkgs.writeShellApplication {
 				name = "nixos-mracek-stable-install";

@@ -33,10 +33,10 @@ esudo chmod 700 "$ragenixTempDir" # Ensure expected permission
 
 [ -s "$ragenixTempDir/mracek-ssh-ed25519-private" ] || esudo age --identity "$ragenixIdentity" --decrypt --output "$ragenixTempDir/mracek-ssh-ed25519-private" "$secretSSHHostKeyPath"
 
-nixos-rebuild build --flake "$FLAKE_ROOT#nixos-mracek-stable" # pre-build the configuration
+nixos-rebuild build --flake "$FLAKE_ROOT#nixos-mracek-master" # pre-build the configuration
 
 esudo disko-install \
-	--flake "$FLAKE_ROOT#nixos-mracek-stable" \
+	--flake "$FLAKE_ROOT#nixos-mracek-master" \
 	--mode format \
 	--debug \
 	--disk system "$(realpath "$systemDeviceBlock")" \

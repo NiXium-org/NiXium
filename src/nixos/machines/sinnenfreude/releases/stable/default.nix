@@ -15,6 +15,16 @@
 		modules = [
 			self.nixosModules."nixos-sinnenfreude"
 
+			{
+				nix.nixPath = [
+					"nixpkgs=${self.inputs.nixpkgs}"
+				];
+
+				nix.registry = {
+					nixpkgs = { flake = self.inputs.nixpkgs; };
+				};
+			}
+
 			# Principles
 			self.inputs.ragenix.nixosModules.default
 			self.inputs.sops.nixosModules.sops
@@ -60,37 +70,30 @@
 		};
 	};
 
-	# Task to perform installation of SINNENFREUDE in NixOS distribution
+	# Task to perform installation of SINNENFREUDE in NixOS distribution, stable release
 	perSystem = { system, pkgs, inputs', self', ... }: {
 		packages.nixos-sinnenfreude-stable-install = pkgs.writeShellApplication {
-			name = "nixos-sinnenfreude-stable-install";
-			runtimeInputs = [
-				inputs'.disko.packages.disko-install
-				pkgs.age
-			];
-			text = ''
-				# FIXME-QA(Krey): This should be a runtimeInput
-				die() { printf "FATAL: %s\n" "$2"; exit ;}
+				name = "nixos-sinnenfreude-stable-install";
+				bashOptions = [ "errexit" "xtrace" ];
+				runtimeInputs = [
+					inputs'.disko.packages.disko-install # disko-install
+					pkgs.age # age
+					pkgs.nixos-install-tools # nixos-install
+					pkgs.gawk # awk
+					pkgs.curl
+					pkgs.jq
+				];
+				runtimeEnv = {
+					systemDevice = self.nixosConfigurations.nixos-sinnenfreude-stable.config.disko.devices.disk.system.device;
 
-				[ -f "${self.nixosConfigurations.sinnenfreude.config.disko.devices.disk.system.device}" ] || die 1 "Expected device was not found, refusing to install"
+					systemDeviceBlock = self.nixosConfigurations.nixos-sinnenfreude-stable.config.disko.devices.disk.system.device;
 
-				ragenixTempDir="/var/tmp/nixium"
-				ragenixIdentity="$HOME/.ssh/id_ed25519"
+					secretPasswordPath = self.nixosConfigurations.nixos-sinnenfreude-stable.config.age.secrets.sinnenfreude-disks-password.file;
 
-				[ -d "$ragenixTempDir" ] || sudo mkdir "$ragenixTempDir"
-				sudo chown -R "$USER:users" "$ragenixTempDir"
-				sudo chmod -R 700 "$ragenixTempDir"
-
-				[ -s "$ragenixTempDir/sinnenfreude-disks-password" ] || age --identity "$ragenixIdentity" --decrypt --output "$ragenixTempDir/sinnenfreude-disks-password" "${self.nixosConfigurations.sinnenfreude.config.age.secrets.sinnenfreude-disks-password.file}"
-
-				[ -s "$ragenixTempDir/sinnenfreude-ssh-ed25519-private" ] || age --identity "$ragenixIdentity" --decrypt --output "$ragenixTempDir/sinnenfreude-ssh-ed25519-private" "${self.nixosConfigurations.sinnenfreude.config.age.secrets.sinnenfreude-ssh-ed25519-private.file}"
-
-				sudo disko-install \
-					--flake "git+file://$FLAKE_ROOT#sinnenfreude" \
-					--disk system "$(realpath ${self.nixosConfigurations.sinnenfreude.config.disko.devices.disk.system.device})" \
-					--extra-files "$ragenixTempDir/sinnenfreude-ssh-ed25519-private" /nix/persist/system/etc/ssh/ssh_host_ed25519_key
-			'';
-		};
+					secretSSHHostKeyPath = self.nixosConfigurations.nixos-sinnenfreude-stable.config.age.secrets.sinnenfreude-ssh-ed25519-private.file;
+				};
+				text = builtins.readFile ./sinnenfreude-nixos-stable-install.sh;
+			};
 
 		# Declare for `nix run`
 		apps.nixos-sinnenfreude-stable-install.program = self'.packages.nixos-sinnenfreude-stable-install;
