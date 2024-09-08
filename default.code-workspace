@@ -10,6 +10,11 @@
 		"editor.fontFamily": "'Fira Code'",
 		"terminal.integrated.fontFamily": "'Fira Code'",
 
+		// FIXME(Krey): This should automatically use javacsript, fix this upstream
+		"files.associations": {
+			"*.es": "javascript"
+		},
+
 		"editor.renderWhitespace": "all",
 		"terminal.integrated.scrollback": 20000,
 		"nix.enableLanguageServer": true,

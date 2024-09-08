@@ -35,6 +35,7 @@ in {
 				nixosModules.system-bootloader
 				nixosModules.system-ccache
 				nixosModules.system-clamav
+				nixosModules.system-docker
 				nixosModules.system-environment
 				nixosModules.system-firewall
 				nixosModules.system-impermenance

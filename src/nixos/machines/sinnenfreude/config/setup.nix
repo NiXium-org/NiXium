@@ -20,6 +20,9 @@
 
 	networking.wireguard.enable = false;
 
+	virtualisation.waydroid.enable = true;
+	virtualisation.docker.enable = true;
+
 	nix.channel.enable = true; # To be able to use nix repl :l <nixpkgs> as loading flake loads only 16 variables
 
 	# Desktop Environment

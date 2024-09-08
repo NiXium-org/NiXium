@@ -6,10 +6,14 @@ in {
 	# FIXME-QA(Krey): Should only be used for home-manager NixOS Module, not expected to work in standalone setup!
 	home.persistence."/nix/persist/users/kreyren" = mkIf config.home.impermanence.enable {
 		directories = [
+			"Desktop"
+			"Documents"
 			"Downloads"
 			"Monero" # For Monero Wallet
 			"Music"
 			"Pictures"
+			"Public"
+			"Templates"
 			"Videos"
 			".gnupg"
 			".local/state/nix/profiles"
@@ -36,6 +40,8 @@ in {
 
 			# FIXME-QA(Krey): Should only be applied if fractal is installed
 			".local/share/fractal"
+
+			".local/share/PolyMC"
 
 			(mkIf nixosConfig.services.flatpak.enable ".local/share/flatpak")
 

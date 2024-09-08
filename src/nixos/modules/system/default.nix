@@ -3,6 +3,7 @@
 		./bootloader
 		./ccache
 		./clamav
+		./docker
 		./environment
 		./firewall
 		./impermenance

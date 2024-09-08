@@ -1,4 +1,4 @@
-{ config, pkgs, lib, unstable, aagl, ... }:
+{ config, pkgs, lib, unstable, aagl, polymc, ... }:
 
 # FIXME(Krey): trace: evaluation warning: The ‘gnome.dconf-editor’ was moved to top-level. Please use ‘pkgs.dconf-editor’ directly. -- Channel 24.11
 
@@ -32,6 +32,8 @@ in {
 		# FIXME(Krey): It's ET: Legacy, what's proprietary there?
 		"etlegacy"
 		"etlegacy-assets"
+
+		"discord"
 	];
 
 	home.packages = [
@@ -40,6 +42,19 @@ in {
 				pkgs.fractal # GTK4+ Matrix Client Written in Rust
 			# FIXME-QA(Krey): Enable this on QT-based desktop environments
 				# pkgs.nheko # QT-based Matrix Client
+
+			# PRIVACY(Krey): Temporary management with adjusted threat model used only as a fallback in case webcord fails in production
+			(pkgs.discord.overrideAttrs (super: {
+				postInstall = ''
+					wrapProgram $out/bin/discord \
+						--append-flags "--no-proxy-server"
+
+					wrapProgram $out/bin/Discord \
+						--append-flags "--no-proxy-server"
+				'';
+			}))
+
+			pkgs.nss
 
 			# Temporary management of Post-Quantum Safety until matrix manages it, see https://github.com/matrix-org/matrix-spec/issues/975 for details
 			unstable.simplex-chat-desktop
@@ -58,6 +73,8 @@ in {
 			pkgs.dissent
 
 		pkgs.libreoffice
+
+		polymc.polymc
 
 		# Slicers
 		pkgs.prusa-slicer

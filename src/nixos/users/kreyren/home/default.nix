@@ -64,6 +64,7 @@ in {
 				aagl = self.inputs.aagl.packages."${system}";
 				unstable = self.inputs.nixpkgs-unstable.legacyPackages."${system}";
 				staging-next = self.inputs.nixpkgs-staging-next.legacyPackages."${system}";
+				polymc = self.inputs.polymc.packages."${system}";
 				firefox-addons = self.inputs.firefox-addons.packages."${system}";
 			};
 		}

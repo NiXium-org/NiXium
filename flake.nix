@@ -49,6 +49,8 @@
 
 		rust-overlay.url = "github:oxalica/rust-overlay";
 
+		polymc.url = "github:PolyMC/PolyMC";
+
 		# SOPS
 			sops = {
 				url = "github:Mic92/sops-nix";
