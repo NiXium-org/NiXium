@@ -50,9 +50,7 @@
 	};
 
 	imports = [
-		./releases/master.nix
-		./releases/stable.nix
-		./releases/unstable.nix
+		./releases # Include releases
 	];
 
 	flake.nixosModules.machine-tupac = ./lib/tupac-export.nix;
