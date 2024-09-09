@@ -37,7 +37,9 @@
 	};
 
 	imports = [
-		./releases # Include the releases
+		./releases/master.nix
+		./releases/stable.nix
+		./releases/unstable.nix
 	];
 
 	# Export to other systems
