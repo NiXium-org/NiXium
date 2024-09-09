@@ -11,7 +11,7 @@ in {
 
 		# Set channels
 		nixPath = mkDefault [
-			"nixpkgs=${self.inputs.nixpkgs}" # Stable
+			"stable=${self.inputs.nixpkgs}" # Stable
 			"unstable=${self.inputs.nixpkgs-unstable}" # Unstable
 			"master=${self.inputs.nixpkgs-master}" # Master
 			"staging=${self.inputs.nixpkgs-staging}" # Staging
@@ -22,7 +22,7 @@ in {
 
 		# Set Flake Registries
 		registry = {
-			nixpkgs = { flake = self.inputs.nixpkgs; };
+			stable = { flake = self.inputs.nixpkgs; };
 			unstable = { flake = self.inputs.nixpkgs-unstable; };
 			master = { flake = self.inputs.nixpkgs-master; };
 			staging = { flake = self.inputs.nixpkgs-staging; };

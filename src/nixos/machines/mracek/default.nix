@@ -36,9 +36,7 @@
 	};
 
 	imports = [
-		./releases/master.nix
-		./releases/stable.nix
-		./releases/unstable.nix
+		./releases # Include releases
 	];
 
 	# Module export to other systems in the infrastructure
