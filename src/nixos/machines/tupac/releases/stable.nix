@@ -15,16 +15,6 @@
 		modules = [
 			self.nixosModules."nixos-tupac"
 
-			{
-				nix.nixPath = [
-					"nixpkgs=${self.inputs.nixpkgs}"
-				];
-
-				nix.registry = {
-					nixpkgs = { flake = self.inputs.nixpkgs; };
-				};
-			}
-
 			# Principles
 			self.inputs.ragenix.nixosModules.default
 			self.inputs.sops.nixosModules.sops
@@ -60,30 +50,37 @@
 		};
 	};
 
-	# Task to perform installation of TUPAC in NixOS distribution, stable release
+	# Task to perform installation of TUPC in NixOS distribution
 	perSystem = { system, pkgs, inputs', self', ... }: {
 		packages.nixos-tupac-stable-install = pkgs.writeShellApplication {
-				name = "nixos-tupac-stable-install";
-				bashOptions = [ "errexit" "xtrace" ];
-				runtimeInputs = [
-					inputs'.disko.packages.disko-install # disko-install
-					pkgs.age # age
-					pkgs.nixos-install-tools # nixos-install
-					pkgs.gawk # awk
-					pkgs.curl
-					pkgs.jq
-				];
-				runtimeEnv = {
-					systemDevice = self.nixosConfigurations.nixos-tupac-stable.config.disko.devices.disk.system.device;
+			name = "nixos-tupac-stable-install";
+			runtimeInputs = [
+				inputs'.disko.packages.disko-install
+				pkgs.age
+			];
+			text = ''
+				# FIXME-QA(Krey): This should be a runtimeInput
+				die() { printf "FATAL: %s\n" "$2"; exit ;}
 
-					systemDeviceBlock = self.nixosConfigurations.nixos-tupac-stable.config.disko.devices.disk.system.device;
+				[ -f "${self.nixosConfigurations.tupac.config.disko.devices.disk.system.device}" ] || die 1 "Expected device was not found, refusing to install"
 
-					secretPasswordPath = self.nixosConfigurations.nixos-tupac-stable.config.age.secrets.tupac-disks-password.file;
+				ragenixTempDir="/var/tmp/nixium"
+				ragenixIdentity="$HOME/.ssh/id_ed25519"
 
-					secretSSHHostKeyPath = self.nixosConfigurations.nixos-tupac-stable.config.age.secrets.tupac-ssh-ed25519-private.file;
-				};
-				text = builtins.readFile ./tupac-nixos-stable-install.sh;
-			};
+				[ -d "$ragenixTempDir" ] || sudo mkdir "$ragenixTempDir"
+				sudo chown -R "$USER:users" "$ragenixTempDir"
+				sudo chmod -R 700 "$ragenixTempDir"
+
+				[ -s "$ragenixTempDir/tupac-disks-password" ] || age --identity "$ragenixIdentity" --decrypt --output "$ragenixTempDir/tupac-disks-password" "${self.nixosConfigurations.tupac.config.age.secrets.tupac-disks-password.file}"
+
+				[ -s "$ragenixTempDir/tupac-ssh-ed25519-private" ] || age --identity "$ragenixIdentity" --decrypt --output "$ragenixTempDir/tupac-ssh-ed25519-private" "${self.nixosConfigurations.tupac.config.age.secrets.tupac-ssh-ed25519-private.file}"
+
+				sudo disko-install \
+					--flake "git+file://$FLAKE_ROOT#tupac" \
+					--disk system "$(realpath ${self.nixosConfigurations.tupac.config.disko.devices.disk.system.device})" \
+					--extra-files "$ragenixTempDir/tupac-ssh-ed25519-private" /nix/persist/system/etc/ssh/ssh_host_ed25519_key
+			'';
+		};
 
 		# Declare for `nix run`
 		apps.nixos-tupac-stable-install.program = self'.packages.nixos-tupac-stable-install;

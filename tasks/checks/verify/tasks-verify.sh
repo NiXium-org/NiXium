@@ -6,9 +6,6 @@ hostname="$(hostname --short)" # Capture the hostname of the current system
 # FIXME(Krey): Implement better management for this so that ideally `die` is always present by default
 command -v die 1>/dev/null || die() { printf "FATAL: %s\n" "$2"; exit 1 ;} # Termination Helper
 
-# FIXME(Krey): Implement better management for this so that ideally `success` is always present by default
-command -v success 1>/dev/null || success() { printf "SUCCESS: %s\n" "$1"; exit 0 ;} # Success Termination Helper
-
 # Check current system if no argument is provided
 [ "$#" != 0 ] || {
 	# FIXME(Krey): This needs logic to determine the distribution and release
@@ -95,10 +92,10 @@ case "$distro" in
 		# Check if the system is defined
 		[ -d "$FLAKE_ROOT/src/nixos/machines/$machine" ] || die 1 "This system '$machine' is not implemented in NiXium's management of distribution '$distro'"
 
-		[ -n "$release" ] || {
+		[ -n "$3" ] || {
 			echo "Processing all available releases for machine '$machine' in distribution '$distro'"
 
-			for release in $(find "$FLAKE_ROOT/src/nixos/machines/$machine/releases/"* -maxdepth 0 -type d | sed -E "s#^$FLAKE_ROOT/src/nixos/machines/$machine/releases/##g" | tr '\n' ' '); do
+			for release in $(find "$FLAKE_ROOT/src/nixos/machines/$machine/releases/"* -maxdepth 0 -type f | sed -E "s#^$FLAKE_ROOT/src/nixos/machines/$machine/releases/##g" | sed -E "s#.nix##g" | tr '\n' ' '); do
 				echo "Checking system '$machine' in distribution '$distro', release '$release'"
 
 				nixos-rebuild \
@@ -108,7 +105,7 @@ case "$distro" in
 					--show-trace || die 1 "System '$machine' in distribution '$distro' of release '$release' failed evaluation!"
 			done
 
-			success "All available releases of machine '$machine' passed config verification"
+			exit 0 # Success
 		}
 
 		# Process the system
@@ -119,8 +116,6 @@ case "$distro" in
 			--flake "git+file://$FLAKE_ROOT#nixos-$machine-$release" \
 			--option eval-cache false \
 			--show-trace || echo "WARNING: System '$machine' in distribution '$distro' and release '$release' failed evaluation!"
-
-		success "Machine '$machine' in distribution '$distro' and release '$release' passed config verification"
 	;;
 	*) die 1 "Distribution '$distro' is not implemented!"
 esac
