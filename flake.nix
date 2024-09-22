@@ -178,12 +178,18 @@
 				devShells.default = inputs.nixpkgs.legacyPackages.${system}.mkShell {
 					name = "NiXium-devshell";
 					nativeBuildInputs = [
+						# Shell
 						inputs.nixpkgs.legacyPackages.${system}.bashInteractive # For terminal
+						inputs.nixpkgs.legacyPackages.${system}.shellcheck # Linting of shell files
+
+						# Nix
 						inputs.nixpkgs.legacyPackages.${system}.nil # Needed for linting
 						inputs.nixpkgs.legacyPackages.${system}.nixpkgs-fmt # Nixpkgs formatter
-						inputs.nixpkgs.legacyPackages.${system}.git # Working with the codebase
-						inputs.nixpkgs.legacyPackages.${system}.nano # Editor to work with the codebase in cli
 
+						# Javascript
+						inputs.nixpkgs.legacyPackages.${system}.nodePackages.eslint
+
+						# Secrets
 						inputs.ragenix.packages.${system}.default # To manage secrets
 						inputs.nixpkgs.legacyPackages.${system}.age # Managing age files
 
@@ -191,12 +197,14 @@
 						inputs.nixpkgs.legacyPackages.${system}.sbctl # To set up secureboot
 						inputs.nixpkgs.legacyPackages.${system}.fira-code # For liquratures in code editors
 
+						# Utilities
+						inputs.nixpkgs.legacyPackages.${system}.git # Working with the codebase
+						inputs.nixpkgs.legacyPackages.${system}.nano # Editor to work with the codebase in cli
+
 						inputs.nixos-generators.packages.${system}.nixos-generate
 
 						inputs.disko.packages.${system}.disko-install
 						inputs.disko.packages.${system}.disko
-
-						inputs.nixpkgs.legacyPackages.${system}.nodePackages.eslint
 					];
 					inputsFrom = [
 						config.mission-control.devShell
