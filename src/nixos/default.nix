@@ -23,6 +23,7 @@ in {
 			# Keep this sorted
 			imports = [
 				nixosModules.programs-git
+				nixosModules.programs-wakeonlan
 
 				nixosModules.security
 				nixosModules.security-nvidia
