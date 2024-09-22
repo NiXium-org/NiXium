@@ -115,7 +115,7 @@ case "$distro" in
 			dry-build \
 			--flake "git+file://$FLAKE_ROOT#nixos-$machine-$release" \
 			--option eval-cache false \
-			--show-trace || echo "WARNING: System '$machine' in distribution '$distro' and release '$release' failed evaluation!"
+			--show-trace || die 1 "System '$machine' in distribution '$distro' and release '$release' failed evaluation"
 	;;
 	*) die 1 "Distribution '$distro' is not implemented!"
 esac
