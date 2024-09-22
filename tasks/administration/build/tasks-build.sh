@@ -6,6 +6,8 @@ hostname="$(hostname --short)" # Capture the hostname of the current system
 # FIXME(Krey): Implement better management for this so that ideally `die` is always present by default
 command -v die 1>/dev/null || die() { printf "FATAL: %s\n" "$2"; exit 1 ;} # Termination Helper
 
+command -v success 1>/dev/null || success() { printf "SUCCESS: %s\n" "$1"; exit 0 ;} # Termination Helper
+
 # Check current system if no argument is provided
 [ "$#" != 0 ] || {
 	# FIXME(Krey): This needs logic to determine the distribution and release
@@ -27,6 +29,8 @@ command -v die 1>/dev/null || die() { printf "FATAL: %s\n" "$2"; exit 1 ;} # Ter
 		--flake "git+file://$FLAKE_ROOT#nixos-$1-stable" \
 		--option eval-cache false \
 		--show-trace || die 1 "Build of the '$1' system on NixOS distribution using stable release failed"
+
+	success "Build of derivation '$1' was successful"
 }
 
 nixosSystems="$(find "$FLAKE_ROOT/src/nixos/machines/"* -maxdepth 0 -type d | sed "s#^$FLAKE_ROOT/src/nixos/machines/##g" | tr '\n' ' ')" # Get a space-separated list of all systems in the nixos distribution of NiXium
