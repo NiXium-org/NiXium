@@ -26,7 +26,7 @@
 			./config/sound.nix
 			./config/vm-build.nix
 
-			# ./services/binfmt.nix
+			./services/binfmt.nix
 			./services/distributedBuilds.nix
 			./services/openssh.nix
 			./services/tor.nix
