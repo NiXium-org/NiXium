@@ -42,13 +42,9 @@
 
 	age.secrets.tupac-ssh-ed25519-private.file = ../secrets/tupac-ssh-ed25519-private.age; # Declare private key
 
-	# Experiment
-	hardware.bluetooth.enable = true;
-	hardware.enableAllFirmware = true;
-
 	hardware.steam-hardware.enable = true; # Compatibility for Steam Controller
 
-	hardware.enableRedistributableFirmware = true; 	# There should be nothing on this system that needs proprietary firmware, but the user likely uses proprietary peripherals
+	hardware.enableRedistributableFirmware = true; 	# There should be nothing on this system that needs proprietary firmware, but the user 'kira' likely uses proprietary peripherals
 
 	hardware.cpu.intel.updateMicrocode = true; # Use the proprietary CPU microcode as the CPU won't work without it
 

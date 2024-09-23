@@ -31,7 +31,7 @@
 	services.xserver.desktopManager.gnome.enable = true;
 		programs.dconf.enable = true; # Needed for home-manager to not fail deployment (https://github.com/nix-community/home-manager/issues/3113)
 
-	hardware.steam-hardware.enable = true;
+	# hardware.steam-hardware.enable = true;
 
 	# Japanese Keyboard Input
 	i18n.inputMethod.enabled = "fcitx5";

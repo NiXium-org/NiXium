@@ -72,7 +72,7 @@ in mkMerge [
 									type = "luks";
 									settings.allowDiscards = true;
 
-									# passwordFile = config.age.secrets.mracek-disks-password.path;
+									passwordFile = config.age.secrets.mracek-disks-password.path;
 
 									initrdUnlock = true; # Add a boot.initrd.luks.devices entry for the specified disk
 
@@ -111,7 +111,7 @@ in mkMerge [
 
 									settings.allowDiscards = true;
 
-									# passwordFile = config.age.secrets.mracek-disks-password.path;
+									passwordFile = config.age.secrets.mracek-disks-password.path;
 
 									initrdUnlock = true; # Add a boot.initrd.luks.devices entry for the specified disk
 
@@ -171,7 +171,7 @@ in mkMerge [
 								type = "luks";
 								settings.allowDiscards = true;
 
-								# passwordFile = config.age.secrets.mracek-disks-password.path;
+								passwordFile = config.age.secrets.mracek-disks-password.path;
 
 								initrdUnlock = true; # Add a boot.initrd.luks.devices entry for the specified disk
 
@@ -210,7 +210,7 @@ in mkMerge [
 
 								settings.allowDiscards = true;
 
-								# passwordFile = config.age.secrets.mracek-disks-password.path;
+								passwordFile = config.age.secrets.mracek-disks-password.path;
 
 								initrdUnlock = true; # Add a boot.initrd.luks.devices entry for the specified disk
 

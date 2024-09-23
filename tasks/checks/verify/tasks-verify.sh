@@ -51,26 +51,57 @@ nixosSystems="$(find "$FLAKE_ROOT/src/nixos/machines/"* -maxdepth 0 -type d | se
 
 # Assume that we are always checking against nixos distribution with stable release
 [ "$#" != 1 ] || {
-	echo "Checking stable release of system '$1' in NixOS distribution"
+	system="$1"
+
+	echo "Checking stable release of system '$system' in NixOS distribution"
 
 	nixos-rebuild dry-build \
-		--flake "git+file://$FLAKE_ROOT#nixos-$1-stable" \
+		--flake "git+file://$FLAKE_ROOT#nixos-$system-stable" \
 		--option eval-cache false \
-		--show-trace || die 1 "Verification of the '$1' system on NixOS distribution using stable release failed"
+		--show-trace || die 1 "Verification of the '$system' system on NixOS distribution using stable release failed"
+
+	exit 0 # Success
+}
+
+# If special argument `all` is used as second argument then process all releases and distros that match the first argument as system name
+[ "$2" != "all" ] ||  {
+	system="$1"
+
+	echo "Checking all distributions that contain machine '$1'"
+
+	# NixOS Distribution
+	status="$(cat "$FLAKE_ROOT/src/nixos/machines/$system/status")"
+	distro="nixos"
+
+	case "$status" in
+		"OK")
+			for release in $(find "$FLAKE_ROOT/src/nixos/machines/$system/releases/"* -maxdepth 0 -type d | sed -E "s#^$FLAKE_ROOT/src/nixos/machines/$system/releases/##g" | sed -E "s#.nix##g" | tr '\n' ' '); do
+				echo "Checking system '$system' in distribution '$distro', release '$release'"
+
+				nixos-rebuild \
+					dry-build \
+					--flake "git+file://$FLAKE_ROOT#nixos-$system-$release" \
+					--option eval-cache false \
+					--show-trace || die 1 "System '$system' in distribution '$distro' of release '$release' failed evaluation!"
+			done
+		;;
+		"WIP") echo "Configuration for system '$system' in distribution '$distro' is marked a Work-in-Progress, skipping build.." ;;
+		*) echo "System '$system' reports undeclared status state: $status"
+	esac
 
 	exit 0 # Success
 }
 
 # Process Arguments
 distro="$1" # e.g. nixos
-machine="$2" # e.g. tupac, tsvetan, sinnenfreude
+machine="$2" # e.g. tupac, tsvetan, sinnenfreude or special `all`
 release="$3" # Optional argument uses stable as default, ability to set supported release e.g. unstable or master
 
 case "$distro" in
 	"nixos") # NixOS Management
 
 		# Process all systems in NixOS distribution if `nixos all` is used
-		[ "$machine" != "all" ] || {
+		[ "$2" != "all" ] || {
 			for system in $nixosSystems; do
 				status="$(cat "$FLAKE_ROOT/src/nixos/machines/$system/status")"
 				case "$status" in

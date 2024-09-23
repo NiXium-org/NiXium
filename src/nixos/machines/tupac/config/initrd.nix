@@ -1,7 +1,8 @@
 { ... }:
 
 {
-	boot.initrd.systemd.enable = true; # Use Systemd for initrd
+	# FIXME(Krey): We are expecting to use the systemd initrd, but it currently has issues (https://github.com/NixOS/nixpkgs/issues/245089#issuecomment-1646966283)
+	boot.initrd.systemd.enable = false;
 
 	# InitRD Kernel Modules
 	boot.initrd.availableKernelModules = [
@@ -14,7 +15,4 @@
 		"sdhci_pci"
 	];
 	boot.initrd.kernelModules = [ ];
-
-	# FIXME-OPTIMIZE(Krey): This can be heavily optimized, but it's very time consuming to maintain
-	boot.initrd.includeDefaultModules = true; # Include default modules for amd64 systems to endure functionality during initrd
 }

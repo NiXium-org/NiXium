@@ -11,15 +11,6 @@
 		imports = [
 			self.nixosModules.default
 
-			# An Anime Game
-			self.inputs.aagl.nixosModules.default {
-				networking.mihoyo-telemetry.block = true; # Block miHoYo telemetry servers
-				nix.settings = {
-					substituters = [ "https://ezkea.cachix.org" ];
-					trusted-public-keys = [ "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI=" ];
-				};
-			}
-
 			# Users
 			self.nixosModules.users-kreyren
 			self.homeManagerModules."kreyren@tupac"
@@ -50,9 +41,7 @@
 	};
 
 	imports = [
-		./releases/master.nix
-		./releases/stable.nix
-		./releases/unstable.nix
+		./releases # Include releases
 	];
 
 	flake.nixosModules.machine-tupac = ./lib/tupac-export.nix;
