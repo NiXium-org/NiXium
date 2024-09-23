@@ -1,11 +1,14 @@
 # Standalone ragenix secret declaration
 
+# TODO(Krey): Pending Rework
+
 let
 	# Users
 	kreyren = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOzh6FRxWUemwVeIDsr681fgJ2Q2qCnwJbvFe4xD15ve";
 	kira = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICWLIYYAXRUD0+bg5CXsxh9F4spvqCz4jaxvtGMsezl/";
 
 	# Systems
+	flexy-system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJQei8wZXD379qw4ygSTOZ1cdj6vHwtFG7QsuWdT0UlM";
 	mracek-system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP8d9Nz64gE+x/+Dar4zknmXMAZXUAxhF1IgrA9DO4Ma";
 	pelagus-system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINhxI+25BwlCuEezW6Vc4mJ+EP/KO597PI2YfEU9t+vf";
 	sinnenfreude-system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIAXnS4xUPWwjBdKDvvy5OInLbs3oeHUUs5qUsX+fBji";
@@ -13,6 +16,7 @@ let
 	tupac-system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEmYpmNkpSkSSk1FnxHvPb8JlbeYh2lf3d5u8MBqGpHP";
 
 	all-systems = [
+		flexy-system
 		mracek-system
 		pelagus-system
 		sinnenfreude-system
@@ -36,6 +40,23 @@ in {
 
 	"./users/kira/home/modules/vpn/kira-wireproxy-protonvpn-config.age".publicKeys = [
 		kira kreyren tupac-system
+	];
+
+	# FLEXY (system)
+	"./machines/flexy/secrets/flexy-ssh-ed25519-private.age".publicKeys = [
+		kreyren kira flexy-system
+	];
+	"./machines/flexy/secrets/flexy-disks-password.age".publicKeys = [
+		kreyren kira flexy-system
+	];
+	"./machines/flexy/secrets/flexy-onion.age".publicKeys = [
+		kreyren kira flexy-system tupac-system sinnenfreude-system mracek-system
+	];
+	"./machines/flexy/secrets/flexy-onion-secretKey.age".publicKeys = [
+		kreyren kira tupac-system
+	];
+	"./machines/flexy/secrets/flexy-onion-openssh-private.age".publicKeys = [
+		kreyren kira flexy-system
 	];
 
 	# MRACEK (system)
