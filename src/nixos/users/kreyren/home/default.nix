@@ -25,6 +25,9 @@ in {
 					#homeManagerModules.prompts-kreyren
 					homeManagerModules.prompts-starship-kreyren
 
+					#homeManagerModules.scripts-kreyren
+					homeManagerModules.scripts-wake-morph-kreyren
+
 					# homeManagerModules.kreyren.shells.default
 					homeManagerModules.shells-bash-kreyren
 					homeManagerModules.shells-nushell-kreyren
