@@ -5,9 +5,10 @@
 let
 	inherit (lib) mkIf;
 in {
-	boot.kernelPackages = pkgs.linuxPackages_hardened;
+	boot.kernelPackages = pkgs.linuxPackages_hardened; # Use hardened kernel
 
-	# SECURITY(Krey): Some packages run in electron (session-desktop, vscodium) which requires this, in process of getting rid of them
+	# SECURITY(Krey): NiXium-important packages require this atm
+	# * vscodium - Pending management on MORPH
 	security.unprivilegedUsernsClone = true;
 
 	# Kernel Modules
