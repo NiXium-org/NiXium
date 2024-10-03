@@ -4,6 +4,7 @@
 		./editors
 		./extensions
 		./prompts
+		./scripts
 		./shells
 		./system
 		./terminal-emulators

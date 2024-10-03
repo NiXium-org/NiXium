@@ -23,6 +23,7 @@ in {
 			# Keep this sorted
 			imports = [
 				nixosModules.programs-git
+				nixosModules.programs-wakeonlan
 
 				nixosModules.security
 				nixosModules.security-nvidia
@@ -47,6 +48,7 @@ in {
 				nixosModules.system-time
 				nixosModules.system-wifi
 
+				nixosModules.machine-morph
 				nixosModules.machine-mracek
 				nixosModules.machine-sinnenfreude
 				nixosModules.machine-tupac
