@@ -27,7 +27,6 @@
 			./services/binfmt.nix
 			./services/distributedBuilds.nix
 			./services/openssh.nix
-			./services/sunshine.nix
 			./services/tor.nix
 		];
 	};

@@ -22,8 +22,5 @@ in {
 
 	age.secrets.morph-ssh-ed25519-private.file = ../secrets/morph-ssh-ed25519-private.age; # Declare private key
 
-	# Desktop Environment
-	services.xserver.enable = true;
-
 	nixpkgs.hostPlatform = "x86_64-linux";
 }

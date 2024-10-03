@@ -3,7 +3,7 @@
 # Security management of MORPH
 
 let
-	inherit (lib) mkMerge mkForce mkDefault mkIf;
+	inherit (lib) mkMerge mkForce;
 in {
 	config = mkMerge [
 		{
