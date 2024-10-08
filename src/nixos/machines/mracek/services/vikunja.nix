@@ -25,6 +25,7 @@ in mkIf config.services.vikunja.enable {
 		}];
 	};
 
+	# FIXME(Krey): We should set up a self-signed certificate for the HTTPS here as added security layer on top of Tor
 	services.vikunja.frontendScheme = "http";
 
 	services.vikunja.frontendHostname = "vikunja.nx";
