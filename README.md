@@ -18,20 +18,44 @@ Trusted community members are welcomed to commit their systems for collective ad
 
 Work In Progress..
 
-## Provided Public Services
+## Provided Services
 
-### Monero Node
+All of our services are provided primarely through onion routing, for ease of use we recommend that you configure [MapAddress](https://manpages.org/tor) so that you can use easily memorable URLs instead of the long and cryptic Onion URLs.
 
-We provide a Private [Monero Node](https://www.getmonero.org/resources/moneropedia/node.html) for all viewers of this repository to process your [Monero](https://en.wikipedia.org/wiki/Monero) transactions through our transparent infrastructure:
+Without MapAddress: somewhereInTheDarks45h5f8h76sd7f98h7sd9h6sg876hsl.org
+With MapAddress: cool-service.nx
+
+### [Monero Node](https://www.getmonero.org/resources/moneropedia/node.html)
+
+We provide a private [Monero Node](https://www.getmonero.org/resources/moneropedia/node.html) for all viewers of this repository to process your [Monero](https://en.wikipedia.org/wiki/Monero) transactions through our transparent infrastructure:
 
 ```
+Recommended MapAddress: monero.nx
 Hostname: jj6qehtyrfvvi4gtwttpg2qyaukqzxwaoxvak534nidlnnelmqtlm3qd.onion
 Port: 18081
 Username: Monerochan
 Password: iL0VEMoNeRoChan<3
+
+Providing system: mracek.systems.nx
+Configurtion: https://github.com/NiXium-org/NiXium/blob/central/src/nixos/machines/mracek/services/monero.nix
 ```
 
-We recommend to [MapAddress](https://manpages.org/tor) this Onion URL as `monero.nx` for ease of use.
+The node is set up to communicate with the outside world exclusively via Tor including it's synchronization with the blockchain for added security and privacy.
+
+### [Vikunja](https://vikunja.io)
+
+The open-source to-do app, access is provided upon special request.
+
+```
+Recommended MapAddress: vikunja.nx
+Hostname: u65cyt3tdc66u7ciin55atl5sattytx3rjzzrzhlfdfc2t7pqbhyd6qd.onion
+Port: 80
+
+Providing system: mracek.systems.nx
+Configurtion: https://github.com/NiXium-org/NiXium/blob/central/src/nixos/machines/mracek/services/vikunja.nix
+```
+
+This service is mostly used internally to organize private projects. We recommend you to use the [Vikunja Cloud Services](https://vikunja.cloud) instead to support the upstream developers if you are not in position to self-host it.
 
 ## Claim of "NX" Custom Top Level Domain
 
