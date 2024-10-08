@@ -2,8 +2,6 @@
 
 # Mracek-specific configuration of Vikunja
 
-# FIXME(Krey): Add Admin User
-
 let
 	inherit (lib) mkIf;
 in mkIf config.services.vikunja.enable {
@@ -30,4 +28,14 @@ in mkIf config.services.vikunja.enable {
 	services.vikunja.frontendScheme = "http";
 
 	services.vikunja.frontendHostname = "vikunja.nx";
+
+	# Impermanence
+	environment.persistence."/nix/persist/system".directories = mkIf config.boot.impermanence.enable [{
+		directory = "/var/lib/private/vikunja";
+		user = "vikunja";
+		group = "vikunja";
+		mode = "u=rwx,g=rx,o=";
+	}];
+
+	# FIXME(Krey): Figure out a backup solution
 }
