@@ -2,7 +2,7 @@
 
 # Mracek-specific configuration of Vikunja
 
-# FIXME(Krey): Add Admin User
+# FIXME-TRANSPARENCY(Krey): Figure out a declarative way to do user-management as currently new users are added via CLI: `# vikunja create users ...` which is not transparent
 
 let
 	inherit (lib) mkIf;
@@ -27,7 +27,20 @@ in mkIf config.services.vikunja.enable {
 		}];
 	};
 
+	# FIXME(Krey): We should set up a self-signed certificate for the HTTPS here as added security layer on top of Tor
 	services.vikunja.frontendScheme = "http";
 
 	services.vikunja.frontendHostname = "vikunja.nx";
+
+	services.vikunja.settings.service.enableregistration = false; # Disable new registrations
+
+	# Impermanence
+	environment.persistence."/nix/persist/system".directories = mkIf config.boot.impermanence.enable [{
+		directory = "/var/lib/private/vikunja";
+		user = "vikunja";
+		group = "vikunja";
+		mode = "u=rwx,g=,o=";
+	}];
+
+	# FIXME(Krey): Figure out a backup solution
 }
