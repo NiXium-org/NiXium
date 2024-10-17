@@ -3,7 +3,6 @@
 let
 	inherit (lib) mkForce;
 	inherit (lib.hm.gvariant) mkTuple;
-  flameshot-gui = pkgs.writeShellScriptBin "flameshot-gui" "${pkgs.flameshot}/bin/flameshot gui";
 in {
 	# Use `$ dconf dump /` to get these
 	# dconf2nix, can be used to make this process easier -- https://github.com/gvolpe/dconf2nix
@@ -118,8 +117,8 @@ in {
 		## Flameshot GUI
 		"org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4" = {
 			name = "Flameshot GUI";
-			command = "${flameshot-gui}/bin/flameshot-gui";
-			binding = "Print";
+			command = "flameshot gui";
+			binding = "<Control>Print";
 		};
 
 		# Background
