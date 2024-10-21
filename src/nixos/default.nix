@@ -46,12 +46,6 @@ in {
 				nixosModules.system-nix
 				nixosModules.system-release
 				nixosModules.system-time
-				nixosModules.system-wifi
-
-				nixosModules.machine-morph
-				nixosModules.machine-mracek
-				nixosModules.machine-sinnenfreude
-				nixosModules.machine-tupac
 
 				# {
 				# 	sops.defaultSopsFile = ./.sops.yaml;

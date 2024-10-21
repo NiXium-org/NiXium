@@ -7,8 +7,15 @@
 		imports = [
 			self.nixosModules.default # Load NiXium's Global configuration
 
+			# Machines
+			self.nixosModules.machine-morph
+			# self.nixosModules.machine-mracek
+			# self.nixosModules.machine-sinnenfreude
+			# self.nixosModules.machine-tupac
+
 			# Users
 			self.nixosModules.users-kreyren
+			self.homeManagerModules."kreyren@morph"
 
 			# Files
 			./config/bootloader.nix
@@ -27,6 +34,7 @@
 			./services/binfmt.nix
 			./services/distributedBuilds.nix
 			./services/openssh.nix
+			./services/sunshine
 			./services/tor.nix
 		];
 	};

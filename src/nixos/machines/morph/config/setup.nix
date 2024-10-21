@@ -14,6 +14,7 @@ in {
 	nix.distributedBuilds = true; # Perform distributed builds if requested
 
 	services.openssh.enable = true;
+	services.sunshine.enable = true;
 	services.tor.enable = true;
 
 	users.users.root.openssh.authorizedKeys.keys = mkIf config.services.openssh.enable [

@@ -8,6 +8,10 @@ in {
 	# NOTE(Krey): Morph is projected to be used as a gaming server where the hardened kernel might impact it's performance too much
 	boot.kernelPackages = pkgs.linuxPackages_hardened;
 
+	# SECURITY(Krey): Blocked by applications
+	# * anime-game-launcher
+	security.unprivilegedUsernsClone = true;
+
 	# Kernel Modules
 	boot.kernelModules = [
 		"kvm-intel" # Use KVM
