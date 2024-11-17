@@ -48,7 +48,8 @@ in {
 				nixosModules.system-time
 				nixosModules.system-wifi
 
-				nixosModules.machine-morph
+				# DNM(Krey): For some reason MORPH is not declared in secrets.nix likely made a mistake during rebase somewhere -> Fix it prior to merge
+				# nixosModules.machine-morph
 				nixosModules.machine-mracek
 				nixosModules.machine-sinnenfreude
 				nixosModules.machine-tupac

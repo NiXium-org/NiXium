@@ -52,7 +52,7 @@ in {
 		# pkgs.cura # Broken: https://github.com/NixOS/nixpkgs/issues/186570
 		pkgs.prusa-slicer
 		unstable.fractal
-		pkgs.qbittorrent
+		# pkgs.qbittorrent
 		pkgs.stremio
 		pkgs.android-tools
 		pkgs.picocom

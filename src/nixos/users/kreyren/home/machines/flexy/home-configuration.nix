@@ -77,9 +77,9 @@ in {
 		polymc.polymc
 
 		# Slicers
-		pkgs.prusa-slicer
+		# (unstable.prusa-slicer.override { mesa = pkgs.mesa; })
 		pkgs.super-slicer-beta # Prusa-slicer fork by community. Includes additional features, but lags behind in releases
-		pkgs.orca-slicer # Prusa-slicer fork by BambuLab adapted by the community
+		# (unstable.orca-slicer.override { mesa = pkgs.mesa; }) # Prusa-slicer fork by BambuLab adapted by the community
 
 		# Games
 		aagl.anime-game-launcher # An Anime Game
@@ -118,7 +118,7 @@ in {
 		# FIXME-QA(Krey): As of 24th Jun 2024 this doesn't build
 			# pkgs.gaphor # Mind Maps
 		pkgs.kooha # Screen Recorder
-		pkgs.qbittorrent # Torrents
+		unstable.qbittorrent # Torrents
 		pkgs.tealdeer # TLDR Pages Implementation
 		pkgs.nextcloud-client
 		# FIXME(Krey): To be managed..
