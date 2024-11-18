@@ -17,9 +17,6 @@ in mkIf config.boot.impermanence.enable {
 
 			{ directory = "/var/lib/colord"; user = "colord"; group = "colord"; mode = "u=rwx,g=rx,o="; }
 
-			# Users
-			{ directory = "/nix/persist/users"; user = "root"; group = "users"; mode = "u=rwx,g=rwx,o="; }
-
 			# FIXME(Krey): Move this to it's own module
 			(mkIf config.virtualisation.waydroid.enable "/var/lib/waydroid")
 		];
