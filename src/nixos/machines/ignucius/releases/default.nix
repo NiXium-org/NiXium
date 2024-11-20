@@ -2,8 +2,6 @@
 
 {
 	imports = [
-		./master
 		./stable
-		./unstable
 	];
 }

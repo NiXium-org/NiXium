@@ -11,6 +11,7 @@ in {
 			"Downloads"
 			"Monero" # For Monero Wallet
 			"Music"
+			"src" # For project files
 			"Pictures"
 			"Public"
 			"Templates"

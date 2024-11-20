@@ -1,4 +1,4 @@
-{ config, pkgs, lib, unstable, aagl, polymc, ... }:
+{ config, pkgs, lib, unstable, aagl, polymc, staging-next, ... }:
 
 # FIXME(Krey): trace: evaluation warning: The ‘gnome.dconf-editor’ was moved to top-level. Please use ‘pkgs.dconf-editor’ directly. -- Channel 24.11
 
@@ -99,7 +99,7 @@ in {
 
 		# Engineering
 		pkgs.blender
-		pkgs.freecad
+		unstable.freecad
 		pkgs.gimp
 		pkgs.kicad-small
 
@@ -117,7 +117,8 @@ in {
 		# FIXME-QA(Krey): As of 24th Jun 2024 this doesn't build
 			# pkgs.gaphor # Mind Maps
 		pkgs.kooha # Screen Recorder
-		pkgs.qbittorrent # Torrents
+		# FIXME(Krey): Broken in stable
+		unstable.qbittorrent # Torrents
 		pkgs.tealdeer # TLDR Pages Implementation
 		pkgs.nextcloud-client
 		# FIXME(Krey): To be managed..
@@ -135,6 +136,9 @@ in {
 		pkgs.gnomeExtensions.blur-my-shell
 		pkgs.gnomeExtensions.gsconnect
 		pkgs.gnomeExtensions.custom-accent-colors
+		pkgs.gnomeExtensions.desktop-cube
+		pkgs.gnomeExtensions.burn-my-windows
+		pkgs.gnomeExtensions.caffeine
 
 		# Fonts
 		# This was recommended, because nerdfonts might have issues with rendering -- https://github.com/TanvirOnGH/nix-config/blob/nix%2Bhome-manager/desktop/customization/font.nix#L4-L39
@@ -170,6 +174,40 @@ in {
 			];
 
 			disabled-extensions = [];
+		};
+		# System Monitor
+		"org/gnome/gnome-system-monitor" = {
+			show-dependencies = false;
+			show-whose-processes= "user";
+		};
+
+		"org/gnome/gnome-system-monitor/disktreenew" = {
+			col-6-visible = true;
+			col-6-width = 0;
+		};
+
+		"org/gnome/shell/extensions/vitals" = {
+			fixed-widths = true;
+			hide-icons = false;
+			hide-zeros = false;
+			icon-style = 1;
+			include-static-info = false;
+			menu-centered = false;
+			network-speed-format = 1;
+			position-in-panel = 0;
+			show-battery = true;
+			show-gpu = false; # Nvidia only, system without dGPU
+			update-time = 3;
+			use-higher-precision = true;
+
+			hot-sensors = [
+				"_memory_usage_"
+				"__temperature_max__"
+				"_system_load_1m_"
+				"_battery_energy_(now)_"
+				"__network-rx_max__"
+				"__network-tx_max__"
+			];
 		};
 	};
 }

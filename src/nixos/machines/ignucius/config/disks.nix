@@ -38,7 +38,7 @@ in mkMerge [
 			nodev."/" = {
 				fsType = "tmpfs";
 				mountOptions = [
-					"size=1G"
+					"size=5G" # >=5GB Needed to avoid no space left errors during rebuilds
 					"defaults"
 					"mode=755"
 				];
@@ -101,6 +101,11 @@ in mkMerge [
 												mountpoint = "/nix/persist/users";
 												mountOptions = [ "compress=lzo" "noatime" ];
 											};
+											# FIXME(Krey): Causes emergency shell
+											# "@nixium-persist" = {
+											#  	mountpoint = "/nix/persist/NiXium";
+											# 	mountOptions = [ "compress=lzo" "noatime" ];
+											# };
 										};
 									};
 								};

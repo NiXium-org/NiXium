@@ -24,9 +24,11 @@
 			./config/initrd.nix
 			./config/kernel.nix
 			./config/networking.nix
+			./config/plymouth.nix
 			./config/security.nix
 			./config/setup.nix
 			./config/sound.nix
+			./config/suspend-then-hibernate.nix
 			./config/vm-build.nix
 		];
 	};

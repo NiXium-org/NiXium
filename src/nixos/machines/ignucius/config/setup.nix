@@ -9,6 +9,7 @@ in {
 
 	boot.impermanence.enable = true; # Use impermanence
 
+	# NOTE(Krey): Doesn't work as of 19th Nov 2024
 	boot.plymouth.enable = false;
 
 	nix.distributedBuilds = false; # Perform distributed builds

@@ -24,6 +24,8 @@ in {
 					"mds=off" # Paranoid enforcement, shouldn't be needed..
 				];
 
+				security.unprivilegedUsernsClone = true; # Required for current development stack (vscodium)
+
 			# Necessary Evil to keep the CPU microcode up-to-date, such is all i686 and amd64 architecture systems
 			hardware.enableRedistributableFirmware = true;
 			hardware.cpu.intel.updateMicrocode = mkDefault config.hardware.enableRedistributableFirmware;
