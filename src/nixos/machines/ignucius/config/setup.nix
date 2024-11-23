@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 # Setup of IGNUCIUS
 
@@ -9,13 +9,20 @@ in {
 
 	boot.impermanence.enable = true; # Use impermanence
 
-	# NOTE(Krey): Doesn't work as of 19th Nov 2024
-	boot.plymouth.enable = false;
+	boot.plymouth.enable = true;
 
 	nix.distributedBuilds = false; # Perform distributed builds
 
+	programs.noisetorch.enable = true;
+	programs.adb.enable = true;
+
 	services.openssh.enable = true;
 	services.tor.enable = true;
+
+	networking.wireguard.enable = false;
+
+	virtualisation.waydroid.enable = true;
+	virtualisation.docker.enable = false;
 
 	nix.channel.enable = true; # To be able to use nix repl :l <nixpkgs> as loading flake loads only 16 variables
 
@@ -26,8 +33,24 @@ in {
 	# Desktop Environment
 	services.xserver.enable = true;
 	services.xserver.displayManager.gdm.enable = true;
+	services.xserver.displayManager.gdm.wayland = false; # Do not use wayland as it has issues rn
 	services.xserver.desktopManager.gnome.enable = true;
 		programs.dconf.enable = true; # Needed for home-manager to not fail deployment (https://github.com/nix-community/home-manager/issues/3113)
+
+	# Fingerprint
+	services.fprintd.enable = true;
+	services.fprintd.tod.enable = false;
+
+	# Japanese Keyboard Input
+	i18n.inputMethod.enabled = "fcitx5";
+	i18n.inputMethod.fcitx5.addons = with pkgs; [ fcitx5-mozc ];
+
+	# Power Management
+	services.tlp.enable = false;
+	services.power-profiles-daemon.enable = true;
+
+	# Extending life of the SSD
+	services.fstrim.enable = true;
 
 	age.secrets.ignucius-ssh-ed25519-private.file = ../secrets/ignucius-ssh-ed25519-private.age; # Declare private key
 

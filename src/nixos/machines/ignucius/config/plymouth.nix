@@ -19,9 +19,6 @@ in mkIf config.boot.plymouth.enable {
 		})
 	];
 
-	#boot.initrd.availableKernelModules = ["i915"];
-	boot.kernelParams = [ "plymouth.use-simple-drm" ];
-
 	boot.plymouth = {
 		theme = "deus_ex";
 		themePackages = [
@@ -30,4 +27,21 @@ in mkIf config.boot.plymouth.enable {
 			})
 		];
 	};
+
+	#boot.initrd.availableKernelModules = ["i915"];
+	boot.kernelParams = [
+		"plymouth.use-simple-drm" # Workaround for a bug above
+		# Silent Boot
+		"quiet"
+		"splash"
+		"boot.shell_on_fail"
+		"loglevel=3"
+		"rd.systemd.show_status=false"
+		"rd.udev.log_level=3"
+		"udev.log_priority=3"
+	];
+
+	# More "Silent Boot" stuff
+	boot.consoleLogLevel = 0;
+	boot.initrd.verbose = false;
 }

@@ -7,3 +7,6 @@
 [submodule "vendor/ragenix"]
 	path = vendor/ragenix
 	url = git@github.com:NiXium-org/ragenix.git
+[submodule "vendor/coreboot"]
+	path = vendor/coreboot
+	url = https://review.coreboot.org/coreboot.git

@@ -3,7 +3,7 @@
 # Module that implements suspend-then-hibernate for IGNUCIUS
 
 let
-	hibernateSeconds = "120";
+	hibernateSeconds = "60";
 in {
 	services.logind = {
 		# NOTE(Krey): Temporary until I get a new palmrest with it's magnet

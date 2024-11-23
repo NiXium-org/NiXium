@@ -205,6 +205,9 @@
 
 						inputs.disko.packages.${system}.disko-install
 						inputs.disko.packages.${system}.disko
+
+						inputs.nixpkgs.legacyPackages.${system}.ncurses
+						inputs.nixpkgs.legacyPackages.${system}.pkg-config
 					];
 					inputsFrom = [
 						config.mission-control.devShell

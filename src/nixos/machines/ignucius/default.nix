@@ -25,6 +25,7 @@
 			./config/kernel.nix
 			./config/networking.nix
 			./config/plymouth.nix
+			./config/power-management.nix
 			./config/security.nix
 			./config/setup.nix
 			./config/sound.nix

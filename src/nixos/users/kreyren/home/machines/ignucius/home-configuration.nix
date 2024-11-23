@@ -79,7 +79,7 @@ in {
 		# Slicers
 		pkgs.prusa-slicer
 		pkgs.super-slicer-beta # Prusa-slicer fork by community. Includes additional features, but lags behind in releases
-		pkgs.orca-slicer # Prusa-slicer fork by BambuLab adapted by the community
+		unstable.orca-slicer # Prusa-slicer fork by BambuLab adapted by the community
 
 		# Games
 		aagl.anime-game-launcher # An Anime Game
@@ -188,7 +188,7 @@ in {
 
 		"org/gnome/shell/extensions/vitals" = {
 			fixed-widths = true;
-			hide-icons = false;
+			hide-icons = true;
 			hide-zeros = false;
 			icon-style = 1;
 			include-static-info = false;
@@ -201,12 +201,13 @@ in {
 			use-higher-precision = true;
 
 			hot-sensors = [
-				"_memory_usage_"
 				"__temperature_max__"
 				"_system_load_1m_"
-				"_battery_energy_(now)_"
-				"__network-rx_max__"
+				"_memory_usage_"
 				"__network-tx_max__"
+				"__network-rx_max__"
+				"_battery_rate_"
+				"_fan_thinkpad_fan1_"
 			];
 		};
 	};

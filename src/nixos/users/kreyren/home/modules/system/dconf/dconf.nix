@@ -119,7 +119,7 @@ in {
 		"org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4" = {
 			name = "Flameshot GUI";
 			command = "${flameshot-gui}/bin/flameshot-gui";
-			binding = "Print";
+			binding = "<Control>Print";
 		};
 
 		# Background
