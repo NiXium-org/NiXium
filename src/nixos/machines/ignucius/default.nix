@@ -13,7 +13,7 @@
 
 			# Files
 			./services/binfmt.nix
-			# ./services/distributedBuilds.nix
+			./services/distributedBuilds.nix
 			./services/openssh.nix
 			./services/tor.nix
 
@@ -30,6 +30,7 @@
 			./config/setup.nix
 			./config/sound.nix
 			./config/suspend-then-hibernate.nix
+			./config/usbguard.nix
 			./config/vm-build.nix
 		];
 	};

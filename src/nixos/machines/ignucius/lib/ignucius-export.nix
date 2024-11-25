@@ -7,8 +7,8 @@ let
 in mkMerge [
 	{
 		# SSHD on Onions
-		age.secrets.ignucius-openssh-onion = {
-			file = ../secrets/ignucius-openssh-onion.age;
+		age.secrets.ignucius-onion = {
+			file = ../secrets/ignucius-onion.age;
 
 			owner = "tor";
 			group = "tor";
@@ -24,7 +24,7 @@ in mkMerge [
 
 		# Add to the tor settings
 		services.tor.settings."%include" = [
-			config.age.secrets."ignucius-openssh-onion".path
+			config.age.secrets."ignucius-onion".path
 		];
 	}
 ]

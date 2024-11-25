@@ -48,7 +48,8 @@ in {
 				nixosModules.system-time
 				nixosModules.system-wifi
 
-				# nixosModules.machine-morph
+				nixosModules.machine-ignucius
+				nixosModules.machine-morph
 				nixosModules.machine-mracek
 				nixosModules.machine-sinnenfreude
 				nixosModules.machine-tupac

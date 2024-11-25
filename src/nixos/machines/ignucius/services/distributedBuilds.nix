@@ -6,11 +6,11 @@
 
 let
 	inherit (lib) mkIf;
-in {
-	# Authorize TSVETAN
-		# users.extraUsers.builder.openssh.authorizedKeys.keys = [
-		# 	"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF18QG9oqeeq/lQc5QDJl3hz5D4Q9bhiHFTRLJN4KSZb" # TSVETAN
-		# ];
+in mkIf config.nix.distributedBuilds {
+	# Builders Authorizations
+		users.extraUsers.builder.openssh.authorizedKeys.keys = [
+			"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDO4srKF7or/2SZ6eC7vX5mMdW2ZjE0r7GOBEWLm9KPf" # MORPH (Builder)
+		];
 
 	# Import the SSH Keys for the builder account
 	age.secrets.ignucius-builder-ssh-ed25519-private = {
@@ -18,7 +18,7 @@ in {
 
 		owner = "builder";
 		group = "builder";
-		mode = "660"; # rw-rw----
+		mode = "400"; # r--------
 
 		path = (if config.boot.impermanence.enable
 			then "/nix/persist/system/etc/ssh/ssh_builder_ed25519_key"

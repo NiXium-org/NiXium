@@ -7,18 +7,17 @@ let
 
 	# Systems
 	ignucius-system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKWL1P+3Bg7rr3NEW2h0I1bXBZtwCpU3IiruewsUQrcg";
+	morph-system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFJh5Bd1p4GGCAvNkfoWoflrRIFnoj43b2aMs0GxmULs";
 	mracek-system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP8d9Nz64gE+x/+Dar4zknmXMAZXUAxhF1IgrA9DO4Ma";
-	pelagus-system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINhxI+25BwlCuEezW6Vc4mJ+EP/KO597PI2YfEU9t+vf";
 	sinnenfreude-system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIAXnS4xUPWwjBdKDvvy5OInLbs3oeHUUs5qUsX+fBji";
 	tsvetan-system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJdqMVQ3TO5ckmk9nepAY/7zLHy555EkzBJxpfTIwuT5";
 	tupac-system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEmYpmNkpSkSSk1FnxHvPb8JlbeYh2lf3d5u8MBqGpHP";
 
 	all-systems = [
 		ignucius-system
+		morph-system
 		mracek-system
-		pelagus-system
 		sinnenfreude-system
-		tsvetan-system
 		tupac-system
 	];
 in {
@@ -59,6 +58,32 @@ in {
 
 	"./machines/ignucius/secrets/ignucius-builder-ssh-ed25519-private.age".publicKeys = [
 		kreyren ignucius-system
+	];
+
+	"./machines/ignucius/secrets/ignucius-usbguard-config.age".publicKeys = [
+		kreyren ignucius-system
+	];
+
+
+	# MORPH (system)
+	"./machines/morph/secrets/morph-builder-ssh-ed25519-private.age".publicKeys = [
+		kreyren morph-system
+	];
+
+	"./machines/morph/secrets/morph-disks-password.age".publicKeys = [
+		kreyren morph-system
+	];
+
+	"./machines/morph/secrets/morph-onion-openssh-private.age".publicKeys = [
+		kreyren morph-system
+	];
+
+	"./machines/morph/secrets/morph-onion.age".publicKeys = [
+		kreyren
+	] ++ all-systems;
+
+	"./machines/morph/secrets/morph-ssh-ed25519-private.age".publicKeys = [
+		kreyren morph-system
 	];
 
 	# MRACEK (system)
@@ -130,14 +155,6 @@ in {
 		kreyren mracek-system
 	];
 
-	# PELAGUS (system)
-	"./machines/pelagus/secrets/disks-password.age".publicKeys = [
-		kreyren pelagus-system
-	];
-	"./machines/pelagus/secrets/pelagus-onion.age".publicKeys = [
-		kreyren
-	] ++ all-systems;
-
 	# SINNENFREUDE (system)
 	"./machines/sinnenfreude/secrets/sinnenfreude-disks-password.age".publicKeys = [
 		kreyren sinnenfreude-system
@@ -157,11 +174,6 @@ in {
 
 	"./machines/sinnenfreude/secrets/sinnenfreude-builder-ssh-ed25519-private.age".publicKeys = [
 		kreyren sinnenfreude-system
-	];
-
-	# TSVETAN (system)
-	"./machines/tsvetan/secrets/disks-password.age".publicKeys = [
-		kreyren tsvetan-system
 	];
 
 	# TUPAC (system)

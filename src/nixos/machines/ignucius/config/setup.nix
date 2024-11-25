@@ -11,13 +11,16 @@ in {
 
 	boot.plymouth.enable = true;
 
-	nix.distributedBuilds = false; # Perform distributed builds
+	nix.distributedBuilds = true; # Perform distributed builds
 
 	programs.noisetorch.enable = true;
 	programs.adb.enable = true;
 
 	services.openssh.enable = true;
 	services.tor.enable = true;
+	# TODO(Krey): Pending Management
+	services.usbguard.dbus.enable = false;
+	services.smartd.enable = true;
 
 	networking.wireguard.enable = false;
 

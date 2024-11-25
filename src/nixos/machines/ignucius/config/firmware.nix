@@ -10,7 +10,4 @@ in {
 
 	# Required at the time to use the WiFi Adapter, pending a different one
 	hardware.enableRedistributableFirmware = mkForce true; # Whether to load propritary firmware files
-
-	# Handled externally via coreboot management
-	hardware.cpu.intel.updateMicrocode = false; # Whether to update the intel CPU microcode on system bootup
 }

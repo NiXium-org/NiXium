@@ -20,7 +20,7 @@
 let
 	inherit (lib) mkMerge;
 
-	diskoDevice = "/dev/disk/by-id/ata-TOSHIBA_MQ01ABF050_33Q7S25ZS";
+	diskoDevice = "/dev/disk/by-id/ata-CT500MX500SSD1_21052CD42FFF";
 in mkMerge [
 	{
 		age.secrets.ignucius-disks-password.file = ../secrets/ignucius-disks-password.age; # Supply password for disk encryption

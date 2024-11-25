@@ -26,6 +26,8 @@ warn() { printf "WARNING: %s\n" "$1" ;} # Warning Helper
 #[ -n "$FLAKE_ROOT" ] || FLAKE_ROOT="github:NiXium-org/NiXium/$(curl -s -X GET "https://api.github.com/repos/NiXium-org/NiXium/commits" | jq -r '.[0].sha')"
 [ -n "$FLAKE_ROOT" ] || FLAKE_ROOT="github:NiXium-org/NiXium/$(curl -s -X GET "https://api.github.com/repos/NiXium-org/NiXium/commits?sha=central" | jq -r '.[0].sha')"
 
+export FLAKE_ROOT=/home/kreyren/src/NiXium
+
 ### [END] Export this outside [END] ###
 
 [ "$(id -u || true)" = 0 ] || die 126 "This script must be executed as the root user" # Ensure that we are root
@@ -97,6 +99,7 @@ status "Formatting disks"
 disko \
 	--mode "disko" \
 	--root-mountpoint "/mnt" \
+	--debug \
 	--flake "$FLAKE_ROOT#$derivation"
 
 #! # Activate SWAP
@@ -105,12 +108,12 @@ disko \
 # FIXME-QA(Kret): Use the device declaratively for activating swap
 # status "Activating swap"
 # swapon "$(realpath "$systemSwapDevice" || true)"
-swapon "/dev/mapper/swap" || true
+# swapon "/dev/mapper/swap" || true
 
 # These have to be implemented for the installer to not fail with out of memory err
 # FIXME-QA(Krey): Do not run these if the size is already adjusted
-mount -o remount,size=20G,noatime /nix/.rw-store
-mount -o remount,size=5G,noatime /mnt
+# mount -o remount,size=20G,noatime /nix/.rw-store
+# mount -o remount,size=5G,noatime /mnt
 
 #! Pre-build the system configuration
 status "Pre-building the system configuration"
