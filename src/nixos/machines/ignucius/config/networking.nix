@@ -5,11 +5,10 @@
 let
 	inherit (lib) mkForce;
 in {
-	# FIXME-QA(Krey): Set to false by `/nixos/modules/services/networking/networkmanager.nix`, better management needed
-	networking.useDHCP = mkForce true; # Use DHCP on all adapters
-	# networking.interfaces.wlp2s0.useDHCP = true;
-	# networking.interfaces.docker0.useDHCP = true;
-	# networking.interfaces.wwp0s29u1u4i6.useDHCP = true;
+	# Adapters that are allowed to use DHCP
+	networking.interfaces.wlp2s0.useDHCP = true;
+	networking.interfaces.docker0.useDHCP = true;
+	networking.interfaces.wwp0s29u1u4i6.useDHCP = true;
 
 	# Always use network manager for convinience
 	# FIXME-QA(Krey): Set to false by `/nixos/modules/services/networking/networkmanager.nix`, better management needed

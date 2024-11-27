@@ -15,6 +15,11 @@ in {
 
 	programs.noisetorch.enable = true;
 	programs.adb.enable = true;
+	programs.nix-ld.enable = true;
+	programs.appimage = {
+		enable = true;
+		binfmt = true;
+	};
 
 	services.openssh.enable = true;
 	services.tor.enable = true;
