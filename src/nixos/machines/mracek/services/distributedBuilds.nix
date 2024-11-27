@@ -7,10 +7,11 @@
 let
 	inherit (lib) mkIf;
 in {
-	# Authorize TSVETAN
-		# users.extraUsers.builder.openssh.authorizedKeys.keys = [
-		# 	"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF18QG9oqeeq/lQc5QDJl3hz5D4Q9bhiHFTRLJN4KSZb" # TSVETAN
-		# ];
+	# Authorized Keys
+		users.extraUsers.builder.openssh.authorizedKeys.keys = [
+			"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDhD5Fel4xaocToIQay3IkytHGaK93cDN52ww2Bw5Nj+" # IGNUCIUS (Builder)
+			"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOzh6FRxWUemwVeIDsr681fgJ2Q2qCnwJbvFe4xD15ve" # KREYREN (User)
+		];
 
 	# Import the SSH Keys for the builder account
 	age.secrets.mracek-builder-ssh-ed25519-private = {

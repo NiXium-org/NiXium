@@ -5,7 +5,8 @@
 let
 	inherit (lib) mkForce;
 in {
-	boot.kernelPackages = mkForce pkgs.linuxPackages_hardened;
+	# FIXME(Krey): Move on harneded kernel, tbd how to manage
+	boot.kernelPackages = mkForce pkgs.linuxPackages;
 
 	boot.kernelParams = [
 		# SECURITY(Krey): Used to manage CPU Vulnerabilities

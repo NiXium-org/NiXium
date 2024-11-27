@@ -19,8 +19,10 @@ in {
 	services.openssh.enable = true;
 	services.tor.enable = true;
 	# TODO(Krey): Pending Management
-	services.usbguard.dbus.enable = false;
+		services.usbguard.dbus.enable = false;
 	services.smartd.enable = true;
+	services.clamav.daemon.enable = true;
+	services.printing.enable = true;
 
 	networking.wireguard.enable = false;
 
@@ -49,8 +51,9 @@ in {
 	i18n.inputMethod.fcitx5.addons = with pkgs; [ fcitx5-mozc ];
 
 	# Power Management
-	services.tlp.enable = false;
-	services.power-profiles-daemon.enable = true;
+	powerManagement.enable = true; # Enable Power Management
+	services.tlp.enable = true; # TLP-Based Managemnt (For Fine Tuning)
+	services.power-profiles-daemon.enable = false; # PPD-Based Management (Predefined through system data only)
 
 	# Extending life of the SSD
 	services.fstrim.enable = true;

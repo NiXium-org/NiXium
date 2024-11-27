@@ -11,13 +11,19 @@
 # This doesn't seem to change anything?
 			# * https://forums.gentoo.org/viewtopic-t-1068292-start-0.html
 
+# FIXME(Krey): Figure out how to disable all but one physical core while on battery power
+
 let
 	inherit (lib) mkIf mkMerge;
-in mkMerge [
+in mkIf config.powerManagement.enable (mkMerge [
 	# TLP Management
 	(mkIf (config.services.tlp.enable == true) {
 		services.tlp.settings = {
 			TLP_ENABLE = 1; # Use TLP
+
+			# Platform Profiles
+			PLATFORM_PROFILE_ON_AC = "performance";
+			PLATFORM_PROFILE_ON_BAT = "low-power";
 
 			# Set Governors depending on power input
 			CPU_SCALING_GOVERNOR_ON_AC = "performance"; # AC power
@@ -27,6 +33,24 @@ in mkMerge [
 			# Whether to use boost depending on power input
 			CPU_BOOST_ON_AC = 1;
 			CPU_BOOST_ON_BAT = 0;
+
+			# Energy Profile Policy
+			CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+			CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+
+			# CPU Performance Scaling
+			CPU_MIN_PERF_ON_AC = 0;
+			CPU_MAX_PERF_ON_AC = 100;
+
+			CPU_MIN_PERF_ON_BAT = 0;
+			CPU_MAX_PERF_ON_BAT = 10;
+
+			# CPU Scaling
+				# Range is 1200000 ~ 3300000 [kHz]
+			CPU_SCALING_MIN_FREQ_ON_AC = 1200000;
+			CPU_SCALING_MAX_FREQ_ON_AC = 3300000;
+			CPU_SCALING_MIN_FREQ_ON_BAT = 1200000;
+			CPU_SCALING_MAX_FREQ_ON_BAT = 2600000;
 
 			# SATA aggressive link power management (ALPM):
 			# min_power/medium_power/max_performance
@@ -53,7 +77,9 @@ in mkMerge [
 
 	{
 		# Required for interaction between the solutions
-			boot.kernelModules = [ "acpi_call" ];
-			boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
+			boot.kernelModules = [
+				# Superseeds `thinkpad_acpi` and `acpi_call`
+				"natacpi"
+			];
 	}
-]
+])

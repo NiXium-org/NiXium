@@ -18,4 +18,4 @@ release="$3"
 echo "WARNING: This action will wipe all data on the target device and performs full declarative re-installation!"
 
 # Perform the task
-nix --extra-experimental-features 'nix-command flakes' run "git+file://$FLAKE_ROOT#$distro-$system-$release-install"
+sudo nix --extra-experimental-features 'nix-command flakes' run --impure "git+file://$FLAKE_ROOT#$distro-$system-$release-install"

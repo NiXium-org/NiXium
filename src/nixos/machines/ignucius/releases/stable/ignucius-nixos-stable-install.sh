@@ -76,7 +76,7 @@ status "Verifying the Identity File"
 [ -n "$ragenixIdentity" ] || ragenixIdentity="$HOME/.ssh/id_ed25519" # Try to use the default path
 
 # If the identity file is provided then use it to decrypt the secrets otherwise use hard-coded secrets
-if [ -s "$ragenixIdentity" ]; then
+if [ -f "$ragenixIdentity" ]; then
 	status "The identity file is provided trying to decrypt the secrets"
 
 	[ -s "/run/agenix/$machineName-disks-password" ] || age --identity "$ragenixIdentity" --decrypt --output "/run/agenix/$machineName-disks-password" "$secretPasswordPath"
@@ -144,5 +144,5 @@ age \
 #! Reboot in the new Operating System
 [ "$nixiumDoNotReboot" = 0  ] || {
 	status "Installation was successful, performing reboot"
-	reboot
+	# reboot
 }
