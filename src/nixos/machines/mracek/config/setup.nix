@@ -23,7 +23,7 @@ in {
 	services.vikunja.enable = true;
 
 	# Management for https://github.com/NixOS/nixpkgs/issues/287194#issuecomment-2162085415
-	security.unprivilegedUsernsClone.enable = true;
+	security.unprivilegedUsernsClone = true;
 
 	users.users.root.openssh.authorizedKeys.keys = mkIf config.services.openssh.enable [
 		"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOzh6FRxWUemwVeIDsr681fgJ2Q2qCnwJbvFe4xD15ve kreyren@fsfe.org" # Allow root access for the Super Administrator (KREYREN)
