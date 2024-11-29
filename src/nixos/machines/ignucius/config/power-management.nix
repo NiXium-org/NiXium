@@ -35,22 +35,23 @@ in mkIf config.powerManagement.enable (mkMerge [
 			CPU_BOOST_ON_BAT = 0;
 
 			# Energy Profile Policy
-			CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
 			CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+			CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
 
 			# CPU Performance Scaling
-			CPU_MIN_PERF_ON_AC = 0;
 			CPU_MAX_PERF_ON_AC = 100;
+			CPU_MIN_PERF_ON_AC = 0;
 
-			CPU_MIN_PERF_ON_BAT = 0;
 			CPU_MAX_PERF_ON_BAT = 10;
+			CPU_MIN_PERF_ON_BAT = 0;
 
 			# CPU Scaling
 				# Range is 1200000 ~ 3300000 [kHz]
-			CPU_SCALING_MIN_FREQ_ON_AC = 1200000;
 			CPU_SCALING_MAX_FREQ_ON_AC = 3300000;
-			CPU_SCALING_MIN_FREQ_ON_BAT = 1200000;
+			CPU_SCALING_MIN_FREQ_ON_AC = 1200000;
+
 			CPU_SCALING_MAX_FREQ_ON_BAT = 2600000;
+			CPU_SCALING_MIN_FREQ_ON_BAT = 1200000;
 
 			# SATA aggressive link power management (ALPM):
 			# min_power/medium_power/max_performance

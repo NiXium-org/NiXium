@@ -39,6 +39,7 @@ in {
 	users.users.root.openssh.authorizedKeys.keys = mkIf config.services.openssh.enable [
 		"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOzh6FRxWUemwVeIDsr681fgJ2Q2qCnwJbvFe4xD15ve kreyren@fsfe.org" # Allow root access for the Super Administrator (KREYREN)
 	];
+	programs.ssh.knownHosts."localhost".publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKWL1P+3Bg7rr3NEW2h0I1bXBZtwCpU3IiruewsUQrcg";
 
 	# Desktop Environment
 	services.xserver.enable = true;
@@ -57,8 +58,8 @@ in {
 
 	# Power Management
 	powerManagement.enable = true; # Enable Power Management
-	services.tlp.enable = true; # TLP-Based Managemnt (For Fine Tuning)
-	services.power-profiles-daemon.enable = false; # PPD-Based Management (Predefined through system data only)
+	services.tlp.enable = false; # TLP-Based Managemnt (For Fine Tuning)
+	services.power-profiles-daemon.enable = true; # PPD-Based Management (Predefined through system data only)
 
 	# Extending life of the SSD
 	services.fstrim.enable = true;

@@ -7,11 +7,19 @@
 let
 	inherit (lib) mkIf;
 in mkIf config.nix.distributedBuilds {
+	nix.settings.max-jobs = 0; # Do not perform any local nix builds when distributed builds are enabled
+
 	# Builders Authorizations
 		users.extraUsers.builder.openssh.authorizedKeys.keys = [
 			"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILRmGX/iKHM0fwwDjq4fQGt+B8Nj0fJlw7Lq5YA0v3NP" # MORPH (Builder)
 			"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOzh6FRxWUemwVeIDsr681fgJ2Q2qCnwJbvFe4xD15ve" # KREYREN (User)
+			"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDhD5Fel4xaocToIQay3IkytHGaK93cDN52ww2Bw5Nj+" # IGNUCIUS (Builder)
+			"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJIGULjxE0+f8yz08cgtU9WtRQtxa3QUIyaw0cILRl/y" # Mracek (Builder)
 		];
+
+		# Add to known hosts
+			programs.ssh.knownHosts."mracek.systems.nx".publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP8d9Nz64gE+x/+Dar4zknmXMAZXUAxhF1IgrA9DO4Ma";
+			programs.ssh.knownHosts."morph.systems.nx".publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFJh5Bd1p4GGCAvNkfoWoflrRIFnoj43b2aMs0GxmULs";
 
 	# Import the SSH Keys for the builder account
 	age.secrets.ignucius-builder-ssh-ed25519-private = {
@@ -52,25 +60,25 @@ in mkIf config.nix.distributedBuilds {
 				supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
 				mandatoryFeatures = [ ];
 			}
-			{
-				# SINNENFREUDE
-				hostName = "sinnenfreude.systems.nx";
-				systems = [ "x86_64-linux" "aarch64-linux" ];
-				protocol = "ssh-ng";
+			# {
+			# 	# SINNENFREUDE
+			# 	hostName = "sinnenfreude.systems.nx";
+			# 	systems = [ "x86_64-linux" "aarch64-linux" ];
+			# 	protocol = "ssh-ng";
 
-				# FIXME-QA(Krey): Set this as a variable from nixos/modules/distributedBuilds
-				sshUser = "builder";
-				# sshUser = builder-account;
+			# 	# FIXME-QA(Krey): Set this as a variable from nixos/modules/distributedBuilds
+			# 	sshUser = "builder";
+			# 	# sshUser = builder-account;
 
-				# FIXME-QA(Krey): Set this as a variable from nixos/modules/distributedBuilds
-				sshKey = "/etc/ssh/ssh_builder_ed25519_key";
-				#sshKey = "${builder-key-path}/ssh_${builder-account}_ed25519_key";
+			# 	# FIXME-QA(Krey): Set this as a variable from nixos/modules/distributedBuilds
+			# 	sshKey = "/etc/ssh/ssh_builder_ed25519_key";
+			# 	#sshKey = "${builder-key-path}/ssh_${builder-account}_ed25519_key";
 
-				maxJobs = 8; # 100%, 16GB RAM available
-				speedFactor = 2;
-				supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
-				mandatoryFeatures = [ ];
-			}
+			# 	maxJobs = 8; # 100%, 16GB RAM available
+			# 	speedFactor = 2;
+			# 	supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+			# 	mandatoryFeatures = [ ];
+			# }
 			{
 				# MRACEK
 				hostName = "mracek.systems.nx";
@@ -90,25 +98,25 @@ in mkIf config.nix.distributedBuilds {
 				supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
 				mandatoryFeatures = [ ];
 			}
-			{
-				# TUPAC
-				hostName = "tupac.systems.nx";
-				systems = [ "x86_64-linux" "aarch64-linux" ];
-				protocol = "ssh-ng";
+			# {
+			# 	# TUPAC
+			# 	hostName = "tupac.systems.nx";
+			# 	systems = [ "x86_64-linux" "aarch64-linux" ];
+			# 	protocol = "ssh-ng";
 
-				# FIXME-QA(Krey): Set this as a variable from nixos/modules/distributedBuilds
-				sshUser = "builder";
-				# sshUser = builder-account;
+			# 	# FIXME-QA(Krey): Set this as a variable from nixos/modules/distributedBuilds
+			# 	sshUser = "builder";
+			# 	# sshUser = builder-account;
 
-				# FIXME-QA(Krey): Set this as a variable from nixos/modules/distributedBuilds
-				sshKey = "/etc/ssh/ssh_builder_ed25519_key";
-				#sshKey = "${builder-key-path}/ssh_${builder-account}_ed25519_key";
+			# 	# FIXME-QA(Krey): Set this as a variable from nixos/modules/distributedBuilds
+			# 	sshKey = "/etc/ssh/ssh_builder_ed25519_key";
+			# 	#sshKey = "${builder-key-path}/ssh_${builder-account}_ed25519_key";
 
-				maxJobs = 2; # 50% of system resources
-				speedFactor = 2;
-				supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
-				mandatoryFeatures = [ ];
-			}
+			# 	maxJobs = 2; # 50% of system resources
+			# 	speedFactor = 2;
+			# 	supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+			# 	mandatoryFeatures = [ ];
+			# }
 		];
 	};
 
