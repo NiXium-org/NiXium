@@ -19,6 +19,8 @@ in mkIf config.boot.impermanence.enable {
 
 			# FIXME(Krey): Move this to it's own module
 			(mkIf config.virtualisation.waydroid.enable "/var/lib/waydroid")
+
+			(mkIf config.services.fprintd.enable "/var/lib/fprint")
 		];
 		files = [
 			# FIXME(Krey): Should have been in the OpenSSH module

@@ -28,6 +28,8 @@ in {
 	services.smartd.enable = true;
 	services.clamav.daemon.enable = true;
 	services.printing.enable = true;
+	services.thinkfan.enable = true;
+	powerManagement.powertop.enable = true;
 
 	networking.wireguard.enable = false;
 
@@ -47,10 +49,11 @@ in {
 	services.xserver.displayManager.gdm.wayland = false; # Do not use wayland as it has issues rn
 	services.xserver.desktopManager.gnome.enable = true;
 		programs.dconf.enable = true; # Needed for home-manager to not fail deployment (https://github.com/nix-community/home-manager/issues/3113)
+		services.xserver.displayManager.gdm.autoSuspend = false;
 
 	# Fingerprint
 	services.fprintd.enable = true;
-	services.fprintd.tod.enable = false;
+		services.fprintd.tod.enable = false;
 
 	# Japanese Keyboard Input
 	i18n.inputMethod.enabled = "fcitx5";
@@ -58,8 +61,8 @@ in {
 
 	# Power Management
 	powerManagement.enable = true; # Enable Power Management
-	services.tlp.enable = false; # TLP-Based Managemnt (For Fine Tuning)
-	services.power-profiles-daemon.enable = true; # PPD-Based Management (Predefined through system data only)
+	services.tlp.enable = true; # TLP-Based Managemnt (For Fine Tuning)
+	services.power-profiles-daemon.enable = false; # PPD-Based Management (Predefined through system data only)
 
 	# Extending life of the SSD
 	services.fstrim.enable = true;

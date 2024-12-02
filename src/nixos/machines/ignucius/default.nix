@@ -30,6 +30,7 @@
 			./config/setup.nix
 			./config/sound.nix
 			./config/suspend-then-hibernate.nix
+			./config/thinkfan.nix
 			./config/usbguard.nix
 			./config/vm-build.nix
 		];

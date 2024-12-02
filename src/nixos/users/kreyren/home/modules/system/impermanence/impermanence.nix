@@ -54,6 +54,7 @@ in {
 		];
 		files = [
 			".config/monitors.xml"
+			(mkIf config.programs.nix-index.enable ".cache/nix-index/files")
 		];
 
 		allowOther = true; # FIXME-DOCS(Krey): What is this used for?

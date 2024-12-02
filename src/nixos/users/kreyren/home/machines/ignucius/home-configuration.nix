@@ -17,8 +17,8 @@ in {
 	programs.direnv.enable = true; # To manage git repositories
 	programs.git.enable = true; # Generic use only
 	programs.gpg.enable = true;
-	programs.firefox.enable = true; # Fully hardened web browser (Privacy > Comfort)
-	programs.librewolf.enable = true; # Lesser security web browser (Comfort > Privacy)
+	programs.firefox.enable = true; # Configured as fully hardened web browser (Privacy > Comfort)
+	programs.librewolf.enable = true; # Configured as lesser security web browser (Comfort > Privacy)
 	programs.vim.enable = true;
 	programs.vscode.enable = true;
 	programs.nix-index.enable = true;

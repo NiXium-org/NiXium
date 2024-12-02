@@ -12,7 +12,7 @@ in {
 
 			# Kernel
 				# NOTE(Krey): Might require patches to gain more performance out of it's hardware eventually
-				boot.kernelPackages = mkForce pkgs.linuxPackages_hardened; # Always use the Hardened Kernel
+				# boot.kernelPackages = mkForce pkgs.linuxPackages_hardened; # Always use the Hardened Kernel
 
 				boot.kernelParams = mkForce [
 					"tsx=auto" # Let Linux Developers determine if the mitigation is needed
