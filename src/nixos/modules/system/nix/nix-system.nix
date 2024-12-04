@@ -44,12 +44,10 @@ in {
 			options = "--delete-older-than 3d";
 			randomizedDelaySec = toString (60 * 60 * 4); # 4 Hours
 		};
-# FORMATTING(Krey): Pain.. tabs are not processed correctly
-    extraOptions = ''
-      builders-use-substitutes = true
-      min-free = ${toString (512 * 1024 * 1024)}
-      max-free = ${toString (2048 * 1024 * 1024)}
-    '';
+		extraOptions = builtins.concatStringsSep "\n" [
+			"min-free = ${toString (512 * 1024 * 1024)}"
+			"max-free = ${toString (2048 * 1024 * 1024)}"
+		];
 	};
 
 	# Impermanence

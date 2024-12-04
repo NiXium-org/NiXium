@@ -32,7 +32,7 @@
 #### SponsorBlock Settings
 ##### Enable SponsorBlock: TRUE
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, nixConfig, ... }:
 
 # Common Home-Manager configuration across all systems
 let
@@ -54,11 +54,12 @@ in {
 		pkgs.file
 		pkgs.tree
 		pkgs.open-dyslexic
+		pkgs.htop
 
-		# FIXME(Krey): This should be only enabled on GNOME
-		pkgs.xdg-desktop-portal-gnome
-		pkgs.xdg-desktop-portal
-		pkgs.gnome.dconf-editor
+		# FIXME(Krey): This should be only enabled on GNOME, to be better managed in GNOME's own user module
+			pkgs.xdg-desktop-portal-gnome
+			pkgs.xdg-desktop-portal
+			pkgs.gnome.dconf-editor
 
 		pkgs.cryptsetup
 
@@ -68,6 +69,9 @@ in {
 
 		pkgs.wakeonlan
 
-		pkgs.ix
+		# Command-line Pastebins
+		# pkgs.ix # Long-Term Down
+		pkgs.pb_cli
+		pkgs.wgetpaste
 	];
 }

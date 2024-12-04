@@ -3,10 +3,10 @@
 # Kernel Management of MORPH
 
 let
-	inherit (lib) mkIf;
+	inherit (lib) mkIf mkForce;
 in {
 	# NOTE(Krey): Morph is projected to be used as a gaming server where the hardened kernel might impact it's performance too much
-	boot.kernelPackages = pkgs.linuxPackages_hardened;
+	boot.kernelPackages = mkForce pkgs.linuxPackages;
 
 	# Kernel Modules
 	boot.kernelModules = [
@@ -15,4 +15,8 @@ in {
 	];
 
 	boot.extraModulePackages = [ ];
+
+	# Experiment(Krey)
+	security.lockKernelModules = false; # Prefer to Lock Kernel Modules by default
+	security.protectKernelImage = false; # Prefer to Protect Kernel Image by default
 }

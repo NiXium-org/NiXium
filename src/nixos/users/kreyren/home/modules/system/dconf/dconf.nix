@@ -2,7 +2,7 @@
 
 let
 	inherit (lib) mkForce;
-	inherit (lib.hm.gvariant) mkTuple;
+	inherit (lib.hm.gvariant) mkTuple mkUint32;
   flameshot-gui = pkgs.writeShellScriptBin "flameshot-gui" "${pkgs.flameshot}/bin/flameshot gui";
 in {
 	# Use `$ dconf dump /` to get these
@@ -87,6 +87,13 @@ in {
 			];
 		};
 
+		## Night Light
+		"org/gnome/settings-daemon/plugins/color" = {
+			night-light-enabled = true;
+			night-light-schedule-automatic = true; # From Sunset to Sunrise
+			night-light-temperature = mkUint32 1700; # 4700~1700
+		};
+
 		## Terminal
 		"org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
 			name = "Open Terminal";
@@ -119,7 +126,7 @@ in {
 		"org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4" = {
 			name = "Flameshot GUI";
 			command = "${flameshot-gui}/bin/flameshot-gui";
-			binding = "Print";
+			binding = "<Control>Print";
 		};
 
 		# Background

@@ -8,11 +8,12 @@
 			nixpkgs-staging.url = "github:nixos/nixpkgs/staging";
 			nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
-			nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/*.tar.gz";
+			nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
 
 			nixpkgs-23_05.url = "github:nixos/nixpkgs/nixos-23.05";
 			nixpkgs-23_11.url = "github:nixos/nixpkgs/nixos-23.11";
 			nixpkgs-24_05.url = "github:nixos/nixpkgs/nixos-24.05";
+			nixpkgs-24_11.url = "github:nixos/nixpkgs/nixos-24.11";
 
 			nixpkgs-kreyren.url = "github:kreyren/nixpkgs/central";
 
@@ -95,10 +96,14 @@
 
 		# AAGL
 			aagl = {
+				url = "github:ezKEa/aagl-gtk-on-nix/release-24.11";
+				inputs.nixpkgs.follows = "nixpkgs-24_11";
+			};
+
+			aagl-24_11 = {
 				url = "github:ezKEa/aagl-gtk-on-nix/release-24.05";
 				inputs.nixpkgs.follows = "nixpkgs-24_05";
 			};
-
 			aagl-24_05 = {
 				url = "github:ezKEa/aagl-gtk-on-nix/release-24.05";
 				inputs.nixpkgs.follows = "nixpkgs-24_05";
@@ -119,8 +124,13 @@
 
 		# Home-Manager
 			hm = {
-				url = "github:nix-community/home-manager/release-24.05";
+				url = "github:nix-community/home-manager/release-24.11";
 				inputs.nixpkgs.follows = "nixpkgs";
+			};
+
+			hm-24_11 = {
+				url = "github:nix-community/home-manager/release-24.11";
+				inputs.nixpkgs.follows = "nixpkgs-24_11";
 			};
 
 			hm-24_05 = {
@@ -205,6 +215,9 @@
 
 						inputs.disko.packages.${system}.disko-install
 						inputs.disko.packages.${system}.disko
+
+						inputs.nixpkgs.legacyPackages.${system}.ncurses
+						inputs.nixpkgs.legacyPackages.${system}.pkg-config
 					];
 					inputsFrom = [
 						config.mission-control.devShell

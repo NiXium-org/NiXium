@@ -5,6 +5,7 @@
 let
 	inherit (lib) mkIf mkForce;
 in mkIf (config.boot.kernelPackages.nvidiaPackages.production.version == "535.154") {
+	# FIXME-QA(Krey): Should output a warning that this is happening
 	hardware.nvidia = {
 		# This is the latest driver with the CVE patches + explicit sync
 		# CVE‑2024‑0090
