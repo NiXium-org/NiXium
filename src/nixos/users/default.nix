@@ -1,15 +1,25 @@
-{ config, ... }:
+{ config, moduleWithSystem, ... }:
 
 let
 	inherit (config.flake) nixosModules;
 in {
-	flake.nixosModules.users.imports = [
-		nixosModules.users-kreyren
-		nixosModules.users-kira
-	];
+	# Home Modules used by all the users on demand
+	flake.homeManagerModules.default = moduleWithSystem (
+		perSystem@{ system }:
+		{ ... }:
+		{
+			# Keep this sorted
+			imports = [
+
+				# {
+				# 	sops.defaultSopsFile = ./.sops.yaml;
+				# }
+			];
+		}
+	);
 
 	imports = [
-		./kreyren
-		./kira
+		./users
+		./modules
 	];
 }
