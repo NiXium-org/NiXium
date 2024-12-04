@@ -18,4 +18,5 @@ release="$3"
 echo "WARNING: This action will wipe all data on the target device and performs full declarative re-installation!"
 
 # Perform the task
+# FIXME(Krey): Figure out how to parse FLAKE_ROOT to the payload
 sudo nix --extra-experimental-features 'nix-command flakes' run --impure "git+file://$FLAKE_ROOT#$distro-$system-$release-install"

@@ -1,6 +1,6 @@
 { self, config, lib, ... }:
 
-# MRACEK-specific configuration of OpenSSH
+# IGNUCIUS-specific configuration of OpenSSH
 
 let
 	inherit (lib) mkIf mkForce;

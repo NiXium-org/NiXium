@@ -1,6 +1,6 @@
 { self, config, lib, ... }:
 
-# Mracek-specific configuration of Tor
+# IGNUCIUS-specific configuration of Tor
 
 let
 	inherit (lib) mkIf;

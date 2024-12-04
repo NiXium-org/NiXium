@@ -26,8 +26,6 @@ warn() { printf "WARNING: %s\n" "$1" ;} # Warning Helper
 #[ -n "$FLAKE_ROOT" ] || FLAKE_ROOT="github:NiXium-org/NiXium/$(curl -s -X GET "https://api.github.com/repos/NiXium-org/NiXium/commits" | jq -r '.[0].sha')"
 [ -n "$FLAKE_ROOT" ] || FLAKE_ROOT="github:NiXium-org/NiXium/$(curl -s -X GET "https://api.github.com/repos/NiXium-org/NiXium/commits?sha=central" | jq -r '.[0].sha')"
 
-export FLAKE_ROOT=/home/kreyren/src/NiXium
-
 ### [END] Export this outside [END] ###
 
 [ "$(id -u || true)" = 0 ] || die 126 "This script must be executed as the root user" # Ensure that we are root
@@ -139,10 +137,10 @@ age \
 # FIXME(Krey)
 
 #! Flash Coreboot
-# FIXME(Krey)
+# FIXME(Krey): Management at https://github.com/NiXium-org/coreboot/issues/2
 
 #! Reboot in the new Operating System
 [ "$nixiumDoNotReboot" = 0  ] || {
 	status "Installation was successful, performing reboot"
-	# reboot
+	reboot
 }
