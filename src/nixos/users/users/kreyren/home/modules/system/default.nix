@@ -3,10 +3,9 @@
 let
 	inherit (config.flake) homeManagerModules;
 in {
-	# flake.homeManagerModules.kreyren.system.default = [
-	# 	homeManagerModules.kreyren.system.gtk
-	# 	homeManagerModules.kreyren.system.dconf
-	# ];
+	flake.homeManagerModules.system-kreyren.imports = [
+		homeManagerModules.kreyren.system.gtk
+	];
 
 	imports = [
 		./flatpak

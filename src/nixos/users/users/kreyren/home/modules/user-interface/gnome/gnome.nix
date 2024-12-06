@@ -6,155 +6,162 @@
 let
 	inherit (lib) mkForce mkIf mkMerge;
 	inherit (lib.hm.gvariant) mkTuple mkUint32;
-  flameshot-gui = pkgs.writeShellScriptBin "flameshot-gui" "${pkgs.flameshot}/bin/flameshot gui";
-in mkIf nixosConfig.services.xserver.desktopManager.gnome.enable (mkMerge [
-	{
+	flameshot-gui = pkgs.writeShellScriptBin "flameshot-gui" "${pkgs.flameshot}/bin/flameshot gui";
+in mkIf nixosConfig.services.xserver.desktopManager.gnome.enable {
+	config = mkMerge [
+	# Gnome-version specific
+		{
+			"47.0.1" = {
+				dconf.settings."org/gnome/desktop/interface".accent-color = "purple";
+			};
+		}.${pkgs.gnome-session.version}
 
-	}.
-	{
-		# Common Configuration across multiple GNOME releases
-		dconf.settings = {
-			"org/gnome/desktop/interface" = {
-				color-scheme = "prefer-dark";
-				gtk-theme = mkForce "adw-gtk3-dark";
-				enable-hot-corners = true;
-				clock-show-seconds = true;
-				show-battery-percentage = true;
-			};
+	# Common Configuration across multiple GNOME releases
+		{
+			dconf.settings = {
+				"org/gnome/desktop/interface" = {
+					color-scheme = "prefer-dark";
+					gtk-theme = "adw-gtk3-dark";
+					enable-hot-corners = true;
+					clock-show-seconds = true;
+					show-battery-percentage = true;
+				};
 
-			"org/gnome/mutter" = {
-				dynamic-workspaces=true;
-				workspaces-only-on-primary=false;
-				experimental-features = [
-					# Fractional Scaling
-					"scale-monitor-framebuffer"
-				];
-			};
+				"org/gnome/mutter" = {
+					dynamic-workspaces=true;
+					workspaces-only-on-primary=false;
+					experimental-features = [
+						# Fractional Scaling
+						"scale-monitor-framebuffer"
+					];
+				};
 
-			"org/gnome/desktop/peripherals/touchpad" = {
-				edge-scrolling-enabled = false;
-				natural-scroll = true;
-				two-finger-scrolling-enabled = true;
-			};
+				"org/gnome/desktop/peripherals/touchpad" = {
+					edge-scrolling-enabled = false;
+					natural-scroll = true;
+					two-finger-scrolling-enabled = true;
+				};
 
-			# FIXME(Krey): This doesn't work, figure out why
-			# "org/gnome/Weather" = {
-			# 	locations = "[<(uint32 2, <('Brno', 'LKTB', true, [(0.857829327355213, 0.291469985083053)], [(0.85870199198121022, 0.29030642643062599)])>)>]";
-			# };
-			"org/gnome/shell/weather" = {
-				automatic-location = true;
-				#locations = "[<(uint32 2, <('Brno', 'LKTB', true, [(0.857829327355213, 0.291469985083053)], [(0.85870199198121022, 0.29030642643062599)])>)>]";
-			};
+				# FIXME(Krey): This doesn't work, figure out why
+				# "org/gnome/Weather" = {
+				# 	locations = "[<(uint32 2, <('Brno', 'LKTB', true, [(0.857829327355213, 0.291469985083053)], [(0.85870199198121022, 0.29030642643062599)])>)>]";
+				# };
+				"org/gnome/shell/weather" = {
+					automatic-location = true;
+					#locations = "[<(uint32 2, <('Brno', 'LKTB', true, [(0.857829327355213, 0.291469985083053)], [(0.85870199198121022, 0.29030642643062599)])>)>]";
+				};
 
-			# Set the weather app in Kelvin #KelvinGang
-			"org/gnome/GWeather4" = {
-				temperature-unit = "kelvin";
-			};
+				# Set the weather app in Kelvin #KelvinGang
+				"org/gnome/GWeather4" = {
+					temperature-unit = "kelvin";
+				};
 
-			# Set up Proxy
-			"system/proxy" = {
-				mode = "auto";
-				autoconfig-url = "file://${config.home.homeDirectory}/.config/proxy.pac";
-			};
+				# Set up Proxy
+				"system/proxy" = {
+					mode = "auto";
+					autoconfig-url = "file://${config.home.homeDirectory}/.config/proxy.pac";
+				};
 
-			# Bottles
-			"com/usebottles/bottles" = {
-				auto-close-bottles = true;
-				release-candidate = true;
-				experiments-sandbox = true;
-				steam-proton-support = true;
-			};
+				# Bottles
+				"com/usebottles/bottles" = {
+					auto-close-bottles = true;
+					release-candidate = true;
+					experiments-sandbox = true;
+					steam-proton-support = true;
+				};
 
-			# Over Amplification
-			"org/gnome/desktop/sound" = {
-				allow-volume-above-100-percent = true;
-			};
+				# Over Amplification
+				"org/gnome/desktop/sound" = {
+					allow-volume-above-100-percent = true;
+				};
 
-			# Button Modifier for resizing with mouse
-			"org/gnome/desktop/wm/preferences" = {
-				mouse-button-modifier = "<Alt>";
-				resize-with-right-button = true;
-			};
+				# Button Modifier for resizing with mouse
+				"org/gnome/desktop/wm/preferences" = {
+					mouse-button-modifier = "<Alt>";
+					resize-with-right-button = true;
+				};
 
-			# Keybinds -- https://discourse.nixos.org/t/nixos-options-to-configure-gnome-keyboard-shortcuts/7275/4
-			"org/gnome/shell/keybinds" = {
-				## To fix conflict with keybinding
-				# show-screenshot-ui = [ "<Control>Print" ];
-				show-screenshot-ui = [ ];
-			};
+				# Keybinds -- https://discourse.nixos.org/t/nixos-options-to-configure-gnome-keyboard-shortcuts/7275/4
+				"org/gnome/shell/keybinds" = {
+					## To fix conflict with keybinding
+					# show-screenshot-ui = [ "<Control>Print" ];
+					show-screenshot-ui = [ ];
+				};
 
-			"org/gnome/settings-daemon/plugins/media-keys" = {
-				custom-keybindings = [
-					"/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
-					"/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
-					"/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
-					"/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/"
-					"/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/"
-				];
-			};
+				"org/gnome/settings-daemon/plugins/media-keys" = {
+					custom-keybindings = [
+						"/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+						"/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
+						"/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
+						"/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/"
+						"/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/"
+					];
+				};
 
-			## Night Light
-			"org/gnome/settings-daemon/plugins/color" = {
-				night-light-enabled = true;
-				night-light-schedule-automatic = true; # From Sunset to Sunrise
-				night-light-temperature = mkUint32 1700; # 4700~1700
-			};
+				## Night Light
+				"org/gnome/settings-daemon/plugins/color" = {
+					night-light-enabled = true;
+					night-light-schedule-automatic = true; # From Sunset to Sunrise
+					night-light-temperature = mkUint32 1700; # 4700~1700
+				};
 
-			## Terminal
-			"org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
-				name = "Open Terminal";
-				command = "alacritty";
-				binding = "<Super>Return";
-			};
+				## Terminal
+				"org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+					name = "Open Terminal";
+					command = "alacritty";
+					binding = "<Super>Return";
+				};
 
-			## Web Browser
-			"org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
-				name = "Open Web Browser";
-				command = "firefox-esr";
-				binding = "<Super>t";
-			};
+				## Web Browser
+				"org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
+					name = "Open Web Browser";
+					command = "firefox-esr";
+					binding = "<Super>t";
+				};
 
-			## File Browser
-			"org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
-				name = "Open File Browser";
-				command = "nautilus";
-				binding = "<Super>e";
-			};
+				## File Browser
+				"org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
+					name = "Open File Browser";
+					command = "nautilus";
+					binding = "<Super>e";
+				};
 
-			## xkill
-			"org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3" = {
-				name = "xkill";
-				command = "xkill";
-				binding = "<Control>Escape";
-			};
+				## xkill
+				"org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3" = {
+					name = "xkill";
+					command = "xkill";
+					binding = "<Control>Escape";
+				};
 
-			## Flameshot GUI
-			"org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4" = {
-				name = "Flameshot GUI";
-				command = "${flameshot-gui}/bin/flameshot-gui";
-				binding = "<Control>Print";
-			};
+				## Flameshot GUI
+				"org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4" = {
+					name = "Flameshot GUI";
+					# FIXME-QA(Krey): This is weird, why this way?
+					command = "${flameshot-gui}/bin/flameshot-gui";
+					binding = "<Control>Print";
+				};
 
-			# Background
-			"org/gnome/desktop/background" = {
-				#picture-uri="${pkgs.gnome.gnome-backgrounds}/share/backgrounds/gnome/blobs-l.svg";
-				picture-uri ="${./wallpaper.jpeg}";
-				#picture-uri-dark="${pkgs.gnome.gnome-backgrounds}/share/backgrounds/gnome/blobs-d.svg";
-				picture-uri-dark ="${./wallpaper.jpeg}";
-			};
-			"org/gnome/desktop/screensaver" = {
-				picture-uri ="${./lockscreen.jpg}";
-				#picture-uri = "${pkgs.gnome.gnome-backgrounds}/share/backgrounds/gnome/blobs-l.svg";
-			};
+				# Background
+				"org/gnome/desktop/background" = {
+					#picture-uri="${pkgs.gnome.gnome-backgrounds}/share/backgrounds/gnome/blobs-l.svg";
+					picture-uri ="${./wallpaper.jpeg}";
+					#picture-uri-dark="${pkgs.gnome.gnome-backgrounds}/share/backgrounds/gnome/blobs-d.svg";
+					picture-uri-dark ="${./wallpaper.jpeg}";
+				};
+				"org/gnome/desktop/screensaver" = {
+					picture-uri ="${./lockscreen.jpg}";
+					#picture-uri = "${pkgs.gnome.gnome-backgrounds}/share/backgrounds/gnome/blobs-l.svg";
+				};
 
-			"org/gnome/desktop/input-sources" = {
-				shob-all-sources = true;
-				sources = [
-					(mkTuple [ "xkb" "us" ])
-					(mkTuple [ "xkb" "cz+qwerty" ])
-				];
-				xkb-options = [ "terminate:ctrl_alt_bksp" ];
+				"org/gnome/desktop/input-sources" = {
+					shob-all-sources = true;
+					sources = [
+						(mkTuple [ "xkb" "us" ])
+						(mkTuple [ "xkb" "cz+qwerty" ])
+					];
+					xkb-options = [ "terminate:ctrl_alt_bksp" ];
+				};
 			};
-		};
-	}
-])
+		}
+	];
+}
