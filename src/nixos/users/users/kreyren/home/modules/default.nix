@@ -1,7 +1,6 @@
 {
 	imports = [
 		./editors
-		./extensions
 		./prompts
 		./scripts
 		./shells

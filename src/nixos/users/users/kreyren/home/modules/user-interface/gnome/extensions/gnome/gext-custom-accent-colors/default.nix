@@ -3,7 +3,7 @@
 # Kreyren's configuration of 'custom accent colors' gnome extension
 
 let
-	inherit (lib) mkIf mkMerge;
+	inherit (lib) mkIf;
 in mkIf nixosConfig.services.xserver.desktopManager.gnome.enable {
 	"24.05" = {
 		home.packages = [ pkgs.gnomeExtensions.custom-accent-colors ]; # Install the extension
