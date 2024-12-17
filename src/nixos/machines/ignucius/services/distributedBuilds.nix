@@ -39,25 +39,25 @@ in mkIf config.nix.distributedBuilds {
 
 	nix = {
 		buildMachines = [
-			{
-				# MORPH
-				hostName = "morph.systems.nx";
-				systems = [ "x86_64-linux" "i686-linux" "aarch64-linux" ];
-				protocol = "ssh-ng";
+			# {
+			# 	# MORPH
+			# 	hostName = "morph.systems.nx";
+			# 	systems = [ "x86_64-linux" "i686-linux" "aarch64-linux" ];
+			# 	protocol = "ssh-ng";
 
-				# FIXME-QA(Krey): Set this as a variable from nixos/modules/distributedBuilds
-				sshUser = "builder";
-				# sshUser = builder-account;
+			# 	# FIXME-QA(Krey): Set this as a variable from nixos/modules/distributedBuilds
+			# 	sshUser = "builder";
+			# 	# sshUser = builder-account;
 
-				# FIXME-QA(Krey): Set this as a variable from nixos/modules/distributedBuilds
-				sshKey = "/etc/ssh/ssh_builder_ed25519_key";
-				#sshKey = "${builder-key-path}/ssh_${builder-account}_ed25519_key";
+			# 	# FIXME-QA(Krey): Set this as a variable from nixos/modules/distributedBuilds
+			# 	sshKey = "/etc/ssh/ssh_builder_ed25519_key";
+			# 	#sshKey = "${builder-key-path}/ssh_${builder-account}_ed25519_key";
 
-				maxJobs = 8; # 100%, 16GB RAM available
-				speedFactor = 10;
-				supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
-				mandatoryFeatures = [ ];
-			}
+			# 	maxJobs = 8; # 100%, 16GB RAM available
+			# 	speedFactor = 10;
+			# 	supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+			# 	mandatoryFeatures = [ ];
+			# }
 			# {
 			# 	# SINNENFREUDE
 			# 	hostName = "sinnenfreude.systems.nx";
