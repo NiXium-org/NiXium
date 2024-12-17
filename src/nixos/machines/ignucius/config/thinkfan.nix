@@ -31,7 +31,7 @@ in mkIf config.services.thinkfan.enable {
 		# Attempt to proactively stabilize the temperatures around the projected peak of power efficiecny
 		[ 1 75 76 ]
 		[ 2 76 77 ]
-		[ 3 77 78 ]
+		[ 3 77 80 ]
 		# Management For Ambient Temperature >40 C
 		[ 4 80 85 ]
 		[ 5 85 90 ]
