@@ -52,7 +52,7 @@ in {
 		services.xserver.displayManager.gdm.autoSuspend = false;
 
 	# Fingerprint
-	services.fprintd.enable = true;
+	services.fprintd.enable = false;
 		services.fprintd.tod.enable = false;
 
 	# Japanese Keyboard Input
