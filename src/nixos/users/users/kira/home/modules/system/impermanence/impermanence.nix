@@ -4,12 +4,14 @@ let
 	inherit (lib) mkIf;
 in {
 	# FIXME-QA(Krey): Should only be used for home-manager NixOS Module, not expected to work in standalone setup!
-	home.persistence."/nix/persist/users/kira" = mkIf config.home.impermanence.enable {
+	home.persistence."/nix/persist/users/kreyren" = mkIf config.home.impermanence.enable {
 		directories = [
 			"Desktop"
 			"Documents"
 			"Downloads"
+			"Monero" # For Monero Wallet
 			"Music"
+			"src" # For project files
 			"Pictures"
 			"Public"
 			"Templates"
@@ -19,22 +21,8 @@ in {
 			".ssh"
 			".cache"
 
-			# FIXME-QA(Krey): Should only be applied if `webcord` is installed
-			".config/WebCord"
-
-			# FIXME-QA(Krey): Should only be applied if `discord` is installed
-			".config/discord"
-
-			# Steam
-			# FIXME(Krey): This should only contain the authorization files, steam games and cache everything else should be handled by steam on startup
-			".local/share/Steam"
-
-			# Session
-			"~/.config/Session"
-
-			# NOTE(Krey): Temporary management until we get Storage Server with declarative sync
-			".local/db"
-			".config/Nextcloud"
+			# FIXME-QA(Krey): This should be applied only when hexchat is installed
+			".config/hexchat"
 
 			# FIXME-QA(Krey): This should be applied only when simplex is installed
 			".local/share/simplex"
@@ -54,6 +42,8 @@ in {
 			# FIXME-QA(Krey): Should only be applied if fractal is installed
 			".local/share/fractal"
 
+			".local/share/PolyMC"
+
 			(mkIf nixosConfig.services.flatpak.enable ".local/share/flatpak")
 
 			# FIXME-QA(Krey): Should only be applied if `anime-game-launcher` is installed
@@ -63,11 +53,10 @@ in {
 			".stremio-server/stremio-cache"
 		];
 		files = [
-			# FIXME-QA(Krey): This should be generated for each system
-			".config/monitors.xml"
-			".steam/steam.token"
+			(mkIf config.programs.nix-index.enable ".cache/nix-index/files")
 		];
-		allowOther = true;
+
+		allowOther = true; # FIXME-DOCS(Krey): What is this used for?
 	};
 
 	home.stateVersion = nixosConfig.system.nixos.release; # Impermanence does not have state

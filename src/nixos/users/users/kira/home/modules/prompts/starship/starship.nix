@@ -1,14 +1,15 @@
-{
+{ config, lib, ... }:
+
+let
+	inherit (lib) mkIf;
+in mkIf config.programs.starship.enable {
 	programs.starship = {
 		settings = {
 			# ├ ❯ ╰ ─ ┌ ❮	 
-# FIXME(Krey): Due to a bug in nix parser this needs to be indented with spaces atm
-###
-      format = ''
-        [](#9A348E)$os$username[@](bg:#9A348E)$hostname[](bg:#DA627D fg:#9A348E)$time[](fg:#DA627D bg:#33658A)$cmd_duration[](fg:#33658A)
-        ├─ $directory$all
-      '';
-###
+			format = builtins.concatStringsSep "\n" [
+				''[](#9A348E)$os$username[@](bg:#9A348E)$hostname[](bg:#DA627D fg:#9A348E)$time[](fg:#DA627D bg:#33658A)$cmd_duration[](fg:#33658A)''
+				''├─ $directory$all''
+			];
 
 			# Git requires at least 300ms to load in it's module
 			command_timeout = 300; # ms

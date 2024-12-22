@@ -10,6 +10,5 @@ in {
 
 	imports = [
 		./firefox
-		./librewolf
 	];
 }

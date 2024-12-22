@@ -35,7 +35,7 @@ in {
 			ExtensionSettings = {
 				"*" = {
 					installation_mode = "blocked";
-					blocked_install_message = "FUCKING FORGET IT!";
+					blocked_install_message = mkForce "FUCKING FORGET IT!";
 				};
 				"{b43b974b-1d3a-4232-b226-eaa2ac6ebb69}" = {
 					# Random User-Agent Switcher

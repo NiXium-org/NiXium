@@ -3,6 +3,7 @@
 let
 	inherit (lib) mkIf;
 in {
+	# FIXME-QA(Krey): This should be a home-manager module
 	systemd.user.services.flathub-init = mkIf nixosConfig.services.flatpak.enable {
 		Unit = { Description = "flathub initialization"; };
 		Service = {

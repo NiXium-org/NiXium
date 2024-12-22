@@ -3,9 +3,9 @@
 let
 	inherit (config.flake) homeManagerModules;
 in {
-	# flake.homeManagerModules.editors-kreyren.inputs = [
-	# 	homeManagerModules.editors-vim-kreyren
-	# 	#homeManagerModules.editors-vscode-kreyren
+	# flake.homeManagerModules.editors-kira.inputs = [
+	# 	homeManagerModules.editors-vim-kira
+	# 	#homeManagerModules.editors-vscode-kira
 	# ];
 
 	imports = [

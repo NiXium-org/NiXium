@@ -3,9 +3,9 @@
 {
 	programs.git = {
 		enable = true; # Should be present everywhere
-		userName = "Jacob Hrbek";
-		userEmail = "kreyren@fsfe.org";
-		signing.key = "D0501F7980EA70D192C03A52667F0DAFAF09BA2B";
+		userName = "Kiroshi";
+		# userEmail = "user@fsfe.org";
+		# signing.key = "...";
 		signing.signByDefault = true;
 
 		delta = {
@@ -29,7 +29,7 @@
 		extraConfig = {
 			sendemail = {
 				smtpServer = "127.0.0.1";
-				smtpUser = "kreyren@proton.me";
+				# smtpUser = "kreyren@proton.me";
 				# smtpPass = "REDACTED"; # FIXME-SECURITY(Krey): Set up ragenix for this
 				smtpEncryption = "ssl";
 				smtpServerport = 1025;

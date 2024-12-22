@@ -7,7 +7,7 @@ in mkIf config.programs.vscode.enable {
 		package = mkDefault pkgs.vscodium;
 
 		# Purity Enforcement
-		enableExtensionUpdateCheck = mkForce false;
+		enableExtensionUpdateCheck = false;
 		enableUpdateCheck = false;
 
 		# Extensions to install by default, can be overwritten by the user

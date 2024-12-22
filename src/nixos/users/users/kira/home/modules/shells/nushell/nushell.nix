@@ -4,12 +4,12 @@
 
 let
 	inherit (lib) mkIf;
-in {
+in mkIf config.programs.nushell.enable {
 	programs.nushell = {
 		extraConfig = ''
 			# FIXME(Krey): Customize from example https://github.com/nushell/nushell/blob/main/crates/nu-utils/src/sample_config/default_config.nu
 			$env.config = {
-				show_banner: false,
+				show_banner: true,
 
 				rm: {
 					# Always move files in trash

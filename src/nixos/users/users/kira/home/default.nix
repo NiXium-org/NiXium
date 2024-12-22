@@ -5,14 +5,14 @@ let
 in {
 	flake.homeManagerModules.kira = moduleWithSystem (
 		perSystem@{ system }:
-		{ ... }:
-		{
-			imports = [{
+		{ ... }: {
 				home-manager.users.kira = {
 					imports = [
 						self.inputs.arkenfox.hmModules.default
 						self.inputs.ragenix.homeManagerModules.default
 						self.inputs.impermanence.nixosModules.home-manager.impermanence
+
+						homeManagerModules.default # Include NiXium Home Modules
 
 						./home.nix
 
@@ -28,10 +28,10 @@ in {
 						homeManagerModules.shells-nushell-kira
 
 						# homeManagerModules.kira.system.default
-						homeManagerModules.system-dconf-kira
 						homeManagerModules.system-flatpak-kira
 						homeManagerModules.system-gtk-kira
 						homeManagerModules.system-impermanence-kira
+						homeManagerModules.system-pac-kira
 
 						# homeManagerModules.kira.terminal-emulators.default
 						homeManagerModules.terminal-emulators-alacritty-kira
@@ -45,22 +45,23 @@ in {
 						homeManagerModules.vpn-protonvpn-kira
 
 						# homeManagerModules.kira.web-browsers.default
-						# homeManagerModules.web-browsers-firefox-kira # Broken
+						homeManagerModules.web-browsers-firefox-kira
 						homeManagerModules.web-browsers-librewolf-kira
 					];
 				};
 
+				# Include Import Arguments
+				# FIXME-MANAGEMENT(Krey): This should be included for all users by default
 				home-manager.extraSpecialArgs = {
 					inherit self;
+
 					aagl = self.inputs.aagl.packages."${system}";
-					aagl-unstable = self.inputs.aagl-unstable.packages."${system}";
 					unstable = self.inputs.nixpkgs-unstable.legacyPackages."${system}";
+					staging-next = self.inputs.nixpkgs-staging-next.legacyPackages."${system}";
+					polymc = self.inputs.polymc.packages."${system}";
 					firefox-addons = self.inputs.firefox-addons.packages."${system}";
-					kreyren = self.inputs.nixpkgs-kreyren.legacyPackages."${system}";
 				};
-			}];
-		}
-	);
+		});
 
 	imports = [
 		./machines

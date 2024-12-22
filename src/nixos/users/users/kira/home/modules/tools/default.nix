@@ -10,7 +10,6 @@ in {
 	# ];
 
 	imports = [
-		./direnv
 		./git
 		./gpg-agent
 		./ragenix

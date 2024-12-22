@@ -7,6 +7,7 @@
 		./system
 		./terminal-emulators
 		./tools
+		./user-interface
 		./vpn
 		./web-browsers
 	];

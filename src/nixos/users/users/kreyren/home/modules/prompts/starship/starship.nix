@@ -1,4 +1,8 @@
-{
+{ config, lib, ... }:
+
+let
+	inherit (lib) mkIf;
+in mkIf config.programs.starship.enable {
 	programs.starship = {
 		settings = {
 			# ├ ❯ ╰ ─ ┌ ❮	 

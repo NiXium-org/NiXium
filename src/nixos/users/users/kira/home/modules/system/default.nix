@@ -9,9 +9,9 @@ in {
 	# ];
 
 	imports = [
-		./dconf
 		./flatpak
 		./gtk
 		./impermanence
+		./pac
 	];
 }

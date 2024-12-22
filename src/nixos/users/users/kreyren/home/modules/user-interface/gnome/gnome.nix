@@ -21,24 +21,6 @@ in mkIf nixosConfig.services.xserver.desktopManager.gnome.enable {
 	# Common Configuration across multiple GNOME releases
 		{
 			dconf.settings = {
-				"org/gnome/desktop/interface" = {
-					color-scheme = "prefer-dark";
-					gtk-theme = "adw-gtk3-dark";
-
-					enable-hot-corners = true;
-					clock-show-seconds = true;
-					show-battery-percentage = true;
-				};
-
-				"org/gnome/mutter" = {
-					dynamic-workspaces=true;
-					workspaces-only-on-primary=false;
-					experimental-features = [
-						# Fractional Scaling
-						"scale-monitor-framebuffer"
-					];
-				};
-
 				# Set up Proxy
 					# TODO(Krey): Move this into a VPN/PAC setup?
 					"system/proxy" = {

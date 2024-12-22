@@ -56,11 +56,6 @@ in {
 		pkgs.open-dyslexic
 		pkgs.htop
 
-		# FIXME(Krey): This should be only enabled on GNOME, to be better managed in GNOME's own user module
-			pkgs.xdg-desktop-portal-gnome
-			pkgs.xdg-desktop-portal
-			pkgs.gnome.dconf-editor
-
 		pkgs.cryptsetup
 
 		pkgs.xclip
