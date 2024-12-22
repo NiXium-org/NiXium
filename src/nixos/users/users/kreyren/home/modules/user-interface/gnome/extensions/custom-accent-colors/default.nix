@@ -1,6 +1,8 @@
-{ pkgs, lib, nixosConfig, ... }:
+{ self, pkgs, lib, nixosConfig, ... }:
 
 # Kreyren's configuration of 'custom accent colors' gnome extension
+
+# FIXME(Krey): This is kinda a weird one to manage as in gnome-47 this was added in the gnome itself and we are using multiple themes.. Maybe add this to the generic theme up until gnome-47?
 
 let
 	inherit (lib) mkIf;
@@ -24,7 +26,7 @@ in mkIf nixosConfig.services.xserver.desktopManager.gnome.enable {
 		};
 	};
 
-	"21.11" = {
+	"24.11" = {
 		# Deprecated with GNOME 47
 	};
-}."${lib.trivial.release}"
+}."${lib.trivial.release}" or (throw "The NixOS Release '${lib.trivial.release}' is not implemented")

@@ -16,7 +16,10 @@ in {
 
 						./home.nix
 
-						# FIXME-QA(Krey): Expected to be just `homeManagerModules.editors-kreyren` same for all others..
+						# FIXME-QA(Krey): Expected to be just `homeManagerModules.apps-kreyren` same for all others..
+						homeManagerModules.apps-bottles-kreyren
+
+						# homeManagerModules.editors-kreyren
 						homeManagerModules.editors-vim-kreyren
 						homeManagerModules.editors-vscode-kreyren
 
@@ -48,6 +51,10 @@ in {
 						homeManagerModules.tools-gpg-agent-kreyren
 						homeManagerModules.tools-ragenix-kreyren
 
+						homeManagerModules.ui-gnome-kreyren
+						homeManagerModules.ui-gnome-theme-generic-kreyren # Use Generic GNOME Theme
+
+						# homeManagerModules.vpn-kreyren
 						homeManagerModules.vpn-protonvpn-kreyren
 
 						# homeManagerModules.kreyren.web-browsers.default

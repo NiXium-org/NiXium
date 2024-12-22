@@ -1,5 +1,5 @@
 {
 	imports = [
-		./gnome
+		./custom-accent-colors
 	];
 }

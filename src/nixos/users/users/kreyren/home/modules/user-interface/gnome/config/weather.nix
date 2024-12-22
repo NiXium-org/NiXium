@@ -4,8 +4,7 @@
 
 let
 	inherit (lib) mkIf mkMerge;
-in mkIf nixosConfig.services.xserver.desktopManager.gnome.enable {
-	config = mkMerge [
+in mkIf nixosConfig.services.xserver.desktopManager.gnome.enable (mkMerge [
 	# Common Configuration across multiple GNOME releases
 		{
 			dconf.settings = {
@@ -19,5 +18,4 @@ in mkIf nixosConfig.services.xserver.desktopManager.gnome.enable {
 					};
 			};
 		}
-	];
-}
+])

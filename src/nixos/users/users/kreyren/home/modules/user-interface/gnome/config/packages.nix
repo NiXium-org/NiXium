@@ -1,8 +1,10 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, nixosConfig,... }:
+
+# Kreyren's management of GNOME-related packages
 
 let
-	inherit (lib) mkMerge;
-in mkMerge [
+	inherit (lib) mkIf mkMerge;
+in mkIf nixosConfig.services.xserver.desktopManager.gnome.enable (mkMerge [
 	{
 		"24.05" = {
 			home.packages = [
@@ -10,11 +12,6 @@ in mkMerge [
 			];
 		};
 		"24.11" = {
-			home.packages = [
-				pkgs.dconf-editor
-			];
-		};
-		"25.05" = {
 			home.packages = [
 				pkgs.dconf-editor
 			];
@@ -27,4 +24,4 @@ in mkMerge [
 			pkgs.xdg-desktop-portal
 		];
 	}
-]
+])

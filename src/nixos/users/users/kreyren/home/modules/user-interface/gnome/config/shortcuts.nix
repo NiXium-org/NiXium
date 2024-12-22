@@ -1,13 +1,14 @@
 { lib, pkgs, config, nixosConfig, ... }:
 
-# Kreyren's Module for Keyboard Shortcuts Managements on GNOME
+# Kreyren's Module for Managing Keyboard Shortcuts
 
 let
 	inherit (lib) mkIf mkMerge;
-in mkIf nixosConfig.services.xserver.desktopManager.gnome.enable {
-	config = mkMerge [
+in mkIf nixosConfig.services.xserver.desktopManager.gnome.enable (mkMerge [
 	# Common Configuration across multiple GNOME releases
 		{
+			home.packages = [ pkgs.gnomeExtensions.shortcuts ]; # Install an extension to show the shortcuts on demand
+
 			dconf.settings = {
 				# Keybinds -- https://discourse.nixos.org/t/nixos-options-to-configure-gnome-keyboard-shortcuts/7275/4
 					"org/gnome/shell/keybinds" = {
@@ -63,5 +64,4 @@ in mkIf nixosConfig.services.xserver.desktopManager.gnome.enable {
 					};
 			};
 		}
-	];
-}
+])

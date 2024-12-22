@@ -1,5 +1,17 @@
 {
 	flake.homeManagerModules.ui-gnome-kreyren.imports = [
-		./gnome.nix
+		./config/input.nix
+		./config/nightlight-filter.nix
+		./config/packages.nix
+		./config/shortcuts.nix
+		./config/touchpad.nix
+		./config/usability.nix
+		./config/weather.nix
+
+		./extensions/custom-accent-colors
+	];
+
+	imports = [
+		./themes
 	];
 }

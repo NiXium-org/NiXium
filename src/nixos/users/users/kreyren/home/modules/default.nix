@@ -1,5 +1,6 @@
 {
 	imports = [
+		./apps
 		./editors
 		./prompts
 		./scripts
