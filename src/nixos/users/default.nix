@@ -6,9 +6,8 @@ in {
 	flake.homeManagerModules.default = moduleWithSystem (
 		perSystem@{ system }:
 		{ ... }: {
-			flake.homeManagerModules.editors.inputs = [
-				# homeManagerModules.editors
-
+			home-manager.imports = [
+				homeManagerModules.editors
 				homeManagerModules.system
 				homeManagerModules.tools
 				homeManagerModules.web-browsers
