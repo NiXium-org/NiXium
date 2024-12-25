@@ -1,13 +1,15 @@
-{ lib, ... }:
+{ config, lib, ... }:
 
 # Networking Management of IGNUCIUS
 
 let
-	inherit (lib) mkForce;
+	inherit (lib) mkForce mkIf;
 in {
 	# Adapters that are allowed to use DHCP
 	networking.interfaces.wlp2s0.useDHCP = true;
-	networking.interfaces.docker0.useDHCP = true;
+	# FIXME(Krey): This doesn't seem to work?
+		networking.interfaces.docker0.useDHCP = true;
+		# networking.interfaces.docker0.useDHCP = mkIf config.virtualisation.docker.enable;
 	networking.interfaces.wwp0s29u1u4i6.useDHCP = true;
 
 	# Always use network manager for convinience

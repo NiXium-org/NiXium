@@ -23,10 +23,25 @@ in mkIf config.boot.impermanence.enable {
 			(mkIf config.services.fprintd.enable "/var/lib/fprint")
 		];
 		files = [
+			"/etc/machine-id" # Unique ID of the system
+			"/var/lib/systemd/random-seed"
+
 			# FIXME(Krey): Should have been in the OpenSSH module
 			"/etc/ssh/ssh_host_ed25519_key"
 		];
 	};
+
+	# The configuration will deploy the user directories owned by root:root which will cause the user's home manager to fail deployment due to permission denied error, so we need to change the ownership before home-manager setup
+		# Plan A
+		# system.activationScripts.change-ownership-persist-users = ''chown root:users /nix/persist/users''; # Set Permission Of the Persistent Users Directory
+
+		# Plan B
+			# systemd.tmpfiles.rules = [
+			# 	"d /persist/home/${username} 0700 ${username} users"
+			# 	# We need to explicitly set ownership on the home directory when using impermanence.
+			# 	# Otherwise, it will be owned as root, and home-manager will fail.
+			# 	"d /home/${username} 0700 ${username} users"
+			# ];
 
 	age.identityPaths = [ "/nix/persist/system/etc/ssh/ssh_host_ed25519_key" ]; # Add impermenant path for keys
 

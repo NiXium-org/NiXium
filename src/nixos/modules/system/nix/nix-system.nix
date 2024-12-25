@@ -57,7 +57,6 @@ in {
 			"/nix/var/nix/profiles/per-user" # Profiles
 		];
 		files = [
-			"/etc/machine-id" # Unique ID of the system
 			{ file = "/etc/nix/id_rsa"; parentDirectory = { mode = "u=rwx,g=rx,o=rx"; }; }
 		];
 	};

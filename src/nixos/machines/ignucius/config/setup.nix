@@ -55,9 +55,11 @@ in {
 	services.fprintd.enable = false;
 		services.fprintd.tod.enable = false;
 
+	# FIXME(Krey): Figure out how to handle this
 	# Japanese Keyboard Input
-	i18n.inputMethod.enabled = "fcitx5";
-	i18n.inputMethod.fcitx5.addons = with pkgs; [ fcitx5-mozc ];
+	# i18n.inputMethod.enable = true;
+	# i18n.inputMethod.type = "fcitx5";
+	# i18n.inputMethod.fcitx5.addons = with pkgs; [ fcitx5-mozc ];
 
 	# Power Management
 	powerManagement.enable = true; # Enable Power Management
