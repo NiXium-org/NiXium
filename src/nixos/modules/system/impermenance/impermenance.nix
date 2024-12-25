@@ -1,4 +1,4 @@
-{ self, config, lib, ...}:
+{ config, lib, ...}:
 
 # Global Management of Impermanence
 
@@ -30,6 +30,12 @@ in mkIf config.boot.impermanence.enable {
 			"/etc/ssh/ssh_host_ed25519_key"
 		];
 	};
+
+	# TODO(Krey): Pending vendor re-management
+		# Hotfix for https://github.com/nix-community/impermanence/issues/229
+		boot.initrd.systemd.suppressedUnits = [ "systemd-machine-id-commit.service" ];
+		systemd.suppressedSystemUnits = [ "systemd-machine-id-commit.service" ];
+
 
 	# The configuration will deploy the user directories owned by root:root which will cause the user's home manager to fail deployment due to permission denied error, so we need to change the ownership before home-manager setup
 		# Plan A

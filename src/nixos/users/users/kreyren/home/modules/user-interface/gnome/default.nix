@@ -7,8 +7,6 @@
 		./config/touchpad.nix
 		./config/usability.nix
 		./config/weather.nix
-
-		./extensions/custom-accent-colors
 	];
 
 	imports = [
