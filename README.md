@@ -12,8 +12,6 @@ We are using:
 * [lanzaboote](https://github.com/nix-community/lanzaboote) for declarative secure boot
 * [nixos-generators](https://github.com/nix-community/nixos-generators) to generate filesystem images
 
-Trusted community members are welcomed to commit their systems for collective administration and share of resources.
-
 ## Directory layout
 
 Work In Progress..
