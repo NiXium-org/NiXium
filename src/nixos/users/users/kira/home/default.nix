@@ -42,6 +42,9 @@ in {
 						homeManagerModules.tools-gpg-agent-kira
 						homeManagerModules.tools-ragenix-kira
 
+						homeManagerModules.ui-gnome-kira
+						homeManagerModules.ui-gnome-theme-generic-kira # Use Generic GNOME Theme
+
 						homeManagerModules.vpn-protonvpn-kira
 
 						# homeManagerModules.kira.web-browsers.default

@@ -9,5 +9,5 @@ in {
 	services.fwupd.enable = false; # Use FWUP daemon to keep firmware files up-to-date
 
 	# Required at the time to use the WiFi Adapter, pending a different one
-	hardware.enableRedistributableFirmware = mkForce true; # Whether to load propritary firmware files
+	# hardware.enableRedistributableFirmware = mkForce true; # Whether to load propritary firmware files
 }

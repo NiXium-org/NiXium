@@ -52,7 +52,7 @@ in {
 		services.xserver.displayManager.gdm.autoSuspend = false;
 
 	# Fingerprint
-	services.fprintd.enable = false;
+	services.fprintd.enable = true;
 		services.fprintd.tod.enable = false;
 
 	# FIXME(Krey): Figure out how to handle this
