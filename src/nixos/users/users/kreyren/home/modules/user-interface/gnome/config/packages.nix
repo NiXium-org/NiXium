@@ -1,6 +1,6 @@
 { config, lib, pkgs, nixosConfig,... }:
 
-# Kreyren's management of GNOME-related packages
+# Kreyren's management of GNOME-related packages that are needed to make GNOME to run well
 
 let
 	inherit (lib) mkIf mkMerge;

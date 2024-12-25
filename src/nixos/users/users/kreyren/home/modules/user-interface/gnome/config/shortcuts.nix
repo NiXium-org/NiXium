@@ -7,6 +7,7 @@ let
 in mkIf nixosConfig.services.xserver.desktopManager.gnome.enable (mkMerge [
 	# Common Configuration across multiple GNOME releases
 		{
+			# FIXME(Krey): Configure this and change the shortcuts
 			home.packages = [ pkgs.gnomeExtensions.shortcuts ]; # Install an extension to show the shortcuts on demand
 
 			dconf.settings = {
