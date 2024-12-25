@@ -16,8 +16,9 @@ in {
 		}
 	];
 
+	# FIXME(Krey): Figure out how to make this work on non-standalone nix distro scenario or on foreign infrastructure managements
 	# # Standalone declaration
-	# flake.homeManagerConfigurations."kreyren@sinnenfreude" = inputs.home-manager-nixpkgs.lib.homeManagerConfiguration {
+	# flake.homeManagerConfigurations."kreyren@ignucius" = inputs.home-manager-nixpkgs.lib.homeManagerConfiguration {
 	# 	pkgs = import inputs.nixpkgs {
 	# 		system = "x86_64-linux";
 	# 		nixpkgs.config.allowUnfree = true;

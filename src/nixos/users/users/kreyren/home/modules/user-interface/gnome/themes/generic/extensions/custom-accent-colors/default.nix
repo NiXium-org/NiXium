@@ -13,7 +13,6 @@ in mkIf nixosConfig.services.xserver.desktopManager.gnome.enable {
 		dconf.settings = {
 			"org/gnome/shell/extensions/custom-accent-colors" = {
 				accent-color = "purple";
-				# FIXME(Krey): Figure out how to get this functionality on 24.11+
 				theme-flatpak = true; # Use for flatpak
 				theme-gtk3 = true; # Use for GTK3
 				theme-shell = true; # Use for shell

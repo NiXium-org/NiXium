@@ -1,8 +1,15 @@
-{ config, lib, ... }:
+{ config, pkgs, lib, ... }:
 
 let
 	inherit (lib) mkIf;
 in mkIf config.programs.starship.enable {
+	home.packages = [
+		# Add the fonts that we are using in the shell
+		# FIXME-OPTIMIZE(Krey): This package takes a lot of resources to build and significant amount of resources for few (~5 font characters), we should just include the invidual symbols instead to speed up the evaluation
+		# This override was recommended, because nerdfonts might have issues with rendering -- https://github.com/TanvirOnGH/nix-config/blob/nix%2Bhome-manager/desktop/customization/font.nix#L4-L39
+		(pkgs.nerdfonts.override { fonts = [ "Noto" "FiraCode"]; }) # Add NerdFont's Noto and FiraCode
+	];
+
 	programs.starship = {
 		settings = {
 			# ├ ❯ ╰ ─ ┌ ❮	 
@@ -11,7 +18,7 @@ in mkIf config.programs.starship.enable {
 				''├─ $directory$all''
 			];
 
-			# Git requires at least 300ms to load in it's module
+			# Timeout for git which appears to require at minimum 300 ms to load all of it's modules
 			command_timeout = 300; # ms
 
 			username = {
