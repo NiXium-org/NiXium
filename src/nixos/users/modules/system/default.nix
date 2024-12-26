@@ -3,7 +3,7 @@
 let
 	inherit (config.flake) homeManagerModules;
 in {
-	flake.homeManagerModules.system.inputs = [
+	flake.homeManagerModules.system.imports = [
 		homeManagerModules.system-nix
 	];
 

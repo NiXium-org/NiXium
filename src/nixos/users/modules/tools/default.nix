@@ -3,10 +3,9 @@
 let
 	inherit (config.flake) homeManagerModules;
 in {
-	flake.homeManagerModules.tools.inputs = [
+	flake.homeManagerModules.tools.imports = [
 		homeManagerModules.tools-direnv
 		homeManagerModules.tools-git
-		homeManagerModules.web-browsers
 	];
 
 	imports = [

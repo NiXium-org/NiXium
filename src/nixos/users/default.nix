@@ -6,11 +6,10 @@ in {
 	flake.homeManagerModules.default = {
 		imports = [
 			homeManagerModules.editors-vscode
-			homeManagerModules.system-nix
-			homeManagerModules.tools-direnv
-			homeManagerModules.tools-git
-			homeManagerModules.web-browsers-firefox
-			homeManagerModules.web-browsers-librewolf
+			homeManagerModules.system
+			homeManagerModules.terminal-emulators
+			homeManagerModules.tools
+			homeManagerModules.web-browsers
 		];
 	};
 
