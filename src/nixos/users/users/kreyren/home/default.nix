@@ -16,49 +16,10 @@ in {
 
 						./home.nix
 
-						# FIXME-QA(Krey): Expected to be just `homeManagerModules.apps-kreyren` same for all others..
-						homeManagerModules.apps-bottles-kreyren
+						homeManagerModules.modules-kreyren
 
-						# homeManagerModules.editors-kreyren
-						homeManagerModules.editors-vim-kreyren
-						homeManagerModules.editors-vscode-kreyren
-
-						#homeManagerModules.prompts-kreyren
-						homeManagerModules.prompts-starship-kreyren
-
-						#homeManagerModules.scripts-kreyren
-						homeManagerModules.scripts-ssh-ignucius-kreyren
-						homeManagerModules.scripts-ssh-morph-kreyren
-						homeManagerModules.scripts-ssh-mracek-kreyren
-						homeManagerModules.scripts-ssh-sinnenfreude-kreyren
-						homeManagerModules.scripts-wake-morph-kreyren
-
-						# homeManagerModules.kreyren.shells.default
-						homeManagerModules.shells-bash-kreyren
-						homeManagerModules.shells-nushell-kreyren
-
-						# homeManagerModules.kreyren.system.default
-						homeManagerModules.system-flatpak-kreyren
-						homeManagerModules.system-gtk-kreyren
-						homeManagerModules.system-impermanence-kreyren
-						homeManagerModules.system-pac-kreyren
-
-						# homeManagerModules.kreyren.terminal-emulators.default
-						homeManagerModules.terminal-emulators-alacritty-kreyren
-
-						# homeManagerModules.kreyren.tools.default
-						homeManagerModules.tools-git-kreyren
-						homeManagerModules.tools-gpg-agent-kreyren
-						homeManagerModules.tools-ragenix-kreyren
-
-						homeManagerModules.ui-gnome-kreyren
+						# FIXME-QA(Krey): This is kinda weird and i haven't yet decided how to handle it as it should be per-system configurable
 						homeManagerModules.ui-gnome-theme-generic-kreyren # Use Generic GNOME Theme
-
-						# homeManagerModules.vpn-kreyren
-						homeManagerModules.vpn-protonvpn-kreyren
-
-						# homeManagerModules.kreyren.web-browsers.default
-						homeManagerModules.web-browsers-firefox-kreyren
 					];
 				};
 

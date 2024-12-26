@@ -3,10 +3,10 @@
 let
 	inherit (config.flake) homeManagerModules;
 in {
-	# flake.homeManagerModules.editors-kreyren.inputs = [
-	# 	homeManagerModules.editors-vim-kreyren
-	# 	#homeManagerModules.editors-vscode-kreyren
-	# ];
+	flake.homeManagerModules.editors-kreyren.imports = [
+		homeManagerModules.editors-vim-kreyren
+		homeManagerModules.editors-vscode-kreyren
+	];
 
 	imports = [
 		./vim

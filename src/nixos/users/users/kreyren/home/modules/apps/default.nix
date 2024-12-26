@@ -3,10 +3,9 @@
 let
 	inherit (config.flake) homeManagerModules;
 in {
-	# flake.homeManagerModules.apps-kreyren.inputs = [
-	# 	homeManagerModules.apps-vim-kreyren
-	# 	#homeManagerModules.apps-vscode-kreyren
-	# ];
+	flake.homeManagerModules.apps-kreyren.imports = [
+		homeManagerModules.apps-bottles-kreyren
+	];
 
 	imports = [
 		./bottles

@@ -4,7 +4,9 @@ let
 	inherit (config.flake) homeManagerModules;
 in {
 	flake.homeManagerModules.system-kreyren.imports = [
-		homeManagerModules.kreyren.system.gtk
+		homeManagerModules.system-flatpak-kreyren
+		homeManagerModules.system-gtk-kreyren
+		homeManagerModules.system-impermanence-kreyren
 	];
 
 	imports = [
