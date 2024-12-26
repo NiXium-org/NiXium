@@ -33,6 +33,9 @@ in {
 			# FIXME-QA(Krey): Should only be applied if `element-desktop` is installed
 			".config/Element" # Element-Desktop
 
+			# Temporary Management for Experimentation, pending better management for purity and functionality
+			".config/OrcaSlicer"
+
 			# FIXME-QA(Krey): Should only be applied if gnome keyring is used
 			".local/share/keyrings"
 
