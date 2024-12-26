@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 # Nix-based Disk Management of IGNUCIUS with disko and impermenance on tmpfs
 
@@ -48,7 +48,7 @@ in mkMerge [
 				system = {
 					device = diskoDevice;
 					type = "disk";
-					# imageSize = "50G"; # Size of the generated image
+					imageSize = "50G"; # Size of the generated image
 					content = {
 						type = "gpt";
 						partitions = {

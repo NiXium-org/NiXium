@@ -12,8 +12,6 @@ We are using:
 * [lanzaboote](https://github.com/nix-community/lanzaboote) for declarative secure boot
 * [nixos-generators](https://github.com/nix-community/nixos-generators) to generate filesystem images
 
-Trusted community members are welcomed to commit their systems for collective administration and share of resources.
-
 ## Directory layout
 
 Work In Progress..
@@ -89,6 +87,14 @@ $ grep -A 10 -rP "(FIXME|DOCS|)((\\-.*|)\\(.*\\))" /path/to/this/repository
 ```
 
 To get them printed in your terminal.
+
+### Peer-Review The Code
+
+The used programming, scripting and frameworking languages are separated into invidual files and all follow coding standardization, any peer-review is always very appreciated.
+
+Notes to the implementation:
+* **POSIX Shell Script:** The environment and libraries are managed by the Nix Daemon so they do not include shebang and bash options as those are supplemented by Nix, all these files should include notice at the first line about this management (please report this to us if it's not present). Additionally Nix runs these files through a very strict [shellcheck](https://www.shellcheck.net) where any unhandled failure or warning will terminate evaluation with detailed info about the isuse prior to executing the script.
+* **Nix Language:** Is the sole exception that does not follow the standard coding practices provided by upstream as they are considered not sensible and introduce too many security issues that are not fixable at the current NixOS Foundation Administration chaired by Eelco Dolstra for us to be in the process of writting an alternative one. [NixOS/nixpkgs/133088](https://github.com/NixOS/nixpkgs/issues/133088) [NixOS/nixpkgs/133089](https://github.com/NixOS/nixpkgs/issues/133089) [NixOS/nixpkgs/243089](https://github.com/NixOS/nixpkgs/pull/241360) [NixOS/nixpkgs/254625](https://github.com/NixOS/nixpkgs/issues/254625) [NixOS/nixpkgs/296013](https://github.com/NixOS/nixpkgs/issues/296013) [NixOS/nixpkgs/296013](https://github.com/NixOS/nixpkgs/pull/324693)
 
 ### Donate - Finance
 

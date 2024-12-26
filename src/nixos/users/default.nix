@@ -1,15 +1,20 @@
 { config, ... }:
 
 let
-	inherit (config.flake) nixosModules;
+	inherit (config.flake) homeManagerModules;
 in {
-	flake.nixosModules.users.imports = [
-		nixosModules.users-kreyren
-		nixosModules.users-kira
-	];
+	flake.homeManagerModules.default = {
+		imports = [
+			homeManagerModules.editors-vscode
+			homeManagerModules.system
+			homeManagerModules.terminal-emulators
+			homeManagerModules.tools
+			homeManagerModules.web-browsers
+		];
+	};
 
 	imports = [
-		./kreyren
-		./kira
+		./users
+		./modules
 	];
 }

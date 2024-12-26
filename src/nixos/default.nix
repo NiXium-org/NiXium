@@ -27,6 +27,7 @@ in {
 
 				nixosModules.security
 				nixosModules.security-nvidia
+				nixosModules.security-sudo
 
 				nixosModules.services-distributedBuilds
 				nixosModules.services-monero

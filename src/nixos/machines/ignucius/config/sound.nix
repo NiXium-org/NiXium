@@ -2,36 +2,34 @@
 
 # Sound management of IGNUCIUS
 
-let
-	inherit (lib) mkMerge mkIf;
-in {
-	config = mkMerge [
-		(mkIf (config.system.nixos.release == "24.05") {
-			sound.enable = true;
+{
+	"24.05" = {
+		sound.enable = true; # Whether to use ALSA
+		hardware.pulseaudio.enable = false; # Whether to use pulseaudio, requires to be turned off if pipewire is used
+		services.pipewire.enable = true; # Whether to use pipewire
 
-			hardware.pulseaudio.enable = false;
+		# Pipewire
+		services.pipewire = {
+			alsa.enable = config.sound.enable; # Integrate alse in pipewire
+			alsa.support32Bit = config.sound.enable; # Allow 32-bit ALSA support
+			pulse.enable = true; # Integrate pulseaudio in pipewire
+		};
 
-			services.pipewire = {
-				enable = true;
-				alsa.enable = true;
-				alsa.support32Bit = true;
-				pulse.enable = true;
-			};
-		})
+		security.rtkit.enable = true; # Allow real-time scheduling priority to user
+	};
 
-		(mkIf (config.system.nixos.release == "24.11") {
-			hardware.pulseaudio.enable = false;
+	# Option 'sound' has been removed
+	"24.11" = {
+		hardware.pulseaudio.enable = false; # Whether to use pulseaudio, requires to be turned off if pipewire is used
+		services.pipewire.enable = true; # Whether to use pipewire
 
-			services.pipewire = {
-				enable = true;
-				alsa.enable = true;
-				alsa.support32Bit = true;
-				pulse.enable = true;
-			};
-		})
+		# Pipewire
+		services.pipewire = {
+			alsa.enable = true; # Integrate alse in pipewire
+			alsa.support32Bit = true; # Allow 32-bit ALSA support
+			pulse.enable = true; # Integrate pulseaudio in pipewire
+		};
 
-		{
-			security.rtkit.enable = true; # To Get Real-Time priority for Audio
-		}
-	];
-}
+		security.rtkit.enable = true; # Allow real-time scheduling priority to user
+	};
+}.${lib.trivial.release} or (throw "Release '${lib.trivial.release}' is not implemented in this module")
