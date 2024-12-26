@@ -1,5 +1,0 @@
-{
-	imports = [
-		./custom-accent-colors
-	];
-}
