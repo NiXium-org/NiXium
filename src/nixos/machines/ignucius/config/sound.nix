@@ -32,4 +32,4 @@
 
 		security.rtkit.enable = true; # Allow real-time scheduling priority to user
 	};
-}."${lib.trivial.release}"
+}.${lib.trivial.release} or (throw "Release '${lib.trivial.release}' is not implemented in this module")
