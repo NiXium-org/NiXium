@@ -4,6 +4,3 @@ result
 system.raw
 *.log
 tmp
-
-# QEMU
-*.fd

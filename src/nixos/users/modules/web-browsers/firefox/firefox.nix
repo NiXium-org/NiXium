@@ -1,7 +1,9 @@
-{ config, pkgs, lib, firefox-addons, nixosConfig, ... }:
+{ config, firefox-addons, pkgs, lib, nixosConfig, nixpkgs-24_05, ... }:
+
+# FIXME-REFACTOR(Krey): This file is pending refactor to be more flexible
 
 # TODO(Krey)
-# * `Performance -> Use recommended performance settings` is expected to be blocked by policy to be impossible to toggle back on
+# * `Performance -> Use recommended performance settings` is expected to be blocked by policy to be impossible to toggle back ony
 # * Figure out how to set the default web browser
 
 # This extension can be used to generate the policies through GUI: https://addons.mozilla.org/en-US/firefox/addon/enterprise-policy-generator/
@@ -10,7 +12,8 @@ let
 	inherit (lib) mkDefault mkForce;
 in {
 	programs.firefox = {
-		package = pkgs.firefox-esr-128;
+		# FIXME(Krey): The package in current stable breaks all of our config, pending refactor management
+		package = nixpkgs-24_05.firefox-esr-128;
 		policies = {
 			# Purity Enforcement
 				AppAutoUpdate = mkForce false; # Disable automatic application update

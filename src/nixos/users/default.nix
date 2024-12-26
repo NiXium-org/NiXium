@@ -1,4 +1,4 @@
-{ self, config, moduleWithSystem, ... }:
+{ config, ... }:
 
 let
 	inherit (config.flake) homeManagerModules;

@@ -67,9 +67,12 @@ in {
 				home-manager.extraSpecialArgs = {
 					inherit self;
 
-					aagl = self.inputs.aagl.packages."${system}";
-					unstable = self.inputs.nixpkgs-unstable.legacyPackages."${system}";
 					staging-next = self.inputs.nixpkgs-staging-next.legacyPackages."${system}";
+					unstable = self.inputs.nixpkgs-unstable.legacyPackages."${system}";
+					stable = self.inputs.nixpkgs.legacyPackages."${system}";
+					nixpkgs-24_05 = self.inputs.nixpkgs-24_05.legacyPackages."${system}";
+
+					aagl = self.inputs.aagl.packages."${system}";
 					polymc = self.inputs.polymc.packages."${system}";
 					firefox-addons = self.inputs.firefox-addons.packages."${system}";
 				};

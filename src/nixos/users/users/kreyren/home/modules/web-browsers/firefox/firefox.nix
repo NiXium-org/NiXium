@@ -1,12 +1,10 @@
-{ config, pkgs, lib, firefox-addons, ... }:
+{ config, lib, firefox-addons, ... }:
 
 # WELCOME TO THE WORLD OF MINDFUCKERY SUCKAAAA!
 
-
-
 let
-	inherit (lib) mkForce;
-in {
+	inherit (lib) mkForce mkIf;
+in mkIf config.programs.firefox.enable {
 	programs.firefox = {
 		# Refer to https://mozilla.github.io/policy-templates or `about:policies#documentation` in firefox
 		policies = {
