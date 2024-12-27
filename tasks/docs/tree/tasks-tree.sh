@@ -8,7 +8,7 @@ print_tree() {
 
 		# Generate indentation based on the level
 		for _ in $(seq 1 "$level"); do
-				indent="|&nbsp;&nbsp;&nbsp;$indent"
+				indent="&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$indent"
 		done
 
 		# Check if this directory contains a .about file
