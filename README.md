@@ -4,14 +4,14 @@ Transparent Nix-based Open-Source Infrastructure as Code (OSS IaaC) Management S
 
 We are using:
 
-* [disko](https://github.com/nix-community/disko) for filesystem management
-* [impermanence](https://github.com/nix-community/impermanence) to enforce fully declarative setup
-* [flake-parts](https://github.com/hercules-ci/flake-parts) for nix flake management
-* [home-manager](https://github.com/nix-community/home-manager) for user configuration
-* [ragenix](https://github.com/yaxitech/ragenix) for Secrets
-* [mission-control](https://github.com/Platonic-Systems/mission-control) to administrate this repository
-* [lanzaboote](https://github.com/nix-community/lanzaboote) for declarative secure boot
-* [nixos-generators](https://github.com/nix-community/nixos-generators) to generate filesystem images
+* [disko](https://github.com/nix-community/disko) for Declarative Filesystem Management
+* [impermanence](https://github.com/nix-community/impermanence) to Enforce Declarative Setup
+* [flake-parts](https://github.com/hercules-ci/flake-parts) for Nix Flake Management
+* [home-manager](https://github.com/nix-community/home-manager) for User Configuration
+* [ragenix](https://github.com/yaxitech/ragenix) for Managing of Secrets
+* [mission-control](https://github.com/Platonic-Systems/mission-control) as a Frontend for this repository
+* [lanzaboote](https://github.com/nix-community/lanzaboote) for Declarative Secure Boot
+* [nixos-generators](https://github.com/nix-community/nixos-generators) to Generate Filesystem Images
 
 ## Directory layout
 
