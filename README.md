@@ -18,29 +18,29 @@ We are using:
 ├── **config** -- Project Configuration<br/>
 ├── **lib** -- Project-Oriented Libraries<br/>
 ├── **src** -- Source Code Files<br/>
-|   ├── **nixos** -- Source Files Relevant to the NixOS Distribution<br/>
-|   |   ├── **machines** -- Machine Management in the NixOS Distribution<br/>
-|   |   |   ├── **template** -- Example of Machine Management<br/>
-|   |   |   |   ├── **config** -- Invidual System configuration<br/>
-|   |   |   |   ├── **lib** -- Libraries Exported by the Machine to Others<br/>
-|   |   |   |   ├── **releases** -- Management across releases for the invidual machine<br/>
-|   |   |   |   ├── **secrets** -- Machine-invidual secrets<br/>
-|   |   |   |   ├── **services** -- Machine managed services<br/>
-|   |   ├── **modules** -- NixOS-related Modules<br/>
-|   |   |   ├── **programs** -- NixOS-related Programs Adjustments<br/>
-|   |   |   ├── **security** -- NixOS-related Security Management<br/>
-|   |   |   ├── **services** -- NixOS-related Service Adjustments<br/>
-|   |   |   ├── **system** -- NixOS-related System Management<br/>
-|   |   |   |   ├── **impermenance** -- NixOS-related management of impermanence<br/>
-|   |   ├── **overlays** -- Changes on top of nixpkgs<br/>
-|   |   ├── **users** -- Management of Users in NixOS Distribution<br/>
-|   |   |   ├── **modules** -- Home-Manager specific modules applied to all users<br/>
-|   |   |   ├── **users** -- Invidual User Management<br/>
-|   |   |   |   ├── **kreyren** -- Management of Kreyren User<br/>
-|   |   |   |   |   ├── **home** -- User Kreyren's Home Management<br/>
+|&nbsp;&nbsp;&nbsp;├── **nixos** -- Source Files Relevant to the NixOS Distribution<br/>
+|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;├── **machines** -- Machine Management in the NixOS Distribution<br/>
+|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;├── **template** -- Example of Machine Management<br/>
+|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;├── **config** -- Invidual System configuration<br/>
+|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;├── **lib** -- Libraries Exported by the Machine to Others<br/>
+|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;├── **releases** -- Management across releases for the invidual machine<br/>
+|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;├── **secrets** -- Machine-invidual secrets<br/>
+|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;├── **services** -- Machine managed services<br/>
+|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;├── **modules** -- NixOS-related Modules<br/>
+|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;├── **programs** -- NixOS-related Programs Adjustments<br/>
+|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;├── **security** -- NixOS-related Security Management<br/>
+|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;├── **services** -- NixOS-related Service Adjustments<br/>
+|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;├── **system** -- NixOS-related System Management<br/>
+|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;├── **impermenance** -- NixOS-related management of impermanence<br/>
+|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;├── **overlays** -- Changes on top of nixpkgs<br/>
+|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;├── **users** -- Management of Users in NixOS Distribution<br/>
+|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;├── **modules** -- Home-Manager specific modules applied to all users<br/>
+|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;├── **users** -- Invidual User Management<br/>
+|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;├── **kreyren** -- Management of Kreyren User<br/>
+|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;├── **home** -- User Kreyren's Home Management<br/>
 ├── **tasks** -- Routines to work with the project<br/>
-|   ├── **docs** -- Tasks related to the project documentation<br/>
-|   |   ├── **tree** -- Task used to generate this file hierarchy output<br/>
+|&nbsp;&nbsp;&nbsp;├── **docs** -- Tasks related to the project documentation<br/>
+|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;├── **tree** -- Task used to generate this file hierarchy output<br/>
 ├── **vendor** -- 3rd party repos used in this projects<br/>
 
 *This file hierarchy output is generated using the `tree` task that processes directories with the `.about` file containing short description about the purpose of the directory*
