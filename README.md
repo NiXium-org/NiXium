@@ -14,7 +14,37 @@ We are using:
 
 ## Directory layout
 
-Work In Progress..
+```
+├── config -- Project Configuration
+├── lib -- Project-Oriented Libraries
+├── src -- Source Code Files
+|   ├── nixos -- Source Files Relevant to the NixOS Distribution
+|   |   ├── machines -- Machine Management in the NixOS Distribution
+|   |   |   ├── template -- Example of Machine Management
+|   |   |   |   ├── config -- Invidual System configuration
+|   |   |   |   ├── lib -- libraries exported by the machine to others
+|   |   |   |   ├── releases -- Management across releases for the invidual machine
+|   |   |   |   ├── secrets -- Machine-invidual secrets
+|   |   |   |   ├── services -- Machine managed services
+|   |   ├── modules -- NixOS-related Modules
+|   |   |   ├── programs -- NixOS-related Programs Adjustments
+|   |   |   ├── security -- NixOS-related Security Management
+|   |   |   ├── services -- NixOS-related Service Adjustments
+|   |   |   ├── system -- NixOS-related System Management
+|   |   |   |   ├── impermenance -- NixOS-related management of impermanence
+|   |   ├── overlays -- Changes on top of nixpkgs
+|   |   ├── users -- Management of Users in NixOS Distribution
+|   |   |   ├── modules -- Home-Manager specific modules applied to all users
+|   |   |   ├── users -- Invidual User Management
+|   |   |   |   ├── kreyren -- Management of Kreyren User
+|   |   |   |   |   ├── home -- User Kreyren's Home Management
+├── tasks -- Routines to work with the project
+|   ├── docs -- Tasks related to the project documentation
+|   |   ├── tree -- Task used to generate this file hierarchy output
+├── vendor -- 3rd party repos used in this projects
+```
+
+*This file hierarchy output is generated using the `tree` task that processes directories with the `.about` file containing short description about the purpose of the directory*
 
 ## Provided Services
 
