@@ -15,7 +15,7 @@
 					runtimeInputs = [];
 
 					# FIXME(Krey): This should use flake-root to set absolute path
-					text = builtins.readFile ./tree-build.sh;
+					text = builtins.readFile ./tasks-tree.sh;
 				};
 			};
 		};
