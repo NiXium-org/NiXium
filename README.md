@@ -3,18 +3,47 @@
 Transparent Nix-based Open-Source Infrastructure as Code (OSS IaaC) Management Solution for Multiple Systems and Domains designed to be a reliable tool for mission-critical tasks in paranoid and high-security environment.
 
 We are using:
-* [disko](https://github.com/nix-community/disko) for filesystem management
-* [impermanence](https://github.com/nix-community/impermanence) to enforce fully declarative setup
-* [flake-parts](https://github.com/hercules-ci/flake-parts) for nix flake management
-* [home-manager](https://github.com/nix-community/home-manager) for user configuration
-* [ragenix](https://github.com/yaxitech/ragenix) for Secrets
-* [mission-control](https://github.com/Platonic-Systems/mission-control) to administrate this repository
-* [lanzaboote](https://github.com/nix-community/lanzaboote) for declarative secure boot
-* [nixos-generators](https://github.com/nix-community/nixos-generators) to generate filesystem images
+
+* [disko](https://github.com/nix-community/disko) for Declarative Filesystem Management
+* [impermanence](https://github.com/nix-community/impermanence) to Enforce Declarative Setup
+* [flake-parts](https://github.com/hercules-ci/flake-parts) for Nix Flake Management
+* [home-manager](https://github.com/nix-community/home-manager) for User Configuration
+* [ragenix](https://github.com/yaxitech/ragenix) for Managing of Secrets
+* [mission-control](https://github.com/Platonic-Systems/mission-control) as a Frontend for this repository
+* [lanzaboote](https://github.com/nix-community/lanzaboote) for Declarative Secure Boot
+* [nixos-generators](https://github.com/nix-community/nixos-generators) to Generate Filesystem Images
 
 ## Directory layout
 
-Work In Progress..
+├── **config** -- Project Configuration<br/>
+├── **lib** -- Project-Oriented Libraries<br/>
+├── **src** -- Source Code Files<br/>
+&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── **nixos** -- Source Files Relevant to the NixOS Distribution<br/>
+&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── **machines** -- Machine Management in the NixOS Distribution<br/>
+&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── **template** -- Example of Machine Management<br/>
+&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── **config** -- Invidual System configuration<br/>
+&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── **lib** -- Libraries Exported by the Machine to Others<br/>
+&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── **releases** -- Management across releases for the invidual machine<br/>
+&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── **secrets** -- Machine-invidual secrets<br/>
+&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── **services** -- Machine managed services<br/>
+&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── **modules** -- NixOS-related Modules<br/>
+&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── **programs** -- NixOS-related Programs Adjustments<br/>
+&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── **security** -- NixOS-related Security Management<br/>
+&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── **services** -- NixOS-related Service Adjustments<br/>
+&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── **system** -- NixOS-related System Management<br/>
+&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── **impermenance** -- NixOS-related management of impermanence<br/>
+&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── **overlays** -- Changes on top of nixpkgs<br/>
+&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── **users** -- Management of Users in NixOS Distribution<br/>
+&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── **modules** -- Home-Manager specific modules applied to all users<br/>
+&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── **users** -- Invidual User Management<br/>
+&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── **kreyren** -- Management of Kreyren User<br/>
+&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── **home** -- User Kreyren's Home Management<br/>
+├── **tasks** -- Routines to work with the project<br/>
+&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── **docs** -- Tasks related to the project documentation<br/>
+&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── **tree** -- Task used to generate this file hierarchy output<br/>
+├── **vendor** -- 3rd party repos used in this projects<br/>
+
+*This file hierarchy output is generated using the `tree` task that processes directories with the `.about` file containing short description about the purpose of the directory*
 
 ## Provided Services
 
@@ -93,6 +122,7 @@ To get them printed in your terminal.
 The used programming, scripting and frameworking languages are separated into invidual files and all follow coding standardization, any peer-review is always very appreciated.
 
 Notes to the implementation:
+
 * **POSIX Shell Script:** The environment and libraries are managed by the Nix Daemon so they do not include shebang and bash options as those are supplemented by Nix, all these files should include notice at the first line about this management (please report this to us if it's not present). Additionally Nix runs these files through a very strict [shellcheck](https://www.shellcheck.net) where any unhandled failure or warning will terminate evaluation with detailed info about the isuse prior to executing the script.
 * **Nix Language:** Is the sole exception that does not follow the standard coding practices provided by upstream as they are considered not sensible and introduce too many security issues that are not fixable at the current NixOS Foundation Administration chaired by Eelco Dolstra for us to be in the process of writting an alternative one. [NixOS/nixpkgs/133088](https://github.com/NixOS/nixpkgs/issues/133088) [NixOS/nixpkgs/133089](https://github.com/NixOS/nixpkgs/issues/133089) [NixOS/nixpkgs/243089](https://github.com/NixOS/nixpkgs/pull/241360) [NixOS/nixpkgs/254625](https://github.com/NixOS/nixpkgs/issues/254625) [NixOS/nixpkgs/296013](https://github.com/NixOS/nixpkgs/issues/296013) [NixOS/nixpkgs/296013](https://github.com/NixOS/nixpkgs/pull/324693)
 
@@ -109,10 +139,13 @@ If you want to donate Hardware then contact [@Kreyren](https://github.com/Kreyre
 Kreyren: I also accept broken/locked iDevices (please don't send me stolen devices, return them to their owners instead) as apple often artificially shortens their lifespan through various means e.g. serilizing the replacement parts, making the glass replacement extremly uneconomical, etc.. to force their customers to buy a new model and I like to mess with Apple by fixing them and selling them for cheap, [installing Linux on them](https://git.dotya.ml/kreyren/kreyren/issues/81) or [making new PCBs with better chips](https://git.dotya.ml/kreyren/kreyren/issues/30)~
 
 # References
+
 ## Manuals
+
 * [home-manager's options](https://nix-community.github.io/home-manager/options.html)
 
 ## Guides
+
 * [NixOS Flakes Wiki](https://nixos.wiki/wiki/Flakes)
 * [Nix Flakes, Part 3: Managing NixOS systems - Eelco Dolstra](https://www.tweag.io/blog/2020-07-31-nixos-flakes/)
 * [NixOS Configuration with Flakes - jordanisaacs](https://jdisaacs.com/series/nixos-desktop/)
@@ -169,11 +202,13 @@ Collection of NixOS configurations that you might find useful as a reference for
 *Feel Free To Add Yours*
 
 Relevant References through GitHub Querries:
+
 * https://github.com/topics/nixos-configuration -- for other public nixos configurations
 * https://github.com/search?q=flake.homeManagerModules&type=code -- home-manager references
 * https://github.com/search?q=flake-parts+path%3Aflake.nix&type=code&p=3 -- GitHub repositories which use flake-parts
 
 ## Relevant Projects
+
 * [flake-compat](https://github.com/edolstra/flake-compat)
 * [sops-nix](https://github.com/Mic92/sops-nix)
 * [NixOS hardware repo](https://github.com/NixOS/nixos-hardware)
@@ -189,6 +224,7 @@ Relevant References through GitHub Querries:
 To update NixOS (and other inputs) run `nix flake update`
 
 You may also update a subset of inputs, e.g.
+
 ```console
 $ nix flake lock --update-input nixpkgs --update-input home-manager
 ```
@@ -198,6 +234,7 @@ Credit: [Samuel Sung](https://codeberg.org/samuelsung)
 ### Free Up The Disk Space
 
 To free up disk space you can clear unused nixos generations
+
 ```console
 # nix-env -p /nix/var/nix/profiles/system --delete-generations +2 # Remove all NixOS Generations but last 2
 # nixos-rebuild boot # Build a new generation and deploy it on next reboot
