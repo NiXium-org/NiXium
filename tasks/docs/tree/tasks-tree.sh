@@ -18,7 +18,7 @@ print_tree() {
 		if [ -f "$about_file" ]; then
 				about_message=" -- $(cat "$about_file")"
 				# Print the directory with its .about content if exists
-				echo "${indent}├── $(basename "$dir")$about_message"
+				echo "${indent}├── **$(basename "$dir")**$about_message<br/>"
 		else
 				# Debugging: List all directories being processed
 				echo "DEBUG: Skipping $dir (no .about file)"
