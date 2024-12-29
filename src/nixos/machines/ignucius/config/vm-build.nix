@@ -11,6 +11,7 @@ let
 in {
 	virtualisation = {
 		# nix run -L .#nixosConfigurations.nixos-ignucius-stable.config.system.build.vmWithDisko
+		# FIXME(Krey): ignucius-disko-images> hwclock: Cannot access the Hardware Clock via any known method.
 		vmVariantWithDisko = {
 			virtualisation = {
 				fileSystems."/nix/persist/system".neededForBoot = true;
@@ -35,26 +36,21 @@ in {
 				};
 			};
 
-			services.displayManager.autoLogin.user = "kreyren";
+			# Setup autologin
+				# FIXME(Krey): This will make the system to hang on black screen after initrd phase for some reason
+				# services.displayManager.autoLogin.user = "kreyren";
 
-			# services.xserver.enable = mkForce false;
-			# services.xserver.desktopManager.gnome.enable = mkForce false;
-			# services.xserver.displayManager.gdm.enable = mkForce false;
+			# Enable Graphical User Interface
+				# FIXME(Krey): We should have e.g. `, vm-gui ...` task to deploy the system with these
+				services.xserver.enable = mkForce false;
+				services.xserver.desktopManager.gnome.enable = mkForce false;
+				services.xserver.displayManager.gdm.enable = mkForce false;
 
-			# QEMU VM doesn't provide the relevant endpoints
-			services.smartd.enable = mkForce false; # Disable S.M.A.R.T. Daemon
+			# Disable S.M.A.R.T. as QEMU VM doesn't provide the relevant endpoints
+				services.smartd.enable = mkForce false; # Disable S.M.A.R.T. Daemon
 
-			# No internet connection so these will fail on startup
-			services.tor.enable = mkForce false;
-			services.openssh.enable = mkForce false;
-			virtualisation.waydroid.enable = mkForce false;
-			# networking.useDHCP = mkForce false;
-			# networking.interfaces.wlp2s0.useDHCP = mkForce false;
-			# networking.interfaces.docker0.useDHCP = mkForce false;
-			# networking.interfaces.wwp0s29u1u4i6.useDHCP = mkForce false;
-
-			# It errors out as we don't have the /proc/acpi/ibm/thermal in QEMU
-			services.thinkfan.enable = mkForce false; # Disable thinkfan service
+			# Disable ThinkFan as it errors out as we don't have the /proc/acpi/ibm/thermal in QEMU
+				services.thinkfan.enable = mkForce false; # Disable thinkfan service
 
 			# Use a Dummy Cryptkey so that we don't have to input disk password
 				# disko.devices.disk.cryptkey = {
@@ -78,12 +74,6 @@ in {
 				# 	chmod 0400 /dev/disk/by-partlabel/CRYPTKEY
 				# '';
 
-				# disko.devices.disk.system.content.postCreateHook = ''
-				# 	mkdir -p /dev/disk/by-partlabel/
-				# 	dd bs=1024 count=4 if=/dev/zero of=/dev/disk/by-partlabel/CRYPTKEY iflag=fullblock
-				# 	chmod 0400 /dev/disk/by-partlabel/CRYPTKEY
-				# '';
-
 				# # Configure the system to use the CRYPTKEY
 				# disko.devices.disk.system.content.partitions.store.content.settings = {
 				# 	keyFileSize = 4096;
@@ -92,13 +82,31 @@ in {
 				# 	# passwordFile = mkForce ""; # Unset Disk Password for the store
 				# 	fallbackToPassword = false;
 				# };
-				# disko.devices.disk.system.content.partitions.store.content.passwordFile = mkForce (pkgs.writeText "ignucius-disks-password" "000000").outPath;
 
-				# disko.devices.disk.system.content.partitions.swap.content.passwordFile = mkForce (pkgs.writeText "ignucius-disks-password" "000000").outPath;
+				# FIXME(Krey): For some reason this results in no option type even when the same configuration works outside of vmVariantWithDisko?
+					# error: No type option set in
+					# disko.devices.disk.system.content.partitions.store.content.passwosssrdFile = mkForce (pkgs.writeText "ignucius-disks-password" "000000").outPath;
 
+					# disko.devices.disk.system.content.partitions.swap.content.passsssswordFile = mkForce (pkgs.writeText "ignucius-disks-password" "000000").outPath;
 
-				# It's not needed for VM tests and takes a significant amount of space (~30G)
+					# Also doesn't work:
+					# disko.devices.disk.system.content.preCreateHook = ''
+					# 	mkdir -p /run/agenix/
+					# 	echo 000000 > /run/agenix/ignucius-disks-password
+					# '';
+
+					# Doesn't seem to deploy the files
+					# system.activationScripts.set-dummy-secrets = ''
+					# 	mkdir -p /run/agenix
+					# 	echo 000000 > /run/agenix/ignucius-disks-password
+					# ''; # Set Permission Of the Persistent Users Directory
+
+			# Disable Swap as it's not needed during VM and only takes space
+				# FIXME(Krey): Fails with **No Type option set in**, apparently we can't change disko.* in here?
 				# disko.devices.disk.system.content.partitions.swap.size = mkForce null; # Unset swap partition
+
+			# FIXME(Krey): Using Impermanence seems to cause failure of **Transport endpoint is not connected** for the declared pathnames (fuse issues in QEMU?)
+				home-manager.users.kreyren.boot.home.impermanence.enable = mkForce false;
 
 			# Set Default Passwords For Users
 				users.users.kreyren = {
