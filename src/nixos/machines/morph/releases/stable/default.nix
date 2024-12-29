@@ -1,4 +1,4 @@
-{ inputs, lib, self,... }:
+{ inputs, lib, self, self', ... }:
 
 # Declaration for STABLE release of NixOS for MORPH
 
@@ -100,5 +100,80 @@ in {
 
 		# Declare for `nix run`
 		apps.nixos-morph-stable-install.program = self'.packages.nixos-morph-stable-install;
+
+		# Unattended installer
+		packages.nixos-morph-stable-unattended-installer-iso = inputs.nixos-generators.nixosGenerate {
+			pkgs = import inputs.nixpkgs {
+				inherit system;
+				config.allowUnfree = true;
+			};
+
+			inherit system;
+
+			modules = [
+				{
+					boot.loader.timeout = mkForce 0;
+
+					boot.kernelParams = [
+						"copytoram" # Run the installer from the Random Access Memory
+					];
+
+					environment.systemPackages = [
+						pkgs.git
+					];
+
+					nix.settings.experimental-features = "nix-command flakes";
+
+					services.getty.loginProgram = "${pkgs.util-linux}/bin/nologin"; # Do not permit login on ttys
+
+					services.getty.greetingLine = ''<<< Welcome To The NiXium Installer >>>'';
+
+					systemd.services.inception = {
+						description = "NiXium Installation";
+						after = [ "multi-user.target" ];
+						wantedBy = [ "network-online.target" ];
+						path = [
+							inputs'.disko.packages.disko-install # disko-install
+							pkgs.age # age
+							pkgs.nixos-install-tools # nixos-install
+							pkgs.gawk # awk
+							pkgs.curl
+							pkgs.jq
+							pkgs.openssh # ssh-keygen
+							pkgs.nixos-rebuild
+							pkgs.util-linux # mountpoint
+						];
+
+						serviceConfig = {
+							ExecStart = "${pkgs.nix}/bin/nix run github:kreyren/nixos-config/morph-changes#nixos-morph-stable-install";
+							StandardInput = "tty-force";  # Force interaction with TTY1
+							StandardOutput = "tty";       # Show the output on the TTY
+							StandardError = "tty";        # Display any errors on the TTY
+							TTYPath = "/dev/tty1";        # Specify TTY1 for the interaction
+							Restart = "always";
+							# Make it wait 30 sec so that we don't blow past the API rate limits in case there is an error
+							RestartSec = 30; # Wait 30 second before trying again
+						};
+					};
+
+					# Connect to FreeNet if the system doesn't have access to the internet by itself
+					networking.wireless.networks."FreeNet" = { };
+				}
+
+				{
+					services.sshd.enable = true; # Start OpenSSH server
+					users.users.root.openssh.authorizedKeys.keys = [
+						"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOzh6FRxWUemwVeIDsr681fgJ2Q2qCnwJbvFe4xD15ve kreyren@fsfe.org" # Allow root access for the Super Administrator (KREYREN)
+					];
+				}
+			];
+			format = "iso";
+
+			specialArgs = {
+				inherit self;
+			};
+		};
+
+		apps.nixos-morph-stable-unattended-installer-iso.program = self'.packages.nixos-morph-stable-unattended-installer-iso;
 	};
 }

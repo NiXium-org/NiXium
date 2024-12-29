@@ -22,7 +22,7 @@ warn() { printf "WARNING: %s\n" "$1" ;} # Warning Helper
 # FIXME(Krey): This should be managed for all used scripts e.g. runtimeEnv
 # Refer to https://github.com/srid/flake-root/discussions/5 for details tldr flake-root doesn't currently allow parsing the specific commit
 #[ -n "$FLAKE_ROOT" ] || FLAKE_ROOT="github:NiXium-org/NiXium/$(curl -s -X GET "https://api.github.com/repos/NiXium-org/NiXium/commits" | jq -r '.[0].sha')"
-[ -n "$FLAKE_ROOT" ] || FLAKE_ROOT="github:kreyren/nixos-config/morph-changes"
+[ -n "$FLAKE_ROOT" ] || FLAKE_ROOT="github:NiXium-org/NiXium/$(curl -s -X GET "https://api.github.com/repos/NiXium-org/NiXium/commits?sha=central" | jq -r '.[0].sha')"
 
 ### [END] Export this outside [END] ###
 
@@ -31,7 +31,7 @@ warn() { printf "WARNING: %s\n" "$1" ;} # Warning Helper
 # Check if the declared installation device is available on the target system
 [ -b "$systemDevice" ] || die 1 "Expected device was not found, refusing to install for safety"
 
-###! This script performs declarative installation of NiXium-Managed NixOS STABLE for the MORPH system
+###! This script performs declarative installation of NiXium-Managed NixOS 24_05 for the MORPH system
 ###!
 ###! For that we utilize:
 ###! * Ragenix <https://github.com/yaxitech/ragenix> - The Rust implementation of agenix which is used to handle secrets in a declarative way
@@ -92,12 +92,12 @@ fi
 
 #! Pre-build the system configuration
 status "Pre-building the system configuration"
-nixos-rebuild build --flake "$FLAKE_ROOT#nixos-morph-stable" # pre-build the configuration
+nixos-rebuild build --flake "$FLAKE_ROOT#nixos-morph-24_05" # pre-build the configuration
 
 #! Perform the Payload
 status "Performing the system installation"
 esudo disko-install \
-	--flake "$FLAKE_ROOT#nixos-morph-stable" \
+	--flake "$FLAKE_ROOT#nixos-morph-24_05" \
 	--mode format \
 	--debug \
 	--disk system "$(realpath "$systemDevice" || true)" \

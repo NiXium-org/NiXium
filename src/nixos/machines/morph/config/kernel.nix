@@ -6,6 +6,7 @@ let
 	inherit (lib) mkIf mkForce;
 in {
 	# NOTE(Krey): Morph is projected to be used as a gaming server where the hardened kernel might impact it's performance too much
+	# FIXME-SECURITY(Krey): Hardened kernel causes lot of issues, pending custom kernel
 	boot.kernelPackages = mkForce pkgs.linuxPackages;
 
 	# Kernel Modules
