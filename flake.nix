@@ -17,6 +17,11 @@
 
 			nixpkgs-kreyren.url = "github:kreyren/nixpkgs/central";
 
+			nur-xddxdd = {
+				url = "github:xddxdd/nur-packages";
+				inputs.nixpkgs.follows = "nixpkgs";
+			};
+
 		# Principle inputs
 			nixos-hardware.url = "github:NixOS/nixos-hardware";
 			nixos-flake.url = "github:srid/nixos-flake";

@@ -14,6 +14,7 @@
 			./services/monero.nix
 			./services/murmur.nix
 			./services/navidrome.nix
+			./services/ollama.nix
 			./services/openssh.nix
 			./services/tor.nix
 			./services/vaultwarden.nix
@@ -26,6 +27,7 @@
 			./config/initrd.nix
 			./config/kernel.nix
 			./config/networking.nix
+			./config/nvidia.nix
 			./config/power-management.nix
 			./config/remote-unlock.nix
 			./config/security.nix
