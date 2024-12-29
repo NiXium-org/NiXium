@@ -9,6 +9,7 @@
 let
 	inherit (lib) mkForce;
 in {
+	# The end Goal Of this configuration is to provide ideally 1:1 emulation of the system to be used as a part of Quality Assurance and to test various deployments
 	virtualisation = {
 		# nix run -L .#nixosConfigurations.nixos-ignucius-stable.config.system.build.vmWithDisko
 		# FIXME(Krey): ignucius-disko-images> hwclock: Cannot access the Hardware Clock via any known method.
@@ -106,7 +107,8 @@ in {
 				# disko.devices.disk.system.content.partitions.swap.size = mkForce null; # Unset swap partition
 
 			# FIXME(Krey): Using Impermanence seems to cause failure of **Transport endpoint is not connected** for the declared pathnames (fuse issues in QEMU?)
-				home-manager.users.kreyren.boot.home.impermanence.enable = mkForce false;
+				# Apparently we can't even change home-manager configurations this way: error: The option `virtualisation.vmVariantWithDisko.home-manager.users.kreyren.boot' does not exist. Definition values:
+				# home-manager.users.kreyren.boot.home.impermanence.enable = mkForce false;
 
 			# Set Default Passwords For Users
 				users.users.kreyren = {
