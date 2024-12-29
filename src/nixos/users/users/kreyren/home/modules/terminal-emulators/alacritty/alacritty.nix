@@ -7,7 +7,8 @@ let
 in {
 	programs.alacritty = {
 		settings = {
-			shell = {
+			# FIXME-BACKWARDS_COMPAT(Krey): During 24.05 this was using only `shell.*`, but starting 24.11 it's using `terminal.shell.*`
+			terminal.shell = {
 				program = mkDefault "${pkgs.bashInteractive}/bin/bash";
 			};
 
