@@ -7,6 +7,7 @@ in {
 		homeManagerModules.system-flatpak-kreyren
 		homeManagerModules.system-gtk-kreyren
 		homeManagerModules.system-impermanence-kreyren
+		homeManagerModules.system-pac-kreyren
 	];
 
 	imports = [
