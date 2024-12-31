@@ -15,6 +15,7 @@ in {
 		# FIXME(Krey): ignucius-disko-images> hwclock: Cannot access the Hardware Clock via any known method.
 		vmVariantWithDisko = {
 			virtualisation = {
+				# FIXME-QA(Krey): It's weird that this is needed when it's already set in disks.nix
 				fileSystems."/nix/persist/system".neededForBoot = true;
 
 				restrictNetwork = false; # Whether to Enable Network Connection
@@ -22,7 +23,7 @@ in {
 				# More efficient space management as it won't be re-creating store paths in VM
 					mountHostNixStore = true;
 
-				# This is enabled by default and it will set up small (~500MB) /nix/rw-store mount that will cause most of the services to fail loading due to lack of space
+				# This is enabled by default and it will set up small (~500MB) /nix/.rw-store mount that will cause most of the services to fail loading due to lack of space
 					writableStoreUseTmpfs = false;
 
 				# Set Virtual Resolution
@@ -32,9 +33,9 @@ in {
 					};
 
 				# error: EFI variables can be used only with a partition table of type: hybrid, efi, efixbootldr, or legacy+gpt.
-				# useBootLoader = true;
+				useBootLoader = true;
 				# 	# Resolve configuration config
-				# 	fileSystems."/boot".device = mkForce "/dev/disk/by-label/ESP";
+					fileSystems."/boot".device = mkForce "/dev/disk/by-partlabel/disk-system-boot";
 
 				# FIXME(Krey): Replace the secrets with dummies so that this can be used by others as well
 				# Mount local .ssh directory, so the secrets can be decrypted.

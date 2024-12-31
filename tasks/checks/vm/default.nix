@@ -7,7 +7,7 @@
 		mission-control.scripts = {
 			"vm" = {
 				description = "Open the derivation in a Virtual Machine";
-				category = "Administration";
+				category = "Checks";
 
 				exec = pkgs.writeShellApplication {
 					name = "tasks-wm";

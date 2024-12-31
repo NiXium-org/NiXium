@@ -4,6 +4,5 @@
 		./deploy
 		./install
 		./switch
-		./vm
 	];
 }
