@@ -16,13 +16,20 @@ in {
 		vmVariantWithDisko = {
 			virtualisation = {
 				fileSystems."/nix/persist/system".neededForBoot = true;
-				fileSystems."/nix/persist/users".neededForBoot = true;
 
-				# FIXME-BUG(Krey): This doesn't seem to work
-				resolution = {
-					x = 1280;
-					y = 720;
-				};
+				restrictNetwork = false; # Whether to Enable Network Connection
+
+				# More efficient space management as it won't be re-creating store paths in VM
+					mountHostNixStore = true;
+
+				# This is enabled by default and it will set up small (~500MB) /nix/rw-store mount that will cause most of the services to fail loading due to lack of space
+					writableStoreUseTmpfs = false;
+
+				# Set Virtual Resolution
+					resolution = {
+						x = 1280;
+						y = 720;
+					};
 
 				# error: EFI variables can be used only with a partition table of type: hybrid, efi, efixbootldr, or legacy+gpt.
 				# useBootLoader = true;
@@ -31,29 +38,29 @@ in {
 
 				# FIXME(Krey): Replace the secrets with dummies so that this can be used by others as well
 				# Mount local .ssh directory, so the secrets can be decrypted.
-				sharedDirectories."secrets_decryption_key" = {
-					source = "/nix/persist/users/kreyren/.ssh";
-					target = dirOf (builtins.head config.age.identityPaths);
-				};
+					sharedDirectories."secrets_decryption_key" = {
+						source = "/nix/persist/users/kreyren/.ssh";
+						target = dirOf (builtins.head config.age.identityPaths);
+					};
 			};
+
+			# Do not perform distributed builds as it's not subject of this VM check
+				nix.distributedBuilds = mkForce false;
 
 			# Setup autologin
 				# FIXME(Krey): This will make the system to hang on black screen after initrd phase for some reason
 				# services.displayManager.autoLogin.user = "kreyren";
 
-			# Enable Graphical User Interface
-				# FIXME(Krey): We should have e.g. `, vm-gui ...` task to deploy the system with these
-				services.xserver.enable = mkForce false;
-				services.xserver.desktopManager.gnome.enable = mkForce false;
-				services.xserver.displayManager.gdm.enable = mkForce false;
-
 			# Disable S.M.A.R.T. as QEMU VM doesn't provide the relevant endpoints
+				# FIXME(Krey): Figure out how to emulate the end-point
 				services.smartd.enable = mkForce false; # Disable S.M.A.R.T. Daemon
 
 			# Disable ThinkFan as it errors out as we don't have the /proc/acpi/ibm/thermal in QEMU
+				# FIXME(Krey): Figure out how to emulate the end-point
 				services.thinkfan.enable = mkForce false; # Disable thinkfan service
 
 			# Use a Dummy Cryptkey so that we don't have to input disk password
+				# FIXME(Krey): Any changes to `disko.*` appears to cause `no type option set in` error
 				# disko.devices.disk.cryptkey = {
 				# 	type = "disk";
 				# 	content.type = "gpt";
@@ -86,7 +93,7 @@ in {
 
 				# FIXME(Krey): For some reason this results in no option type even when the same configuration works outside of vmVariantWithDisko?
 					# error: No type option set in
-					# disko.devices.disk.system.content.partitions.store.content.passwosssrdFile = mkForce (pkgs.writeText "ignucius-disks-password" "000000").outPath;
+					# disko.devices.disk.system.content.partitions.store.content.passwordFile = mkForce (pkgs.writeText "ignucius-disks-password" "000000").outPath;
 
 					# disko.devices.disk.system.content.partitions.swap.content.passsssswordFile = mkForce (pkgs.writeText "ignucius-disks-password" "000000").outPath;
 
@@ -105,10 +112,6 @@ in {
 			# Disable Swap as it's not needed during VM and only takes space
 				# FIXME(Krey): Fails with **No Type option set in**, apparently we can't change disko.* in here?
 				# disko.devices.disk.system.content.partitions.swap.size = mkForce null; # Unset swap partition
-
-			# FIXME(Krey): Using Impermanence seems to cause failure of **Transport endpoint is not connected** for the declared pathnames (fuse issues in QEMU?)
-				# Apparently we can't even change home-manager configurations this way: error: The option `virtualisation.vmVariantWithDisko.home-manager.users.kreyren.boot' does not exist. Definition values:
-				# home-manager.users.kreyren.boot.home.impermanence.enable = mkForce false;
 
 			# Set Default Passwords For Users
 				users.users.kreyren = {

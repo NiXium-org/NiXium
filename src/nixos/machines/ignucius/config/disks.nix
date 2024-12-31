@@ -48,7 +48,7 @@ in mkMerge [
 				system = {
 					device = diskoDevice;
 					type = "disk";
-					imageSize = "50G"; # Size of the generated image
+					imageSize = "30G"; # Size of the generated image
 					content = {
 						type = "gpt";
 						partitions = {
