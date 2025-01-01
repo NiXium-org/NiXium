@@ -74,5 +74,6 @@ in mkIf config.services.monero.enable {
 	services.tor.relay.onionServices."monero-p2p".map = mkIf config.services.tor.enable [{ port = 18083; target = { port = 18083; }; }]; # Needed for p2p communications
 
 	# Deploy NTP to manage a known threat, see https://github.com/monero-project/monero/blob/master/docs/ANONYMITY_NETWORKS.md#mitigation
-	services.ntp.enable = true;
+		# FIXME-CONTRIBUTE(Krey): Get Precision-Time-Protocol ("PTP") implementation
+		services.ntp.enable = true;
 }
