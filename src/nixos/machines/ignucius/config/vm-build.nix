@@ -32,25 +32,30 @@ in {
 						y = 720;
 					};
 
-				# error: EFI variables can be used only with a partition table of type: hybrid, efi, efixbootldr, or legacy+gpt.
-				useBootLoader = true;
-				# 	# Resolve configuration config
-					fileSystems."/boot".device = mkForce "/dev/disk/by-partlabel/disk-system-boot";
+				# Set up the bootloader
+					# FIXME-BUG(Krey): Can't be made to work rn as we can't modify `disko.*` to adjust the filesystems for it
+					# error: EFI variables can be used only with a partition table of type: hybrid, efi, efixbootldr, or legacy+gpt.
+					# useBootLoader = true;
+					# # Resolve configuration config
+					# 	fileSystems."/boot".device = mkForce "/dev/disk/by-partlabel/disk-system-boot";
+					# 	useEFIBoot = true;
 
-				# FIXME(Krey): Replace the secrets with dummies so that this can be used by others as well
-				# Mount local .ssh directory, so the secrets can be decrypted.
+				# Secret Management
+					# FIXME(Krey): Replace the secrets with dummies so that this can be used by others as well
+					# Mount local .ssh directory, so the secrets can be decrypted.
 					sharedDirectories."secrets_decryption_key" = {
 						source = "/nix/persist/users/kreyren/.ssh";
 						target = dirOf (builtins.head config.age.identityPaths);
 					};
 			};
 
+			# Disable GUI
+				services.xserver.enable = mkForce false;
+				services.xserver.displayManager.gdm.enable = mkForce false;
+				services.xserver.desktopManager.gnome.enable = mkForce false;
+
 			# Do not perform distributed builds as it's not subject of this VM check
 				nix.distributedBuilds = mkForce false;
-
-			# Setup autologin
-				# FIXME(Krey): This will make the system to hang on black screen after initrd phase for some reason
-				# services.displayManager.autoLogin.user = "kreyren";
 
 			# Disable S.M.A.R.T. as QEMU VM doesn't provide the relevant endpoints
 				# FIXME(Krey): Figure out how to emulate the end-point
@@ -113,14 +118,6 @@ in {
 			# Disable Swap as it's not needed during VM and only takes space
 				# FIXME(Krey): Fails with **No Type option set in**, apparently we can't change disko.* in here?
 				# disko.devices.disk.system.content.partitions.swap.size = mkForce null; # Unset swap partition
-
-			# Set Default Passwords For Users
-				users.users.kreyren = {
-					hashedPasswordFile = mkForce null;
-					password = "a"; # Fastest to brute force password
-				};
-
-				users.users.root.password = "a"; # Fastest to brute force password
 		};
 	};
 }
