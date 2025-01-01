@@ -64,7 +64,7 @@ Username: Monerochan
 Password: iL0VEMoNeRoChan<3
 
 Providing system: mracek.systems.nx
-Configurtion: https://github.com/NiXium-org/NiXium/blob/central/src/nixos/machines/mracek/services/monero.nix
+Configurtion: https://github.com/Arcanyx-org/NiXium/blob/central/src/nixos/machines/mracek/services/monero.nix
 ```
 
 The node is set up to communicate with the outside world exclusively via Tor including it's synchronization with the blockchain for added security and privacy.
@@ -79,7 +79,7 @@ Hostname: u65cyt3tdc66u7ciin55atl5sattytx3rjzzrzhlfdfc2t7pqbhyd6qd.onion
 Port: 80
 
 Providing system: mracek.systems.nx
-Configurtion: https://github.com/NiXium-org/NiXium/blob/central/src/nixos/machines/mracek/services/vikunja.nix
+Configurtion: https://github.com/Arcanyx-org/NiXium/blob/central/src/nixos/machines/mracek/services/vikunja.nix
 ```
 
 This service is mostly used internally to organize private projects. We recommend you to use the [Vikunja Cloud Services](https://vikunja.cloud) instead to support the upstream developers if you are not in position to self-host it.
