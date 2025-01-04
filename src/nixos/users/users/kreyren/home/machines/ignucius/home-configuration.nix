@@ -77,6 +77,9 @@ in {
 		# TODO(Krey): Takes ages to build on the local system, pending compute server
 		# polymc.polymc
 
+		# AI
+		pkgs.alpaca # GTK4 frontend for Ollama
+
 		# 3D Printing Slicers
 		pkgs.prusa-slicer
 		pkgs.super-slicer-beta # Prusa-slicer fork by community. Includes additional features, but lags behind in releases

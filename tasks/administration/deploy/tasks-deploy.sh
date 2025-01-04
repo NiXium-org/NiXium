@@ -14,9 +14,22 @@ command -v die 1>/dev/null || die() { printf "FATAL: %s\n" "$2"; exit 1 ;} # Ter
 	nixos-rebuild switch \
 		--flake "git+file://$FLAKE_ROOT#nixos-$hostname-stable" \
 		--option eval-cache false \
+		--target-host "root@$hostname.systems.nx" \
 		--show-trace || die 1 "Deployment of the stable release of NixOS distribution on the current system failed"
 
 	exit 0 # Success
+}
+
+# If special argument 'all' is used then deploy the specified distribution and release on all systems
+[ "$1" != "all" ] || {
+	for system in $(grep -vP "^#" "$FLAKE_ROOT/config/machine-derivations.conf" | grep -vP "^/n$" | sed -E 's#^(\w+)(\s)([a-z\-]+)#\1#g' | tr '\n' ' '); do
+		derivation="$(grep mracek "$FLAKE_ROOT/config/machine-derivations.conf" | sed -E 's#^(\w+)(\s)([a-z\-]+)#\3#g')"
+
+		nixos-rebuild switch \
+			--flake "git+file://$FLAKE_ROOT#$derivation" \
+			--option eval-cache false \
+			--target-host "root@$system.systems.nx" || echo "WARNING: derivation '$derivation' failed deployment for system '$system'"
+	done
 }
 
 # If only 1 argument is provided then deploy the configured system on said unique machine name
@@ -32,18 +45,6 @@ command -v die 1>/dev/null || die() { printf "FATAL: %s\n" "$2"; exit 1 ;} # Ter
 		--target-host "root@$machine.systems.nx" || die 1 "Deployment of the configured derivation '$derivation' on machine '$machine' failed"
 
 		exit 0 # Success
-}
-
-# If special argument 'all' is used then deploy the specified distribution and release on all systems
-[ "$1" != "all" ] || {
-	for system in $(grep -vP "^#" "$FLAKE_ROOT/config/machine-derivations.conf" | grep -vP "^/n$" | sed -E 's#^(\w+)(\s)([a-z\-]+)#\1#g' | tr '\n' ' '); do
-		derivation="$(grep mracek "$FLAKE_ROOT/config/machine-derivations.conf" | sed -E 's#^(\w+)(\s)([a-z\-]+)#\3#g')"
-
-		nixos-rebuild switch \
-		--flake "git+file://$FLAKE_ROOT#$derivation" \
-		--option eval-cache false \
-		--target-host "root@$system.systems.nx" || echo "WARNING: derivation '$derivation' failed deployment for system '$system'"
-	done
 }
 
 # Process Arguments
