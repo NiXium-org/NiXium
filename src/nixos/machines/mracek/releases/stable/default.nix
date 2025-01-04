@@ -11,7 +11,16 @@ in {
 		pkgs = import inputs.nixpkgs {
 			system = "x86_64-linux";
 			config.allowUnfree = mkForce false; # Forbid proprietary code
-			config.nvidia.acceptLicense = mkForce false; # Nvidia, Fuck You!
+			config.nvidia.acceptLicense = true; # Nvidia, Fuck You!
+			config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+				# Ollama
+				"cuda_cudart"
+				"libcublas"
+				"cuda_cccl"
+				"cuda_nvcc"
+				"nvidia-x11"
+				"nvidia-settings"
+			];
 		};
 
 		modules = [

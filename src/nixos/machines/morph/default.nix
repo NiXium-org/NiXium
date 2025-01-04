@@ -26,6 +26,7 @@
 
 			./services/binfmt.nix
 			./services/distributedBuilds.nix
+			./services/ollama.nix
 			./services/openssh.nix
 			./services/tor.nix
 		];

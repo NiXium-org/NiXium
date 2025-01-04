@@ -26,6 +26,7 @@
 			./config/initrd.nix
 			./config/kernel.nix
 			./config/networking.nix
+			./config/nvidia.nix
 			./config/power-management.nix
 			./config/remote-unlock.nix
 			./config/security.nix
