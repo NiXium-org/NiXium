@@ -94,6 +94,13 @@
 				inputs.nixpkgs.follows = "nixpkgs-master";
 			};
 
+		# Jovian
+		jovian = {
+			url = "github:appsforartists/Jovian-NixOS/legiongo";
+			# url = "git+file:///home/kreyren/src/NiXium/vendor/jovian-nixos";
+			inputs.nixpkgs.follows = "nixpkgs-unstable";
+		};
+
 		# AAGL
 			aagl = {
 				url = "github:ezKEa/aagl-gtk-on-nix/release-24.11";
